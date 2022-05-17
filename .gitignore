@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -9,9 +8,7 @@
 /vendor/
 ###< symfony/framework-bundle ###
 
-###> symfony/webpack-encore-bundle ###
-/node_modules/
-/public/build/
-npm-debug.log
-yarn-error.log
-###< symfony/webpack-encore-bundle ###
+###> custom settings ###
+/.idea
+/migrations/*.php
+###< custom settings ###
