@@ -1,8 +1,26 @@
 /*Paramètres généraux du site*/
-/* Police */
+    /* Police */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 
 body{
     font-family: 'Cinzel', serif;
+}
+    /*Titres H1*/
+h1{
+    text-align: center;
+    font-weight: bold;
+    margin: 40px 0;
+}
+
+/*Page actualités*/
+.container-fluid .row .agenda-entry{
+    background-color: #FF9933;
+    min-height: 100px;
+    border-radius: 10px;
+    border: black 5px solid;
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: auto;
+    text-align: center;
 }
