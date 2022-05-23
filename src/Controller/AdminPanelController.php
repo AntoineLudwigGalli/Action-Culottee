@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route("/admin", name: "admin_")]
+#[Route("/admin", name: "admin_panel_")]
 class AdminPanelController extends AbstractController
 {
     #[Route('/creer-un-evenement', name: 'event')]
@@ -39,7 +39,7 @@ class AdminPanelController extends AbstractController
         }
 
         // Pour que la vue puisse afficher le formulaire, on doit lui envoyer le formulaire généré, avec $form->createView()
-        return $this->render('admin_event.html.twig', [
+        return $this->render('admin_panel/admin_event.html.twig', [
             'form' => $form->createView(),
         ]);
     }

@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\FutureEvents;
-use App\Repository\FutureEventsRepository;
+
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,8 +24,13 @@ class MainController extends AbstractController
     #[Route('/agenda/', name: 'agenda')]
     public function agenda(ManagerRegistry $doctrine): Response
     {
-        $em = $doctrine->getManager();
-        $events = $em->getRepository(FutureEvents::class)->findAll();
+
+        $eventsRepo = $doctrine->getRepository(FutureEvents::class);
+        $events = $eventsRepo->findBy(
+            [],
+            ['eventDate' => 'ASC'],
+            $this->getParameter("app.events.event_number_on_agenda"),
+        );
 
 
         return $this->render('main/agenda.html.twig', [
