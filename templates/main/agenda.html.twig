@@ -16,7 +16,7 @@
                         <p class="m-0 ps-4">
                             <i class="fa-solid fa-calendar mx-5 ps-4"></i>
                             {# todo: Essayer de trouver un logo de calendrier un peu plus joli #}
-                            <span class="text-decoration-underline me-2">{{ event.eventDate|format_datetime(locale='fr') }}</span> {{
+                            <span class="text-decoration-underline me-2">{{ event.eventDate|format_datetime('full', 'none', locale='fr' )}}</span> {{
                             event.eventDescription }}
                         </p>
                     </div>
