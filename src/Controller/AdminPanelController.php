@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 
-use App\Entity\FutureEvents;
+use App\Entity\FutureEvent;
 use App\Form\CreateEventFormType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,8 +18,8 @@ class AdminPanelController extends AbstractController
     public function createEvent(ManagerRegistry $doctrine, Request $request): Response
     {
 
-        // Création d'une nouvelle instance de la classe FutureEvents
-        $newEvent = new FutureEvents();
+        // Création d'une nouvelle instance de la classe FutureEvent
+        $newEvent = new FutureEvent();
 
         $form = $this->createForm(CreateEventFormType::class, $newEvent);
 

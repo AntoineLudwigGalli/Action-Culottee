@@ -2,11 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\FutureEvents;
+use App\Entity\FutureEvent;
 
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route("/", name: "main_")]
@@ -22,10 +25,10 @@ class MainController extends AbstractController
     }
 
     #[Route('/agenda/', name: 'agenda')]
-    public function agenda(ManagerRegistry $doctrine): Response
+    public function agenda(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
 
-        $eventsRepo = $doctrine->getRepository(FutureEvents::class);
+        $eventsRepo = $doctrine->getRepository(FutureEvent::class);
         $events = $eventsRepo->findBy(
             [],
             ['eventDate' => 'ASC'],
@@ -40,6 +43,24 @@ class MainController extends AbstractController
                 $em->flush();
             }
         }
+
+        $requestedPage = $request->query->getInt('page', 1);
+
+        // Si le numéro de page demandé dans l'url est inférieur à 1, erreur 404
+        if($requestedPage < 1){
+            throw new NotFoundHttpException();
+        }
+
+        $em = $doctrine->getManager();
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a');
+
+        // On stocke dans $articles les 10 articles de la page demandée dans l'URL
+        $events = $paginator->paginate(
+            $query,     // Requête de selection des articles en BDD
+            $requestedPage,     // Numéro de la page dont on veux les articles
+            4      // Nombre d'articles par page
+        );
 
 
         return $this->render('main/agenda.html.twig', [

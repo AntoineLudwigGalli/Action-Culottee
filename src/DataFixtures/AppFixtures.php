@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\FutureEvents;
+use App\Entity\FutureEvent;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
@@ -16,7 +16,7 @@ class AppFixtures extends Fixture
 
         for($i = 1; $i <= 50; $i++){
 
-            $newFutureEvent = new FutureEvents();
+            $newFutureEvent = new FutureEvent();
 
             $newFutureEvent
                 ->setEventDescription($faker->sentence(10))

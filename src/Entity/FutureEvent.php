@@ -6,7 +6,7 @@ use App\Repository\FutureEventsRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FutureEventsRepository::class)]
-class FutureEvents
+class FutureEvent
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
