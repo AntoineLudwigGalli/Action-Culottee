@@ -32,6 +32,15 @@ class MainController extends AbstractController
             $this->getParameter("app.events.event_number_on_agenda"),
         );
 
+        // Quand l'évènement dépasse la date du jour, il est supprimé
+        foreach($events as $event){
+            if ($event->getEventDate() < new \DateTime()){
+                $em = $doctrine->getManager();
+                $em->remove($event);
+                $em->flush();
+            }
+        }
+
 
         return $this->render('main/agenda.html.twig', [
             'controller_name' => 'MainController',

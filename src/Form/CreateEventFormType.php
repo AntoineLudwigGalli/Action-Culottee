@@ -15,15 +15,14 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class CreateEventFormType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options): void {
         $builder
-            //    todo Faire disparaitre une fois la date passée
-            // Verifs et contraintes des champs
+            // Vérifs et contraintes des champs
             ->add('eventDate', DateType::class,
                 [
                 'model_timezone' => 'Europe/Paris', //Date au format FR
                 'widget' => 'single_text', //Date au format input date html
                 'label' => "Date de l'évènement",
                 'constraints' => [
-                    new NotBlank([ // Erreur si le champs n'est pas rempli
+                    new NotBlank([ // Erreur si le champ n'est pas rempli
                         'message' => 'Merci de saisir une date valide pour cet évènement'
                     ]),
                     new GreaterThan([ //Erreur si date antérieure à aujourd'hui
@@ -38,7 +37,7 @@ class CreateEventFormType extends AbstractType {
                   "rows" => 8,
                 ],
                 'constraints' => [
-                    new NotBlank([ // Erreur si le champs n'est pas rempli
+                    new NotBlank([ // Erreur si le champ n'est pas rempli
                         'message' => 'Merci de saisir une description pour cet évènement'
                     ]),
                 ]
