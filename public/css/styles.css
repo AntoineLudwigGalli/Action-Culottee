@@ -12,6 +12,20 @@ h1{
     font-weight: bold;
     margin: 40px 0;
 }
+    /* Bannière*/
+/*TODO: Améliorer la bannière*/
+.banner{
+    height: 200px;
+    background-image: url(../images/banner.jpeg);
+    background-position: center ;
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: black 5px solid;
+    border-radius: 10px;
+    background-color: #ec9649;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 /*Page actualités*/
 .container-fluid .row .agenda-entry{
