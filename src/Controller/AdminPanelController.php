@@ -28,15 +28,24 @@ class AdminPanelController extends AbstractController
 
         $newEvent = $form ->getData();
 
-        if($form->isSubmitted() && $form->isValid()){
+        if($form->isSubmitted()){
 
-            // récupération du manager des entités et sauvegarde en BDD de $newArticle
-            $em = $doctrine->getManager();
+            if(!$form->isValid()){
+                $this->addFlash("error", "La création de l'évènement a échoué, veuillez ré-essayer.");
+            } else {
+                // récupération du manager des entités et sauvegarde en BDD de $newArticle
+                $em = $doctrine->getManager();
 
-            $em->persist($newEvent);
+                $em->persist($newEvent);
 
-            $em->flush();
+                $em->flush();
+
+                //Ajout message flash
+                $this->addFlash("success", "Évènement créé avec succès !");
+            }
         }
+
+
 
         // Pour que la vue puisse afficher le formulaire, on doit lui envoyer le formulaire généré, avec $form->createView()
         return $this->render('admin_panel/admin_event.html.twig', [

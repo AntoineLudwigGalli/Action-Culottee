@@ -12,6 +12,13 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 </head>
 <body>
+{#Inclusion du menu#}
+{% include 'partials/header.html.twig' %}
+
+{# Affihcage des messages flashes #}
+{% include 'partials/flashes.html.twig' %}
+
+
 {% block body %}{% endblock %}
 
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
