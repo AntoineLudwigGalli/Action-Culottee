@@ -35,14 +35,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string', length: 8, nullable: true)]
     private $memberIdNumber;
 
-    #[ORM\Column(type: 'string', length: 10)]
+    #[ORM\Column(type: 'string', length: 17)] // Correspond à la longueur des numéros de téléphone les plus longs en
+        // Europe : les numéros autrichiens.
     private $phoneNumber;
 
     #[ORM\Column(type: 'boolean')]
-    private $newsletterOption;
+    private $newsletterOption = false;
 
     #[ORM\Column(type: 'boolean')]
-    private $membershipPaid;
+    private $membershipPaid = false;
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;

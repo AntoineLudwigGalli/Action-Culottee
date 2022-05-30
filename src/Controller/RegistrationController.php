@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
+
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
@@ -32,30 +33,26 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-            $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
+        if ($form->isSubmitted()) {
 
-            $entityManager->persist($user);
-            $entityManager->flush();
 
-            // generate a signed url and email it to the user
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-//                    TODO Mettre la vraie adresse mail
-                    ->from(new Address('a@gmail.com', 'Action Culottée'))
-                    ->to($user->getEmail())
-                    ->subject('Merci de confirmer votre adresse email')
-                    ->htmlTemplate('registration/confirmation_email.html.twig')
-            );
-            // do anything else you need here, like send an email
+            if ($form->isValid()) {
 
-            return $this->redirectToRoute('main_home');
+                // encode the plain password
+                $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                // generate a signed url and email it to the user
+                $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user, (new TemplatedEmail())
+                    //                    TODO Mettre la vraie adresse mail
+                    ->from(new Address('a@gmail.com', 'Action Culottée'))->to($user->getEmail())->subject('Merci de confirmer votre adresse email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig'));
+                // do anything else you need here, like send an email
+
+                return $this->redirectToRoute('main_home');
+            }
         }
 
         return $this->render('registration/register.html.twig', [
