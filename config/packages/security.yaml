@@ -25,6 +25,11 @@ security:
             login_throttling:
                 max_attempts: 3
                 interval: '3 minutes'
+                # Option se souvenir de moi à la connexion
+            remember_me:
+                secret: '%kernel.secret%' # required
+                lifetime: 604800 # 1 week in seconds
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
