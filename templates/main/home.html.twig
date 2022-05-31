@@ -1,11 +1,39 @@
 {% extends 'base.html.twig' %}
+   {% block cssIncludes %}
+       {# Inclusion de la librairie Leaflet pour la map   #}
+       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+             integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+             crossorigin=""/>
+       {# Ajout du Leaflet Control Geocoder pour le css de la barre de recherche #}
+       <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+       {# Ajout du leaflet Locate control pour la geolocalisation #}
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+   {% endblock %}
+
 
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
     <h1>Test Accueil</h1>
-
-
+    
+    <div class="my-5">
+        {# Conteneur de la map#}
+        <div id="map"></div>
+    </div>
+    
 {% endblock %}
-
+{% block jsIncludes %}
+    
+    {# Inclusion de la librairie Leaflet pour la map   #}
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+            integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+            crossorigin="">
+    </script>
+    {# Ajout du Leaflet Control Geocoder pour le css de la barre de recherche #}
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    {# Ajout du leaflet Locate control pour la geolocalisation #}
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+    {# Inclusion fichier JS de la map   #}
+    <script src="{{ asset('js/leaflet-map.js') }}"></script>
+{% endblock %}
 

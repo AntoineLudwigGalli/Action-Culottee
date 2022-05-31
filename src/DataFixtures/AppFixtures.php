@@ -12,7 +12,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         // Création de 50 faux évènements avec Fixtures et Faker
-        $faker = Faker\Factory::create("fr_Fr");
+        $faker = Faker\Factory::create("fr_FR");
 
         for($i = 1; $i <= 50; $i++){
 
