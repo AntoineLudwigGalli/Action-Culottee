@@ -53,29 +53,4 @@ class AdminPanelController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    #[Route('/creer-une-boutique', name: 'shop')]
-    public function createShop(ManagerRegistry $doctrine, Request $request, ): Response
-    {
-        $userRepository = $doctrine->getRepository(User::class);
-        $ownerOfNewShop = $userRepository->findOneById(3);
-
-        $shop = new Shop();
-
-        $shop
-            ->setName('Test')
-            ->setAddress('5 les prés hauts')
-            ->setZip('21150')
-            ->setCity('Pouillenay')
-            ->setCountry('France')
-            ->setOwner($ownerOfNewShop)
-        ;
-
-        $em = $doctrine->getManager();
-        $em->persist($shop);
-        $em->flush();
-
-
-        return $this->redirectToRoute('main_home');
-    }
 }
