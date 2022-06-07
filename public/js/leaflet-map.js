@@ -9,17 +9,21 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+$.getJSON("/ajax", function(data){
 
-//Positionnement d'un marqueur
-let marker = L.marker([47.539813269690576, 4.4612659153420395]).addTo(map);
-// On intègre une étiquette avec la description du marqueur (si on veut que ça apparaisse dès le chargmeent, il faut
+    for (let i=0; i < data.length; i++  ) {
+        //Positionnement d'un marqueur //todo: pimper les marqueurs avec les icones de culottes
+        let marker = L.marker([data[i].latitude, data[i].longitude]).addTo(map);
+// On intègre une étiquette avec la description du marqueur (si on veut que ça apparaisse dès le chargement, il faut
 // rajouter .openPopup() àla suite de cette ligne
-marker.bindPopup(
-    "<b>Jolie Chose</b><br>" +
-    "26 avenue de Dijon<br>" +
-    "Venarey-les-Laumes<br>" +
-    "0380892703"
-);
+        marker.bindPopup(
+            "<b>" + data[i].name +"</b><br>" + data[i].address + "<br>" + data[i].zipcode +"<br>" + data[i].city+"<br>" + data[i].country+"<br>"
+        //    todo: ajouter le téléphone
+        );
+    }
+
+});
+
 L.control.locate().addTo(map); // Ajout du leaflet Locate control pour la geolocalisation
 // Ajout de la search bar du leaflet-control-geocoder et du zoom sur la zone recherchée
 let geocoder = L.Control.geocoder({

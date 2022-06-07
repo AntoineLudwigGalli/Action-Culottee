@@ -28,13 +28,18 @@ class UserPanelController extends AbstractController
        $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $shop->setOwner($this->getUser());
+            $shop->setOwner($this->getUser()); // On récupère l'id de l'utilisateur connecté pour y associer la
+            // boutique qu'il a créé
+
+            //  Avec l'aPI Nominatim, on récupère la latitude et la longitude de la boutique grâce à l'adresse saisie et
+            // présente en bdd.
 
             $address = $shop->getAddress()." ". $shop->getZip(). " " . $shop->getCity() . " " . $shop->getCountry();
 
             $prepAddr = str_replace(' ','+',$address);
-//            $geocode=file_get_contents('https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json');
-            $referer = "https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json";
+
+            $referer = "https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json"; // La connexion à
+            // l'API nominatim requière de passer par le referer (un paramètre du header dans le navigateur)
             $opts = array(
                 'http'=>array(
                     'header'=>array("Referer: $referer\r\n")
@@ -47,6 +52,9 @@ class UserPanelController extends AbstractController
 
             $latitude = $output[0]->lat;
             $longitude = $output[0]->lon;
+
+            $shop->setLatitude($latitude);
+            $shop->setLongitude($longitude);
 
 
             $em = $doctrine->getManager();
