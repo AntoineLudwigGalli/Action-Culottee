@@ -20,7 +20,7 @@ class AppFixtures extends Fixture
 
             $newFutureEvent
                 ->setEventDescription($faker->sentence(10))
-                ->setEventDate( $faker->dateTime("now", "+10 years"))
+                ->setEventDate( $faker->dateTimeBetween("now", "+10 years"))
             ;
 
             $manager->persist($newFutureEvent);

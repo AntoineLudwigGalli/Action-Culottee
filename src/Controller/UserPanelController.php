@@ -30,6 +30,17 @@ class UserPanelController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $shop->setOwner($this->getUser());
 
+            $address = $shop->getAddress()." ". $shop->getZip(). " " . $shop->getCity() . " " . $shop->getCountry();
+
+            $prepAddr = str_replace(' ','+',$address);
+            $geocode=file_get_contents('https://nominatim.openstreetmap.org/ui/search.html?q='.$prepAddr.'&format=jsonv2');
+            $output= json_decode($geocode);
+            dump($geocode);
+//            $latitude = $output->results[0]->boundingbox->lat;
+//            $longitude = $output->results[0]->boundingbox->lon;
+
+
+
             $em = $doctrine->getManager();
             $em->persist($shop);
             $em->flush();

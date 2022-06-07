@@ -28,12 +28,13 @@ class MainController extends AbstractController
     public function agenda(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
 
-        $eventsRepo = $doctrine->getRepository(FutureEvent::class);
-        $events = $eventsRepo->findBy(
+        $eventRepo = $doctrine->getRepository(FutureEvent::class);
+        $events = $eventRepo->findBy(
             [],
             ['eventDate' => 'ASC'],
             $this->getParameter("app.events.event_number_on_agenda"),
         );
+
 
         // Quand l'évènement dépasse la date du jour, il est supprimé
         foreach($events as $event){
