@@ -33,12 +33,20 @@ class UserPanelController extends AbstractController
             $address = $shop->getAddress()." ". $shop->getZip(). " " . $shop->getCity() . " " . $shop->getCountry();
 
             $prepAddr = str_replace(' ','+',$address);
-            $geocode=file_get_contents('https://nominatim.openstreetmap.org/ui/search.html?q='.$prepAddr.'&format=jsonv2');
-            $output= json_decode($geocode);
-            dump($geocode);
-//            $latitude = $output->results[0]->boundingbox->lat;
-//            $longitude = $output->results[0]->boundingbox->lon;
+//            $geocode=file_get_contents('https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json');
+            $referer = "https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json";
+            $opts = array(
+                'http'=>array(
+                    'header'=>array("Referer: $referer\r\n")
+                )
+            );
+            $context = stream_context_create($opts);
+            $geocode = file_get_contents($referer, false, $context);
 
+            $output = json_decode($geocode);
+
+            $latitude = $output[0]->lat;
+            $longitude = $output[0]->lon;
 
 
             $em = $doctrine->getManager();
