@@ -27,13 +27,15 @@ class MainController extends AbstractController
     #[Route('/agenda/', name: 'agenda')]
     public function agenda(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
-
+    // todo : Le tri par date ne marche pas ! On récupère les évènements triés par date de la plus récente à la plus
+        // lointaine
         $eventRepo = $doctrine->getRepository(FutureEvent::class);
         $events = $eventRepo->findBy(
             [],
-            ['eventDate' => 'ASC'],
+            ['eventDate' => 'asc'],
             $this->getParameter("app.events.event_number_on_agenda"),
         );
+
 
 
         // Quand l'évènement dépasse la date du jour, il est supprimé

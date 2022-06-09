@@ -38,6 +38,9 @@ class Shop
     #[ORM\Column(type: 'json')]
     private $longitude;
 
+    #[ORM\Column(type: 'string', length: 17)]
+    private $phoneNumber;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Shop
     public function setLongitude(float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }

@@ -9,16 +9,23 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+// Personnalisation des icônes
+var pantyIcon = L.icon({
+    iconUrl: '../images/map_icon.png',
+    iconSize:     [20, 20], // size of the icon
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 $.getJSON("/ajax", function(data){
 
     for (let i=0; i < data.length; i++  ) {
-        //Positionnement d'un marqueur //todo: pimper les marqueurs avec les icones de culottes
-        let marker = L.marker([data[i].latitude, data[i].longitude]).addTo(map);
+        //Positionnement d'un marqueur
+        let marker = L.marker([data[i].latitude, data[i].longitude], {icon: pantyIcon}).addTo(map);
 // On intègre une étiquette avec la description du marqueur (si on veut que ça apparaisse dès le chargement, il faut
 // rajouter .openPopup() àla suite de cette ligne
         marker.bindPopup(
-            "<b>" + data[i].name +"</b><br>" + data[i].address + "<br>" + data[i].zipcode +"<br>" + data[i].city+"<br>" + data[i].country+"<br>"
-        //    todo: ajouter le téléphone
+            "<b>" + data[i].name +"</b><br>" + data[i].phoneNumber +"<br>" + data[i].address + "<br>" + data[i].zipcode +"<br>" + data[i].city+"<br>" + data[i].country+"<br>"
         );
     }
 

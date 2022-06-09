@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,6 +33,19 @@ class CreateShopFormType extends AbstractType
                         'maxMessage' => 'Le nom de la boutique ne peut contenir plus de {{ limit }} caractères'
                     ]),
                 ],
+            ])
+
+            ->add('phoneNumber', TelType::class, [
+                'label' => 'Numéro de téléphone',
+                'constraints' => [
+                    new Regex([
+                        'pattern' => '/^((?:\+|00)[17](?: |\-)?|(?:\+|00)[1-9]\d{0,2}(?: |\-)?|(?:\+|00)1\-\d{3}(?: |\-)?)?(0\d|\([0-9]{3}\)|[1-9]{0,3})(?:((?: |\-)[0-9]{2}){4}|((?:[0-9]{2}){4})|((?: |\-)[0-9]{3}(?: |\-)[0-9]{4})|([0-9]{7}))$/u', // Accepte tous les numéros européens avec ou sans préfixes internationaux
+                        'message' => "Merci de saisir un numéro de téléphone valide."
+                    ]),
+                    new NotBlank([
+                        'message' => 'Merci de saisir le numéro de téléphone de la boutique.'
+                    ]),
+                ]
             ])
 
             ->add('address', TextType::class, [
@@ -82,13 +96,13 @@ class CreateShopFormType extends AbstractType
                 // 3166-1 Alpha-2
             ])
 
+
+
             ->add('save', SubmitType::class, [
                 'label' => 'Créer une boutique'
             ])
         ;
     }
-// TODO Ajouter la fonctionnalité permettant de situer automatiquement la boutique sur la carte en fonction de
-// l'adresse saisie.
 
     public function configureOptions(OptionsResolver $resolver): void
     {

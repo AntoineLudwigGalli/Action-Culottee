@@ -20,6 +20,7 @@ class AjaxController extends AbstractController
 // Todo: faire la gestion des erreurs
         foreach ($shopAddresses as $shopAddress){
             $name = $shopAddress->getName();
+            $phoneNumber = $shopAddress->getPhoneNumber();
             $address = $shopAddress->getAddress();
             $zipcode = $shopAddress->getZip();
             $city = $shopAddress->getCity();
@@ -32,8 +33,9 @@ class AjaxController extends AbstractController
              */
             $data[] = [
                     "name" => $name,
+                    "phoneNumber" => $phoneNumber,
                     "address" => $address,
-                    "zip" => $zipcode,
+                    "zipcode" => $zipcode,
                     "city" => $city,
                     "country" => $country,
                     "latitude" => $latitude,
