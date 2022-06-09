@@ -30,7 +30,7 @@ class MainController extends AbstractController
     $paginator):
 Response
     {
-    // todo : Le tri par date ne marche pas ! On récupère les évènements triés par date de la plus récente à la plus
+    //  On récupère les évènements triés par date de la plus récente à la plus
         // lointaine
         $eventRepo = $doctrine->getRepository(FutureEvent::class);
         $events = $eventRepo->findBy(
