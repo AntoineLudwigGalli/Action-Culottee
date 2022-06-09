@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\FutureEvent;
 
+
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,14 +26,16 @@ class MainController extends AbstractController
     }
 
     #[Route('/agenda/', name: 'agenda')]
-    public function agenda(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    public function agenda(ManagerRegistry $doctrine, Request $request, PaginatorInterface
+    $paginator):
+Response
     {
     // todo : Le tri par date ne marche pas ! On récupère les évènements triés par date de la plus récente à la plus
         // lointaine
         $eventRepo = $doctrine->getRepository(FutureEvent::class);
         $events = $eventRepo->findBy(
             [],
-            ['eventDate' => 'asc'],
+            ['eventDate' => 'ASC'],
             $this->getParameter("app.events.event_number_on_agenda"),
         );
 
@@ -56,7 +59,7 @@ class MainController extends AbstractController
 
         $em = $doctrine->getManager();
 
-        $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a');
+        $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a ORDER BY a.eventDate ASC');
 
         // On stocke dans $articles les 10 articles de la page demandée dans l'URL
         $events = $paginator->paginate(
