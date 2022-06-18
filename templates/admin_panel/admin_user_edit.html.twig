@@ -1,0 +1,78 @@
+{% extends 'baseAdmin.html.twig' %}
+
+
+{% block title %}Modification d'un utilisateur{% endblock %}
+
+
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <h1 class="col-12 text-center my-5">Modification d'un utilisateur</h1>
+        </div>
+
+        <div class="row">
+            <p class="text-center col-12">
+
+                <a href="{{ path('admin_panel_users_list', {'id': form.vars.value.id}) }}" class="text-decoration-none">Revenir sur la liste</a>
+
+            </p>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 col-md-8 mx-auto">
+{#                {{ form(form) }}#}
+
+
+{#                {{ form_label(form.roles) }}#}
+{#                {{ form(form.roles) }}#}
+
+{#                {{ form_label(form.email) }}#}
+{#                {{ form(form.email) }}#}
+
+{#                {{ form_label(form.firstname) }}#}
+{#                {{ form(form.firstname) }}#}
+
+{#                {{ form_label(form.lastname) }}#}
+{#                {{ form(form.lastname) }}#}
+
+{#                {{ form_label(form.memberIdNumber) }}#}
+{#                {{ form(form.memberIdNumber) }}#}
+
+{#                {{ form_label(form.phoneNumber) }}#}
+{#                {{ form(form.phoneNumber) }}#}
+
+
+{#                {{ form_label(form.newsletterOption) }}#}
+{#                {{ form(form.newsletterOption) }}#}
+
+
+{#                {{ form_start(form) }}#}
+                {{ form_row(form.firstname) }}
+                {{ form_row(form.lastname) }}
+                {{ form_row(form.email) }}
+{#                {{ form_row(form.plainPassword) }}#}
+                {{ form_row(form.phoneNumber) }}
+                {{ form_row(form.memberIdNumber) }}
+                {{ form_row(form.newsletterOption) }}
+{#                {{ form_row(form.agreeTerms) }}#}
+
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+{#                {{ form_end(form) }}#}
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

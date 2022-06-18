@@ -1,0 +1,119 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Menu d'administration{% endblock %}
+
+{% block content %}
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <h1 class="col-12 text-center my-5">Liste des utilisateurs</h1>
+        </div>
+
+        <div class="row">
+
+            <div class="col-12 col-md-8 mx-auto">
+
+
+                {# Affichage nb d'utilisateurs #}
+                <div class="row">
+                    <p class="col-12 text-center">Nombre total d'utilisateurs : {{ users.getTotalItemCount() }}</p>
+                </div>
+
+
+                {% if users is not empty %}
+                    <div class="row">
+                        <div class="col-12 my-3 text-center">
+                            <div class="d-inline-block">
+                                {{ knp_pagination_render(users) }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+                <div class="row">
+
+                    <div class="col-12 table-responsive">
+
+                        <table class="align-middle table table-striped table-hover">
+                            <thead>
+                            <tr>
+{#                                TODO:trié#}
+                                <th scope="col">#</th>
+                                <th scope="col"><span class="mx-2">{{ knp_pagination_sortable(users, 'Trier par ', 'a.firstname') }}</span>Prénom</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">N° adhérent</th>
+                                <th scope="col">N° telephone</th>
+                                <th scope="col">Newsletter</th>
+                                <th scope="col">Paiement</th>
+                                <th scope="col">????</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                {% for user in users %}
+
+
+                            <tr>
+                                <th scope="row"></th>
+{#                                TODO:sup#}
+{#                                <td>{{ user.roles }}</td>#}
+                                <td>{{ user.firstname }}</td>
+                                <td>{{ user.lastname }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.memberIdNumber }}</td>
+                                <td>{{ user.phoneNumber }}</td>
+                                <td>{{ user.newsletterOption }}</td>
+                                <td>{{ user.membershipPaid }}</td>
+                                <td>{{ user.isVerified }}</td>
+
+                                <td>
+{#                                    {% if is_granted('ROLE_ADMIN') %}#}
+
+                                    <div class="mt-3">
+
+                                        <a class="text-decoration-none text-warning me-3"
+                                           href="{{ path('admin_panel_user_edit_', {'id': user.id}) }}">
+                                            <i class="fa-solid fa-pen-to-square"></i>
+                                            Modifier
+                                        </a>
+
+
+                                    </div>
+{#                                    {% endif %}#}
+                                </td>
+                            </tr>
+
+
+
+                        {#                    <div class="mb-2"> #}
+
+                        {#                        {{ user.id }} #}
+                        {#                        {{ user.email }} #}
+                        {#                        #}{#                        {{ user.roles }} #}
+                        {#                        {{ user.firstname }} #}
+                        {#                        {{ user.lastname }} #}
+                        {#                        {{ user.memberIdNumber }} #}
+                        {#                        {{ user.phoneNumber }} #}
+                        {#                        {{ user.newsletterOption }} #}
+                        {#                        {{ user.membershipPaid }} #}
+                        {#                        {{ user.isVerified }} #}
+
+
+
+                        {% endfor %}
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

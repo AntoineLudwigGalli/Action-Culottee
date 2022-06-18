@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Shop;
+use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -33,6 +36,15 @@ class CreateShopFormType extends AbstractType
                         'maxMessage' => 'Le nom de la boutique ne peut contenir plus de {{ limit }} caractères'
                     ]),
                 ],
+            ])
+
+            ->add('owner', EntityType::class, [
+                'label' => 'Gérant',
+                'class' => 'App\Entity\User',
+                'choice_value' => 'id',
+                'choice_label' => function ($owner) {
+                    return $owner->getFirstname() . ' ' . $owner->getLastname();
+                },
             ])
 
             ->add('phoneNumber', TelType::class, [
@@ -95,8 +107,6 @@ class CreateShopFormType extends AbstractType
                 'preferred_choices' => ['FR', 'BE', 'LU'], //Choix qui apparaissent en haut. Noté en format code ISO
                 // 3166-1 Alpha-2
             ])
-
-
 
             ->add('save', SubmitType::class, [
                 'label' => 'Créer une boutique'

@@ -1,0 +1,31 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %} Ajouter un compte utilisateur {% endblock %}
+
+{% block content %}
+    
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="container-fluid">
+        
+        <h1>Ajouter un compte utilisateur</h1>
+        <div class="row">
+            <div class="col-12 col-md-6 mx-auto mt-5">
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.firstname) }}
+                {{ form_row(registrationForm.lastname) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.phoneNumber) }}
+                {{ form_row(registrationForm.memberIdNumber) }}
+                {{ form_row(registrationForm.newsletterOption) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+                
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
