@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\FutureEvent;
 
 
+use App\Entity\HomePresentation;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,10 +19,17 @@ class MainController extends AbstractController
 {
 
     #[Route('/', name: 'home')]
-    public function home(): Response
+    public function home(ManagerRegistry $doctrine, Request $request): Response
     {
+        $homePresentationRepo = $doctrine->getRepository(HomePresentation::class);
+        $homePresentation = $homePresentationRepo->findOneBy(
+            [],
+        );
+
+
         return $this->render('main/home.html.twig', [
             'controller_name' => 'MainController',
+            'homePresentation' => $homePresentation,
         ]);
     }
 

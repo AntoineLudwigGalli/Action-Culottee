@@ -25,34 +25,29 @@
         <div class="position-fixed col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark d-none  d-md-block">
             <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
                 
-                <a href="#" class="d-flex align-items-center
-                py-5
-                mb-md-0
-                me-md-auto text-white text-decoration-none"> <span class="fs-5 d-none d-sm-inline">Menu d'administration</span> </a>
+                <a href="#" class="d-flex align-items-center py-5 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <span class="fs-5 d-none d-sm-inline">Menu d'administration</span>
+                </a>
                 
                 <ul class=" pt-5 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                     
                     <li class="nav-item">
-                        <button class="my-2 btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <a class="text-decoration-none text-white" href=" {{ path('main_home') }} ">Accueil du site</a>
-                        </button>
+                        <a class="my-2 btn btn-secondary text-decoration-none text-white" href=" {{ path('main_home') }}">Accueil du site</a>
                     </li>
                     
                     <li class="nav-item">
-                        <button class="my-2 btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Dashboard
-                        </button>
+                        <a class="my-2 btn btn-secondary text-decoration-none text-white" href="#">Dashboard</a>
                     </li>
                     
                     <div class="dropdown">
                         
                         <button class="my-2 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Evenements
+                            Évènements
                         </button>
                         
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ path ('admin_panel_events_list') }}">Liste des évènements</a></li>
-                            <li><a class="dropdown-item" href="{{ path ('admin_panel_event') }}">Ajouter un evènement</a></li>
+                            <li><a class="dropdown-item" href="{{ path ('admin_panel_event') }}">Ajouter un évènement</a></li>
                         </ul>
                     
                     </div>
@@ -109,7 +104,7 @@
                     
                     
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <span class="d-none d-sm-inline mx-1">
-{#                            TODO: nom du compte#}
+{#                            TODO: nom du compte #}
                         </span> </a>
                     
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -117,7 +112,7 @@
                         <li><a class="dropdown-item" href="#">Profil</a></li>
                         <li>
                             <hr class="dropdown-divider">
-{#                            TODO:lien#}
+                            {# TODO:lien #}
                         </li>
                         <li><a class="dropdown-item" href="#">Déconnexion</a>
                         </li>
@@ -132,12 +127,12 @@
             <div class="container-fluid">
                 
                 <a class="navbar-brand" id="#anchor"><img class="img-fluid" src="" alt=""></a>
-{#                <!-- TODO:logo -->#}
+                {#                <!-- TODO:logo --> #}
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <i class="fas fa-bars"></i>
                 </button>
-{#                <!-- TODO:BOUTON -->#}
+                {#                <!-- TODO:BOUTON --> #}
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     
                     <div class="offcanvas-header bg-dark">
@@ -152,26 +147,26 @@
                         <ul class="nav flex-column">
                             
                             <li class="nav-item">
-                                <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="{{ path('main_home') }}">
                                     Accueil
-                                </button>
+                                </a>
                             </li>
                             
                             <li class="nav-item">
-                                <button class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
                                     Dashboard
-                                </button>
+                                </a>
                             </li>
                             
                             <div class="dropdown">
                                 
                                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Evenements
+                                    Évènements
                                 </button>
                                 
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ path('admin_panel_events_list') }}">Liste des évenements</a></li>
-                                    <li><a class="dropdown-item" href="{{ path('admin_panel_event') }}">Ajouter un evenement</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('admin_panel_events_list') }}">Liste des évènements</a></li>
+                                    <li><a class="dropdown-item" href="{{ path('admin_panel_event') }}">Ajouter un évènement</a></li>
                                 </ul>
                             
                             </div>
@@ -214,7 +209,7 @@
         
         
         {# Affichage du contenu #}
-{#        Todo: Attention les messages flashes sont dégueulasses !#}
+        {#        Todo: Attention les messages flashes sont dégueulasses ! #}
         <div class="col py-3">
             {# Affihcage des messages flashes #}
             {% include 'partials/flashes.html.twig' %}

@@ -92,11 +92,17 @@
     "egulias/email-validator": {
         "version": "3.1.2"
     },
+    "exercise/htmlpurifier-bundle": {
+        "version": "4.0"
+    },
     "fakerphp/faker": {
         "version": "v1.19.0"
     },
     "friendsofphp/proxy-manager-lts": {
         "version": "v1.0.12"
+    },
+    "friendsofsymfony/ckeditor-bundle": {
+        "version": "2.4.0"
     },
     "knplabs/knp-components": {
         "version": "v3.5.0"

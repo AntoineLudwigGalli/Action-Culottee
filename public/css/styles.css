@@ -70,7 +70,12 @@ h1{
 
 /* THE MAP */
 #map {
-    height: 600px;
-    width: 70%;
-    margin: auto;
+    height: 30vh;
+}
+
+@media screen and (min-width: 992px) {
+    #map {
+        height: 60vh;
+    }
+
 }

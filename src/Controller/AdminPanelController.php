@@ -4,10 +4,12 @@ namespace App\Controller;
 
 
 use App\Entity\FutureEvent;
+use App\Entity\HomePresentation;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Form\CreateEventFormType;
 use App\Form\CreateShopFormType;
+use App\Form\HomePresentationFormType;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -45,7 +47,8 @@ class AdminPanelController
 
             if (!$form->isValid()) {
                 $this->addFlash("error", "La création de l'évènement a échoué, veuillez ré-essayer.");
-            } else {
+            }
+            else {
                 // récupération du manager des entités et sauvegarde en BDD de $newEvent
                 $em = $doctrine->getManager();
 
@@ -72,7 +75,7 @@ class AdminPanelController
     public function eventList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
 
-        $requestedPage =$request->query->getInt('page', 1);
+        $requestedPage = $request->query->getInt('page', 1);
 
         if ($requestedPage < 1) {
             throw new NotFoundHttpException();
@@ -83,10 +86,10 @@ class AdminPanelController
         $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a ORDER BY a.eventDate ASC');
 
         $events = $paginator->paginate(
-                $query,
-                $requestedPage,
-                20,
-            );
+            $query,
+            $requestedPage,
+            20,
+        );
 
         return $this->render('admin_panel/admin_events_list.html.twig',
             [
@@ -99,14 +102,15 @@ class AdminPanelController
     public function eventDelete(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response
     {
 
-        $csrfToken = $request->query->get('csrf_token','');
+        $csrfToken = $request->query->get('csrf_token', '');
 
         if (!$this->isCsrfTokenValid('event_delete_' . $futureEvent->getId(), $csrfToken)) {
 
             $this->addFlash('error',
                 'Token sécurité invalide, veuillez ré-essayer.');
 
-        } else {
+        }
+        else {
 
             // Suppression de l'article en BDD
             $em =
@@ -226,7 +230,7 @@ class AdminPanelController
             $form->isValid()) {
 
             // Sauvegarde des données modifiées en BDD
-            $em=$doctrine->getManager();
+            $em = $doctrine->getManager();
             $em->flush();
 
             // Message flash de succès
@@ -252,7 +256,7 @@ class AdminPanelController
     #[Route('/creer-une-boutique', name: 'admin_shop_creation')]
 //    TODO: Penser à activer le role admin sur cette page une fois les roles créés et les tests terminés
 //    #[isGranted('ROLE_ADMIN')]
-    public function createShop(ManagerRegistry $doctrine, Request $request, ): Response
+    public function createShop(ManagerRegistry $doctrine, Request $request,): Response
     {
 
         $shop = new Shop();
@@ -266,15 +270,15 @@ class AdminPanelController
 
             //  Avec l'aPI Nominatim, on récupère la latitude et la longitude de la boutique grâce à l'adresse saisie et
             // présente en bdd.
-            $address = $shop->getAddress()." ". $shop->getZip(). " " . $shop->getCity() . " " . $shop->getCountry();
+            $address = $shop->getAddress() . " " . $shop->getZip() . " " . $shop->getCity() . " " . $shop->getCountry();
 
-            $prepAddr = str_replace(' ','+',$address);
+            $prepAddr = str_replace(' ', '+', $address);
 
             $referer = "https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json"; // La connexion à
             // l'API nominatim requière de passer par le referer (un paramètre du header dans le navigateur)
             $opts = array(
-                'http'=>array(
-                    'header'=>array("Referer: $referer\r\n")
+                'http' => array(
+                    'header' => array("Referer: $referer\r\n")
                 )
             );
             $context = stream_context_create($opts);
@@ -300,6 +304,7 @@ class AdminPanelController
             'form' => $form->createView()
         ]);
     }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     #[Route('/inscription', name: 'register')]
@@ -327,6 +332,57 @@ class AdminPanelController
         return $this->render('admin_panel/admin_register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/modifier-accueil', name: 'home_presentation')]
+    public function homePresentation(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $homePresentation = new HomePresentation();
+
+        $form = $this->createForm(HomePresentationFormType::class, $homePresentation);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $photo = $form->get('presentationImage')->getData();
+            dump($homePresentation->getPresentationText());
+            dump($homePresentation->getPresentationImage());
+
+//            unlink($this->getParameter('app.home.photo.directory') . $homePresentation->getPresentationImage());
+            if(
+                $homePresentation->getPresentationText() != null &&
+                $homePresentation->getPresentationImage() != null &&
+                file_exists($this->getParameter('app.home.photo.directory') . $homePresentation->getPresentationImage() )
+            ){
+
+                dump($this->getParameter('app.home.photo.directory') . $homePresentation->getPresentationImage());
+            }
+
+            do{
+                $newFileName = md5( random_bytes(100) ) . '.' . $photo->guessExtension();
+            } while (file_exists($this->getParameter('app.home.photo.directory') .$newFileName));
+
+            $homePresentation->setPresentationImage($newFileName);
+
+            $em = $doctrine->getManager();
+            $em->persist($homePresentation);
+            $em->flush();
+
+            $photo -> move(
+                $this->getParameter('app.home.photo.directory'),
+                $newFileName,
+            );
+
+            $this->addFlash('success', 'Présentation actualisée avec succès');
+        }
+
+
+            return $this->render('admin_panel/admin_home_presentation.html.twig',
+            [
+                'form' => $form->createView(),
+            ]);
     }
 
 }
