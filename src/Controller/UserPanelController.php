@@ -65,7 +65,7 @@ class UserPanelController extends AbstractController
         }
 
         return $this->render('user_panel/shop_creation.html.twig', [
-            'form' => $form->createView()
+            'createShopForm' => $form->createView(),
         ]);
     }
 }

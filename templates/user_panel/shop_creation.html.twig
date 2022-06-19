@@ -9,7 +9,16 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12 col-md-6 mx-auto text-center mt-5">
-				{{ form(form) }}
+				{{ form_start(createShopForm) }}
+                {{ form_widget(createShopForm.owner, {
+                    'attr' : {
+                        'class' : 'd-none'
+                    }
+                })
+                }}
+                
+                {{ form_end(createShopForm) }}
+                
 			</div>
 		</div>
 	</div>

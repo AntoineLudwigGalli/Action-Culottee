@@ -13,8 +13,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var pantyIcon = L.icon({
     iconUrl: '../images/map_icon.png',
     iconSize:     [20, 20], // size of the icon
-    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    iconAnchor:   [8, 20], // point of the icon which will correspond to marker's location
+    popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
 });
 
 $.getJSON("/ajax", function(data){
