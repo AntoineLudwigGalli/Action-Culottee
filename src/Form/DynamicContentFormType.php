@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\HomePresentation;
+use App\Entity\DynamicContent;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -13,12 +13,12 @@ use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class HomePresentationFormType extends AbstractType
+class DynamicContentFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('presentationText', CKEditorType::class, [
+            ->add('mainText', CKEditorType::class, [
                 'purify_html' => true,
                 'label' => "Texte de présentation",
                 'constraints' => [
@@ -35,8 +35,9 @@ class HomePresentationFormType extends AbstractType
                 ]
             ])
 
-            ->add('presentationImage', FileType::class, [
+            ->add('mainImage', FileType::class, [
                 'label' => 'Sélectionnez une photo',
+                'mapped' => false,
                 'constraints' => [
                     new File([
                         'maxSize' => '10M',
@@ -64,7 +65,7 @@ class HomePresentationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => HomePresentation::class,
+            'data_class' => DynamicContent::class,
         ]);
     }
 }

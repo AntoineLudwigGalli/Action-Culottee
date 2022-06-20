@@ -24,55 +24,19 @@
         <div class="row">
 
             <div class="col-12 col-md-8 mx-auto">
-{#                {{ form(form) }}#}
 
-
-{#                {{ form_label(form.roles) }}#}
-{#                {{ form(form.roles) }}#}
-
-{#                {{ form_label(form.email) }}#}
-{#                {{ form(form.email) }}#}
-
-{#                {{ form_label(form.firstname) }}#}
-{#                {{ form(form.firstname) }}#}
-
-{#                {{ form_label(form.lastname) }}#}
-{#                {{ form(form.lastname) }}#}
-
-{#                {{ form_label(form.memberIdNumber) }}#}
-{#                {{ form(form.memberIdNumber) }}#}
-
-{#                {{ form_label(form.phoneNumber) }}#}
-{#                {{ form(form.phoneNumber) }}#}
-
-
-{#                {{ form_label(form.newsletterOption) }}#}
-{#                {{ form(form.newsletterOption) }}#}
-
-
-{#                {{ form_start(form) }}#}
+                {{ form_start(form) }}
                 {{ form_row(form.firstname) }}
                 {{ form_row(form.lastname) }}
                 {{ form_row(form.email) }}
-{#                {{ form_row(form.plainPassword) }}#}
                 {{ form_row(form.phoneNumber) }}
                 {{ form_row(form.memberIdNumber) }}
                 {{ form_row(form.newsletterOption) }}
-{#                {{ form_row(form.agreeTerms) }}#}
 
-                <button type="submit" class="btn btn-primary">S'inscrire</button>
-{#                {{ form_end(form) }}#}
-
-
-
-
-
-
-
+                <button type="submit" class="btn btn-primary">Modifier</button>
+                {{ form_end(form) }}
             </div>
-
         </div>
-
     </div>
 
 {% endblock %}

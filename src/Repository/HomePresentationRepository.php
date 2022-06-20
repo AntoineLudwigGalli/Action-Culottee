@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\HomePresentation;
+use App\Entity\DynamicContent;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<HomePresentation>
+ * @extends ServiceEntityRepository<DynamicContent>
  *
- * @method HomePresentation|null find($id, $lockMode = null, $lockVersion = null)
- * @method HomePresentation|null findOneBy(array $criteria, array $orderBy = null)
- * @method HomePresentation[]    findAll()
- * @method HomePresentation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method DynamicContent|null find($id, $lockMode = null, $lockVersion = null)
+ * @method DynamicContent|null findOneBy(array $criteria, array $orderBy = null)
+ * @method DynamicContent[]    findAll()
+ * @method DynamicContent[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class HomePresentationRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, HomePresentation::class);
+        parent::__construct($registry, DynamicContent::class);
     }
 
-    public function add(HomePresentation $entity, bool $flush = false): void
+    public function add(DynamicContent $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class HomePresentationRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(HomePresentation $entity, bool $flush = false): void
+    public function remove(DynamicContent $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class HomePresentationRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return HomePresentation[] Returns an array of HomePresentation objects
+//     * @return DynamicContent[] Returns an array of DynamicContent objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class HomePresentationRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?HomePresentation
+//    public function findOneBySomeField($value): ?DynamicContent
 //    {
 //        return $this->createQueryBuilder('h')
 //            ->andWhere('h.exampleField = :val')

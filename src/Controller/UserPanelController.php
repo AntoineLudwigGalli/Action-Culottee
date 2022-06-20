@@ -50,6 +50,8 @@ class UserPanelController extends AbstractController
 
             $output = json_decode($geocode);
 
+            dump($output);
+
             $latitude = $output[0]->lat;
             $longitude = $output[0]->lon;
 

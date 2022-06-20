@@ -19,13 +19,16 @@
 </head>
 <body>
 {# Inclusion du menu #}
-{% include 'partials/header.html.twig' %}
+{% include 'partials/header.html.twig' %}}
 
 {# Affihcage des messages flashes #}
 {% include 'partials/flashes.html.twig' %}
 
 
 {% block body %}{% endblock %}
+
+{# TODO:Affihcage du footer #}
+{% include 'partials/footer.html.twig' %}
 
 {% block jsIncludes %}{% endblock %}
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>

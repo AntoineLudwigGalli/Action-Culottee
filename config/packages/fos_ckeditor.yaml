@@ -3,10 +3,3 @@
 twig:
     form_themes:
         - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
-
-fos_ck_editor:
-  configs:
-    general:
-      language: fr
-      toolbar: standard
-      height: 400px

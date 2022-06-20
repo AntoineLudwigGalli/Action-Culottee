@@ -6,7 +6,7 @@ use App\Repository\HomePresentationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: HomePresentationRepository::class)]
-class HomePresentation
+class DynamicContent
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,10 +14,16 @@ class HomePresentation
     private $id;
 
     #[ORM\Column(type: 'text')]
-    private $presentationText;
+    private $mainText;
 
     #[ORM\Column(type: 'string', length: 50)]
-    private $presentationImage;
+    private $mainImage;
+
+    #[ORM\Column(type: 'string', length: 150)]
+    private $formTitle;
+
+    #[ORM\Column(type: 'string', length: 70)]
+    private $relatedPage;
 
     public function getId(): ?int
     {
@@ -44,6 +50,30 @@ class HomePresentation
     public function setPresentationImage(string $presentationImage): self
     {
         $this->presentationImage = $presentationImage;
+
+        return $this;
+    }
+
+    public function getFormTitle(): ?string
+    {
+        return $this->formTitle;
+    }
+
+    public function setFormTitle(string $formTitle): self
+    {
+        $this->formTitle = $formTitle;
+
+        return $this;
+    }
+
+    public function getRelatedPage(): ?string
+    {
+        return $this->relatedPage;
+    }
+
+    public function setRelatedPage(string $relatedPage): self
+    {
+        $this->relatedPage = $relatedPage;
 
         return $this;
     }
