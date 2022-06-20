@@ -20,7 +20,7 @@ class DynamicContentFormType extends AbstractType
         $builder
             ->add('content', CKEditorType::class, [
                 'purify_html' => true,
-                'label' => "Contenu",
+                'label' => false,
                 'constraints' => [
                     new Length([
                         'max' => 50000,

@@ -45,6 +45,7 @@ class AppExtension extends AbstractExtension
 
         $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
 
-        return (empty($currentDynamicContent) ? '' : $this->purifier->purify($currentDynamicContent->getContent())) . '<a href="#">Modifier</a>';
+        return (empty($currentDynamicContent) ? '' : $this->purifier->purify($currentDynamicContent->getContent())) . '<a href="/admin/contenu-dynamique/modifier/'.
+            $currentDynamicContent->getName() .'">Modifier</a>';
     }
 }

@@ -284,8 +284,6 @@ class AdminPanelController extends AbstractController {
 
         if($form->isSubmitted() && $form->isValid()){
 
-            dump($currentDynamicContent);
-
             $em->flush();
 
             $this->addFlash('success', 'Le contenu a bien été modifié !');
@@ -294,7 +292,7 @@ class AdminPanelController extends AbstractController {
 
         }
 
-        return $this->render('admin_panel/admin_home_presentation.html.twig', ['form' => $form->createView(),]);
+        return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
     }
 
 }
