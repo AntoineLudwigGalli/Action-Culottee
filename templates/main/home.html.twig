@@ -19,7 +19,50 @@
         <div class="row">
             <h1>Action Culottée</h1>
         </div>
-  
+        
+    {% if display_dynamic_content('accueil') is empty %}
+        
+        <h2>Qu’est-ce qu’Action Culottée ?</h2>
+        <p> Action Culottée est une association loi 1901.
+            L’union fait la force et les évènements de ces derniers temps nous
+            ont plus que jamais rappelé cet adage.
+            A l’initiative de Nathalie Paredes, une détaillante
+            indépendante en lingerie, nous avons pu nous
+            regrouper sur les réseaux sociaux et organiser des actions com-
+            munes pour défendre, valoriser et
+            promouvoir notre métier et notre savoir-faire.</p>
+        <h2>Nos missions</h2>
+        <p>Accompagner les professionnels
+            indépendants de l’habillement
+            en lingerie, en équipement et
+            bien-être de la personne dans
+            leur quotidien.</p>
+        <p>Faciliter le partage, la réactivité
+            et la communication entre nous
+            pour créer une dynamique de
+            groupe.</p>
+        <h2>Pourquoi adhérer ?</h2>
+        <p>Contribuer au fonctionnement de l'association, à son existence et à sa
+            bonne gestion.
+            Bénéficier d’avantages et remises négociés lors d’achats
+            groupés d’équipement ou de marchandises. Faire valoir
+            nos intérêts auprès de nos fournisseurs.
+            Profiter de formations spécifiques à notre métier avec un accompagne-
+            ment et une prise en charge du dossier par des organismes partenaires.
+            Participer aux visites d’usines et/ou de fournisseurs.
+            Défendre les intérêts de nos consoeurs et confrères. Valoriser notre
+            métier.
+            Profiter de la retombée médiatique des actions menées
+            par l’association Action Culottée.</p>
+        
+    
+    {% else %}
+    
+        <p class="">
+            {{ display_dynamic_content('accueil') }}
+        </p>
+        
+    {% endif %}
     
     <div class="row ">
         <div class="col-12 col-md-10 offset-md-1 d-md-flex flex-md-row-reverse">
@@ -39,9 +82,7 @@
 "
 
                      alt="" class="img-fluid float-md-end h-md-25 d-none d-md-inline">
-                <p class="">
-                    {{ display_dynamic_content('accueil') }}
-                </p>
+ 
             </div>
         </div>
 

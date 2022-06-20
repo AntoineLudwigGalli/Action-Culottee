@@ -21,6 +21,7 @@ class DynamicContentFormType extends AbstractType
             ->add('content', CKEditorType::class, [
                 'purify_html' => true,
                 'label' => false,
+                'empty_data' => '',
                 'constraints' => [
                     new Length([
                         'max' => 50000,

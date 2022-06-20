@@ -16,7 +16,8 @@ class AppExtension extends AbstractExtension
     private $doctrine;
     private $purifier;
 
-    public function __construct(ManagerRegistry $doctrine, HTMLPurifier $purifier){
+    public function __construct(ManagerRegistry $doctrine, HTMLPurifier $purifier)
+    {
         $this->doctrine = $doctrine;
         $this->purifier = $purifier;
     }
@@ -45,7 +46,8 @@ class AppExtension extends AbstractExtension
 
         $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
 
-        return (empty($currentDynamicContent) ? '' : $this->purifier->purify($currentDynamicContent->getContent())) . '<a href="/admin/contenu-dynamique/modifier/'.
-            $currentDynamicContent->getName() .'">Modifier</a>';
+
+        return (empty($currentDynamicContent) ? '' : $this->purifier->purify($currentDynamicContent->getContent())) .
+            (empty($currentDynamicContent->getContent()) ? '' : ('<a href="/admin/contenu-dynamique/modifier/' . $currentDynamicContent->getName()) . '">Modifier</a>');
     }
 }

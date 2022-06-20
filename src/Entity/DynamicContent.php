@@ -16,7 +16,7 @@ class DynamicContent
     #[ORM\Column(type: 'string', length: 50)]
     private $name;
 
-    #[ORM\Column(type: 'text')]
+    #[ORM\Column(type: 'text', nullable: true)]
     private $content;
 
     public function getId(): ?int
