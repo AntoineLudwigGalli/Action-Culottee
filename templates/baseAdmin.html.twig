@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 
     <style>
-        li, .dropdown button,.nav-item {
+        li, .dropdown button, .nav-item {
             min-width: 60%;
         }
 
@@ -27,6 +27,10 @@
 
         li {
             margin-bottom: 1rem;
+        }
+
+        .offcanvas-header button {
+            background-color: white;
         }
 
     </style>
@@ -40,13 +44,17 @@
 <nav class="container-fluid ">
     <div class="row flex-nowrap">
 
-        {# web #}
+        {#//////////////////////////////////////// web///////////////////////////////////////////////// #}
         <div class="position-fixed col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark d-none  d-md-block">
             <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 text-white min-vh-100">
 
-                <a href="#" class="d-flex align-items-center mx-auto py-5 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img class="w-100 pt-5" src="{{ asset('images/logo_header.png') }}" alt="">
+{#                TODO:changer en blanc l'image ou a voir selon couleur future#}
+                
+                <h1
+                   class="d-flex align-items-center mx-auto pt-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Menu d'administration</span>
-                </a>
+                </h1>
 
                 <ul class=" pt-5 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center"
                     id="menu">
@@ -155,30 +163,39 @@
             </div>
         </div>
 
-        {# Mobile #}
+        {#/////////////////////////////////////// Mobile /////////////////////////////////////////////// #}
 
         <div id="MobileNav" class="navbar fixed-top d-sm-block d-md-none">
             <div class="container-fluid">
 
-                <a class="navbar-brand" id="#anchor"><img class="img-fluid" src="" alt=""></a>
-                {#                <!-- TODO:logo --> #}
+                <a href=""></a>
+{#                                <!-- TODO:logo --> #}
 
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <i class="fas fa-bars"></i>
                 </button>
-                {#                <!-- TODO: aligner BOUTON + couleur--> #}
+                {#                <!-- TODO: changer couleur--> #}
                 <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="offcanvasNavbar"
                      aria-labelledby="offcanvasNavbarLabel">
 
-                    <div class="offcanvas-header bg-dark">
-                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">
-                            <img class="img-fluid" src="" alt="">
+                    <div class="offcanvas-header bg-dark d-flex flex-column">
+
+                        <div class="d-inline-flex w-100 justify-content-end pb-5">
+                            <button type="button" class="btn-close btn-light " data-bs-dismiss="offcanvas"
+                                    aria-label="Close">
+                            </button>
+
+                        </div>
+
+                        <h5 class="offcanvas-title text-white text-center" id="offcanvasNavbarLabel">
+                            <a class="navbar-brand w-75" id="#anchor"><img class="img-fluid w-100 pb-3"
+                                                                           src="{{ asset('images/map_icon.png') }}"
+                                                                           alt=""></a>
                             Menu d'administration
                         </h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
+
                     </div>
 
                     <!-- ////////////////////////////////////// -->
