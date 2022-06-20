@@ -75,4 +75,13 @@ class MainController extends AbstractController {
         ]);
     }
 
+//    Page qui somme nous
+
+    #[Route('/qui-sommes-nous', name: 'about')]
+    public function about(ManagerRegistry $doctrine, Request $request): Response
+    {
+
+        return $this->render('main/about.html.twig');
+    }
+
 }
