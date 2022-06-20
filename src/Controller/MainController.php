@@ -19,11 +19,11 @@ class MainController extends AbstractController {
 
     #[Route('/', name: 'home')]
     public function home(ManagerRegistry $doctrine, Request $request): Response {
-        $homePresentationRepo = $doctrine->getRepository(DynamicContent::class);
-        $homePresentation = $homePresentationRepo->findOneBy([],);
+        $homeModificationRepo = $doctrine->getRepository(DynamicContent::class);
+        $homeModification = $homeModificationRepo->findOneBy([],);
 
 
-        return $this->render('main/home.html.twig', ['controller_name' => 'MainController', 'homePresentation' => $homePresentation,]);
+        return $this->render('main/home.html.twig', ['controller_name' => 'MainController', 'homeModification' => $homeModification,]);
     }
 
     #[Route('/agenda/', name: 'agenda')]

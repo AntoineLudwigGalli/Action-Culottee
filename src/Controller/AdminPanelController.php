@@ -262,37 +262,37 @@ class AdminPanelController extends AbstractController {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    #[Route('/modifier-accueil', name: 'home_presentation')]
-    public function homePresentation(ManagerRegistry $doctrine, Request $request): Response {
+    #[Route('/contenu-dynamique/modifier/{name}/', name: 'dynamic_content_edit', requirements: ["name" => "[a-z0-9_-]{2,50}"] )]
+    public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response {
 
-        $form = $this->createForm(DynamicContentFormType::class);
+        $dynamicContentRepo = $doctrine->getRepository(DynamicContent::class);
+
+        $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
+
+        $em = $doctrine->getManager();
+
+        if(empty($currentDynamicContent)){
+            $currentDynamicContent = new DynamicContent();
+            $currentDynamicContent->setName($name);
+            $em->persist($currentDynamicContent);
+        }
+
+
+        $form = $this->createForm(DynamicContentFormType::class, $currentDynamicContent);
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $photo = $form->get('mainImage')->getData();
+        if($form->isSubmitted() && $form->isValid()){
 
-            if ($homePresentation->getPresentationText() != null && $homePresentation->getPresentationImage() != null &&
-                file_exists($this->getParameter('app.home.photo.directory') . $homePresentation->getPresentationImage())) {
+            dump($currentDynamicContent);
 
-                dump($this->getParameter('app.home.photo.directory') . $homePresentation->getPresentationImage());
-            }
-
-            do {
-                $newFileName = md5(random_bytes(100)) . '.' . $photo->guessExtension();
-            } while (file_exists($this->getParameter('app.home.photo.directory') . $newFileName));
-
-            $homePresentation->setPresentationImage($newFileName);
-
-            $em = $doctrine->getManager();
-            $em->persist($homePresentation);
             $em->flush();
 
-            $photo->move($this->getParameter('app.home.photo.directory'), $newFileName,);
+            $this->addFlash('success', 'Le contenu a bien été modifié !');
 
-            $this->addFlash('success', 'Présentation actualisée avec succès');
+            return $this->redirectToRoute('main_home');
+
         }
-
 
         return $this->render('admin_panel/admin_home_presentation.html.twig', ['form' => $form->createView(),]);
     }
