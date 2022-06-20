@@ -2,12 +2,20 @@
 
 {% block title %}Qui-sommes-nous ?{% endblock %}
 
+{% block cssIncludes %}
+{#	<link rel="stylesheet" href={{ asset('../../node_modules/@splidejs/splide/dist/css/splide.min.css') }}>#}
+    <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css"
+    />
+{% endblock %}
+
 {% block body %}
 
 
     {#////////////////////////////////////////////////////////////////////////////////////////////////////////////////////#}
-
-<div id="about" class="container-fluid col-12 ">
+{#TODO:dynamique#}
+<div id="about" class="container-fluid col-12">
 
     <h1>Qui somme nous ?</h1>
 
@@ -133,7 +141,7 @@
     </div>
 
 
-{#////////////////////////////////////////////////////////////////////////////////////////////////////////////////////#}
+   {#////////////////////////////////////////////////////////////////////////////////////////////////////////////////////#}
 
     <h2> Pourquoi adhérer ?</h2>
 
@@ -167,13 +175,41 @@
             </li>
         </ul>
     </div>
+
 </div>
 
 
 {#//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////#}
 
 
-                <img src="{{ asset('images/test.png') }}" class="d-block w-100" alt="...">
-    
+    <section class="splide" aria-label="Splide Basic HTML Example">
+        <div class="splide__track">
+            <ul class="splide__list">
+
+{#                TODO:foreach#}
+                <li class="splide__slide text-center">
+                    <img src="{{ asset('images/test.png') }}" alt="">
+                    <p>test</p>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
 {% endblock %}
 
+{% block jsIncludes %}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"></script>
+
+    <script>
+
+        var splide = new Splide( '.splide', {
+            type    : 'loop',
+            perPage : 3,
+            autoplay: true,
+        } );
+
+        splide.mount()
+    </script>
+
+{% endblock %}

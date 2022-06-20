@@ -3,15 +3,34 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{% block title %}{% endblock %}</title>
-    
+
     {% block cssIncludes %}{% endblock %}
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+    <style>
+        li, .dropdown button,.nav-item {
+            min-width: 60%;
+        }
+
+        li a, .dropdown button, .nav-item {
+            min-width: 100%;
+        }
+
+        li {
+            margin-bottom: 1rem;
+        }
+
+    </style>
+
 </head>
 <body>
 
@@ -20,95 +39,110 @@
 
 <nav class="container-fluid ">
     <div class="row flex-nowrap">
-        
+
         {# web #}
         <div class="position-fixed col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark d-none  d-md-block">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                
-                <a href="#" class="d-flex align-items-center py-5 mb-md-0 me-md-auto text-white text-decoration-none">
+            <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 text-white min-vh-100">
+
+                <a href="#" class="d-flex align-items-center mx-auto py-5 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Menu d'administration</span>
                 </a>
-                
-                <ul class=" pt-5 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    
+
+                <ul class=" pt-5 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center"
+                    id="menu">
+
                     <li class="nav-item">
-                        <a class="my-2 btn btn-secondary text-decoration-none text-white" href=" {{ path('main_home') }}">Accueil du site</a>
+                        <a class=" btn btn-secondary text-decoration-none text-white"
+                           href=" {{ path('main_home') }}">Accueil du site</a>
                     </li>
-                    
+
                     <li class="nav-item">
-                        <a class="my-2 btn btn-secondary text-decoration-none text-white" href="#">Dashboard</a>
+                        <a class=" btn btn-secondary text-decoration-none text-white" href="#">Dashboard</a>
                     </li>
-                    
-                    <div class="dropdown">
-                        
-                        <button class="my-2 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Évènements
-                        </button>
-                        
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ path ('admin_panel_events_list') }}">Liste des évènements</a></li>
-                            <li><a class="dropdown-item" href="{{ path ('admin_panel_event') }}">Ajouter un évènement</a></li>
-                        </ul>
-                    
-                    </div>
-                    
+
                     <li class="nav-item">
-                        <div class="dropdown  my-2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown">
+
+                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                Évènements
+                            </button>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path ('admin_panel_events_list') }}">Liste des
+                                        évènements</a></li>
+                                <li><a class="dropdown-item" href="{{ path ('admin_panel_event') }}">Ajouter un
+                                        évènement</a></li>
+                            </ul>
+
+                        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="dropdown ">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                 Utilisateurs
                             </button>
-                            
+
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="{{ path('admin_panel_users_list') }}">Liste des utilisateurs</a></li>
-                                <li><a class="dropdown-item" href="{{ path('admin_panel_register') }}">Ajouter un utilisateur</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_panel_users_list') }}">Liste des
+                                        utilisateurs</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_panel_register') }}">Ajouter un
+                                        utilisateur</a></li>
                             </ul>
-                        
+
                         </div>
-                    
+
                     </li>
-                    
+
                     <li class="nav-item">
-                        <div class="dropdown  my-2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                 Boutiques
                             </button>
-                            
+
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="">Liste des boutiques</a></li>
-                                <li><a class="dropdown-item" href="{{ path('admin_panel_admin_shop_creation') }}">Ajouter une boutique</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_panel_admin_shop_creation') }}">Ajouter
+                                        une boutique</a></li>
                             </ul>
-                        
+
                         </div>
-                    
+
                     </li>
-                    
+
                     <li class="nav-item">
-                        <div class="dropdown  my-2">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
                                 Modifier une page
                             </button>
-                            
+
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="">Qui-sommes-nous ?</a></li>
                                 <!-- <li><a class="dropdown-item" href="#">Ajouter un utilisateur</a></li> -->
                             </ul>
-                        
+
                         </div>
-                    
+
                     </li>
-                
-                
+
                 </ul>
                 <hr>
-                <div class="dropdown  my-2 pb-4">
-                    
-                    
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <span class="d-none d-sm-inline mx-1">
+                <div class="dropdown">
+
+
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+                       id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <span
+                                class="d-none d-sm-inline mx-1">
 {#                            TODO: nom du compte #}
                         </span> </a>
-                    
+
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        
+
                         <li><a class="dropdown-item" href="#">Profil</a></li>
                         <li>
                             <hr class="dropdown-divider">
@@ -120,105 +154,144 @@
                 </div>
             </div>
         </div>
-        
+
         {# Mobile #}
-        
+
         <div id="MobileNav" class="navbar fixed-top d-sm-block d-md-none">
             <div class="container-fluid">
-                
+
                 <a class="navbar-brand" id="#anchor"><img class="img-fluid" src="" alt=""></a>
                 {#                <!-- TODO:logo --> #}
-                
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <i class="fas fa-bars"></i>
                 </button>
-                {#                <!-- TODO:BOUTON --> #}
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    
+                {#                <!-- TODO: aligner BOUTON + couleur--> #}
+                <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="offcanvasNavbar"
+                     aria-labelledby="offcanvasNavbarLabel">
+
                     <div class="offcanvas-header bg-dark">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                            <img class="img-fluid" src="" alt=""></h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">
+                            <img class="img-fluid" src="" alt="">
+                            Menu d'administration
+                        </h5>
+                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
                     </div>
-                    
+
                     <!-- ////////////////////////////////////// -->
+
                     <div class="offcanvas-body bg-dark">
-                        
-                        <ul class="nav flex-column">
-                            
+
+                        <ul class="nav flex-column align-items-center">
+
                             <li class="nav-item">
-                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="{{ path('main_home') }}">
+                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false" href="{{ path('main_home') }}">
                                     Accueil
                                 </a>
                             </li>
-                            
+
                             <li class="nav-item">
-                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
+                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown"
+                                   aria-expanded="false" href="#">
                                     Dashboard
                                 </a>
                             </li>
-                            
-                            <div class="dropdown">
-                                
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Évènements
-                                </button>
-                                
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ path('admin_panel_events_list') }}">Liste des évènements</a></li>
-                                    <li><a class="dropdown-item" href="{{ path('admin_panel_event') }}">Ajouter un évènement</a></li>
-                                </ul>
-                            
-                            </div>
-                            
+
+                            <li class="nav-item">
+
+                                <div class="dropdown">
+
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Évènements
+                                    </button>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ path('admin_panel_events_list') }}">Liste
+                                                des
+                                                évènements</a></li>
+                                        <li><a class="dropdown-item" href="{{ path('admin_panel_event') }}">Ajouter un
+                                                évènement</a></li>
+                                    </ul>
+
+                                </div>
+                            </li>
+
                             <li class="nav-item">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Utilisateurs
                                     </button>
-                                    
+
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="{{ path('admin_panel_users_list') }}">Liste des utilisateurs</a></li>
+                                        <li><a class="dropdown-item" href="{{ path('admin_panel_users_list') }}">Liste
+                                                des utilisateurs</a></li>
                                         <li><a class="dropdown-item" href="#">Ajouter un utilisateur</a></li>
                                     </ul>
-                                
+
                                 </div>
-                            
+
                             </li>
+
                             <li class="nav-item">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                         Boutiques
                                     </button>
-                                    
+
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li><a class="dropdown-item" href="#">Liste des boutiques</a></li>
                                         <li><a class="dropdown-item" href="#">Ajouter une boutique</a></li>
                                     </ul>
-                                
+
                                 </div>
-                            
+
                             </li>
+
+                            <li class="nav-item">
+                                <div class="dropdown ">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button"
+                                            id="dropdownMenuButton1"
+                                            data-bs-toggle="dropdown" aria-expanded="false">
+                                        Modifier une page
+                                    </button>
+
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="">Qui-sommes-nous ?</a></li>
+                                        <!-- <li><a class="dropdown-item" href="#">Ajouter un utilisateur</a></li> -->
+                                    </ul>
+
+                                </div>
+
+                            </li>
+
                         </ul>
-                    
+
                     </div>
-                
+
                 </div>
             </div>
         </div>
-        
-        
+
+
         {# Affichage du contenu #}
         {#        Todo: Attention les messages flashes sont dégueulasses ! #}
         <div class="col py-3">
             {# Affihcage des messages flashes #}
             {% include 'partials/flashes.html.twig' %}
-            
+
             {% block content %}{% endblock %}
         </div>
-    
+
     </div>
 </nav>
+
 
 {% block jsIncludes %}{% endblock %}
 
