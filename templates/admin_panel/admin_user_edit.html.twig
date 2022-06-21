@@ -39,17 +39,20 @@
                     {{ form_row(form.phoneNumber) }}
                     {{ form_row(form.memberIdNumber) }}
 
-                <div class="row">
-                    <div class="col-4">
-                    {{ form_row(form.membershipPaid) }}
-                    </div>
+                    <div class="row">
                         <div class="col-4">
-                    {{ form_row(form.isVerified) }}
+                            {{ form_row(form.membershipPaid) }}
+                        </div>
+                        <div class="col-4">
+                            {{ form_row(form.isVerified) }}
+                        </div>
+                        <div class="col-4">
+                            {{ form_row(form.newsletterOption) }}
+                        </div>
                     </div>
-                    <div class="col-4">
-                    {{ form_row(form.newsletterOption) }}
-                    </div>
-                </div>
+
+
+
                     {{ form_row(form.save) }}
 
                 {{ form_end(form) }}

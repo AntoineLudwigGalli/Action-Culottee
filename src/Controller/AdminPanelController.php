@@ -171,7 +171,7 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreur
         if ($form->isSubmitted() && $form->isValid()) {
-            if($user->getRoles() != "ROLE_ADMIN" && $user->isVerified() == 1 && $user->isMembershipPaid() == 1){
+            if($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1){
                 $user->setRoles(["ROLE_MEMBER"]);
             } else {
                 $user->setRoles(["ROLE_USER"]);
