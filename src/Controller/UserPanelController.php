@@ -15,6 +15,7 @@ use App\Repository\ShopRepository;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
@@ -25,20 +26,22 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Model\ChangePassword;
 
 #[Route("/user", name: "user_panel_")]
+#[isGranted('ROLE_MEMBER')]
 class UserPanelController extends AbstractController
 {
     #[Route('/creer-une-boutique', name: 'shop_creation')]
     #[isGranted('ROLE_MEMBER')]
-    public function createShop(ManagerRegistry $doctrine, Request $request, ): Response
+    public function createShop(ManagerRegistry $doctrine, Request $request ): Response
     {
 
         $shop = new Shop();
 
         $form = $this->createForm(CreateShopFormType::class, $shop);
 
-       $form->handleRequest($request);
-
+        $form->handleRequest($request);
+dump($form->isSubmitted());
         if ($form->isSubmitted() && $form->isValid()) {
+            dump($this->getUser());
             $shop->setOwner($this->getUser()); // On récupère l'id de l'utilisateur connecté pour y associer la
             // boutique qu'il a créé
 
@@ -61,7 +64,6 @@ class UserPanelController extends AbstractController
 
             $output = json_decode($geocode);
 
-            dump($output);
 
             $latitude = $output[0]->lat;
             $longitude = $output[0]->lon;
@@ -89,7 +91,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/modifier-votre-boutique', name: 'manage_shop')]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function manageShop() : Response
     {
         $user = $this->getUser();
@@ -106,7 +108,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/modifier-votre-boutique/modifier-boutique/{id}', name: 'edit_shop', priority: 10)]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function editShop(Request $request,Shop $shop, ShopRepository $shopRepository) : Response
     {
 
@@ -144,7 +146,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/modifier-votre-boutique/supprimer-boutique/{id}', name: 'delete_shop', priority: 10)]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function deleteShop(Shop $shop, ShopRepository $shopRepository,Request $request) : Response
     {
 
@@ -172,7 +174,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil', name: 'profil')]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function userProfil(Request $request, UserRepository $userRepository) : Response
     {
         $user = $this->getUser();
@@ -201,7 +203,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-nom-et-prenom', name: 'edit_lastname_firstname')]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function userEditFirstnameLastname(Request $request, UserRepository $userRepository) : Response
     {
 
@@ -237,7 +239,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-email', name: 'edit_email')]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function userEditEmail(EmailVerifier $emailVerifier,Request $request, UserRepository $userRepository) : Response
     {
 
@@ -280,7 +282,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-mot-de-passe', name: 'edit_password')]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function userEditPassword(UserPasswordHasherInterface $userPasswordHasher, Request $request, UserRepository $userRepository) : Response
     {
 
@@ -335,7 +337,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-telephone', name: 'edit_phone')]
-    // #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function userEditPhone(Request $request, UserRepository $userRepository) : Response
     {
 

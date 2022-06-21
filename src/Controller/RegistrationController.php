@@ -52,7 +52,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig'));
                 // do anything else you need here, like send an email
 
-                return $this->redirectToRoute('main_home');
+                return $this->redirectToRoute('app_login');
             }
         }
 
