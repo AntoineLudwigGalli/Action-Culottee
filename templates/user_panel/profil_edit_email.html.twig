@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de l'email{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-10 mx-auto">
+
+                {# Formulaire de modification d'email #}
+                {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+
+                {{ form_label(form.email, 'Votre nouvelle adress mail') }}
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+
+                {{ form_widget(form.submit, {'attr': { 'value': 'Confirmer' } }) }}
+
+                {{ form_end(form) }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+

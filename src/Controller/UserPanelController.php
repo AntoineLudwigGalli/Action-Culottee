@@ -5,12 +5,24 @@ namespace App\Controller;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Form\CreateShopFormType;
+use App\Form\EditEmailFormType;
+use App\Form\EditLastnameFirstnameFormType;
+use App\Form\EditNewsletterTypeFormType;
+use App\Form\EditPasswordTypeFormType;
+use App\Form\EditPhoneNumberTypeFormType;
+use App\Form\EditShopTypeFormType;
+use App\Repository\ShopRepository;
+use App\Repository\UserRepository;
+use App\Security\EmailVerifier;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Model\ChangePassword;
 
 #[Route("/user", name: "user_panel_")]
 class UserPanelController extends AbstractController
@@ -68,6 +80,282 @@ class UserPanelController extends AbstractController
 
         return $this->render('user_panel/shop_creation.html.twig', [
             'createShopForm' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     *
+     * Page pour gérer la boutique de l'utilisateur
+     *
+     */
+    #[Route('/modifier-votre-boutique', name: 'manage_shop')]
+    // #[isGranted('ROLE_USER')]
+    public function manageShop() : Response
+    {
+        $user = $this->getUser();
+
+
+
+        return $this->render('user_panel/manage_shop.html.twig');
+    }
+
+
+    /**
+     *
+     * Page de modification de boutique
+     *
+     */
+    #[Route('/modifier-votre-boutique/modifier-boutique/{id}', name: 'edit_shop', priority: 10)]
+    // #[isGranted('ROLE_USER')]
+    public function editShop(Request $request,Shop $shop, ShopRepository $shopRepository) : Response
+    {
+
+        $form = $this->createForm(EditShopTypeFormType::class, $shop);
+        $form->handleRequest( $request );
+        dump($form);
+
+        $csrfToken = $request->query->get('token', '');
+
+        if(!$this->isCsrfTokenValid('modifier_boutique_' . $shop->getId(), $csrfToken)){
+
+            $this->addFlash('error', 'Un problème est survenue veuillez réssayer.');
+
+        } else {
+
+            if ( $form->isSubmitted() && $form->isValid() ) {
+
+                $shopRepository->add($form->getData(), true);
+
+                $this->addFlash('success', 'La boutique à été supprimée avec succès !');
+
+                return $this->redirectToRoute('user_panel_manage_shop');
+            }
+
+        }
+
+        return $this->render('user_panel/edit_shop.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     *
+     * Page de suppression de boutique
+     *
+     */
+    #[Route('/modifier-votre-boutique/supprimer-boutique/{id}', name: 'delete_shop', priority: 10)]
+    // #[isGranted('ROLE_USER')]
+    public function deleteShop(Shop $shop, ShopRepository $shopRepository,Request $request) : Response
+    {
+
+        $csrfToken = $request->query->get('token', '');
+
+        if(!$this->isCsrfTokenValid('supprimer_boutique_' . $shop->getId(), $csrfToken)){
+
+            $this->addFlash('error', 'Un problème est survenue veuillez réssayer.');
+
+        } else {
+
+            $shopRepository->remove($shop, true);
+
+            $this->addFlash('success', 'La boutique à été supprimée avec succès !');
+
+        }
+
+        return $this->redirectToRoute('user_panel_edit_shop');
+    }
+
+
+    /**
+     *
+     * Page de profil
+     *
+     */
+    #[Route('/profil', name: 'profil')]
+    // #[isGranted('ROLE_USER')]
+    public function userProfil(Request $request, UserRepository $userRepository) : Response
+    {
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditNewsletterTypeFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ( $form->isSubmitted() && $form->isValid() ) {
+
+            $userRepository->add($user, true);
+
+            $this->addFlash('success', 'Newsletter modifier avec succes');
+
+            return $this->redirectToRoute('user_panel_profil');
+
+        }
+
+        return $this->render('user_panel/profil.html.twig',[
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     *
+     * Page de modification du prénom et nom
+     *
+     */
+    #[Route('/profil/modifier-nom-et-prenom', name: 'edit_lastname_firstname')]
+    // #[isGranted('ROLE_USER')]
+    public function userEditFirstnameLastname(Request $request, UserRepository $userRepository) : Response
+    {
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditLastnameFirstnameFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Ajout des nouveau nom et prénom sur l'utilisateur de la session actuel
+            $user->setLastname( $form->get('lastname')->getData() );
+            $user->setFirstname( $form->get('firstname')->getData() );
+
+            $userRepository->add($user, true);
+
+            $this->addFlash('success', 'Modification du Nom/Prénom avec success.');
+
+            return $this->redirectToRoute('user_panel_profil');
+
+        }
+
+        return $this->render('user_panel/profil_edit_lastname_firstname.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+
+    /**
+     *
+     * Page de modification de l'email
+     *
+     */
+    #[Route('/profil/modifier-email', name: 'edit_email')]
+    // #[isGranted('ROLE_USER')]
+    public function userEditEmail(EmailVerifier $emailVerifier,Request $request, UserRepository $userRepository) : Response
+    {
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditEmailFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ( $user->getEmail() == $this->getUser()->getEmail() ) {
+                return $this->redirectToRoute('user_panel_edit_email');
+            }
+
+            $user->setEmail( $form->get('email')->getData() );
+
+            $userRepository->add($user, true);
+
+            // Envoie du mail de vérification
+            $emailVerifier->sendEmailConfirmation('user_panel_edit_email', $user, (new TemplatedEmail())
+                // TODO Mettre la vraie adresse mail
+                ->from(new \Symfony\Component\Mime\Address('a@gmail.com', 'Action Culottée'))->to($user->getEmail())->subject('Merci de confirmer votre adresse email')
+                ->htmlTemplate('registration/confirmation_email.html.twig'));
+
+            $this->addFlash('success', 'Modification de l\'adress email avec success. Une vérification a été envoyer dans votre boite mail');
+
+            return $this->redirectToRoute('user_panel_profil');
+
+        }
+
+        return $this->render('user_panel/profil_edit_email.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     *
+     * Page de modification du mot de pass
+     *
+     */
+    #[Route('/profil/modifier-mot-de-passe', name: 'edit_password')]
+    // #[isGranted('ROLE_USER')]
+    public function userEditPassword(UserPasswordHasherInterface $userPasswordHasher, Request $request, UserRepository $userRepository) : Response
+    {
+
+        // Utilisateur actuellement connecter
+        $user = $this->getUser();
+
+        // Class qui permet de crée le formulaire pour après faire la comparaison avec l'utilisateur
+        $changePassword = new ChangePassword();
+
+        $form = $this->createForm(EditPasswordTypeFormType::class, $changePassword);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Si l'ancien mot de passe est bon
+            if ( $userPasswordHasher->isPasswordValid( $user, $form->get('oldPassword')->getData() ) ) {
+
+                // Si le nouveau mot de passe et pareil que le mot de passe actuel on return
+                if (
+                    $form->get('newPassword')->getData() == $user->getPassword()
+                ) {
+                    return $this->redirectToRoute('user_panel_edit_password');
+                }
+
+                // On met le nouveau mot de passe à l'utilisateur
+                $user->setPassword( $userPasswordHasher->hashPassword( $user, $form->get('newPassword')->getData() ) );
+
+                $userRepository->add($user, true);
+
+                $this->addFlash('success', 'Modification du mot de pass avec success');
+
+                return $this->redirectToRoute('user_panel_profil');
+
+            } else {
+
+                // Sinon on crée une erreur
+                $form->get('oldPassword')->addError(new FormError('Mot de pass actuel incorect'));
+
+            }
+
+        }
+
+        return $this->render('user_panel/profil_edit_password.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+
+    /**
+     *
+     * Page de modification du téléphone
+     *
+     */
+    #[Route('/profil/modifier-telephone', name: 'edit_phone')]
+    // #[isGranted('ROLE_USER')]
+    public function userEditPhone(Request $request, UserRepository $userRepository) : Response
+    {
+
+        $user = $this->getUser();
+
+        $form = $this->createForm(EditPhoneNumberTypeFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $userRepository->add( $user, true );
+
+            $this->addFlash('success', 'Modification du numéro de téléphone avec succes');
+
+            return $this->redirectToRoute('user_panel_profil');
+        }
+
+        return $this->render('user_panel/profil_edit_phone.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

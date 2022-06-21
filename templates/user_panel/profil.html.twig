@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de votre boutique{% endblock %}
+
+{% block body %}
+
+    <main class="container">
+
+        <div class="row mt-5">
+
+            <div class="col-11 mx-auto">
+
+                <div class="row profil-text-size">
+
+                    <!-- Block d'information de l'utilisateur' -->
+                    <div class="flex-profil d-sm-flex flex-sm-column align-self-md-center">
+
+                        <!-- Nom -->
+                        <div class="lastname-profil">
+                            <p>{{ app.user.lastname }} {{ app.user.firstname }} </p>
+
+                            <div>
+                                <a class="text-decoration-none text-white" href="{{ path('user_panel_edit_lastname_firstname') }}"><button class="btn btn-warning">Modifier Nom/Prénom</button></a>
+                            </div>
+
+                        </div>
+
+                        <!-- Email -->
+                        <div class="email-profil">
+                            <p>{{ app.user.email }}<sup class="ms-1 {{ app.user.verified ? 'text-success' : 'text-danger' }}">{{ app.user.verified ? 'Email vérifier' : 'Email non vérifier' }}</sup></p>
+
+                            <div>
+                                <a href="{{ path('user_panel_edit_email') }}"><button class="btn btn-warning">Modifier l'email</button></a>
+                            </div>
+
+                        </div>
+
+                        <!-- Mot de pass -->
+                        <div class="password-profil">
+                            <a href="{{ path('user_panel_edit_password') }}"> <button class="btn btn-warning">Modifier le mot de pass</button></a>
+                        </div>
+
+                        <!-- Téléphone -->
+                        <div class="phone-profil">
+                            <p>{{ app.user.phoneNumber }}</p>
+
+                            <div>
+                                <a href="{{ path('user_panel_edit_phone') }}"><button class="btn btn-warning">Modifier le numéro</button></a>
+                                 <!-- TODO: Mettre du text si le numéro de téléphone est verifier ou pas -->
+                            </div>
+
+                        </div>
+
+                        <!-- Newsletter -->
+                        <div>
+
+                            {{ form( form ) }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+{% endblock %}
+
+
+{% block jsIncludes %}
+
+    <!--
+        <script type="module" src="{# asset('js/profil/profil.js') #}"></script>
+    <script type="module" src="{# asset('js/profil/main.js') #}"></script>
+    -->
+{#
+    <script type="module" src="{{ asset('js/profil/main.js') }}" ></script>
+#}
+
+
+{% endblock %}
