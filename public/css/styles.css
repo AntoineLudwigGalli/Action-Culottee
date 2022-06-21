@@ -3,44 +3,56 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 body{
     font-family: 'Roboto', serif;
 }
     /*Titres H1*/
+
 h1{
     font-family: 'Cinzel', serif;
     text-align: center;
     font-weight: bold;
-    margin: 40px 0;
 }
-/*-------------------------------------------------------------------------------------*/
 
+/*-------------------------------------------------------------------------------------*/
 /* Partials */
     /*Header*/
-        /* Bannière*/
-/*TODO: Améliorer la bannière*/
-.banner{
-    height: 200px;
-    background-image: url(../images/banner.jpeg);
-    background-position: center ;
-    background-size: contain;
-    background-repeat: no-repeat;
-    border: black 5px solid;
-    border-radius: 10px;
-    background-color: #ec9649;
-}
-
-    /*Footer*/
-
-/*TODO: Améliorer le pied de page*/
-.footer {
-    height: auto;
-    background-color: #FF9933;
+        /*Menu principal*/
+        /*TODO: Barre de nav - Menu principal*/
+.navbar {
+    margin-bottom: 40px;
 ;
 }
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
+.navbar-nav {
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+;
+}
+
+.container-fluid>.navbar-collapse>.navbar-nav>.nav-item>.nav-link a.hover{
+    color: black;
+ ;
+ }
+
+    /*Footer*/
+    /*TODO: Améliorer le pied de page*/
+.footer {
+    height: auto;
+    width: 100%;
+    background-color: #000000;
+    padding: 60px 0 60px 0;
+;
+}
+
+.footer-logo{
+    margin-left: 200px;
+;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Page actualités*/
 .container-fluid .row .agenda-entry{
     background-color: #FF9933;
@@ -84,19 +96,25 @@ h1{
 
 /* THE MAP */
 #map {
-    height: 30vh;
+    height: 60vh;
+    margin-bottom: 40px;
 }
 
-@media screen and (min-width: 992px) {
-    #map {
-        height: 60vh;
-    }
+/*Texte de la page d'accueil*/
+.home_text{
+    text-align: justify;
+}
 
+/*Texte au dessus de la map*/
+.container-fluid .row h2{
+    font-family: 'Caveat', serif;
+    text-align: center;
+    font-size: 45px;
+    color: #FF9933;
+    margin-bottom: 0;
 }
 
 /*---------------------------------------------------------*/
-
-
 
 /* Page partenaire */
 
@@ -111,7 +129,7 @@ h1{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0,0,0,0.5);
+    background-color: white;
     z-index: 1;
     transition: all 0.3s ease;
     opacity: 0;
