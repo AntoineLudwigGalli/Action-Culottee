@@ -196,7 +196,7 @@ class AdminPanelController extends AbstractController {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
-    #[Route('/creer-une-boutique', name: 'admin_shop_creation')]
+    #[Route('/creer-une-boutique', name: 'shop_creation')]
     #[isGranted('ROLE_ADMIN')]
     public function createShop(ManagerRegistry $doctrine, Request $request,): Response {
 
@@ -238,6 +238,25 @@ class AdminPanelController extends AbstractController {
         }
 
         return $this->render('admin_panel/admin_shop_creation.html.twig', ['form' => $form->createView()]);
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/liste-des-boutiques', name: 'shops_list')]
+    public function shopsList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+
+        $requestedPage = $request->query->getInt('page', 1);
+
+        if ($requestedPage < 1) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $doctrine->getManager();
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\Shop a ORDER BY a.id DESC');
+
+        $shops = $paginator->paginate($query, $requestedPage, 25,);
+
+        return $this->render('admin_panel/admin_shops_list.html.twig', ['shops' => $shops,]);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
