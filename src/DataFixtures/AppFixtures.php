@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
 
             $newUser
                 ->setEmail($faker->email)
-                ->setRoles([])
+                ->setRoles(["ROLE_USER"])
                 ->setPassword($faker->password(60,60))
                 ->setFirstname($faker->firstName)
                 ->setLastname($faker->lastName)

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification du nom et prénom{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-10 mx-auto">
+
+                {# Formulaire de modification du Nom et Prénom #}
+                {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+
+                    {{ form_label(form.lastname, 'Nom') }}
+                    {{ form_widget(form.lastname, {'attr': { 'value': app.user.lastname } }) }}
+                    {{ form_errors(form.lastname) }}
+
+                    {{ form_label(form.firstname, 'Prénom') }}
+                    {{ form_widget(form.firstname, {'attr': { 'value': app.user.firstname } }) }}
+                    {{ form_errors(form.firstname) }}
+
+                    {{ form_widget(form.submit, {'attr': { 'value': 'Modifier' } }) }}
+
+                {{ form_end(form) }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de votre boutique{% endblock %}
+
+{% block cssIncludes %}
+
+    <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}">
+
+{% endblock %}
+
+{% block body %}
+
+    <main class="container">
+
+        <div class="row">
+
+            {% for shops in app.user.shops %}
+
+                <div class="col-12">
+
+                    <!-- Block de la boutique crée par l'utilisateur -->
+                    <div class="row">
+
+                        <div class="col-12 d-md-flex flex-md-row align-items-md-center">
+
+                            <!-- Information sur la boutique -->
+                            <div class="row mt-3">
+
+                                <div class="col-12 mx-auto">
+
+                                    <table class="table d-none d-md-block shop-edit-table">
+                                        <thead class="col-xxl-6">
+                                        <tr>
+                                            <th>Nom</th>
+                                            <th>Adresse</th>
+                                            <th>ZIP Code</th>
+                                            <th>Ville</th>
+                                            <th>Région</th>
+                                            <th>Téléphone</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tbody>
+                                        <tr>
+                                            <td>{{ shops.name }}</td>
+                                            <td>{{ shops.address }}</td>
+                                            <td>{{ shops.zip }}</td>
+                                            <td>{{ shops.city }}</td>
+                                            <td>{{ shops.country }}</td>
+                                            <td>{{ shops.phoneNumber }}</td>
+                                        </tr>
+                                        </tbody>
+
+                                    </table>
+
+
+                                    <ul class="list-unstyled p-0 separeted d-md-none">
+                                        <li>Nom: {{ shops.name }}</li>
+                                        <li>Adresse: {{ shops.address }}</li>
+                                        <li>ZIP Code: {{ shops.zip }}</li>
+                                        <li>Ville: {{ shops.city }}</li>
+                                        <li>Région: {{ shops.country }}</li>
+                                        <li>Téléphone: {{ shops.phoneNumber }}</li>
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TODO: Bouton modifier et supprimé -->
+                    <div class="row mb-5">
+
+                        <div class="col-12 d-flex flex-row justify-content-end">
+
+                            <div>
+                                <a href="{{ path('user_panel_edit_shop', {'id': shops.id, 'token': csrf_token('modifier_boutique_' ~ shops.id)}) }}"><button class="btn btn-warning me-2">Modifier</button></a>
+                            </div>
+
+                            <div>
+                                <a onclick="return confirm()" href="{{ path('user_panel_delete_shop', {'id': shops.id, 'token': csrf_token('supprimer_boutique_' ~ shops.id) }) }}" ><button class="btn btn-danger">Supprimé</button></a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% else %}
+                    <div class="col-12 mx-auto">
+                        <div class="alert alert-warning">Aucune boutique a été crée pour le moment</div>
+                    </div>
+            {% endfor %}
+
+        </div>
+
+    </main>
+
+
+{% endblock %}
+
+{% block jsIncludes %}
+
+    <script src="{{ asset('js/shop/deleteShop.js') }}"></script>
+
+{% endblock %}

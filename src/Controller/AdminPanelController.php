@@ -15,6 +15,7 @@ use App\Form\UpdateUserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route("/admin", name: "admin_panel_")]
+#[IsGranted('ROLE_ADMIN')]
 class AdminPanelController extends AbstractController {
 
     #[Route('/creer-un-evenement', name: 'event')]
@@ -110,7 +112,7 @@ class AdminPanelController extends AbstractController {
 
 
     #[Route('/modification-d\'un-evenement/{id}/', name: 'event_edit_', priority: 10)]
-    //    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN')]
     public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
 
         // Instanciation d'un nouveau formulaire basé sur $article qui contient déjà les données actuelles de l'article à modifier
@@ -162,7 +164,7 @@ class AdminPanelController extends AbstractController {
     //////////////////////////////////////////////////////////
 
     #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
-    //    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN')]
     public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response {
         $form = $this->createForm(UpdateUserFormType::class, $user);
 
@@ -171,6 +173,11 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreur
         if ($form->isSubmitted() && $form->isValid()) {
+            if($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1){
+                $user->setRoles(["ROLE_MEMBER"]);
+            } else {
+                $user->setRoles(["ROLE_USER"]);
+            }
 
             // Sauvegarde des données modifiées en BDD
             $em = $doctrine->getManager();
@@ -190,8 +197,7 @@ class AdminPanelController extends AbstractController {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
     #[Route('/creer-une-boutique', name: 'admin_shop_creation')]
-    //    TODO: Penser à activer le role admin sur cette page une fois les roles créés et les tests terminés
-        //    #[isGranted('ROLE_ADMIN')]
+    #[isGranted('ROLE_ADMIN')]
     public function createShop(ManagerRegistry $doctrine, Request $request,): Response {
 
         $shop = new Shop();

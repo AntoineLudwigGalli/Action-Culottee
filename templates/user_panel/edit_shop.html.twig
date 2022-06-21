@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de la boutique{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-10 mx-auto">
+
+                {# Formulaire de modification d'email #}
+                {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+
+                    {{ form(form) }}
+
+                {{ form_end(form) }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
