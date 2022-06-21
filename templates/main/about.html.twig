@@ -6,58 +6,158 @@
     {#  Inclusion du css pour le slider  #}
     <link
             rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/css/splide.min.css"
+            href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css"
     />
 {% endblock %}
 
 {% block body %}
 
-
     {# //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// #}
-    {# TODO:dynamique #}
-    <div id="about" class="container-fluid col-12">
 
-        <h1>Qui sommes-nous ?</h1>
 
-                <p class="">
-                    {{ display_dynamic_content('about') }}
-                </p>
+<div class="d-flex flex-column flex-md-row container">
+    {# TODO:dynamique +responsive #}
+{#    <div class="row">#}
+
+
+        <div id="about" class="col-12 col-md-6 offset-md-1">
+            <h1>Qui sommes-nous ?</h1>
+
+            <p class="">
+                {{ display_dynamic_content('about') }}
+            </p>
+            {# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// #}
+        </div>
+
+        <section id="container" class="d-flex align-items-center col-12 col-lg-4 offset-md-1 p-md-3">
+
+            <div id="vertical-slider" class="splide">
+
+                <div class="splide__track ">
+
+                    <ul class="splide__list ">
+
+                        {#                        TODO:foreach #}
+
+                        <li class="splide__slide">
+                            <div class="d-flex flex-column">
+                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
+                                <h4 class="text-center">test</h4>
+                            </div>
+                        </li>
+                        <li class="splide__slide my-auto">
+                            <div class="d-flex flex-column">
+                                <img class="img-fluid w-100 " src="{{ asset('images/map_icon.png') }}" alt="">
+                                <h4 class="text-center">test</h4>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="d-flex flex-column">
+                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
+                                <h4 class="text-center">test2</h4>
+                            </div>
+                        </li>
+                        <li class="splide__slide">
+                            <div class="d-flex flex-column">
+                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
+                                <h4 class="text-center">test3</h4>
+                            </div>
+                        </li>
+                        <li class="splide__slide ">
+                            <div class="d-flex flex-column">
+                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
+                                <h4 class="text-center">test3</h4>
+                            </div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+        </section>
+
+
+{#    </div>#}
+</div>
+
 
     {# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// #}
 
-    <section class="splide" aria-label="Slide Container Example">
-        <div class="splide__track">
-            <ul class="splide__list">
-
-{#                TODO:foreach depuis db#}
-                <li class="splide__slide">
-                    <div class="splide__slide__container">
-                        <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
-                    </div>
-                    test1
-                </li>
-
-            </ul>
-        </div>
-    </section>
 
 
-{% endblock %}
 
-{% block jsIncludes %}
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@2.4.21/dist/js/splide.min.js"></script>
 
-    <script>
 
-        let splide = new Splide('.splide', {
-            type: 'loop',
-            perPage: 3,
-            rewind : true,
-            autoplay: true
-        });
+    {% endblock %}
 
-        splide.mount()
+    {% block jsIncludes %}
 
-    </script>
+        <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 
-{% endblock %}
+        <script>
+
+            document.addEventListener('DOMContentLoaded', function () {
+
+                new Splide('.splide', {
+
+
+                    type: 'loop',
+                    direction: "ttb",
+                    updateOnMove: true,
+
+                    isNavigation: true,
+                    wheel: true,
+                    pagination: false,
+                    focus: "center",
+
+                    gap: '2.5rem',
+
+                    perPage: 1,
+
+                    rewind: true,
+
+                    height: '150vh',
+                    width: 'auto',
+                    fixedHeight: 'auto',
+                    autoWidth: true,
+                    autoHeight: true,
+
+// breakpoints responsive
+
+                    breakpoints: {
+
+
+                        1024: {
+
+                            type: 'loop',
+                            direction: "ltr",
+                            updateOnMove: true,
+
+                            isNavigation: true,
+                            wheel: true,
+                            pagination: false,
+                            focus: 'center',
+
+                            perPage: 3,
+
+                            rewind: true,
+
+                            width: '100vw',
+                            height: '150rem',
+
+                            autoWidth: false,
+                            autoHeight: false,
+
+
+                        },
+
+                    },
+
+                }).mount();
+
+            });
+
+        </script>
+
+
+    {% endblock %}

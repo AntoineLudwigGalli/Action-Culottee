@@ -17,28 +17,23 @@
 
     <div class="container-fluid">
         <div class="row">
-            <h1>Action Culottée</h1>
-        </div>
-        
 
-    
-    <div class="row ">
-        <div class="col-12 col-md-10 offset-md-1 d-md-flex flex-md-row-reverse">
-
-            {{ display_dynamic_content('home_main_presentation') }}
- 
+            <div class="col-md-7">
+                <h1>Culottés , inspirés et déterminés !</h1>
+                <div class="home_text">
+                    {{ display_dynamic_content('home_main_presentation') }}
+                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <h2 class="col-12 col-lg-10 offset-lg-1">Retrouvez-nous près de chez vous :</h2>
-            <div class="col-12 col-lg-10 offset-lg-1 p-0">
-                {# Conteneur de la map#}
-                <div id="map"></div>
+            <div class="col-md-5">
+                <h2>Retrouvez-nous près de chez vous !</h2>
+                <div>
+                    {# Conteneur de la map#}
+                    <div id="map">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 {% block jsIncludes %}
