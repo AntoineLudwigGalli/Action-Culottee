@@ -16,8 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserPanelController extends AbstractController
 {
     #[Route('/creer-une-boutique', name: 'shop_creation')]
-//    TODO: Penser à activer le role user sur cette page une fois les roles créés et les tests terminés
-//    #[isGranted('ROLE_USER')]
+    #[isGranted('ROLE_MEMBER')]
     public function createShop(ManagerRegistry $doctrine, Request $request, ): Response
     {
 

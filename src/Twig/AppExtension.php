@@ -5,6 +5,8 @@ namespace App\Twig;
 use App\Entity\DynamicContent;
 use Doctrine\Persistence\ManagerRegistry;
 use Exercise\HTMLPurifierBundle\HTMLPurifiersRegistry;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -15,11 +17,15 @@ class AppExtension extends AbstractExtension
 
     private $doctrine;
     private $purifier;
+    private $urlGenerator;
+    private $authenticateUser;
 
-    public function __construct(ManagerRegistry $doctrine, HTMLPurifier $purifier)
+    public function __construct(ManagerRegistry $doctrine, HTMLPurifier $purifier, UrlGeneratorInterface $urlGenerator, AuthorizationCheckerInterface $authenticateUser)
     {
         $this->doctrine = $doctrine;
         $this->purifier = $purifier;
+        $this->urlGenerator = $urlGenerator;
+        $this->authenticateUser = $authenticateUser;
     }
 
 //    public function getFilters(): array
@@ -46,8 +52,12 @@ class AppExtension extends AbstractExtension
 
         $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
 
+        if($this->authenticateUser->isGranted('ROLE_ADMIN')){
 
-        return (empty($currentDynamicContent) ? '' : $this->purifier->purify($currentDynamicContent->getContent())) .
-            (empty($currentDynamicContent->getContent()) ? '' : ('<a href="/admin/contenu-dynamique/modifier/' . $currentDynamicContent->getName()) . '">Modifier</a>');
+            return (empty($currentDynamicContent) ? '' : $this->purifier->purify($currentDynamicContent->getContent())) . ('<a href="' . $this->urlGenerator->generate('admin_panel_dynamic_content_edit', ['name' => $name]) . '">Modifier</a>');
+
+        } else {
+            return (empty($currentDynamicContent) ? '' : $this->purifier->purify($currentDynamicContent->getContent()));
+        }
     }
 }
