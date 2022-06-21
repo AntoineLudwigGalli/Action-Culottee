@@ -20,26 +20,12 @@
             <h1>Action Culottée</h1>
         </div>
         
-    {{ display_dynamic_content('home_main_presentation') }}
+
     
     <div class="row ">
         <div class="col-12 col-md-10 offset-md-1 d-md-flex flex-md-row-reverse">
-            
-            <div class="col-12 col-md-4 p-0 d-md-none">
-                <img src="
-{{ asset('images/exemple-accueil.jpg') }}
-{#{{ asset('images/home_presentation/'~ homeModification.mainImage) }}#}
-" alt="" class="img-fluid col-12">
-            </div>
-            
-            <div class="col-12">
 
-                <img src="
-{{ asset('images/exemple-accueil.jpg') }}
-{#{{ asset('images/home_presentation/'~ homeModification.mainImage) }}#}
-"
-
-                     alt="" class="img-fluid float-md-end h-md-25 d-none d-md-inline">
+            {{ display_dynamic_content('home_main_presentation') }}
  
             </div>
         </div>
