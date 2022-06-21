@@ -17,7 +17,7 @@ var pantyIcon = L.icon({
     popupAnchor:  [0, -20] // point from which the popup should open relative to the iconAnchor
 });
 
-$.getJSON("/ajax", function(data){
+$.getJSON("/ajax/shops", function(data){
 
     for (let i=0; i < data.length; i++  ) {
         //Positionnement d'un marqueur

@@ -1,11 +1,35 @@
+function partnerDynamicContent (name){
+    $.getJSON("/ajax/partners", function(data) {
+
+        for (let i = 0; i < data.length; i++) {
+
+           let name ="partnerContent" + data[i].id;
+            let dynamicPartnerName = data[i].name;
+
+            if (dynamicPartnerName === name) {
+
+                $('#partner-info').each(function () {
+                    document.querySelector('.overlay-partner .img-p-partner p').textContent = data[i].content;
+                });
+            }
+        }
+    });
+}
+
+
+
+
 export class Partner {
 
     createPartnerPopup(imageLocation = null) {
 
-        // Div pour le posissionement du partenaire à affiché
+        // Div pour le positionnement du partenaire à affiché
         document.querySelector('.overlay-partner').prepend(document.createElement('div'));
         document.querySelector('.overlay-partner>div').setAttribute('class', 'container d-block col-12 col-md-8 mx-auto my-5 bg-black h-25');
         document.querySelector('.overlay-partner>div').setAttribute('id', 'partner-info');
+
+
+
 
         // Création du titre du partenaire
         document.querySelector('.overlay-partner>div').prepend(  document.createElement('h1') );
@@ -30,9 +54,17 @@ export class Partner {
         document.querySelector('.overlay-partner .img-p-partner img').setAttribute('alt',  '');
         document.querySelector('.overlay-partner .img-p-partner img').setAttribute('src', imageLocation);
 
+
+
+
         // Description du partenaire
         document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('p') );
-        document.querySelector('.overlay-partner .img-p-partner p').textContent = 'hjdsfjjhgh jdhj gdhj ghjdshjggdgkjds jghg sjdghjghjdhj ghjsghj shjk dskhjgk jhdhjg hj gjhdhj k';
-    }
+        // document.querySelector('.overlay-partner .img-p-partner p').textContent = "" ;
 
+        partnerDynamicContent(name);
+    }
 }
+
+
+
+
