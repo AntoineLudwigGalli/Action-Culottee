@@ -12,6 +12,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    
+    <style>
+        li, .dropdown button, .nav-item {
+            min-width: 60%;
+        }
+
+        li a, .dropdown button, .nav-item {
+            min-width: 100%;
+        }
+
+        li {
+            margin-bottom: 1rem;
+        }
+
+        .offcanvas-header button {
+            background-color: white;
+        }
+    
+    </style>
+
 </head>
 <body>
 
@@ -21,39 +41,44 @@
 <nav class="container-fluid ">
     <div class="row flex-nowrap">
         
-        {# web #}
+        {# //////////////////////////////////////// web///////////////////////////////////////////////// #}
         <div class="position-fixed col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark d-none  d-md-block">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+            <div class="d-flex flex-column align-items-center align-items-sm-center px-3 pt-2 text-white min-vh-100">
                 
-                <a href="#" class="d-flex align-items-center py-5 mb-md-0 me-md-auto text-white text-decoration-none">
+                <img class="w-100 pt-5" src="{{ asset('images/logo_header.png') }}" alt="">
+                {#                TODO:changer en blanc l'image ou a voir selon couleur future #}
+                
+                <h1 class="d-flex align-items-center mx-auto pt-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <span class="fs-5 d-none d-sm-inline">Menu d'administration</span>
-                </a>
+                </h1>
                 
-                <ul class=" pt-5 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                <ul class=" pt-5 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center" id="menu">
                     
                     <li class="nav-item">
-                        <a class="my-2 btn btn-secondary text-decoration-none text-white" href=" {{ path('main_home') }}">Accueil du site</a>
+                        <a class=" btn btn-secondary text-decoration-none text-white" href=" {{ path('main_home') }}">Accueil du site</a>
                     </li>
                     
                     <li class="nav-item">
-                        <a class="my-2 btn btn-secondary text-decoration-none text-white" href="#">Dashboard</a>
+                        <a class=" btn btn-secondary text-decoration-none text-white" href="#">Dashboard</a>
                     </li>
                     
-                    <div class="dropdown">
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Évènements
+                            </button>
+                            
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ path ('admin_panel_events_list') }}">Liste des évènements</a></li>
+                                <li><a class="dropdown-item" href="{{ path ('admin_panel_event') }}">Ajouter un évènement</a></li>
+                            </ul>
                         
-                        <button class="my-2 btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Évènements
-                        </button>
-                        
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ path ('admin_panel_events_list') }}">Liste des évènements</a></li>
-                            <li><a class="dropdown-item" href="{{ path ('admin_panel_event') }}">Ajouter un évènement</a></li>
-                        </ul>
-                    
-                    </div>
+                        </div>
+                    </li>
                     
                     <li class="nav-item">
-                        <div class="dropdown  my-2">
+                        <div class="dropdown ">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Utilisateurs
                             </button>
@@ -68,7 +93,7 @@
                     </li>
                     
                     <li class="nav-item">
-                        <div class="dropdown  my-2">
+                        <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Boutiques
                             </button>
@@ -83,24 +108,23 @@
                     </li>
                     
                     <li class="nav-item">
-                        <div class="dropdown  my-2">
+                        <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                 Modifier une page
                             </button>
                             
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="">Qui-sommes-nous ?</a></li>
-                                <!-- <li><a class="dropdown-item" href="#">Ajouter un utilisateur</a></li> -->
+                                <li><a class="dropdown-item" href="/admin/contenu-dynamique/modifier/accueil/">Accueil</a></li>
+                                <li><a class="dropdown-item" href="/admin/contenu-dynamique/modifier/about/">Qui sommes-nous ?</a></li>
                             </ul>
                         
                         </div>
                     
                     </li>
                 
-                
                 </ul>
                 <hr>
-                <div class="dropdown  my-2 pb-4">
+                <div class="dropdown">
                     
                     
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> <span class="d-none d-sm-inline mx-1">
@@ -121,55 +145,62 @@
             </div>
         </div>
         
-        {# Mobile #}
+        {# /////////////////////////////////////// Mobile /////////////////////////////////////////////// #}
         
         <div id="MobileNav" class="navbar fixed-top d-sm-block d-md-none">
             <div class="container-fluid">
                 
-                <a class="navbar-brand" id="#anchor"><img class="img-fluid" src="" alt=""></a>
-                {#                <!-- TODO:logo --> #}
+                <a href=""></a>
+                {#                                <!-- TODO:logo --> #}
+                
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <i class="fas fa-bars"></i>
                 </button>
-                {#                <!-- TODO:BOUTON --> #}
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                {#                <!-- TODO: changer couleur--> #}
+                <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     
-                    <div class="offcanvas-header bg-dark">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                            <img class="img-fluid" src="" alt=""></h5>
-                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    <div class="offcanvas-header bg-dark d-flex flex-column">
+                        
+                        <div class="d-inline-flex w-100 justify-content-end pb-5">
+                            <button type="button" class="btn-close btn-light " data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                        
+                        </div>
+                        
+                        <h5 class="offcanvas-title text-white text-center" id="offcanvasNavbarLabel">
+                            <a class="navbar-brand w-75" id="#anchor"><img class="img-fluid w-100 pb-3" src="{{ asset('images/map_icon.png') }}" alt=""></a> Menu d'administration </h5>
+                    
                     </div>
                     
                     <!-- ////////////////////////////////////// -->
+                    
                     <div class="offcanvas-body bg-dark">
                         
-                        <ul class="nav flex-column">
+                        <ul class="nav flex-column align-items-center">
                             
                             <li class="nav-item">
-                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="{{ path('main_home') }}">
-                                    Accueil
-                                </a>
+                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="{{ path('main_home') }}"> Accueil </a>
                             </li>
                             
                             <li class="nav-item">
-                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="#">
-                                    Dashboard
-                                </a>
+                                <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false" href="#"> Dashboard </a>
                             </li>
                             
-                            <div class="dropdown">
+                            <li class="nav-item">
                                 
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Évènements
-                                </button>
+                                <div class="dropdown">
+                                    
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Évènements
+                                    </button>
+                                    
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ path('admin_panel_events_list') }}">Liste des évènements</a></li>
+                                        <li><a class="dropdown-item" href="{{ path('admin_panel_event') }}">Ajouter un évènement</a></li>
+                                    </ul>
                                 
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ path('admin_panel_events_list') }}">Liste des évènements</a></li>
-                                    <li><a class="dropdown-item" href="{{ path('admin_panel_event') }}">Ajouter un évènement</a></li>
-                                </ul>
-                            
-                            </div>
+                                </div>
+                            </li>
                             
                             <li class="nav-item">
                                 <div class="dropdown">
@@ -185,6 +216,7 @@
                                 </div>
                             
                             </li>
+                            
                             <li class="nav-item">
                                 <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -199,6 +231,22 @@
                                 </div>
                             
                             </li>
+                            
+                            <li class="nav-item">
+                                <div class="dropdown ">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Modifier une page
+                                    </button>
+                                    
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item" href="">Qui-sommes-nous ?</a></li>
+                                        <!-- <li><a class="dropdown-item" href="#">Ajouter un utilisateur</a></li> -->
+                                    </ul>
+                                
+                                </div>
+                            
+                            </li>
+                        
                         </ul>
                     
                     </div>
@@ -219,6 +267,7 @@
     
     </div>
 </nav>
+
 
 {% block jsIncludes %}{% endblock %}
 

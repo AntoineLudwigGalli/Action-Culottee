@@ -129,7 +129,7 @@ h1{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: white;
+    background-color: rgba(0,0,0,0.5);
     z-index: 1;
     transition: all 0.3s ease;
     opacity: 0;
@@ -185,5 +185,88 @@ h1{
     width: 60%;
 
     font-size: .9rem;
+
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* Page de profile */
+
+.profil-text-size,
+.profil-text-size div div button {
+
+    font-size: var(--text-font);
+
+}
+
+/* Newsletter */
+
+#edit_newsletter_type_form {
+
+    display: flex;
+
+    flex-direction: row;
+
+    justify-content: space-between;
+
+}
+
+#edit_newsletter_type_form fieldset {
+
+    width: 50%;
+
+}
+
+#edit_newsletter_type_form_newsletterOption .form-check {
+
+    display: block;
+
+}
+
+/*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+/* Page de modification de boutique */
+
+.separeted li {
+
+    margin-bottom: 10px;
+
+}
+
+.flex-profil div{
+
+    margin-bottom: 15px;
+
+}
+
+@media screen and (min-width: 574px){
+
+    .flex-profil div {
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: baseline;
+
+        justify-content: space-between;
+
+    }
+
+    .flex-profil div:last-child {
+
+        display: block;
+
+    }
+
+}
+
+@media screen and (min-width: 1500px){
+
+    .shop-edit-table thead tr th,
+    .shop-edit-table tbody tr td
+    {
+        width: 50%;
+    }
 
 }

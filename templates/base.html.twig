@@ -8,14 +8,14 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>{% block title %}{% endblock %}</title>
 	
-	{% block cssIncludes %}{% endblock %}
-	
 	<link rel="stylesheet"
 	      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
 	      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
 	      crossorigin="anonymous" referrerpolicy="no-referrer"/>
 	<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+	{% block cssIncludes %}{% endblock %}
 </head>
 <body>
 {# Inclusion du menu #}
@@ -30,8 +30,8 @@
 {# TODO:Affihcage du footer #}
 {% include 'partials/footer.html.twig' %}
 
-{% block jsIncludes %}{% endblock %}
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+{% block jsIncludes %}{% endblock %}
 
 </body>
 </html>

@@ -9,6 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -23,7 +24,7 @@ class UpdateUserFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-//        Création et paramétrage des champs du formulaire d'inscription
+//        Création et paramétrage des champs du formulaire de modification d'un utilisateur
         $builder
 //            Champs Email
             ->add('email', EmailType::class, [
@@ -106,9 +107,36 @@ class UpdateUserFormType extends AbstractType
                     'Non' => "0",
                 ],
                 'empty_data' => "0",
-
             ])
 
+
+            ->add('isVerified', ChoiceType::class, [
+                'label' => "L'utilisateur a été vérifié et le compte est valide ?",
+                'expanded' => true,
+                'multiple' => false, //expanded et multiple permettent d'avoir des boutons radio plutôt qu'un menu
+                // déroulant
+                'choices' => [
+                    'Oui' => "1",
+                    'Non' => "0",
+                ],
+                'empty_data' => "0",
+            ])
+
+            ->add('membershipPaid', ChoiceType::class, [
+                'label' => "L'utilisateur est-il à jour de sa cotisation ?",
+                'expanded' => true,
+                'multiple' => false, //expanded et multiple permettent d'avoir des boutons radio plutôt qu'un menu
+                // déroulant
+                'choices' => [
+                    'Oui' => "1",
+                    'Non' => "0",
+                ],
+                'empty_data' => "0",
+            ])
+
+            ->add('save', SubmitType::class, [
+                'label' => 'Modifier l\'utilisateur'
+            ])
         ;
     }
 

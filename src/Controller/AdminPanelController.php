@@ -15,6 +15,7 @@ use App\Form\UpdateUserFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,6 +26,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route("/admin", name: "admin_panel_")]
+#[IsGranted('ROLE_ADMIN')]
 class AdminPanelController extends AbstractController {
 
     #[Route('/creer-un-evenement', name: 'event')]
@@ -110,7 +112,7 @@ class AdminPanelController extends AbstractController {
 
 
     #[Route('/modification-d\'un-evenement/{id}/', name: 'event_edit_', priority: 10)]
-    //    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN')]
     public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
 
         // Instanciation d'un nouveau formulaire basé sur $article qui contient déjà les données actuelles de l'article à modifier
@@ -162,7 +164,7 @@ class AdminPanelController extends AbstractController {
     //////////////////////////////////////////////////////////
 
     #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
-    //    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN')]
     public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response {
         $form = $this->createForm(UpdateUserFormType::class, $user);
 
@@ -171,6 +173,11 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreur
         if ($form->isSubmitted() && $form->isValid()) {
+            if($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1){
+                $user->setRoles(["ROLE_MEMBER"]);
+            } else {
+                $user->setRoles(["ROLE_USER"]);
+            }
 
             // Sauvegarde des données modifiées en BDD
             $em = $doctrine->getManager();
@@ -190,8 +197,7 @@ class AdminPanelController extends AbstractController {
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
     #[Route('/creer-une-boutique', name: 'admin_shop_creation')]
-    //    TODO: Penser à activer le role admin sur cette page une fois les roles créés et les tests terminés
-        //    #[isGranted('ROLE_ADMIN')]
+    #[isGranted('ROLE_ADMIN')]
     public function createShop(ManagerRegistry $doctrine, Request $request,): Response {
 
         $shop = new Shop();
@@ -262,39 +268,37 @@ class AdminPanelController extends AbstractController {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    #[Route('/modifier-accueil', name: 'home_presentation')]
-    public function homePresentation(ManagerRegistry $doctrine, Request $request): Response {
+    #[Route('/contenu-dynamique/modifier/{name}/', name: 'dynamic_content_edit', requirements: ["name" => "[a-z0-9_-]{2,50}"] )]
+    public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response {
 
-        $form = $this->createForm(DynamicContentFormType::class);
+        $dynamicContentRepo = $doctrine->getRepository(DynamicContent::class);
 
-        $form->handleRequest($request);
+        $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $photo = $form->get('mainImage')->getData();
+        $em = $doctrine->getManager();
 
-            if ($homePresentation->getPresentationText() != null && $homePresentation->getPresentationImage() != null &&
-                file_exists($this->getParameter('app.home.photo.directory') . $homePresentation->getPresentationImage())) {
-
-                dump($this->getParameter('app.home.photo.directory') . $homePresentation->getPresentationImage());
-            }
-
-            do {
-                $newFileName = md5(random_bytes(100)) . '.' . $photo->guessExtension();
-            } while (file_exists($this->getParameter('app.home.photo.directory') . $newFileName));
-
-            $homePresentation->setPresentationImage($newFileName);
-
-            $em = $doctrine->getManager();
-            $em->persist($homePresentation);
-            $em->flush();
-
-            $photo->move($this->getParameter('app.home.photo.directory'), $newFileName,);
-
-            $this->addFlash('success', 'Présentation actualisée avec succès');
+        if(empty($currentDynamicContent)){
+            $currentDynamicContent = new DynamicContent();
+            $currentDynamicContent->setName($name);
+            $em->persist($currentDynamicContent);
         }
 
 
-        return $this->render('admin_panel/admin_home_presentation.html.twig', ['form' => $form->createView(),]);
+        $form = $this->createForm(DynamicContentFormType::class, $currentDynamicContent);
+
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $em->flush();
+
+            $this->addFlash('success', 'Le contenu a bien été modifié !');
+
+            return $this->redirectToRoute('main_home');
+
+        }
+
+        return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
     }
 
 }

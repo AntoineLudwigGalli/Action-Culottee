@@ -13,68 +13,39 @@ class DynamicContent
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'text')]
-    private $mainText;
-
     #[ORM\Column(type: 'string', length: 50)]
-    private $mainImage;
+    private $name;
 
-    #[ORM\Column(type: 'string', length: 150)]
-    private $formTitle;
-
-    #[ORM\Column(type: 'string', length: 70)]
-    private $relatedPage;
+    #[ORM\Column(type: 'text', nullable: true)]
+    private $content;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getPresentationText(): ?string
+    public function getName(): ?string
     {
-        return $this->presentationText;
+        return $this->name;
     }
 
-    public function setPresentationText(string $presentationText): self
+    public function setName(string $name): self
     {
-        $this->presentationText = $presentationText;
+        $this->name = $name;
 
         return $this;
     }
 
-    public function getPresentationImage(): ?string
+    public function getContent(): ?string
     {
-        return $this->presentationImage;
+        return $this->content;
     }
 
-    public function setPresentationImage(string $presentationImage): self
+    public function setContent(string $content): self
     {
-        $this->presentationImage = $presentationImage;
+        $this->content = $content;
 
         return $this;
     }
-
-    public function getFormTitle(): ?string
-    {
-        return $this->formTitle;
-    }
-
-    public function setFormTitle(string $formTitle): self
-    {
-        $this->formTitle = $formTitle;
-
-        return $this;
-    }
-
-    public function getRelatedPage(): ?string
-    {
-        return $this->relatedPage;
-    }
-
-    public function setRelatedPage(string $relatedPage): self
-    {
-        $this->relatedPage = $relatedPage;
-
-        return $this;
-    }
+    
 }

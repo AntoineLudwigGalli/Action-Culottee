@@ -40,15 +40,16 @@
                             <thead>
                             <tr>
 {#                                TODO:trié#}
-                                <th scope="col">#</th>
-                                <th scope="col"><span class="mx-2">{{ knp_pagination_sortable(users, 'Trier par ', 'a.firstname') }}</span>Prénom</th>
-                                <th scope="col">Nom</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">N° adhérent</th>
-                                <th scope="col">N° telephone</th>
-                                <th scope="col">Newsletter</th>
-                                <th scope="col">Paiement</th>
-                                <th scope="col">????</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'Rôle ', 'a.roles') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'Prénom ', 'a.firstname') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'Nom ', 'a.lastname') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'Email ', 'a.email') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'N° adhérent ', 'a.memberIdNumber') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'N° téléphone ', 'a.phoneNumber') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'Newsletter ', 'a.newsletterOption') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'Paiement ', 'a.membershipPaid') }}</th>
+                                <th scope="col">{{ knp_pagination_sortable(users, 'Compte vérifié ', 'a.isVerified') }}</th>
+
                             </tr>
                             </thead>
                             <tbody>
@@ -58,19 +59,23 @@
 
 
                             <tr>
-                                <th scope="row"></th>
 {#                                TODO:sup#}
-{#                                <td>{{ user.roles }}</td>#}
+                                <td>{% if user.roles[0] == "ROLE_ADMIN" %}
+                                        Administrateur
+                                    {% elseif user.roles[0] == "ROLE_MEMBER" %}
+                                        Membre
+                                    {% elseif user.roles[0] == "ROLE_USER" %}
+                                        Membre désactivé
+                                    {% endif %}
+                                </td>
                                 <td>{{ user.firstname }}</td>
                                 <td>{{ user.lastname }}</td>
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.memberIdNumber }}</td>
                                 <td>{{ user.phoneNumber }}</td>
-                                <td>{{ user.newsletterOption }}</td>
-                                <td>{{ user.membershipPaid }}</td>
-                                <td>{{ user.isVerified }}</td>
-
-                                <td>
+                                <td>{{ user.newsletterOption == 0 ? "Non" : "Oui" }}</td>
+                                <td>{{ user.membershipPaid == 0 ? "Cotisation non réglée" : "Cotisation réglée" }}</td>
+                                <td>{{ user.isVerified == 0 ? "Compte non vérifié" : "Compte vérifié" }}<td>
 {#                                    {% if is_granted('ROLE_ADMIN') %}#}
 
                                     <div class="mt-3">

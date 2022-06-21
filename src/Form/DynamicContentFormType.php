@@ -18,41 +18,19 @@ class DynamicContentFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('mainText', CKEditorType::class, [
+            ->add('content', CKEditorType::class, [
                 'purify_html' => true,
-                'label' => "Texte de présentation",
+                'label' => false,
+                'empty_data' => '',
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Merci de renseigner un contenu'
-                    ]),
                     new Length([
-//                        todo: mettre une vraie valeur minimum
-                        'min' => 1,
-                        'minMessage' => 'Le contenu doit contenir au moins {{ limit }} caractères',
-                        'max' => 5000,
+                        'max' => 50000,
                         'maxMessage' => 'Le contenu doit contenir au maximum {{ limit }} caractères'
                     ]),
                 ]
             ])
 
-            ->add('mainImage', FileType::class, [
-                'label' => 'Sélectionnez une photo',
-                'mapped' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '10M',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'L\'image doit être de type jpg ou png',
-                        'maxSizeMessage' => 'Fichier trop volumineux ({{ size }} {{ suffix }}). La taille maximum autorisée est {{ limit }}{{ suffix }}',
-                    ]),
-                    new NotBlank([
-                        'message' => 'Vous devez sélectionner un fichier',
-                    ])
-                ]
-            ])
+
             ->add('save', SubmitType::class, [
                 'label' => 'Envoyer',
                 'attr' => [
