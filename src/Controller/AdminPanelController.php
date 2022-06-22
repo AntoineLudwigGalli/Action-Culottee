@@ -15,7 +15,6 @@ use App\Form\DynamicContentFormType;
 use App\Form\EditShopTypeFormType;
 use App\Form\RegistrationFormType;
 use App\Form\UpdateUserFormType;
-use App\Repository\ShopRepository;
 
 use App\Form\PartnerTypeFormType;
 
@@ -27,7 +26,6 @@ use Knp\Component\Pager\PaginatorInterface;
 
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -49,8 +47,8 @@ class AdminPanelController extends AbstractController
 
 
     /**
-     * Events Section
      *
+     * Events Section
      *
      */
 
@@ -106,7 +104,7 @@ class AdminPanelController extends AbstractController
 
         $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a ORDER BY a.eventDate ASC');
 
-        $events = $paginator->paginate($query, $requestedPage, 20,);
+        $events = $paginator->paginate($query, $requestedPage, 20);
 
         return $this->render('admin_panel/admin_events_list.html.twig', ['events' => $events,]);
     }
@@ -130,7 +128,7 @@ class AdminPanelController extends AbstractController
             $em->flush();
 
             // Message flash de succès
-            $this->addFlash('success', "L'évenement' a été supprimé avec succès !");
+            $this->addFlash('success', "L'évènement' a été supprimé avec succès !");
         }
         // Redirection vers la page qui liste les articles
         return $this->redirectToRoute('admin_panel_events_list');
@@ -148,7 +146,7 @@ class AdminPanelController extends AbstractController
 
         $form->handleRequest($request);
 
-        // Si le formulaire est envoyé et sans erreur
+        // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Sauvegarde des données modifiées en BDD
@@ -216,7 +214,7 @@ class AdminPanelController extends AbstractController
 
         $query = $em->createQuery('SELECT a FROM App\Entity\User a ORDER BY a.id DESC');
 
-        $users = $paginator->paginate($query, $requestedPage, 25,);
+        $users = $paginator->paginate($query, $requestedPage, 25);
 
         return $this->render('admin_panel/admin_users_list.html.twig', ['users' => $users,]);
     }
@@ -232,7 +230,7 @@ class AdminPanelController extends AbstractController
 
         $form->handleRequest($request);
 
-        // Si le formulaire est envoyé et sans erreur
+        // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
             if ($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1) {
                 $user->setRoles(["ROLE_MEMBER"]);
@@ -313,7 +311,7 @@ class AdminPanelController extends AbstractController
         $users = $paginator->paginate(
             $query,     // Requête créée juste avant
             $requestedPage,     // Page qu'on souhaite voir
-            10,     // Nombre d'article à afficher par page
+            10     // Nombre d'articles par page
         );
 
         return $this->render('admin_panel/admin_users_search.html.twig', [
@@ -330,7 +328,7 @@ class AdminPanelController extends AbstractController
      */
 
     #[Route('/creer-une-boutique', name: 'shop_creation')]
-    public function createShop(ManagerRegistry $doctrine, Request $request,): Response
+    public function createShop(ManagerRegistry $doctrine, Request $request): Response
     {
 
         $shop = new Shop();
@@ -349,7 +347,7 @@ class AdminPanelController extends AbstractController
             $prepAddr = str_replace(' ', '+', $address);
 
             $referer = "https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json"; // La connexion à
-            // l'API nominatim requière de passer par le referer (un paramètre du header dans le navigateur)
+            // l'API nominatim requière de passer par le referer (un paramètre du header dans le navigateur.)
             $opts = array('http' => array('header' => array("Referer: $referer\r\n")));
             $context = stream_context_create($opts);
             $geocode = file_get_contents($referer, false, $context);
@@ -390,7 +388,7 @@ class AdminPanelController extends AbstractController
 
         $query = $em->createQuery('SELECT a FROM App\Entity\Shop a ORDER BY a.id DESC');
 
-        $shops = $paginator->paginate($query, $requestedPage, 25,);
+        $shops = $paginator->paginate($query, $requestedPage, 25);
 
         return $this->render('admin_panel/admin_shops_list.html.twig', ['shops' => $shops,]);
     }
@@ -407,7 +405,7 @@ class AdminPanelController extends AbstractController
         $form->handleRequest($request);
 
 
-        // Si le formulaire est envoyé et sans erreur
+        // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Sauvegarde des données modifiées en BDD
@@ -519,9 +517,7 @@ class AdminPanelController extends AbstractController
 
             if (!in_array($ext, $extArray)) {
 
-                dump('fgffg');
-
-                $form->get('logo')->addError(new FormError('L\'extention du fichier n\'est pas bon'));
+                $form->get('logo')->addError(new FormError('L\'extension du fichier n\'est pas bon'));
 
             } else {
 
@@ -536,7 +532,7 @@ class AdminPanelController extends AbstractController
 
                 $partnerRepository->add($partner, true);
 
-                $this->addFlash('success', 'Partenaire ajouté avec sucess');
+                $this->addFlash('success', 'Partenaire ajouté avec succés');
 
             }
 
@@ -566,7 +562,7 @@ class AdminPanelController extends AbstractController
 
         $query = $em->createQuery('SELECT a FROM App\Entity\Partner a ORDER BY a.id DESC');
 
-        $partners = $paginator->paginate($query, $requestedPage, 25,);
+        $partners = $paginator->paginate($query, $requestedPage, 25);
 
         return $this->render('admin_panel/admin_partners_list.html.twig', ['partners' => $partners,]);
     }
@@ -583,14 +579,14 @@ class AdminPanelController extends AbstractController
         $form->handleRequest($request);
 
 
-        // Si le formulaire est envoyé et sans erreur
+        // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Sauvegarde des données modifiées en BDD
             $em = $doctrine->getManager();
             $em->flush();
 
-            $this->addFlash('success', 'Le partneraire à été modifié avec succès !');
+            $this->addFlash('success', 'Le partenaire à été modifié avec succès !');
 
             return $this->redirectToRoute('admin_panel_partners_list');
         }
