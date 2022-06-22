@@ -18,6 +18,10 @@ use App\Repository\PartnerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+
+
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +31,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route("/admin", name: "admin_panel_")]
+#[IsGranted('ROLE_ADMIN')]
 class AdminPanelController extends AbstractController {
 
 
@@ -113,7 +118,7 @@ class AdminPanelController extends AbstractController {
 
 
     #[Route('/modification-d\'un-evenement/{id}/', name: 'event_edit_', priority: 10)]
-    //    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN')]
     public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
 
         // Instanciation d'un nouveau formulaire basé sur $article qui contient déjà les données actuelles de l'article à modifier
@@ -165,7 +170,7 @@ class AdminPanelController extends AbstractController {
     //////////////////////////////////////////////////////////
 
     #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
-    //    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_ADMIN')]
     public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response {
         $form = $this->createForm(UpdateUserFormType::class, $user);
 
@@ -174,6 +179,11 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreur
         if ($form->isSubmitted() && $form->isValid()) {
+            if($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1){
+                $user->setRoles(["ROLE_MEMBER"]);
+            } else {
+                $user->setRoles(["ROLE_USER"]);
+            }
 
             // Sauvegarde des données modifiées en BDD
             $em = $doctrine->getManager();
@@ -192,9 +202,8 @@ class AdminPanelController extends AbstractController {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
-    #[Route('/creer-une-boutique', name: 'admin_shop_creation')]
-    //    TODO: Penser à activer le role admin sur cette page une fois les roles créés et les tests terminés
-        //    #[isGranted('ROLE_ADMIN')]
+    #[Route('/creer-une-boutique', name: 'shop_creation')]
+    #[isGranted('ROLE_ADMIN')]
     public function createShop(ManagerRegistry $doctrine, Request $request,): Response {
 
         $shop = new Shop();
@@ -235,6 +244,25 @@ class AdminPanelController extends AbstractController {
         }
 
         return $this->render('admin_panel/admin_shop_creation.html.twig', ['form' => $form->createView()]);
+    }
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/liste-des-boutiques', name: 'shops_list')]
+    public function shopsList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+
+        $requestedPage = $request->query->getInt('page', 1);
+
+        if ($requestedPage < 1) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $doctrine->getManager();
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\Shop a ORDER BY a.id DESC');
+
+        $shops = $paginator->paginate($query, $requestedPage, 25,);
+
+        return $this->render('admin_panel/admin_shops_list.html.twig', ['shops' => $shops,]);
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -307,7 +335,7 @@ class AdminPanelController extends AbstractController {
     /**
      * Méthode du formulaire partenaire
      */
-    #[Route('/cree-un-partneraire/', name: 'partner')]
+    #[Route('/creer-un-partneraire', name: 'partner')]
     public function partner(PartnerRepository $partnerRepository, Request $request) : Response
     {
         $partner = new Partner();

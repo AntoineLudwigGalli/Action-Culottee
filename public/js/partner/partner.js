@@ -2,10 +2,13 @@ export class Partner {
 
     createPartnerPopup(imageLocation = null, getId) {
 
-        // Div pour le posissionement du partenaire à affiché
+        // Div pour le positionnement du partenaire à affiché
         document.querySelector('.overlay-partner').prepend(document.createElement('div'));
         document.querySelector('.overlay-partner>div').setAttribute('class', 'container d-block col-12 col-md-8 mx-auto my-5 bg-black h-25');
         document.querySelector('.overlay-partner>div').setAttribute('id', 'partner-info');
+
+
+
 
         // Création du titre du partenaire
         document.querySelector('.overlay-partner>div').prepend(  document.createElement('h1') );
@@ -30,10 +33,12 @@ export class Partner {
         document.querySelector('.overlay-partner .img-p-partner img').setAttribute('alt',  '');
         document.querySelector('.overlay-partner .img-p-partner img').setAttribute('src', imageLocation);
 
+
+
+
         // Description du partenaire
         document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('p') );
         document.querySelector('.overlay-partner .img-p-partner p').setAttribute('class', 'text-break')
-        document.querySelector('.overlay-partner .img-p-partner p').textContent = 'f';
 
     }
 

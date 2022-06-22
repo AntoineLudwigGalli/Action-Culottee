@@ -1,6 +1,6 @@
 {#TODO: Barre de navigation avec bannière + de culotte !#}
 {# Menu principal du site #}
-<nav class="navbar navbar-expand-lg navbar- navbar-light" style="background-color: #FF9933;">
+<nav class="navbar navbar-expand-lg navbar- navbar-light">
     <div class="container-fluid">
 
         {# Logo et titre du site #}
@@ -38,7 +38,7 @@
                 {#TODO:#}
                 {# Bouton de la page Nos partenaires #}
                 <li class="nav-item">
-                    <a class="nav-link{{ route == 'main_home' ? '' }}" href="{{ path('main_home') }}">Nos partenaires</a>
+                    <a class="nav-link{{ route == 'main_partners' ? '' }}" href="{{ path('main_partners') }}">Nos partenaires</a>
                 </li>
 
                 {#TODO:#}
@@ -59,7 +59,7 @@
                     <li class="nav-item dropdown">
 
                         {# Texte du bouton du menu déroulant #}
-                        <a class="nav-link dropdown-toggle text-light" href="#" id="profil-dropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="profil-dropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {#TODO:#}
                             {# Affichage du prénom de l'utilisateur connecté #}
                             <i class="fas fa-user mx-1"></i>{{ app.user.firstname }} {{ app.user.lastname }}
@@ -72,9 +72,15 @@
                             {# Bouton de la page mon profil #}
                             <a class="dropdown-item" href="{{ path('user_panel_profil') }}"><i class="fas fa-users-cog me-1"></i>Mon Profil</a>
 
-                            {#TODO: BOUTON UNIQUEMENT ADMIN #}
-                            {# Bouton de la page mon profil #}
-                            <a class="dropdown-item" href="{{ path('main_home') }}"><i class="fas fa-users-cog me-1"></i>Administration</a>
+                            {# Bouton de la page Administration #}
+                            {% if app.user.roles[0] == "ROLE_ADMIN" %}
+                                <a class="dropdown-item" href="{{ path('main_home') }}"><i class="fas fa-users-cog me-1"></i>Administration</a>
+                            {% endif %}
+
+                            {# Bouton de la page User Panel #}
+                            {% if app.user.roles[0] == "ROLE_MEMBER" %}
+                                <a class="dropdown-item" href="{{ path('main_home') }}"><i class="fas fa-users-cog me-1"></i>Gestion du compte</a>
+                            {% endif %}
 
                             {# Séparateur #}
                             <div class="dropdown-divider"></div>
@@ -103,7 +109,5 @@
 
             </ul>
         </div>
-
-    </div>
-
 </nav>
+</div>

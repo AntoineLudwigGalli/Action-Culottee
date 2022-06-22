@@ -21,6 +21,7 @@ class CreateEventFormType extends AbstractType {
                 'model_timezone' => 'Europe/Paris', //Date au format FR
                 'widget' => 'single_text', //Date au format input date html
                 'label' => "Date de l'évènement",
+                'help' => 'Saisir une date future uniquement',
                 'constraints' => [
                     new NotBlank([ // Erreur si le champ n'est pas rempli
                         'message' => 'Merci de saisir une date valide pour cet évènement'
