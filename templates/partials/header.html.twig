@@ -74,7 +74,7 @@
 
                             {# Bouton de la page Administration #}
                             {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                                <a class="dropdown-item" href="{{ path('main_home') }}"><i class="fas fa-users-cog me-1"></i>Administration</a>
+                                <a class="dropdown-item" href="{{ path('admin_panel_index') }}"><i class="fas fa-users-cog me-1"></i>Administration</a>
                             {% endif %}
 
                             {# Bouton de la page User Panel #}

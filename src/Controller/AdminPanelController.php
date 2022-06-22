@@ -11,10 +11,16 @@ use App\Entity\User;
 use App\Form\CreateEventFormType;
 use App\Form\CreateShopFormType;
 use App\Form\DynamicContentFormType;
-use App\Form\PartnerTypeFormType;
+
+use App\Form\EditShopTypeFormType;
 use App\Form\RegistrationFormType;
 use App\Form\UpdateUserFormType;
+use App\Repository\ShopRepository;
+
+use App\Form\PartnerTypeFormType;
+
 use App\Repository\PartnerRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -32,11 +38,22 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route("/admin", name: "admin_panel_")]
 #[IsGranted('ROLE_ADMIN')]
-class AdminPanelController extends AbstractController {
+class AdminPanelController extends AbstractController
+{
+
+    #[Route('', name: 'index')]
+    public function indexAdmin(): Response
+    {
+        return $this->render('admin_panel/admin_index.html.twig');
+    }
+
+
+    /////////////////////////////////////////////////////////////////////////////
 
 
     #[Route('/creer-un-evenement', name: 'event')]
-    public function createEvent(ManagerRegistry $doctrine, Request $request): Response {
+    public function createEvent(ManagerRegistry $doctrine, Request $request): Response
+    {
 
         // Création d'une nouvelle instance de la classe FutureEvent
         $newEvent = new FutureEvent();
@@ -69,11 +86,11 @@ class AdminPanelController extends AbstractController {
         return $this->render('admin_panel/admin_event.html.twig', ['form' => $form->createView(),]);
     }
 
-
     ////////////////////////////////////////////////////////////////
     ///
     #[Route('/liste-des-evenements', name: 'events_list')]
-    public function eventList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function eventList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -92,8 +109,8 @@ class AdminPanelController extends AbstractController {
 
     /////////////////////////////////////////////////////////////////////
     #[Route('/suppression-d\'un-evenement/{id}/', name: 'event_delete_', priority: 10)]
-    public function eventDelete(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
-
+    public function eventDelete(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response
+    {
         $csrfToken = $request->query->get('csrf_token', '');
 
         if (!$this->isCsrfTokenValid('event_delete_' . $futureEvent->getId(), $csrfToken)) {
@@ -101,7 +118,6 @@ class AdminPanelController extends AbstractController {
             $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
 
         } else {
-
             // Suppression de l'article en BDD
             $em = $doctrine->getManager();
             $em->remove($futureEvent);
@@ -109,17 +125,15 @@ class AdminPanelController extends AbstractController {
 
             // Message flash de succès
             $this->addFlash('success', "L'évenement' a été supprimé avec succès !");
-
         }
-
         // Redirection vers la page qui liste les articles
         return $this->redirectToRoute('admin_panel_events_list');
     }
 
 
     #[Route('/modification-d\'un-evenement/{id}/', name: 'event_edit_', priority: 10)]
-    #[IsGranted('ROLE_ADMIN')]
-    public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
+    public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response
+    {
 
         // Instanciation d'un nouveau formulaire basé sur $article qui contient déjà les données actuelles de l'article à modifier
         $form = $this->createForm(CreateEventFormType::class, $futureEvent);
@@ -146,11 +160,44 @@ class AdminPanelController extends AbstractController {
     }
 
 
+
+
     ////////////////////////////////////////////////////////////////////
+    ///
+    ///
     /// Users
 
+
+    #[Route('/inscription', name: 'register')]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $user = new User();
+        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+
+
+            if ($form->isValid()) {
+
+                // encode the plain password
+                $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
+
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('main_home');
+            }
+        }
+
+        return $this->render('admin_panel/admin_register.html.twig', ['registrationForm' => $form->createView(),]);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     #[Route('/liste-des-utilisateurs', name: 'users_list')]
-    public function usersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function usersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -170,8 +217,8 @@ class AdminPanelController extends AbstractController {
     //////////////////////////////////////////////////////////
 
     #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
-    #[IsGranted('ROLE_ADMIN')]
-    public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response {
+    public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response
+    {
         $form = $this->createForm(UpdateUserFormType::class, $user);
 
 
@@ -179,7 +226,7 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreur
         if ($form->isSubmitted() && $form->isValid()) {
-            if($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1){
+            if ($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1) {
                 $user->setRoles(["ROLE_MEMBER"]);
             } else {
                 $user->setRoles(["ROLE_USER"]);
@@ -201,10 +248,44 @@ class AdminPanelController extends AbstractController {
 
     }
 
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////:
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/suppression-d\'un-utilisateur/{id}/', name: 'user_delete_', priority: 10)]
+    public function userDelete(User $user, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $csrfToken = $request->query->get('csrf_token', '');
+
+        if (!$this->isCsrfTokenValid('user_delete_' . $user->getId(), $csrfToken)) {
+
+            $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
+
+        } else {
+            // Suppression de l'article en BDD
+            $em = $doctrine->getManager();
+            $em->remove($user);
+            $em->flush();
+
+            // Message flash de succès
+            $this->addFlash('success', "L'utilisateur' a été supprimé avec succès !");
+        }
+        // Redirection vers la page qui liste les articles
+        return $this->redirectToRoute('admin_panel_users_list');
+    }
+
+
+
+
+
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
     #[Route('/creer-une-boutique', name: 'shop_creation')]
-    #[isGranted('ROLE_ADMIN')]
-    public function createShop(ManagerRegistry $doctrine, Request $request,): Response {
+    public function createShop(ManagerRegistry $doctrine, Request $request,): Response
+    {
 
         $shop = new Shop();
 
@@ -245,10 +326,12 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_shop_creation.html.twig', ['form' => $form->createView()]);
     }
+
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     #[Route('/liste-des-boutiques', name: 'shops_list')]
-    public function shopsList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function shopsList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -267,66 +350,58 @@ class AdminPanelController extends AbstractController {
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    #[Route('/inscription', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+    #[Route('/modifier-une-boutique/{id}/', name: 'shop_edit_', priority: 10)]
+    public function editShop(Request $request, Shop $shop, ManagerRegistry $doctrine): Response
+    {
 
-        if ($form->isSubmitted()) {
-
-
-            if ($form->isValid()) {
-
-                // encode the plain password
-                $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
-
-                $entityManager->persist($user);
-                $entityManager->flush();
-
-                return $this->redirectToRoute('main_home');
-            }
-        }
-
-        return $this->render('admin_panel/admin_register.html.twig', ['registrationForm' => $form->createView(),]);
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    #[Route('/contenu-dynamique/modifier/{name}/', name: 'dynamic_content_edit', requirements: ["name" => "[a-z0-9_-]{2,50}"] )]
-    public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response {
-
-        $dynamicContentRepo = $doctrine->getRepository(DynamicContent::class);
-
-        $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
-
-        $em = $doctrine->getManager();
-
-        if(empty($currentDynamicContent)){
-            $currentDynamicContent = new DynamicContent();
-            $currentDynamicContent->setName($name);
-            $em->persist($currentDynamicContent);
-        }
-
-
-        $form = $this->createForm(DynamicContentFormType::class, $currentDynamicContent);
+        $form = $this->createForm(EditShopTypeFormType::class, $shop);
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
 
+        // Si le formulaire est envoyé et sans erreur
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Sauvegarde des données modifiées en BDD
+            $em = $doctrine->getManager();
             $em->flush();
 
-            $this->addFlash('success', 'Le contenu a bien été modifié !');
+            $this->addFlash('success', 'La boutique à été modifiée avec succès !');
 
-            return $this->redirectToRoute('main_home');
-
+            return $this->redirectToRoute('admin_panel_shops_list');
         }
 
-        return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
+
+        return $this->render('admin_panel/admin_shop_edit.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    #[Route('/suppression-d\'une-boutique/{id}/', name: 'shop_delete_', priority: 10)]
+    public function shopDelete(Shop $shop, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $csrfToken = $request->query->get('csrf_token', '');
+
+        if (!$this->isCsrfTokenValid('shop_delete_' . $shop->getId(), $csrfToken)) {
+
+            $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
+
+        } else {
+            // Suppression de l'article en BDD
+            $em = $doctrine->getManager();
+            $em->remove($shop);
+            $em->flush();
+
+            // Message flash de succès
+            $this->addFlash('success', "La boutique a été supprimé avec succès !");
+        }
+        // Redirection vers la page qui liste les articles
+        return $this->redirectToRoute('admin_panel_shops_list');
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      * Partner Section
@@ -335,15 +410,15 @@ class AdminPanelController extends AbstractController {
     /**
      * Méthode du formulaire partenaire
      */
-    #[Route('/creer-un-partneraire', name: 'partner')]
-    public function partner(PartnerRepository $partnerRepository, Request $request) : Response
+    #[Route('/creer-un-partenaire', name: 'partner_creation')]
+    public function partner(PartnerRepository $partnerRepository, Request $request): Response
     {
         $partner = new Partner();
 
         $form = $this->createForm(PartnerTypeFormType::class, $partner);
         $form->handleRequest($request);
 
-        if ( $form->isSubmitted() && $form->isValid() ) {
+        if ($form->isSubmitted() && $form->isValid()) {
 
 
             $file = $form->get('logo')->getData();
@@ -352,11 +427,11 @@ class AdminPanelController extends AbstractController {
 
             $extArray = ['jpg', 'png', 'jpeg'];
 
-            if ( !in_array($ext, $extArray)  ) {
+            if (!in_array($ext, $extArray)) {
 
                 dump('fgffg');
 
-                $form->get('logo')->addError( new FormError('L\'extention du fichier n\'est pas bon') );
+                $form->get('logo')->addError(new FormError('L\'extention du fichier n\'est pas bon'));
 
             } else {
 
@@ -369,7 +444,7 @@ class AdminPanelController extends AbstractController {
                 $partner->setLogo($filename);
                 $partner->setOwnerId($this->getUser());
 
-                $partnerRepository->add( $partner, true );
+                $partnerRepository->add($partner, true);
 
                 $this->addFlash('success', 'Partenaire ajouté avec sucess');
 
@@ -383,5 +458,115 @@ class AdminPanelController extends AbstractController {
         ]);
 
     }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/liste-des-partenaires', name: 'partners_list')]
+    public function partnersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
+
+        $requestedPage = $request->query->getInt('page', 1);
+
+        if ($requestedPage < 1) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $doctrine->getManager();
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\Partner a ORDER BY a.id DESC');
+
+        $partners = $paginator->paginate($query, $requestedPage, 25,);
+
+        return $this->render('admin_panel/admin_partners_list.html.twig', ['partners' => $partners,]);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #[Route('/modifier-un-partenaire/{id}/', name: 'partner_edit_', priority: 10)]
+    public function editPartner(Request $request, Partner $partner, ManagerRegistry $doctrine): Response
+    {
+
+        $form = $this->createForm(PartnerTypeFormType::class, $partner);
+
+        $form->handleRequest($request);
+
+
+        // Si le formulaire est envoyé et sans erreur
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Sauvegarde des données modifiées en BDD
+            $em = $doctrine->getManager();
+            $em->flush();
+
+            $this->addFlash('success', 'Le partneraire à été modifié avec succès !');
+
+            return $this->redirectToRoute('admin_panel_partners_list');
+        }
+
+
+        return $this->render('admin_panel/admin_partner_edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #[Route('/suppression-d\'un-partenaire/{id}/', name: 'partner_delete_', priority: 10)]
+    public function partnerDelete(Partner $partner, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $csrfToken = $request->query->get('csrf_token', '');
+
+        if (!$this->isCsrfTokenValid('partner_delete_' . $partner->getId(), $csrfToken)) {
+
+            $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
+
+        } else {
+            // Suppression de l'article en BDD
+            $em = $doctrine->getManager();
+            $em->remove($partner);
+            $em->flush();
+
+            // Message flash de succès
+            $this->addFlash('success', "Le partenaire a été supprimé avec succès !");
+        }
+        // Redirection vers la page qui liste les articles
+        return $this->redirectToRoute('admin_panel_partners_list');
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    #[Route('/contenu-dynamique/modifier/{name}/', name: 'dynamic_content_edit', requirements: ["name" => "[a-z0-9_-]{2,50}"])]
+    public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response
+    {
+
+        $dynamicContentRepo = $doctrine->getRepository(DynamicContent::class);
+
+        $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
+
+        $em = $doctrine->getManager();
+
+        if (empty($currentDynamicContent)) {
+            $currentDynamicContent = new DynamicContent();
+            $currentDynamicContent->setName($name);
+            $em->persist($currentDynamicContent);
+        }
+
+
+        $form = $this->createForm(DynamicContentFormType::class, $currentDynamicContent);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->flush();
+
+            $this->addFlash('success', 'Le contenu a bien été modifié !');
+
+            return $this->redirectToRoute('main_home');
+
+        }
+
+        return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
+    }
+
 
 }

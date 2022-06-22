@@ -7,23 +7,25 @@
     <div class="container-fluid">
         <div class="col-md-10 offset-md-2">
             <div class="row">
-                <h1 class="col-12 text-center my-5">Liste des boutiques</h1>
+                <h1 class="col-12 text-center my-5">Liste des partenaires</h1>
             </div>
 
             <div class="row">
 
                 <div class="col-12 col-md-8 mx-auto">
 
+
+                    {# Affichage nb d'utilisateurs #}
                     <div class="row">
-                        <p class="col-12 text-center">Nombre total de boutiques : {{ shops.getTotalItemCount() }}</p>
+                        <p class="col-12 text-center">Nombre total de partenaires : {{ partners.getTotalItemCount() }}</p>
                     </div>
 
 
-                    {% if shops is not empty %}
+                    {% if partners is not empty %}
                         <div class="row">
                             <div class="col-12 my-3 text-center">
                                 <div class="d-inline-block">
-                                    {{ knp_pagination_render(shops) }}
+                                    {{ knp_pagination_render(partners) }}
                                 </div>
                             </div>
                         </div>
@@ -37,56 +39,50 @@
                             <table class="align-middle table table-striped table-hover">
                                 <thead>
                                 <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">{{ knp_pagination_sortable(shops, 'propriétaire ', 'a.owner') }}</th>
-                                    <th scope="col">{{ knp_pagination_sortable(shops, 'Nom ', 'a.name') }}</th>
-                                    <th scope="col">{{ knp_pagination_sortable(shops, 'Adresse ', 'a.address') }}</th>
-                                    <th scope="col">{{ knp_pagination_sortable(shops, 'Code postal ', 'a.zip') }}</th>
-                                    <th scope="col">{{ knp_pagination_sortable(shops, 'Ville ', 'a.city') }}</th>
-                                    <th scope="col">{{ knp_pagination_sortable(shops, 'N° téléphone ', 'a.phoneNumber') }}</th>
-                                    <th scope="col">{{ knp_pagination_sortable(shops, 'Pays ', 'a.country') }}</th>
-
-
+                                    <th></th>
+                                    <th scope="col">{{ knp_pagination_sortable(partners, 'Titre ', 'a.title') }}</th>
+                                    <th scope="col">{{ knp_pagination_sortable(partners, 'Description ', 'a.description') }}</th>
+                                    <th scope="col">{{ knp_pagination_sortable(partners, 'Offre ', 'a.offer') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
 
 
-                                {% for shop in shops %}
+                                {% for partner in partners %}
 
 
                                     <tr>
                                         <td>
                                             <div class="mt-3">
 
-                                                <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer la boutique ?')"
-                                                   href="{{ path('admin_panel_shop_delete_', {'id': shop.id, 'csrf_token' : csrf_token('shop_delete_' ~ shop.id)}) }}"
-                                                   class=" text-decoration-none text-danger">
+                                                <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce partenaire ?')"
+                                                   href="{{ path('admin_panel_partner_delete_', {'id': partner.id, 'csrf_token' : csrf_token('partner_delete_' ~ partner.id)}) }}"
+                                                   class="text-decoration-none text-danger">
                                                     <i class="fa-solid fa-trash-can"></i>
-                                                    Supprimer
-                                                </a>
+                                                    Supprimer </a>
 
                                             </div>
 
                                         </td>
-                                        <td>{{ shop.owner.getLastname() }}</td>
-                                        <td>{{ shop.name }}</td>
-                                        <td>{{ shop.address }}</td>
-                                        <td>{{ shop.zip }}</td>
-                                        <td>{{ shop.city }}</td>
-                                        <td>{{ shop.phoneNumber }}</td>
-                                        <td>{{ shop.country }}</td>
 
+
+                                        <td>{{ partner.title }}</td>
+                                        <td>{{ partner.description }}</td>
+                                        <td>{{ partner.offer }}</td>
                                         <td>
+
+
                                             <div class="mt-3">
 
                                                 <a class="text-decoration-none text-warning me-3"
-                                                   href="{{ path('admin_panel_shop_edit_', {'id': shop.id}) }}">
+                                                   href="{{ path('admin_panel_partner_edit_', {'id': partner.id}) }}">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                     Modifier
                                                 </a>
 
+
                                             </div>
+
                                         </td>
                                     </tr>
 
@@ -98,11 +94,11 @@
 
                     </div>
 
-                    {% if shops is not empty %}
+                    {% if partners is not empty %}
                         <div class="row">
                             <div class="col-12 my-3 text-center">
                                 <div class="d-inline-block">
-                                    {{ knp_pagination_render(shops) }}
+                                    {{ knp_pagination_render(partners) }}
                                 </div>
                             </div>
                         </div>

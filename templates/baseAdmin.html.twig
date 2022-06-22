@@ -58,12 +58,11 @@
                 <ul class=" pt-5 nav nav-pills flex-column mb-sm-auto mb-0 align-items-center" id="menu">
 
                     <li class="nav-item">
-                        <a class=" btn btn-secondary text-decoration-none text-white" href=" {{ path('main_home') }}">Accueil
-                            du site</a>
+                        <a class=" btn btn-secondary text-decoration-none text-white" href=" {{ path('main_home') }}">Revenir au site</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class=" btn btn-secondary text-decoration-none text-white" href="#">Dashboard</a>
+                        <a class=" btn btn-secondary text-decoration-none text-white" href="{{ path('admin_panel_index') }}">Accueil admin</a>
                     </li>
 
                     <li class="nav-item">
@@ -113,6 +112,23 @@
                                 <li><a class="dropdown-item" href="{{ path('admin_panel_shops_list') }}">Liste des boutiques</a></li>
                                 <li><a class="dropdown-item" href="{{ path('admin_panel_shop_creation') }}">Ajouter
                                         une boutique</a></li>
+                            </ul>
+
+                        </div>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Partenaires
+                            </button>
+
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{ path('admin_panel_partners_list') }}">Liste des partenaires</a></li>
+                                <li><a class="dropdown-item" href="{{ path('admin_panel_partner_creation') }}">Ajouter
+                                        un partenaire</a></li>
                             </ul>
 
                         </div>
@@ -203,12 +219,12 @@
 
                             <li class="nav-item">
                                 <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false" href="{{ path('main_home') }}"> Accueil </a>
+                                   aria-expanded="false" href="{{ path('main_home') }}"> Revenir au site </a>
                             </li>
 
                             <li class="nav-item">
                                 <a class="btn btn-secondary" type="button" data-bs-toggle="dropdown"
-                                   aria-expanded="false" href="#"> Dashboard </a>
+                                   aria-expanded="false" href="{{ path('admin_panel_index') }}"> Accueil admin </a>
                             </li>
 
                             <li class="nav-item">
@@ -284,12 +300,12 @@
                                 <div class="dropdown ">
                                     <button class="btn btn-secondary dropdown-toggle" type="button"
                                             id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Partenaire
+                                        Partenaires
                                     </button>
 
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item" href="{{ path('admin_panel_partner') }}">Créer un partenaire</a></li>
-                                        <!-- <li><a class="dropdown-item" href="#">Ajouter un utilisateur</a></li> -->
+                                        <li><a class="dropdown-item" href="{{ path('admin_panel_partners_list') }}">Liste des partenaires</a></li>
+                                        <li><a class="dropdown-item" href="{{ path('admin_panel_partner_creation') }}">Créer un partenaire</a></li>
                                     </ul>
 
                                 </div>
