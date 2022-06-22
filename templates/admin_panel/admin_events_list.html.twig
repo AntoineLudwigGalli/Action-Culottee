@@ -31,7 +31,6 @@
                         </div>
                     </div>
                 </div>
-            {% endif %}
 
             <div class="row">
 
@@ -94,7 +93,6 @@
             </div>
 
             {# Affichage du menu de nav s'il y a des events #}
-            {% if events is not empty %}
                 <div class="row">
                     <div class="col-12 my-3 text-center">
                         <div class="d-inline-block">
@@ -102,6 +100,10 @@
                         </div>
                     </div>
                 </div>
+
+                {% else %}
+{#                TODO:faire joli#}
+                <p>Aucun évenement crée</p>
             {% endif %}
         </div>
     </div>

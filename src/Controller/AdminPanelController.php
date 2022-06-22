@@ -48,8 +48,11 @@ class AdminPanelController extends AbstractController
     }
 
 
-    /////////////////////////////////////////////////////////////////////////////
-
+    /**
+     * Events Section
+     *
+     *
+     */
 
     #[Route('/creer-un-evenement', name: 'event')]
     public function createEvent(ManagerRegistry $doctrine, Request $request): Response
@@ -85,9 +88,10 @@ class AdminPanelController extends AbstractController
         // Pour que la vue puisse afficher le formulaire, on doit lui envoyer le formulaire généré, avec $form->createView()
         return $this->render('admin_panel/admin_event.html.twig', ['form' => $form->createView(),]);
     }
-
-    ////////////////////////////////////////////////////////////////
-    ///
+    /**
+     *
+     *
+     */
     #[Route('/liste-des-evenements', name: 'events_list')]
     public function eventList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
@@ -106,8 +110,10 @@ class AdminPanelController extends AbstractController
 
         return $this->render('admin_panel/admin_events_list.html.twig', ['events' => $events,]);
     }
-
-    /////////////////////////////////////////////////////////////////////
+    /**
+     *
+     *
+     */
     #[Route('/suppression-d\'un-evenement/{id}/', name: 'event_delete_', priority: 10)]
     public function eventDelete(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -129,8 +135,10 @@ class AdminPanelController extends AbstractController
         // Redirection vers la page qui liste les articles
         return $this->redirectToRoute('admin_panel_events_list');
     }
-
-
+    /**
+     *
+     *
+     */
     #[Route('/modification-d\'un-evenement/{id}/', name: 'event_edit_', priority: 10)]
     public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -159,14 +167,12 @@ class AdminPanelController extends AbstractController
 
     }
 
-
-
-
-    ////////////////////////////////////////////////////////////////////
-    ///
-    ///
-    /// Users
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     * Users Section
+     *
+     */
 
     #[Route('/inscription', name: 'register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
@@ -192,9 +198,10 @@ class AdminPanelController extends AbstractController
 
         return $this->render('admin_panel/admin_register.html.twig', ['registrationForm' => $form->createView(),]);
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     *
+     *
+     */
     #[Route('/liste-des-utilisateurs', name: 'users_list')]
     public function usersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
@@ -213,9 +220,10 @@ class AdminPanelController extends AbstractController
 
         return $this->render('admin_panel/admin_users_list.html.twig', ['users' => $users,]);
     }
-
-    //////////////////////////////////////////////////////////
-
+    /**
+     *
+     *
+     */
     #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
     public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -247,9 +255,10 @@ class AdminPanelController extends AbstractController
         return $this->render('admin_panel/admin_user_edit.html.twig', ['form' => $form->createView(),]);
 
     }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     *
+     *
+     */
     #[Route('/suppression-d\'un-utilisateur/{id}/', name: 'user_delete_', priority: 10)]
     public function userDelete(User $user, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -272,16 +281,53 @@ class AdminPanelController extends AbstractController
         return $this->redirectToRoute('admin_panel_users_list');
     }
 
+    /**
+     *
+     *
+     */
 
+    #[Route('/rechercher-un-utilisateur/', name: 'users_search')]
+    public function searchUser(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
+        // Récupération de $_GET['page'], 1 si elle n'existe pas
+        $requestedPage = $request->query->getInt('page', 1);
 
+        // Vérification que le nombre est positif
+        if($requestedPage < 1){
+            throw new NotFoundHttpException();
+        }
 
+        // On récupère la recherche de l'utilisateur depuis l'URL ( $_GET['search'] )
+        $search = $request->query->get('search', '');
 
+        $em = $doctrine->getManager();
+
+        //Création de la requête de recherche
+        $query = $em
+            ->createQuery('SELECT a FROM App\Entity\User a WHERE a.firstname LIKE :search OR a.lastname LIKE :search OR a.email LIKE :search OR a.phoneNumber LIKE :search OR a.memberIdNumber LIKE :search')
+            ->setParameters([
+                'search' => '%' . $search . '%'
+            ])
+        ;
+
+        $users = $paginator->paginate(
+            $query,     // Requête créée juste avant
+            $requestedPage,     // Page qu'on souhaite voir
+            10,     // Nombre d'article à afficher par page
+        );
+
+        return $this->render('admin_panel/admin_users_search.html.twig', [
+            'users' => $users,
+        ]);
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-
-
+    /**
+     *
+     * Shops Section
+     *
+     */
 
     #[Route('/creer-une-boutique', name: 'shop_creation')]
     public function createShop(ManagerRegistry $doctrine, Request $request,): Response
@@ -326,9 +372,10 @@ class AdminPanelController extends AbstractController
 
         return $this->render('admin_panel/admin_shop_creation.html.twig', ['form' => $form->createView()]);
     }
-
-    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     *
+     *
+     */
     #[Route('/liste-des-boutiques', name: 'shops_list')]
     public function shopsList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
@@ -347,9 +394,10 @@ class AdminPanelController extends AbstractController
 
         return $this->render('admin_panel/admin_shops_list.html.twig', ['shops' => $shops,]);
     }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     *
+     *
+     */
     #[Route('/modifier-une-boutique/{id}/', name: 'shop_edit_', priority: 10)]
     public function editShop(Request $request, Shop $shop, ManagerRegistry $doctrine): Response
     {
@@ -376,9 +424,10 @@ class AdminPanelController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     *
+     *
+     */
     #[Route('/suppression-d\'une-boutique/{id}/', name: 'shop_delete_', priority: 10)]
     public function shopDelete(Shop $shop, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -401,15 +450,56 @@ class AdminPanelController extends AbstractController
         return $this->redirectToRoute('admin_panel_shops_list');
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     *
+     *
+     */
+    #[Route('/rechercher-une-boutique/', name: 'shops_search')]
+    public function searchShop(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
+
+        $requestedPage = $request->query->getInt('page', 1);
+
+        if($requestedPage < 1){
+            throw new NotFoundHttpException();
+        }
+
+        $search = $request->query->get('search', '');
+
+        $em = $doctrine->getManager();
+
+        $query = $em
+//            TODO:owner(jointure?)
+            ->createQuery('SELECT a FROM App\Entity\Shop a WHERE a.zip LIKE :search OR a.city LIKE :search OR a.address LIKE :search OR a.phoneNumber LIKE :search OR a.country LIKE :search OR a.name LIKE :search ')
+            ->setParameters([
+                'search' => '%' . $search . '%'
+            ])
+        ;
+
+        $shops = $paginator->paginate(
+            $query,
+            $requestedPage,
+            10,
+        );
+
+        return $this->render('admin_panel/admin_shops_search.html.twig', [
+            'shops' => $shops,
+        ]);
+    }
+    /**
+     *
+     *
+     */
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
+     *
      * Partner Section
+     *
      */
 
-    /**
-     * Méthode du formulaire partenaire
-     */
     #[Route('/creer-un-partenaire', name: 'partner_creation')]
     public function partner(PartnerRepository $partnerRepository, Request $request): Response
     {
@@ -458,9 +548,10 @@ class AdminPanelController extends AbstractController
         ]);
 
     }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+    /**
+     *
+     *
+     */
     #[Route('/liste-des-partenaires', name: 'partners_list')]
     public function partnersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
     {
@@ -479,8 +570,10 @@ class AdminPanelController extends AbstractController
 
         return $this->render('admin_panel/admin_partners_list.html.twig', ['partners' => $partners,]);
     }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     *
+     */
     #[Route('/modifier-un-partenaire/{id}/', name: 'partner_edit_', priority: 10)]
     public function editPartner(Request $request, Partner $partner, ManagerRegistry $doctrine): Response
     {
@@ -507,8 +600,10 @@ class AdminPanelController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     *
+     */
     #[Route('/suppression-d\'un-partenaire/{id}/', name: 'partner_delete_', priority: 10)]
     public function partnerDelete(Partner $partner, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -531,8 +626,17 @@ class AdminPanelController extends AbstractController
         return $this->redirectToRoute('admin_panel_partners_list');
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /**
+     *
+     *
+     */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     *
+     * Dynamic Content Section
+     *
+     */
 
     #[Route('/contenu-dynamique/modifier/{name}/', name: 'dynamic_content_edit', requirements: ["name" => "[a-z0-9_-]{2,50}"])]
     public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response
@@ -568,5 +672,9 @@ class AdminPanelController extends AbstractController
         return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
     }
 
+    /**
+     *
+     *
+     */
 
 }

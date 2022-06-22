@@ -27,7 +27,15 @@
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
+
+                    <div class="row">
+                        <div class="search-form offset-md-4 col-md-4">
+                            <form method="GET" action="{{ path('admin_panel_shops_search') }}" class="search-box">
+                                <input type="search" placeholder="Recherche" name="search" aria-label="search"  class="form-control">
+                                <button type="submit">Rechercher</button>
+                            </form>
+                        </div>
+                    </div>
 
 
                     <div class="row">
@@ -98,7 +106,6 @@
 
                     </div>
 
-                    {% if shops is not empty %}
                         <div class="row">
                             <div class="col-12 my-3 text-center">
                                 <div class="d-inline-block">
@@ -106,6 +113,9 @@
                                 </div>
                             </div>
                         </div>
+                        {% else %}
+{#                        TODO:faire joli#}
+                        <p>aucune boutique crée</p>
                     {% endif %}
 
                 </div>
