@@ -37,7 +37,7 @@
                             <table class="align-middle table table-striped table-hover">
                                 <thead>
                                 <tr>
-
+                                    <th scope="col"></th>
                                     <th scope="col">{{ knp_pagination_sortable(shops, 'propriétaire ', 'a.owner') }}</th>
                                     <th scope="col">{{ knp_pagination_sortable(shops, 'Nom ', 'a.name') }}</th>
                                     <th scope="col">{{ knp_pagination_sortable(shops, 'Adresse ', 'a.address') }}</th>
@@ -45,8 +45,6 @@
                                     <th scope="col">{{ knp_pagination_sortable(shops, 'Ville ', 'a.city') }}</th>
                                     <th scope="col">{{ knp_pagination_sortable(shops, 'N° téléphone ', 'a.phoneNumber') }}</th>
                                     <th scope="col">{{ knp_pagination_sortable(shops, 'Pays ', 'a.country') }}</th>
-
-
 
 
                                 </tr>
@@ -58,27 +56,37 @@
 
 
                                     <tr>
+                                        <td>
+                                            <div class="mt-3">
+
+                                                <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer la boutique ?')"
+                                                   href="{{ path('admin_panel_shop_delete_', {'id': shop.id, 'csrf_token' : csrf_token('shop_delete_' ~ shop.id)}) }}"
+                                                   class=" text-decoration-none text-danger">
+                                                    <i class="fa-solid fa-trash-can"></i>
+                                                    Supprimer
+                                                </a>
+
+                                            </div>
+
+                                        </td>
                                         <td>{{ shop.owner.getLastname() }}</td>
-                                        <td>{{ shop.name}}</td>
+                                        <td>{{ shop.name }}</td>
                                         <td>{{ shop.address }}</td>
                                         <td>{{ shop.zip }}</td>
                                         <td>{{ shop.city }}</td>
                                         <td>{{ shop.phoneNumber }}</td>
                                         <td>{{ shop.country }}</td>
 
-{#                                            {% if is_granted('ROLE_ADMIN') %}#}
+                                        <td>
+                                            <div class="mt-3">
 
-{#                                                <div class="mt-3">#}
+                                                <a class="text-decoration-none text-warning me-3"
+                                                   href="{{ path('admin_panel_shop_edit_', {'id': shop.id}) }}">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                    Modifier
+                                                </a>
 
-{#                                                    <a class="text-decoration-none text-warning me-3"#}
-{#                                                       href="{{ path('admin_panel_user_edit_', {'id': user.id}) }}">#}
-{#                                                        <i class="fa-solid fa-pen-to-square"></i>#}
-{#                                                        Modifier#}
-{#                                                    </a>#}
-
-
-{#                                                </div>#}
-{#                                            {% endif %}#}
+                                            </div>
                                         </td>
                                     </tr>
 

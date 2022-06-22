@@ -16,13 +16,13 @@
     <div class="col-12 col-md-8 mx-auto">
 
 
-        {# Affichage nb d'articles #}
+        {# Affichage nb d'events #}
         <div class="row">
             <p class="col-12 text-center">Nombre total d'évènements
                 : {{ events.getTotalItemCount() }}</p>
         </div>
 
-        {# Affichage du menu de nav s'il y a des articles #}
+        {# Affichage du menu de nav s'il y a des events #}
         {% if events is not empty %}
             <div class="row">
                 <div class="col-12 my-3 text-center">
@@ -55,25 +55,21 @@
                         <tr>
                             <th scope="row"></th>
 
-                            <td>{#                    todo:   {% if
-							is_granted ('ROLE_ADMIN') %} #}
-
+                            <td>
                                 <div class="mt-3">
 
                                     <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet évènement ?')"
-                                       href="{{ path('admin_panel_event_delete_', {'id': event.id, 'csrf_token' : csrf_token('admin_panel_event_delete_' ~ event.id)}) }}"
+                                       href="{{ path('admin_panel_event_delete_', {'id': event.id, 'csrf_token' : csrf_token('event_delete_' ~ event.id)}) }}"
                                        class="text-decoration-none text-danger">
                                         <i class="fa-solid fa-trash-can"></i>
                                         Supprimer </a>
 
                                 </div>
 
-                                {#                            {% endif %} #}
                             </td>
                             <td>{{ event.eventDate|date('d/m/y à H\\hi') }}</td>
                             <td>{{ event.eventDescription }}</td>
                             <td>
-                                {#                                    {% if is_granted('ROLE_ADMIN') %} #}
 
                                 <div class="mt-3">
 
@@ -84,12 +80,8 @@
 
 
                                 </div>
-                                {#  {% endif %} #}
                             </td>
                         </tr>
-                        {#                        {{ event.id }} #}
-
-
 
                     {% else %}
 
