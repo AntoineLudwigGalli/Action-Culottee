@@ -6,6 +6,7 @@ use App\Entity\FutureEvent;
 
 
 use App\Entity\DynamicContent;
+use App\Repository\PartnerRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -67,11 +68,12 @@ class MainController extends AbstractController {
     }
 
     #[Route('/partenaires/', name: 'partners')]
-    public function partners(): Response {
+    public function partners(PartnerRepository $partnerRepository): Response {
 
+        $getPartners = $partnerRepository->findBy([], null, 16, 0);
 
         return $this->render('main/partner.html.twig', [
-            'controller_name' => 'MainController',
+            'partners' => $getPartners,
         ]);
     }
 

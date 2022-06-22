@@ -1,6 +1,6 @@
 export class Partner {
 
-    createPartnerPopup(imageLocation = null) {
+    createPartnerPopup(imageLocation = null, getId) {
 
         // Div pour le posissionement du partenaire à affiché
         document.querySelector('.overlay-partner').prepend(document.createElement('div'));
@@ -22,7 +22,7 @@ export class Partner {
         // Création d'une div pour encapsuler l'image et le paragraphe
         document.querySelector('.overlay-partner>div').append(  document.createElement('div') );
         document.querySelector('.overlay-partner>div').lastElementChild.setAttribute('class', 'img-p-partner')
-        document.querySelector('.overlay-partner .img-p-partner').setAttribute('class', 'd-flex flex-row img-p-partner')
+        document.querySelector('.overlay-partner .img-p-partner').setAttribute('class', 'd-flex flex-row h img-p-partner')
 
 
         // Création de l'image du partenaire
@@ -32,7 +32,28 @@ export class Partner {
 
         // Description du partenaire
         document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('p') );
-        document.querySelector('.overlay-partner .img-p-partner p').textContent = 'hjdsfjjhgh jdhj gdhj ghjdshjggdgkjds jghg sjdghjghjdhj ghjsghj shjk dskhjgk jhdhjg hj gjhdhj k';
+        document.querySelector('.overlay-partner .img-p-partner p').setAttribute('class', 'text-break')
+        document.querySelector('.overlay-partner .img-p-partner p').textContent = 'f';
+
     }
+
+    getElement() {
+
+        const getId = [];
+
+        document.querySelectorAll('.card a img').forEach(function (element) {
+
+            // Ajout d'un évènement "click" sur chaque card
+            element.addEventListener('click',  function (e) {
+
+                getId[0] = this.dataset.ov1;
+                getId[1] = this.dataset.ov2;
+
+            });
+
+        });
+        
+    }
+
 
 }
