@@ -44,6 +44,7 @@
 
     <script>
 
+        // Text dynamic
         let partnersL = [];
 
         {% for partner in partners %}
@@ -58,6 +59,27 @@
             });
 
         {% endfor %}
+
+
+        // Vérification des rôles
+        let userRoles = [];
+        let getUser;
+
+        {% if app.user is null %}
+
+                userRoles = [''];
+
+            {% else %}
+
+                {% for role in app.user.roles %}
+
+                    userRoles.push('{{ role }}');
+
+                {% endfor %}
+
+        {% endif %}
+
+        const checkIfUser = userRoles.includes('ROLE_USER');
 
     </script>
 

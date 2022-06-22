@@ -25,20 +25,51 @@ export class Partner {
         // Création d'une div pour encapsuler l'image et le paragraphe
         document.querySelector('.overlay-partner>div').append(  document.createElement('div') );
         document.querySelector('.overlay-partner>div').lastElementChild.setAttribute('class', 'img-p-partner')
-        document.querySelector('.overlay-partner .img-p-partner').setAttribute('class', 'd-flex flex-row h img-p-partner')
+        document.querySelector('.overlay-partner .img-p-partner').setAttribute('class', 'd-flex flex-row mt-5 img-p-partner')
 
 
         // Création de l'image du partenaire
-        document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('img') );
-        document.querySelector('.overlay-partner .img-p-partner img').setAttribute('alt',  '');
-        document.querySelector('.overlay-partner .img-p-partner img').setAttribute('src', imageLocation);
-
-
+        document.querySelector('.overlay-partner .img-p-partner').prepend(  document.createElement('div') );
+        document.querySelector('.overlay-partner .img-p-partner div').setAttribute('class',  'col-5');
+        document.querySelector('.overlay-partner .img-p-partner div').prepend(  document.createElement('img') );
+        document.querySelector('.overlay-partner .img-p-partner div img').setAttribute('alt',  '');
+        document.querySelector('.overlay-partner .img-p-partner div img').setAttribute('src', imageLocation);
+        document.querySelector('.overlay-partner .img-p-partner div img').setAttribute('class', 'w-100');
 
 
         // Description du partenaire
-        document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('p') );
-        document.querySelector('.overlay-partner .img-p-partner p').setAttribute('class', 'text-break')
+        document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('div') );
+        document.querySelector('.overlay-partner .img-p-partner div:last-child').append(  document.createElement('p') );
+        document.querySelector('.overlay-partner .img-p-partner div:last-child').setAttribute('class', 'ms-3 text-break w-100');
+
+
+
+
+        // Affichage du boutton si l'utilisateur est connecter
+        if ( checkIfUser ) {
+
+            let buttonOfferCreated = document.createElement('div');
+            document.querySelector('#partner-info').append( buttonOfferCreated )
+            buttonOfferCreated.setAttribute(  'class', 'd-flex flex-row justify-content-end' );
+            buttonOfferCreated.append(  document.createElement('button') );
+            buttonOfferCreated.querySelector('button').setAttribute(  'class', 'btn btn-warning w-25' );
+            buttonOfferCreated.querySelector('button').textContent = 'Offre';
+
+
+            buttonOfferCreated.querySelector('button').addEventListener('click', function (e) {
+
+
+
+            });
+
+
+        } else {
+
+            console.log('Non');
+
+        }
+
+
 
     }
 

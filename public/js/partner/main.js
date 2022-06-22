@@ -2,12 +2,6 @@ import { Overlay } from "./overlay.js";
 import {Partner} from "./partner.js";
 
 const overlay = new Overlay();
-const partnerOverlay = new Partner();
-
-const getId = [partnerOverlay.getElement()];
-
-console.log(getId[0]);
-
 
 // Séléctionne toute les cardes
 document.querySelectorAll('.card a img').forEach(function (element) {
@@ -21,12 +15,48 @@ document.querySelectorAll('.card a img').forEach(function (element) {
         // Application du text dynamic sur l'overlay
         const elementTitle = partnersL[this.dataset.ov1]['title'];
         const elementDescription = partnersL[this.dataset.ov1]['description'];
-        const elementLogo = partnersL[this.dataset.ov1]['logo'];
+        const elementOffer = partnersL[this.dataset.ov1]['offer'];
 
         const selectOverlay = document.querySelector('.overlay-partner');
 
         selectOverlay.querySelector('h1').textContent = elementTitle;
         selectOverlay.querySelector('.img-p-partner p').textContent = elementDescription;
+
+
+        if ( checkIfUser ) {
+
+
+            const button =  document.querySelector('#partner-info div button');
+
+            button.addEventListener('click', function () {
+
+                const text = 'Offre';
+
+                if ( button.textContent.toLowerCase().includes( text.toLowerCase() ) ) {
+
+                    this.textContent = 'Retour';
+
+                    this.setAttribute('class', 'btn btn-danger w-25');
+
+                    selectOverlay.querySelector('.img-p-partner p').textContent = elementOffer;
+
+                } else {
+
+
+                    this.textContent = 'Offre';
+
+                    this.setAttribute('class', 'btn btn-warning w-25');
+
+                    selectOverlay.querySelector('.img-p-partner p').textContent = elementDescription;
+
+
+                }
+
+            });
+
+
+        }
+
 
 
         // Ajout d'un évènement "click" sur l'overlay

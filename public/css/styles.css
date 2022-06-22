@@ -168,23 +168,8 @@ h1{
     min-height: 500px;
 }
 
-.img-p-partner {
-    width: 100%;
-}
-
-.img-p-partner img {
-    display: block;
-    width: 30%;
-    height: fit-content;
-
-    min-height: 100px;
-
-}
 
 .img-p-partner p {
-    margin-left: 10px;
-    display: block;
-    width: 60%;
     font-size: .9rem;
 }
 
