@@ -12,7 +12,7 @@
 
             <div class="row">
 
-                <div class="col-12 col-md-8 mx-auto">
+                <div class="col-12 col-md-9 mx-auto">
 
 
                     {# Affichage nb d'utilisateurs #}
@@ -36,10 +36,11 @@
 
                         <div class="col-12 table-responsive">
 
-                            <table class="align-middle table table-striped table-hover">
+                            <table class="align-middle table table-sm table-striped table-hover">
                                 <thead>
                                 <tr>
                                     {#                                TODO:trié #}
+                                    <th scope="col"></th>
                                     <th scope="col">{{ knp_pagination_sortable(users, 'Rôle ', 'a.roles') }}</th>
                                     <th scope="col">{{ knp_pagination_sortable(users, 'Prénom ', 'a.firstname') }}</th>
                                     <th scope="col">{{ knp_pagination_sortable(users, 'Nom ', 'a.lastname') }}</th>
@@ -60,6 +61,20 @@
 
                                     <tr>
 
+                                        <td>
+                                            {% if user.roles[0] != "ROLE_ADMIN" %}
+                                                <div class="mt-3">
+
+                                                    <a onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?')"
+                                                       href="{{ path('admin_panel_user_delete_', {'id': user.id, 'csrf_token' : csrf_token('user_delete_' ~ user.id)}) }}"
+                                                       class="text-decoration-none text-danger">
+                                                        <i class="fa-solid fa-trash-can"></i>
+                                                        Supprimer </a>
+
+                                                </div>
+                                            {% endif %}
+                                        </td>
+
                                         <td>{% if user.roles[0] == "ROLE_ADMIN" %}
                                                 Administrateur
                                             {% elseif user.roles[0] == "ROLE_MEMBER" %}
@@ -79,16 +94,20 @@
                                         <td>
 
 
-                                            <div class="mt-3">
+                                            {% if user.roles[0] != "ROLE_ADMIN" %}
 
-                                                <a class="text-decoration-none text-warning me-3"
-                                                   href="{{ path('admin_panel_user_edit_', {'id': user.id}) }}">
-                                                    <i class="fa-solid fa-pen-to-square"></i>
-                                                    Modifier
-                                                </a>
+                                                <div class="mt-3">
+
+                                                    <a class="text-decoration-none text-warning me-3"
+                                                       href="{{ path('admin_panel_user_edit_', {'id': user.id}) }}">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                        Modifier
+                                                    </a>
 
 
-                                            </div>
+                                                </div>
+
+                                            {% endif %}
 
                                         </td>
                                     </tr>
@@ -100,6 +119,16 @@
                         </div>
 
                     </div>
+
+                    {% if users is not empty %}
+                        <div class="row">
+                            <div class="col-12 my-3 text-center">
+                                <div class="d-inline-block">
+                                    {{ knp_pagination_render(users) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
 
                 </div>
 

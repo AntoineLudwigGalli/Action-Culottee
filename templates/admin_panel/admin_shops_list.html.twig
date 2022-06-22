@@ -98,6 +98,16 @@
 
                     </div>
 
+                    {% if shops is not empty %}
+                        <div class="row">
+                            <div class="col-12 my-3 text-center">
+                                <div class="d-inline-block">
+                                    {{ knp_pagination_render(shops) }}
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+
                 </div>
 
             </div>
