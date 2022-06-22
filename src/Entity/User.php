@@ -53,9 +53,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Shop::class, orphanRemoval: true)]
     private $shops;
 
+    #[ORM\OneToMany(mappedBy: 'owner_id', targetEntity: Partner::class)]
+    private $partners;
+
     public function __construct()
     {
         $this->shops = new ArrayCollection();
+        $this->partners = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -236,6 +240,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($shop->getOwner() === $this) {
                 $shop->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Partner>
+     */
+    public function getPartners(): Collection
+    {
+        return $this->partners;
+    }
+
+    public function addPartner(Partner $partner): self
+    {
+        if (!$this->partners->contains($partner)) {
+            $this->partners[] = $partner;
+            $partner->setOwnerId($this);
+        }
+
+        return $this;
+    }
+
+    public function removePartner(Partner $partner): self
+    {
+        if ($this->partners->removeElement($partner)) {
+            // set the owning side to null (unless already changed)
+            if ($partner->getOwnerId() === $this) {
+                $partner->setOwnerId(null);
             }
         }
 

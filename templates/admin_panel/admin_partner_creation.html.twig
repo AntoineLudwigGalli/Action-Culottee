@@ -1,0 +1,35 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Création d'un partenaire{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+
+        <header class="col-12">
+
+            <h1>Crée un partenaire</h1>
+
+        </header>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-6 mx-auto">
+
+            {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+
+                {{ form(form) }}
+
+            {{ form_end(form) }}
+
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+
+

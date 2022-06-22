@@ -5,25 +5,34 @@ namespace App\Controller;
 
 use App\Entity\FutureEvent;
 use App\Entity\DynamicContent;
+use App\Entity\Partner;
 use App\Entity\Shop;
 use App\Entity\User;
 use App\Form\CreateEventFormType;
 use App\Form\CreateShopFormType;
 use App\Form\DynamicContentFormType;
+
 use App\Form\EditShopTypeFormType;
 use App\Form\RegistrationFormType;
 use App\Form\UpdateUserFormType;
 use App\Repository\ShopRepository;
+
+use App\Form\PartnerTypeFormType;
+
+use App\Repository\PartnerRepository;
+
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+
+
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -31,6 +40,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[IsGranted('ROLE_ADMIN')]
 class AdminPanelController extends AbstractController
 {
+
 
     #[Route('/creer-un-evenement', name: 'event')]
     public function createEvent(ManagerRegistry $doctrine, Request $request): Response
@@ -380,6 +390,64 @@ class AdminPanelController extends AbstractController
         }
 
         return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
+    }
+
+
+
+    /**
+     * Partner Section
+     */
+
+    /**
+     * Méthode du formulaire partenaire
+     */
+    #[Route('/creer-un-partneraire', name: 'partner')]
+    public function partner(PartnerRepository $partnerRepository, Request $request) : Response
+    {
+        $partner = new Partner();
+
+        $form = $this->createForm(PartnerTypeFormType::class, $partner);
+        $form->handleRequest($request);
+
+        if ( $form->isSubmitted() && $form->isValid() ) {
+
+
+            $file = $form->get('logo')->getData();
+
+            $ext = $file->guessExtension();
+
+            $extArray = ['jpg', 'png', 'jpeg'];
+
+            if ( !in_array($ext, $extArray)  ) {
+
+                dump('fgffg');
+
+                $form->get('logo')->addError( new FormError('L\'extention du fichier n\'est pas bon') );
+
+            } else {
+
+                $dir = $this->getParameter('kernel.project_dir') . '/public/images/images-partners/';
+
+                $filename = uniqid() . '.' . $ext;
+
+                $file->move($dir, $filename);
+
+                $partner->setLogo($filename);
+                $partner->setOwnerId($this->getUser());
+
+                $partnerRepository->add( $partner, true );
+
+                $this->addFlash('success', 'Partenaire ajouté avec sucess');
+
+            }
+
+        }
+
+
+        return $this->render('admin_panel/admin_partner_creation.html.twig', [
+            'form' => $form->createView()
+        ]);
+
     }
 
 }

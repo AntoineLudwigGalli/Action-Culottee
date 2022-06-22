@@ -12,23 +12,24 @@
 
             <div class="col-12 col-md-8 mx-auto d-flex flex-wrap">
 
-                <div class="card" style="width: 22%; margin: 10px;">
+                {% set i = 0 %}
 
-                    <a href="#">
-                        <img src="{{ asset('images/images-partners/partner-1.png') }}" alt="" class="card-img-top">
-                    </a>
+                {% for partner in partners %}
 
-                </div>
+                    <div class="card" style="width: 22%; margin: 10px;">
+                        <a href="#">
+                            <img data-ov1="{{ i }}" data-ov2="{{ partner.id }}" src="{{ asset('images/images-partners/' ~ partner.logo ) }}" alt="" class="card-img-top">
+                        </a>
 
-                <div class="card" style="width: 22%; margin: 10px;">
+                    </div>
 
-                    <a href="#">
-                        <img src="{{ asset('images/images-partners/partner-2.png') }}" alt="" class="card-img-top">
-                    </a>
+                    {% set i = i + 1 %}
 
-                </div>
+                    {% else %}
 
+                        <div class="alert alert-warning w-100 text-center">Pas de partenaire pour le moment</div>
 
+                {% endfor %}
 
             </div>
 
@@ -40,6 +41,27 @@
 {% endblock %}
 
 {% block jsIncludes %}
+
+    <script>
+
+        let partnersL = [];
+
+        {% for partner in partners %}
+
+            partnersL.push({
+                id: '{{ partner.id }}',
+                title: '{{ partner.title }}',
+                logo: '{{ partner.logo ?? 'None' }}',
+                description: '{{ partner.description }}',
+                offer: '{{ partner.offer }}'
+
+            });
+
+        {% endfor %}
+
+    </script>
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
     {#    Inclusion jQuery pour faciliter les requêtes ajax #}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
