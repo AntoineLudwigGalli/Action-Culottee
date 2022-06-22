@@ -401,7 +401,7 @@ class AdminPanelController extends AbstractController
     /**
      * Méthode du formulaire partenaire
      */
-    #[Route('/creer-un-partneraire', name: 'partner')]
+    #[Route('/creer-un-partenaire', name: 'partner_creation')]
     public function partner(PartnerRepository $partnerRepository, Request $request) : Response
     {
         $partner = new Partner();
@@ -450,4 +450,76 @@ class AdminPanelController extends AbstractController
 
     }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    #[Route('/liste-des-partenaires', name: 'partners_list')]
+    public function partnersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
+
+        $requestedPage = $request->query->getInt('page', 1);
+
+        if ($requestedPage < 1) {
+            throw new NotFoundHttpException();
+        }
+
+        $em = $doctrine->getManager();
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\Partner a ORDER BY a.id DESC');
+
+        $partners = $paginator->paginate($query, $requestedPage, 25,);
+
+        return $this->render('admin_panel/admin_partners_list.html.twig', ['partners' => $partners,]);
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #[Route('/modifier-un-partenaire/{id}/', name: 'partner_edit_', priority: 10)]
+    public function editPartner(Request $request, Partner $partner, ManagerRegistry $doctrine): Response
+    {
+
+        $form = $this->createForm(PartnerTypeFormType::class, $partner);
+
+        $form->handleRequest($request);
+
+
+        // Si le formulaire est envoyé et sans erreur
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            // Sauvegarde des données modifiées en BDD
+            $em = $doctrine->getManager();
+            $em->flush();
+
+            $this->addFlash('success', 'Le partneraire à été modifié avec succès !');
+
+            return $this->redirectToRoute('admin_panel_partners_list');
+        }
+
+
+        return $this->render('admin_panel/admin_partner_edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #[Route('/suppression-d\'un-partenaire/{id}/', name: 'partner_delete_', priority: 10)]
+    public function partnerDelete(Partner $partner, Request $request, ManagerRegistry $doctrine): Response
+    {
+        $csrfToken = $request->query->get('csrf_token', '');
+
+        if (!$this->isCsrfTokenValid('partner_delete_' . $partner->getId(), $csrfToken)) {
+
+            $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
+
+        } else {
+            // Suppression de l'article en BDD
+            $em = $doctrine->getManager();
+            $em->remove($partner);
+            $em->flush();
+
+            // Message flash de succès
+            $this->addFlash('success', "Le partenaire a été supprimé avec succès !");
+        }
+        // Redirection vers la page qui liste les articles
+        return $this->redirectToRoute('admin_panel_partners_list');
+    }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
