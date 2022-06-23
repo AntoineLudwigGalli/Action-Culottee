@@ -17,5 +17,6 @@
 !/public/images/images-partners/.gitignore
 /public/images/founders/*
 /public/images/founders/.gitignore
+/public/images/.tmb/*
 
 ###< custom settings ###

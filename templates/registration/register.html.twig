@@ -21,10 +21,17 @@
             {{ form_row(registrationForm.memberIdNumber) }}
             {{ form_row(registrationForm.newsletterOption) }}
             {{ form_row(registrationForm.agreeTerms) }}
-    
+
+            {# Affichage du Recaptcha #}
+            <div class="mb-3">
+                <div class="mb-2">Captcha de sécurité</div>
+
+                <div class="g-recaptcha" data-sitekey="{{ google_recaptcha_site_key }}"></div>
+            </div>
             <button type="submit" class="btn btn-primary">S'inscrire</button>
         {{ form_end(registrationForm) }}
         </div>
     </div>
 </div>
+    {% block jsIncludes %}    <script src="https://www.google.com/recaptcha/api.js" async defer></script>{% endblock %}
 {% endblock %}
