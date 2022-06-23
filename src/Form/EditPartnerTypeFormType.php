@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class PartnerTypeFormType extends AbstractType
+class EditPartnerTypeFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -104,7 +104,7 @@ class PartnerTypeFormType extends AbstractType
 
             ->add('submit', SubmitType::class, [
 
-                'label' => 'Crée le partenaire'
+                'label' => 'Modifier'
 
             ])
         ;
