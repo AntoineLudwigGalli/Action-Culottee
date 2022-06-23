@@ -99,7 +99,7 @@ class AdminPanelController extends AbstractController {
 
         $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a ORDER BY a.eventDate ASC');
 
-        $events = $paginator->paginate($query, $requestedPage, 20);
+        $events = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_events_list.html.twig', ['events' => $events,]);
     }
@@ -209,7 +209,7 @@ class AdminPanelController extends AbstractController {
 
         $query = $em->createQuery('SELECT a FROM App\Entity\User a ORDER BY a.id DESC');
 
-        $users = $paginator->paginate($query, $requestedPage, 25);
+        $users = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_users_list.html.twig', ['users' => $users,]);
     }
@@ -324,27 +324,26 @@ class AdminPanelController extends AbstractController {
 
     #[Route('/rechercher-un-utilisateur/', name: 'users_search')]
     public function searchUser(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
-        // Récupération de $_GET['page'], 1 si elle n'existe pas
+
         $requestedPage = $request->query->getInt('page', 1);
 
-        // Vérification que le nombre est positif
+
         if ($requestedPage < 1) {
             throw new NotFoundHttpException();
         }
 
-        // On récupère la recherche de l'utilisateur depuis l'URL ( $_GET['search'] )
+
         $search = $request->query->get('search', '');
 
         $em = $doctrine->getManager();
 
-        //Création de la requête de recherche
         $query =
             $em->createQuery('SELECT a FROM App\Entity\User a WHERE a.firstname LIKE :search OR a.lastname LIKE :search OR a.email LIKE :search OR a.phoneNumber LIKE :search OR a.memberIdNumber LIKE :search')
                 ->setParameters(['search' => '%' . $search . '%']);
 
-        $users = $paginator->paginate($query,     // Requête créée juste avant
-            $requestedPage,     // Page qu'on souhaite voir
-            10     // Nombre d'articles par page
+        $users = $paginator->paginate($query,
+            $requestedPage,
+            55
         );
 
         return $this->render('admin_panel/admin_users_search.html.twig', ['users' => $users,]);
@@ -418,7 +417,7 @@ class AdminPanelController extends AbstractController {
 
         $query = $em->createQuery('SELECT a FROM App\Entity\Shop a ORDER BY a.id DESC');
 
-        $shops = $paginator->paginate($query, $requestedPage, 25);
+        $shops = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_shops_list.html.twig', ['shops' => $shops,]);
     }
@@ -499,7 +498,7 @@ class AdminPanelController extends AbstractController {
             ->createQuery('SELECT a FROM App\Entity\Shop a WHERE a.zip LIKE :search OR a.city LIKE :search OR a.address LIKE :search OR a.phoneNumber LIKE :search OR a.country LIKE :search OR a.name LIKE :search ')
             ->setParameters(['search' => '%' . $search . '%']);
 
-        $shops = $paginator->paginate($query, $requestedPage, 10,);
+        $shops = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_shops_search.html.twig', ['shops' => $shops,]);
     }
@@ -578,7 +577,7 @@ class AdminPanelController extends AbstractController {
 
         $query = $em->createQuery('SELECT a FROM App\Entity\Partner a ORDER BY a.id DESC');
 
-        $partners = $paginator->paginate($query, $requestedPage, 25);
+        $partners = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_partners_list.html.twig', ['partners' => $partners,]);
     }
