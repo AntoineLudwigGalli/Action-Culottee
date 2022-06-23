@@ -51,8 +51,9 @@
                 </p>
 
             </div>
-
+{#TODO: sup pas ouf#}
         </div>
+        {{ display_dynamic_content('about_nb_img') }}
 
         {#        Affichage du slider #}
 
@@ -62,9 +63,9 @@
 
                 <div class="splide__track ">
 
-                    <ul class="splide__list ">
+                    <ul class="splide__list">
 
-                        {% for i in 1..15 %}
+                       <span class="d-none"> {% for i in 1..display_dynamic_content('about_nb_img') %}</span>
 
                             <li class="splide__slide py-5">
                                 {{ display_dynamic_content('about_image' ~ i) }}
