@@ -20,6 +20,8 @@ class EditEmailFormType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
 
+                "empty_data" => '',
+
                 'constraints' => [
 
                     new NotBlank([

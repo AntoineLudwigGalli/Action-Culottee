@@ -28,7 +28,9 @@ class UpdateUserFormType extends AbstractType
         $builder
 //            Champs Email
             ->add('email', EmailType::class, [
+
                 'label' => 'Adresse Email',
+                "empty_data" => "",
                 'constraints' => [
                     new Email([
                         'message' => 'L\'adresse email {{ value }} n\'est pas une adresse valide',
@@ -41,6 +43,7 @@ class UpdateUserFormType extends AbstractType
 
             // Champ Prénom
             ->add('firstname', TextType::class, [
+                "empty_data" => "",
                 'label' => 'Prénom',
                 'constraints' => [
                     new NotBlank([
@@ -56,6 +59,7 @@ class UpdateUserFormType extends AbstractType
             ])
             // Champ Nom
             ->add('lastname', TextType::class, [
+                "empty_data" => "",
                 'label' => 'Nom',
                 'constraints' => [
                     new NotBlank([
@@ -72,10 +76,13 @@ class UpdateUserFormType extends AbstractType
             // Champ numéro d'adhérent au bon format
             ->add('memberIdNumber', TextType::class, [
                 'label' => "Numéro d'adhérent (facultatif)",
+                "required" => false,
                 'attr' => [
-                    'placeholder' => 'Ex: 2022/123'
+                    'placeholder' => 'Ex: 2022/123',
+                    "required" => false,
                 ],
                 'constraints' => [
+
                     new Regex([
                         'pattern' => '/^20[2-9]\d\/\d{3}$/u',
                         'message' => "Le numéro d'adhérent doit être au format 20XX/XXX, par exemple 2022/123",
@@ -84,6 +91,7 @@ class UpdateUserFormType extends AbstractType
             ])
             // Champs numéro de téléphone français
             ->add('phoneNumber', TelType::class, [
+                "empty_data" => "",
                 'label' => 'Numéro de téléphone',
                 'constraints' => [
                     new Regex([

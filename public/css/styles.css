@@ -218,6 +218,42 @@ h1{
     display: block !important;
 }
 
+
+
+/*---------------------------------------------------------------------------------*/
+/*Panel admin*/
+
+/*Bouton export*/
+
+.export-button a{
+    padding: 0.5rem 1rem;
+    border: black solid 1px;
+    margin: 0 .3em;
+    border-radius: 5px;
+    color: black;
+    text-decoration: none;
+    box-shadow: 3px 3px 3px black;
+}
+.export-button:hover a{
+    box-shadow: none;
+    background-color: #FF9933;
+}
+/*//////////////////////////////////////////////////////////*/
+/*Media Queries*/
+@media screen and (min-width: 992px) {
+    #map {
+        height: 60vh;
+    }
+}
+@media screen and (min-width: 1500px){
+    .shop-edit-table thead tr th,
+    .shop-edit-table tbody tr td
+    {
+        width: 50%;
+    }
+
+}
+
 @media screen and (min-width: 574px){
 
     .flex-profil div {
@@ -231,17 +267,4 @@ h1{
     .flex-profil div:last-child {
         display: block;
     }
-}
-@media screen and (min-width: 992px) {
-    #map {
-        height: 60vh;
-    }
-}
-@media screen and (min-width: 1500px){
-    .shop-edit-table thead tr th,
-    .shop-edit-table tbody tr td
-    {
-        width: 50%;
-    }
-
 }

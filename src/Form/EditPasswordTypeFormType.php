@@ -2,8 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\User;
-use App\Model\ChangePassword;
+use App\Security\ChangePassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
@@ -22,6 +21,8 @@ class EditPasswordTypeFormType extends AbstractType
             ->add('oldPassword', PasswordType::class, [
                 'label' => 'Mot de passe actuel',
 
+                "empty_data" => '',
+
                 'constraints' => [
 
                     new Regex([
@@ -37,6 +38,8 @@ class EditPasswordTypeFormType extends AbstractType
                 ]
             ])
             ->add('newPassword', RepeatedType::class, [
+
+                "empty_data" => '',
 
                 'type' => PasswordType::class,
 
