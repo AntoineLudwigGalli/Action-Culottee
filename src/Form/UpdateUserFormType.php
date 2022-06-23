@@ -28,7 +28,9 @@ class UpdateUserFormType extends AbstractType
         $builder
 //            Champs Email
             ->add('email', EmailType::class, [
+
                 'label' => 'Adresse Email',
+                "empty_data" => "",
                 'constraints' => [
                     new Email([
                         'message' => 'L\'adresse email {{ value }} n\'est pas une adresse valide',
@@ -41,6 +43,7 @@ class UpdateUserFormType extends AbstractType
 
             // Champ Prénom
             ->add('firstname', TextType::class, [
+                "empty_data" => "",
                 'label' => 'Prénom',
                 'constraints' => [
                     new NotBlank([
@@ -56,6 +59,7 @@ class UpdateUserFormType extends AbstractType
             ])
             // Champ Nom
             ->add('lastname', TextType::class, [
+                "empty_data" => "",
                 'label' => 'Nom',
                 'constraints' => [
                     new NotBlank([
@@ -84,6 +88,7 @@ class UpdateUserFormType extends AbstractType
             ])
             // Champs numéro de téléphone français
             ->add('phoneNumber', TelType::class, [
+                "empty_data" => "",
                 'label' => 'Numéro de téléphone',
                 'constraints' => [
                     new Regex([

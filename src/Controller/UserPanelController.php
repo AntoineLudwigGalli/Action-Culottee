@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Model\ChangePassword;
+use App\Security\ChangePassword;
 
 #[Route("/user", name: "user_panel_")]
 #[isGranted('ROLE_MEMBER')]
@@ -292,7 +292,7 @@ class UserPanelController extends AbstractController
             // Si l'ancien mot de passe est bon
             if ( $userPasswordHasher->isPasswordValid( $user, $form->get('oldPassword')->getData() ) ) {
 
-                // Si le nouveau mot de passe et pareil que le mot de passe actuel on return
+                // Si le nouveau mot de passe est identique au mot de passe actuel, on retourne
                 if (
                     $form->get('newPassword')->getData() == $user->getPassword()
                 ) {

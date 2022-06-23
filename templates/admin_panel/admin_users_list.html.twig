@@ -6,8 +6,16 @@
 
     <div class="container-fluid">
         <div class="col-md-11 offset-md-1">
+
             <div class="row">
                 <h1 class="col-12 text-center my-5">Liste des utilisateurs</h1>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="export-button mb-4 col-3 offset-5">
+                        <a href=" {{ path('admin_panel_users_list_export') }} " class="text-center  ">Exporter les données utilisateur</a>
+                    </div>
+                </div>
             </div>
 
             <div class="row">
@@ -22,6 +30,7 @@
                             <p class="col-12 text-center">Nombre total d'utilisateurs
                                 : {{ users.getTotalItemCount() }}</p>
                         </div>
+
 
                         {#                        Pagination #}
                         <div class="row">

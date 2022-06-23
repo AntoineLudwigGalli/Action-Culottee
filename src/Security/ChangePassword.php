@@ -9,12 +9,7 @@ class ChangePassword
 {
     /**
     * @SecurityAssert\UserPassword(
-<<<<<<< HEAD
-    *     message = "Mot de passe actuel incorect"
-=======
-    *     message = "Mot de pass actuel incorect"
->>>>>>> origin/main
-    * )
+    *
     */
     protected $oldPassword;
 
