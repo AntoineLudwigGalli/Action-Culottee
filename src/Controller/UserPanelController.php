@@ -150,19 +150,11 @@ class UserPanelController extends AbstractController
     public function deleteShop(Shop $shop, ShopRepository $shopRepository,Request $request) : Response
     {
 
-        $csrfToken = $request->query->get('token', '');
-
-        if(!$this->isCsrfTokenValid('supprimer_boutique_' . $shop->getId(), $csrfToken)){
-
-            $this->addFlash('error', 'Un problème est survenue veuillez réssayer.');
-
-        } else {
 
             $shopRepository->remove($shop, true);
 
             $this->addFlash('success', 'La boutique à été supprimée avec succès !');
 
-        }
 
         return $this->redirectToRoute('user_panel_edit_shop');
     }

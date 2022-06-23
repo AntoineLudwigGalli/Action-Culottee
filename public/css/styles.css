@@ -146,7 +146,7 @@ h1{
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
-    z-index: 1;
+    z-index: 99;
     transition: all 0.3s ease;
     opacity: 0;
 }
@@ -168,20 +168,8 @@ h1{
     min-height: 500px;
 }
 
-.img-p-partner {
-    width: 100%;
-}
-
-.img-p-partner img {
-    display: block;
-    width: 30%;
-    min-height: 100px;
-}
 
 .img-p-partner p {
-    margin-left: 10px;
-    display: block;
-    width: 60%;
     font-size: .9rem;
 }
 
@@ -189,11 +177,12 @@ h1{
 
 /* Page de profil */
 
+/*
 .profil-text-size,
 .profil-text-size div div button {
 
-    font-size: var(--text-font);
-}
+    font-size: 7;
+}*/
 
 /* Newsletter */
 

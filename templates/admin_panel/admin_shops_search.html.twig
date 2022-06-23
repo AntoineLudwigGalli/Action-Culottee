@@ -6,25 +6,15 @@
 
     <div class="container-fluid">
         <div class="col-md-10 offset-md-2">
-            <div class="row">
-                <h1 class="col-12 text-center my-5">Liste des boutiques</h1>
-            </div>
 
             <div class="row">
 
-                <div class="col-12 col-md-12 mx-auto">
+                <div class="col-12 col-md-8 mx-auto">
+
+                    <a class="btn btn-outline-success" href="{{ path('admin_panel_shops_list') }}">Retour</a>
 
                     {% if shops is not empty %}
-
-                        {#                        Nombre de boutiques crées #}
-
-                        <div class="row">
-                            <p class="col-12 text-center">Nombre total de boutiques
-                                : {{ shops.getTotalItemCount() }}</p>
-                        </div>
-
                         {#                        Pagination #}
-
                         <div class="row">
                             <div class="col-12 my-3 text-center">
                                 <div class="d-inline-block">
@@ -33,21 +23,8 @@
                             </div>
                         </div>
 
-                        {#                        Rechercher une boutique #}
-
-                        <div class="row">
-                            <div class="search-form offset-md-4 col-md-4">
-                                <form method="GET" action="{{ path('admin_panel_shops_search') }}"
-                                      class="search-box d-flex pb-3">
-                                    <input type="search" placeholder="Rechercher" name="search" aria-label="search"
-                                           class="form-control">
-                                    <button type="submit" class="btn btn-outline-success">Rechercher</button>
-                                </form>
-                            </div>
-                        </div>
-
                         {# Tableau #}
-                        <div class="row pt-5">
+                        <div class="row">
 
                             <div class="col-12 table-responsive">
 
@@ -114,6 +91,7 @@
                             </div>
 
                         </div>
+
                         {# Pagination #}
                         <div class="row">
                             <div class="col-12 my-3 text-center">
@@ -122,8 +100,9 @@
                                 </div>
                             </div>
                         </div>
+
                     {% else %}
-                        <div class="alert alert-warning w-100 text-center">Aucune boutique à afficher</div>
+                        <div class="alert alert-warning w-100 text-center">Aucune résultat pour cette recherche</div>
                     {% endif %}
 
                 </div>

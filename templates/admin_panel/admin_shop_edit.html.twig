@@ -1,0 +1,27 @@
+{% extends 'baseAdmin.html.twig' %}
+
+{% block title %}Modification de la boutique{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="col-md-10 offset-md-2">
+            <div class="row">
+
+                <a href="{{ path('admin_panel_users_list', {'id': form.vars.value.id}) }}"
+                   class="text-decoration-none py-5">Revenir sur la liste</a>
+                <div class="col-10 mx-auto">
+
+                    {# Formulaire de modification d'une boutique #}
+
+                    {{ form(form) }}
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

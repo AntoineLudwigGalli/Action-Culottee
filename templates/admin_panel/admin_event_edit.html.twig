@@ -1,36 +1,35 @@
 {% extends 'baseAdmin.html.twig' %}
 
 
-{% block title %}Modification d'une publication{% endblock %}
+{% block title %}Modification d'un évènement{% endblock %}
 
 
 
 {% block content %}
 
     <div class="container-fluid">
-
-        <div class="row">
-            <h1 class="col-12 text-center my-5">Modification d'une publication</h1>
-        </div>
-
-        <div class="row">
-            <p class="text-center col-12">
-
-                <a href="{{ path('admin_panel_events_list', {'id': form.vars.value.id}) }}" class="text-decoration-none">Revenir sur l'article</a>
-
-            </p>
-        </div>
-
-        <div class="row">
-
-            <div class="col-12 col-md-8 mx-auto">
-{{ form(form) }}
-{#                {{ form_row(form.eventDescription) }}#}
-{#                {{ form_row(form.save)}}#}
+        <div class="col-md-10 offset-md-2">
+            <div class="row">
+                <h1 class="col-12 text-center my-5">Modification d'un évènement</h1>
             </div>
 
-        </div>
+            <div class="row">
+                <p class="text-center col-12">
 
+                    <a href="{{ path('admin_panel_events_list', {'id': form.vars.value.id}) }}"
+                       class="text-decoration-none">Revenir sur la liste</a>
+
+                </p>
+            </div>
+
+            <div class="row">
+                {# Affichage du formulaire #}
+                <div class="col-12 col-md-8 mx-auto">
+                    {{ form(form) }}
+                </div>
+
+            </div>
+        </div>
     </div>
 
 {% endblock %}
