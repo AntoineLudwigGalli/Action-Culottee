@@ -3,30 +3,30 @@
 {% block title %}Création d'un partenaire{% endblock %}
 
 {% block content %}
+    <div class="col-md-10 offset-md-2">
+        <div class="row my-5">
 
-    <div class="row">
+            <header class="col-12">
 
-        <header class="col-12">
+                <h1>Créer un partenaire</h1>
 
-            <h1>Crée un partenaire</h1>
-
-        </header>
-
-    </div>
-
-    <div class="row">
-
-        <div class="col-6 mx-auto">
-
-            {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
-
-                {{ form(form) }}
-
-            {{ form_end(form) }}
-
+            </header>
 
         </div>
 
+        <div class="row">
+
+            <div class="col-6 mx-auto">
+                <a class="btn btn-outline-success mb-4" href="{{ path('admin_panel_partners_list') }}">Retour</a>
+                {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+
+                {{ form(form) }}
+
+                {{ form_end(form) }}
+
+
+            </div>
+        </div>
     </div>
 
 {% endblock %}
