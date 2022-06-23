@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Partner;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -48,7 +49,7 @@ class PartnerTypeFormType extends AbstractType
 
             ])
 
-            ->add('description', TextType::class, [
+            ->add('description', CKEditorType::class, [
 
                 'label' => 'Description',
 
@@ -60,7 +61,7 @@ class PartnerTypeFormType extends AbstractType
 
                     new Length([
                         'min' => 3,
-                        'max' => 100,
+                        'max' => 5000,
                         'minMessage' => "La description doit contenir au moins {{ limit }} caractères",
                         'maxMessage' => 'La description est trop grande'
                     ])
@@ -68,7 +69,7 @@ class PartnerTypeFormType extends AbstractType
                 ]
 
             ])
-            ->add('offer', TextType::class, [
+            ->add('offer', CKEditorType::class, [
 
                 'label' => 'Offre du partenaire',
 
@@ -80,7 +81,7 @@ class PartnerTypeFormType extends AbstractType
 
                     new Length([
                         'min' => 3,
-                        'max' => 100,
+                        'max' => 5000,
                         'minMessage' => "L\'offre doit contenir au moins {{ limit }} caractères",
                         'maxMessage' => 'L\'offre est trop grande'
                     ])

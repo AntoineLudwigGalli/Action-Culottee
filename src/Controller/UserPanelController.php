@@ -24,6 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Model\ChangePassword;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[Route("/user", name: "user_panel_")]
 #[isGranted('ROLE_MEMBER')]
@@ -39,9 +40,9 @@ class UserPanelController extends AbstractController
         $form = $this->createForm(CreateShopFormType::class, $shop);
 
         $form->handleRequest($request);
-dump($form->isSubmitted());
+
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($this->getUser());
+
             $shop->setOwner($this->getUser()); // On récupère l'id de l'utilisateur connecté pour y associer la
             // boutique qu'il a créé
 
@@ -114,7 +115,6 @@ dump($form->isSubmitted());
 
         $form = $this->createForm(EditShopTypeFormType::class, $shop);
         $form->handleRequest( $request );
-        dump($form);
 
         $csrfToken = $request->query->get('token', '');
 
@@ -235,30 +235,36 @@ dump($form->isSubmitted());
     public function userEditEmail(EmailVerifier $emailVerifier,Request $request, UserRepository $userRepository) : Response
     {
 
-        $user = $this->getUser();
+        $user = clone $this->getUser();
 
-        $form = $this->createForm(EditEmailFormType::class, $user);
+        $form = $this->createForm(EditEmailFormType::class, $this->getUser());
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             if ( $user->getEmail() == $this->getUser()->getEmail() ) {
+
                 return $this->redirectToRoute('user_panel_edit_email');
+
+            } else {
+
+                $this->getUser()->setEmail( $form->get('email')->getData() );
+
+                $userRepository->add($this->getUser(), true);
+
+                // Envoie du mail de vérification
+                $emailVerifier->sendEmailConfirmation('user_panel_edit_email', $this->getUser(), (new TemplatedEmail())
+                    // TODO Mettre la vraie adresse mail
+                    ->from(new \Symfony\Component\Mime\Address('a@gmail.com', 'Action Culottée'))->to($this->getUser()->getEmail())->subject('Merci de confirmer votre adresse email')
+                    ->htmlTemplate('registration/confirmation_email.html.twig'));
+
+                $this->addFlash('success', 'Modification de l\'adress email avec success. Une vérification a été envoyer dans votre boite mail');
+
+                return $this->redirectToRoute('user_panel_profil');
+
             }
 
-            $user->setEmail( $form->get('email')->getData() );
 
-            $userRepository->add($user, true);
-
-            // Envoie du mail de vérification
-            $emailVerifier->sendEmailConfirmation('user_panel_edit_email', $user, (new TemplatedEmail())
-                // TODO Mettre la vraie adresse mail
-                ->from(new \Symfony\Component\Mime\Address('a@gmail.com', 'Action Culottée'))->to($user->getEmail())->subject('Merci de confirmer votre adresse email')
-                ->htmlTemplate('registration/confirmation_email.html.twig'));
-
-            $this->addFlash('success', 'Modification de l\'adress email avec success. Une vérification a été envoyer dans votre boite mail');
-
-            return $this->redirectToRoute('user_panel_profil');
 
         }
 

@@ -19,17 +19,21 @@ security:
             provider: app_user_provider
             custom_authenticator: App\Security\LoginFormAuthenticator
             logout:
+                invalidate_session: false
                 path: app_logout
                 # where to redirect after logout
                 target: main_home
-                # Limiter les tentatives de connexions
             login_throttling:
+                # Limiter les tentatives de connexions
                 max_attempts: 3
                 interval: '3 minutes'
                 # Option se souvenir de moi à la connexion
             remember_me:
                 secret: '%kernel.secret%' # required
                 lifetime: 604800 # 1 week in seconds
+
+
+
 
 
             # activate different ways to authenticate

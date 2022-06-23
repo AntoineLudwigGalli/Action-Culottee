@@ -13,10 +13,12 @@
                 {# Formulaire de modification du téléphone #}
                 {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
 
-                {{ form_row(form.phoneNumber) }}
+                    {{ form_widget(form.phoneNumber) }}
+
+                    {{ form_widget(form.submit, {'attr': { 'value': 'Modifier' } }) }}
+                    <a href="{{ path('user_panel_profil') }}"><button type="button" class="btn btn-danger">Retour</button></a>
 
                 {{ form_end(form) }}
-
             </div>
 
         </div>
