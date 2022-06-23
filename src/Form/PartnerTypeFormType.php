@@ -43,6 +43,7 @@ class PartnerTypeFormType extends AbstractType
             ->add('logo', FileType::class, [
                 'data_class' => null,
 
+
                 'empty_data' => '',
 
                 'constraints' => [
