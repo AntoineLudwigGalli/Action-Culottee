@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Shop;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,19 +20,15 @@ class EditShopTypeFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-
                 'label' => 'Nom de la boutique',
-
                 'constraints' => [
 
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
                     ]),
-
                     new Length([
                         'min' => 3,
                         'max' => 100,
-
                         'minMessage' => 'Le nom de la boutique doit être de {{ limit }} characters de long',
                         'maxMessage' => 'Le nom de la boutique ne peux pas être plus grand que {{ limit }} characters ',
                     ])
@@ -41,90 +38,61 @@ class EditShopTypeFormType extends AbstractType
             ])
 
             ->add('address', TextType::class, [
-
                 'label' => 'Adresse',
-
+                'attr' => [
+                    'class' => "typeahead"
+                ],
                 'constraints' => [
-
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
                     ]),
-
                     new Length([
                         'min' => 3,
                         'max' => 300,
-
                         'minMessage' => 'L\'adresse doit être de {{ limit }} characters de long',
                         'maxMessage' => 'L\'adresse  ne peux pas être plus grand que {{ limit }} characters ',
                     ])
-
                 ]
-
             ])
 
             ->add('zip', TextType::class, [
-
-                'label' => 'Code postale',
-
+                'label' => 'Code postal',
+                'attr' => [
+                    'class' => "typeahead"
+                ],
                 'constraints' => [
-
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
                     ]),
-
                     new Regex([
-
                         'pattern' => '/^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/',
-
                         'message' => 'Le code postale est invalide'
-
                     ])
                 ]
-
             ])
 
             ->add('city', TextType::class, [
 
                 'label' => 'Ville',
-
+                'attr' => [
+                    'class' => "typeahead"
+                ],
                 'constraints' => [
-
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
                     ]),
-
                     new Length([
                         'min' => 3,
                         'max' => 100,
-
                         'minMessage' => 'La ville doit être de {{ limit }} characters de long',
                         'maxMessage' => 'La ville ne peux pas être plus grand que {{ limit }} characters ',
                     ])
-
                 ]
-
             ])
-
-            ->add('country', TextType::class, [
-
-                'label' => 'Région',
-
-                'constraints' => [
-
-                    new NotBlank([
-                        'message' => 'Le champs ne peux pas être vide'
-                    ]),
-
-                    new Length([
-                        'min' => 2,
-                        'max' => 100,
-
-                        'minMessage' => 'La région doit être de {{ limit }} characters de long',
-                        'maxMessage' => 'La région ne peux pas être plus grand que {{ limit }} characters ',
-                    ])
-
-                ]
-
+            ->add('country', CountryType::class, [
+                'label' => 'Pays :',
+                'preferred_choices' => ['FR', 'BE', 'LU'], //Choix qui apparaissent en haut. Noté en format code ISO
+                // 3166-1 Alpha-2
             ])
 
             ->add('phoneNumber', TelType::class, [

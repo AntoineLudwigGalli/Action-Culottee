@@ -8,31 +8,32 @@
 {% block content %}
 
     <div class="container-fluid">
+        <div class="col-md-10 offset-md-2">
+            <div class="row">
+                <h1 class="col-12 text-center my-5">Modification d'un utilisateur</h1>
+            </div>
 
-        <div class="row">
-            <h1 class="col-12 text-center my-5">Modification d'un utilisateur</h1>
-        </div>
+            <div class="row">
+                <p class="text-center col-12">
 
-        <div class="row">
-            <p class="text-center col-12">
+                    <a href="{{ path('admin_panel_users_list', {'id': form.vars.value.id}) }}"
+                       class="text-decoration-none">Revenir sur la liste</a>
 
-                <a href="{{ path('admin_panel_users_list', {'id': form.vars.value.id}) }}" class="text-decoration-none">Revenir sur la liste</a>
+                </p>
+            </div>
+{#Formulaire#}
+            <div class="row">
 
-            </p>
-        </div>
-
-        <div class="row">
-
-            <div class="col-12 col-md-8 mx-auto">
-                {{ form_start(form) }}
-                <div class="row">
-                    <div class="col-6">
-                        {{ form_row(form.lastname) }}
+                <div class="col-12 col-md-8 mx-auto">
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-6">
+                            {{ form_row(form.lastname) }}
+                        </div>
+                        <div class="col-6">
+                            {{ form_row(form.firstname) }}
+                        </div>
                     </div>
-                    <div class="col-6">
-                        {{ form_row(form.firstname) }}
-                    </div>
-                </div>
 
 
                     {{ form_row(form.email) }}
@@ -52,10 +53,10 @@
                     </div>
 
 
-
                     {{ form_row(form.save) }}
 
-                {{ form_end(form) }}
+                    {{ form_end(form) }}
+                </div>
             </div>
         </div>
     </div>

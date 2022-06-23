@@ -120,7 +120,7 @@ class UserPanelController extends AbstractController
 
         if(!$this->isCsrfTokenValid('modifier_boutique_' . $shop->getId(), $csrfToken)){
 
-            $this->addFlash('error', 'Un problème est survenue veuillez réssayer.');
+            $this->addFlash('error', 'Un problème est survenue veuillez réessayer.');
 
         } else {
 
@@ -128,7 +128,7 @@ class UserPanelController extends AbstractController
 
                 $shopRepository->add($form->getData(), true);
 
-                $this->addFlash('success', 'La boutique à été supprimée avec succès !');
+                $this->addFlash('success', 'La boutique à été modifiée avec succès !');
 
                 return $this->redirectToRoute('user_panel_manage_shop');
             }

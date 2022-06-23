@@ -33,9 +33,9 @@
                                         <tr>
                                             <th>Nom</th>
                                             <th>Adresse</th>
-                                            <th>ZIP Code</th>
+                                            <th>Code postal</th>
                                             <th>Ville</th>
-                                            <th>Région</th>
+                                            <th>Pays</th>
                                             <th>Téléphone</th>
                                         </tr>
                                         </thead>
@@ -82,7 +82,8 @@
                             </div>
 
                             <div>
-                                <a onclick="return confirm()" href="{{ path('user_panel_delete_shop', {'id': shops.id, 'token': csrf_token('supprimer_boutique_' ~ shops.id) }) }}" ><button class="btn btn-danger">Supprimé</button></a>
+                                <a onclick="return confirm()" href="{{ path('user_panel_delete_shop', {'id': shops.id, 'token': csrf_token('supprimer_boutique_' ~ shops.id) })
+                                }}" ><button class="btn btn-danger">Supprimer</button></a>
 
                             </div>
 
@@ -102,11 +103,10 @@
 
     </main>
 
-
 {% endblock %}
 
 {% block jsIncludes %}
-
-    <script src="{{ asset('js/shop/deleteShop.js') }}"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/typeahead/typeahead.js') }}"></script>
+    <script src="{{ asset('js/typeahead/autocompletion-shop-inputs.js') }}"></script>
 {% endblock %}
