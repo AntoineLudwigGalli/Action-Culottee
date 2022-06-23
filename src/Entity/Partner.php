@@ -25,9 +25,9 @@ class Partner
     #[ORM\Column(type: 'text')]
     private $offer;
 
-    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'partners')]
-    #[ORM\JoinColumn(nullable: false)]
-    private $owner;
+//    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'partners')]
+//    #[ORM\JoinColumn(nullable: false)]
+//    private $owner;
 
     public function getId(): ?int
     {
@@ -82,15 +82,15 @@ class Partner
         return $this;
     }
 
-    public function getOwner(): ?User
-    {
-        return $this->owner;
-    }
-
-    public function setOwnerId(?User $owner): self
-    {
-        $this->owner = $owner;
-
-        return $this;
-    }
+//    public function getOwner(): ?User
+//    {
+//        return $this->owner;
+//    }
+//
+//    public function setOwnerId(?User $owner): self
+//    {
+//        $this->owner = $owner;
+//
+//        return $this;
+//    }
 }
