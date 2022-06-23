@@ -544,7 +544,8 @@ class AdminPanelController extends AbstractController {
                 $file->move($dir, $filename);
 
                 $partner->setLogo($filename);
-                $partner->setOwnerId($this->getUser());
+
+                dump($partner);
 
                 $partnerRepository->add($partner, true);
 
@@ -583,26 +584,44 @@ class AdminPanelController extends AbstractController {
 
     /**
      *
+     * Méthode de modification du partenaire
      *
      */
     #[Route('/modifier-un-partenaire/{id}/', name: 'partner_edit_', priority: 10)]
-    public function editPartner(Request $request, Partner $partner, ManagerRegistry $doctrine): Response {
+    public function editPartner(Request $request, Partner $partner ,PartnerRepository $partnerRepository): Response {
+
+        $filename = $partner->getLogo();
 
         $form = $this->createForm(PartnerTypeFormType::class, $partner);
 
         $form->handleRequest($request);
 
-
-        // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Sauvegarde des données modifiées en BDD
-            $em = $doctrine->getManager();
-            $em->flush();
+            $file = $form->get('logo')->getData();
 
-            $this->addFlash('success', 'Le partenaire à été modifié avec succès !');
+            $ext = $file->guessExtension();
 
-            return $this->redirectToRoute('admin_panel_partners_list');
+            $extArray = ['jpg', 'png', 'jpeg'];
+
+            if (!in_array($ext, $extArray)) {
+
+                $form->get('logo')->addError(new FormError('L\'extension du fichier n\'est pas bon'));
+
+            } else {
+
+                $dir = $this->getParameter('kernel.project_dir') . '/public/images/images-partners/';
+
+                $file->move($dir, $filename);
+
+                $partner->setLogo($filename);
+
+                $partnerRepository->add($partner, true);
+
+                $this->addFlash('success', 'Partenaire modifier avec succés');
+
+            }
+
         }
 
 

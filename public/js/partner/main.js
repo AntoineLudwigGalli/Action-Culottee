@@ -1,5 +1,4 @@
 import { Overlay } from "./overlay.js";
-import {Partner} from "./partner.js";
 
 const overlay = new Overlay();
 
@@ -23,16 +22,23 @@ document.querySelectorAll('.card a img').forEach(function (element) {
         selectOverlay.querySelector('.img-p-partner p').innerHTML = elementDescription;
 
 
+        // Si il est connecter on affiche l'offre
         if ( checkIfUser ) {
 
+            let buttonOfferCreated = document.createElement('div');
+            document.querySelector('#partner-info').append(buttonOfferCreated)
+            buttonOfferCreated.setAttribute('class', 'd-flex flex-row justify-content-end');
+            buttonOfferCreated.append(document.createElement('button'));
+            buttonOfferCreated.querySelector('button').setAttribute('class', 'btn btn-warning w-25');
+            buttonOfferCreated.querySelector('button').textContent = 'Offre';
 
-            const button =  document.querySelector('#partner-info div button');
+            const button = document.querySelector('#partner-info div button');
 
             button.addEventListener('click', function () {
 
                 const text = 'Offre';
 
-                if ( button.textContent.toLowerCase().includes( text.toLowerCase() ) ) {
+                if (button.textContent.toLowerCase().includes(text.toLowerCase())) {
 
                     this.textContent = 'Retour';
 
@@ -53,9 +59,8 @@ document.querySelectorAll('.card a img').forEach(function (element) {
                 }
 
             });
-
-
         }
+
 
 
 

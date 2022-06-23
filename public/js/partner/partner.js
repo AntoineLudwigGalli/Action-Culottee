@@ -41,34 +41,7 @@ export class Partner {
         document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('div') );
         document.querySelector('.overlay-partner .img-p-partner div:last-child').append(  document.createElement('p') );
         document.querySelector('.overlay-partner .img-p-partner div:last-child').setAttribute('class', 'ms-3 text-break w-100');
-
-
-
-
-        // Affichage du boutton si l'utilisateur est connecter
-        if ( checkIfUser ) {
-
-            let buttonOfferCreated = document.createElement('div');
-            document.querySelector('#partner-info').append( buttonOfferCreated )
-            buttonOfferCreated.setAttribute(  'class', 'd-flex flex-row justify-content-end' );
-            buttonOfferCreated.append(  document.createElement('button') );
-            buttonOfferCreated.querySelector('button').setAttribute(  'class', 'btn btn-warning w-25' );
-            buttonOfferCreated.querySelector('button').textContent = 'Offre';
-
-
-            buttonOfferCreated.querySelector('button').addEventListener('click', function (e) {
-
-
-
-            });
-
-
-        } else {
-
-            console.log('Non');
-
-        }
-
+        
 
 
     }

@@ -20,7 +20,7 @@ class PartnerTypeFormType extends AbstractType
         $builder
             ->add('title', TextType::class, [
 
-                'label' => 'Titre',
+                'label' => 'Marque',
 
                 "empty_data" => '',
 
@@ -40,19 +40,7 @@ class PartnerTypeFormType extends AbstractType
                 ]
             ])
 
-            ->add('logo', FileType::class, [
-
-                "empty_data" => '',
-
-                'constraints' => [
-
-                    new NotBlank([
-                        'message' => 'Ce champs ne peux pas être vide'
-                    ])
-
-                ]
-
-            ])
+            ->add('logo', FileType::class, [ 'data_class' => null ])
 
             ->add('description', CKEditorType::class, [
 
