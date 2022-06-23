@@ -61,6 +61,8 @@ class EditPartnerTypeFormType extends AbstractType
 
                 'label' => 'Description',
 
+                'purify_html' => true,
+
                 "empty_data" => '',
 
                 'constraints' => [
@@ -82,6 +84,8 @@ class EditPartnerTypeFormType extends AbstractType
             ->add('offer', CKEditorType::class, [
 
                 'label' => 'Offre du partenaire',
+
+                'purify_html' => true,
 
                 "empty_data" => '',
 
