@@ -76,10 +76,13 @@ class UpdateUserFormType extends AbstractType
             // Champ numéro d'adhérent au bon format
             ->add('memberIdNumber', TextType::class, [
                 'label' => "Numéro d'adhérent (facultatif)",
+                "required" => false,
                 'attr' => [
-                    'placeholder' => 'Ex: 2022/123'
+                    'placeholder' => 'Ex: 2022/123',
+                    "required" => false,
                 ],
                 'constraints' => [
+
                     new Regex([
                         'pattern' => '/^20[2-9]\d\/\d{3}$/u',
                         'message' => "Le numéro d'adhérent doit être au format 20XX/XXX, par exemple 2022/123",
