@@ -26,7 +26,7 @@
 
                 {# Bouton de la page qui-sommes-nous #}
                 <li class="nav-item">
-                    <a class="nav-link{{ route == 'main_about' ? ' active' }}" href="{{ path('main_about') }}">Qui sommes nous ?</a>
+                    <a class="nav-link{{ route == 'main_about' ? ' active' }}" href="{{ path('main_about') }}">Qui sommes-nous ?</a>
                 </li>
 
                 {#TODO:#}
@@ -78,8 +78,8 @@
                             {% endif %}
 
                             {# Bouton de la page User Panel #}
-                            {% if app.user.roles[0] == "ROLE_MEMBER" %}
-                                <a class="dropdown-item" href="{{ path('main_home') }}"><i class="fas fa-users-cog me-1"></i>Gestion du compte</a>
+                            {% if app.user.roles[0] == "ROLE_MEMBER" or app.user.roles[0] == "ROLE_ADMIN"%}
+                                <a class="dropdown-item" href="{{ path('main_home') }}"><i class="fas fa-users-cog me-1"></i>Boutiques</a>
                             {% endif %}
 
                             {# Séparateur #}
