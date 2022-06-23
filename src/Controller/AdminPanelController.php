@@ -11,6 +11,7 @@ use App\Entity\User;
 use App\Form\CreateEventFormType;
 use App\Form\CreateShopFormType;
 use App\Form\DynamicContentFormType;
+use App\Form\EditPartnerTypeFormType;
 use App\Form\EditShopTypeFormType;
 use App\Form\RegistrationFormType;
 use App\Form\UpdateUserFormType;
@@ -592,7 +593,7 @@ class AdminPanelController extends AbstractController {
 
         $filename = $partner->getLogo();
 
-        $form = $this->createForm(PartnerTypeFormType::class, $partner);
+        $form = $this->createForm(EditPartnerTypeFormType::class, $partner);
 
         $form->handleRequest($request);
 
@@ -623,7 +624,6 @@ class AdminPanelController extends AbstractController {
             }
 
         }
-
 
         return $this->render('admin_panel/admin_partner_edit.html.twig', ['form' => $form->createView()]);
     }

@@ -25,6 +25,10 @@ class Partner
     #[ORM\Column(type: 'text')]
     private $offer;
 
+
+//    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'partners')]
+//    #[ORM\JoinColumn(nullable: false)]
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,5 +81,6 @@ class Partner
 
         return $this;
     }
+
 
 }

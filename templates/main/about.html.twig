@@ -8,6 +8,27 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css"
     />
+    <style>
+        /*#container img {*/
+        /*    display: block;*/
+        /*    width: 100%!important;*/
+        /*    height: 100% !important;*/
+        /*}*/
+
+        #container img {
+            display: block;
+            width: auto !important;
+            height: 500px !important;
+        }
+
+        #container p {
+            text-align: center;
+        }
+
+        #container {
+            height: 100%;
+        }
+    </style>
 {% endblock %}
 
 {% block body %}
@@ -15,21 +36,27 @@
     {# //////////////////////////////////////////////////////////////////////////////////////////////////////////////////// #}
 
 
-<div class="d-flex flex-column flex-md-row container">
-    {# TODO:dynamique +responsive #}
-{#    <div class="row">#}
+    <div class="container-fluid">
 
 
-        <div id="about" class="col-12 col-md-6 offset-md-1">
-            <h1>Qui sommes-nous ?</h1>
+        {#        Affichage texte qui-sommes-nous #}
 
-            <p class="">
-                {{ display_dynamic_content('about_text_presentation') }}
-            </p>
-            {# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// #}
+-
+        <div id="about" class="row">
+            <div class="col-12">
+                <h1>Qui sommes-nous ?</h1>
+
+                <p class="">
+                    {{ display_dynamic_content('about_text_presentation') }}
+                </p>
+
+            </div>
+
         </div>
 
-        <section id="container" class="d-flex align-items-center col-12 col-lg-4 offset-md-1 p-md-3">
+        {#        Affichage du slider #}
+
+        <section id="container" class="d-flex align-items-center col-12 col-md-3  p-md-3">
 
             <div id="vertical-slider" class="splide">
 
@@ -37,38 +64,14 @@
 
                     <ul class="splide__list ">
 
-                        {#                        TODO:foreach #}
+                        {% for i in 1..15 %}
 
-                        <li class="splide__slide">
-                            <div class="d-flex flex-column">
-                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
-                                <h4 class="text-center">test</h4>
-                            </div>
-                        </li>
-                        <li class="splide__slide my-auto">
-                            <div class="d-flex flex-column">
-                                <img class="img-fluid w-100 " src="{{ asset('images/map_icon.png') }}" alt="">
-                                <h4 class="text-center">test</h4>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="d-flex flex-column">
-                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
-                                <h4 class="text-center">test2</h4>
-                            </div>
-                        </li>
-                        <li class="splide__slide">
-                            <div class="d-flex flex-column">
-                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
-                                <h4 class="text-center">test3</h4>
-                            </div>
-                        </li>
-                        <li class="splide__slide ">
-                            <div class="d-flex flex-column">
-                                <img class="img-fluid w-100" src="{{ asset('images/test.png') }}" alt="">
-                                <h4 class="text-center">test3</h4>
-                            </div>
-                        </li>
+                            <li class="splide__slide py-5">
+                                {{ display_dynamic_content('about_image' ~ i) }}
+                            </li>
+
+                        {% endfor %}
+
 
                     </ul>
                 </div>
@@ -77,8 +80,7 @@
         </section>
 
 
-{#    </div>#}
-</div>
+    </div>
 
 
     {# ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// #}
@@ -88,7 +90,7 @@
 
 
 
-    {% endblock %}
+{% endblock %}
 
     {% block jsIncludes %}
 
@@ -101,57 +103,49 @@
                 new Splide('.splide', {
 
 
-                    type: 'loop',
-                    direction: "ttb",
-                    updateOnMove: true,
+                    // isNavigation: false,
+                    // wheel: true,
+                    // pagination: false,
+                    // focus: "center",
+                    //
+                    // // gap: '3rem',
+                    //
+                    // height: '100vh',
+                    // width: '25vw',
 
-                    isNavigation: true,
-                    wheel: true,
-                    pagination: false,
-                    focus: "center",
-
-                    gap: '2.5rem',
-
-                    perPage: 1,
-
-                    rewind: true,
-
-                    height: '150vh',
-                    width: 'auto',
-                    fixedHeight: 'auto',
-                    autoWidth: true,
-                    autoHeight: true,
 
 // breakpoints responsive
 
-                    breakpoints: {
+                    // breakpoints: {
+                    //
+                    //
+                    //     1024: {
+
+                    type: 'loop',
+                    direction: "ltr",
+                    updateOnMove: true,
+                    arrows: true,
+                    isNavigation: true,
+                    wheel: false,
+                    pagination: false,
+                    focus: 'center',
+
+                    perPage: 2,
+
+                    gap: '1rem',
+                    lazyLoad: true,
+                    rewind: true,
+
+                    autoWidth: true,
+                    height: 'auto',
+                    width: '100vw',
+
+                    autoHeight: true,
 
 
-                        1024: {
+                    // },
 
-                            type: 'loop',
-                            direction: "ltr",
-                            updateOnMove: true,
-
-                            isNavigation: true,
-                            wheel: true,
-                            pagination: false,
-                            focus: 'center',
-
-                            perPage: 3,
-
-                            rewind: true,
-
-                            width: '100vw',
-                            height: '150rem',
-
-                            autoWidth: false,
-                            autoHeight: false,
-
-
-                        },
-
-                    },
+                    // },
 
                 }).mount();
 

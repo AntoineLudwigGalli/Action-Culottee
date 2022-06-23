@@ -53,8 +53,8 @@
                 id: '{{ partner.id }}',
                 title: '{{ partner.title }}',
                 logo: '{{ partner.logo ?? 'None' }}',
-                description: '{{ partner.description }}',
-                offer: '{{ partner.offer }}'
+                description: '{{ partner.description|purify }}',
+                offer: '{{ partner.offer|purify }}'
 
             });
 
