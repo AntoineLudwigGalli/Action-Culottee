@@ -1,3 +1,6 @@
+/*TODO: virer ou adapter la fonction*/
+
+/*
 function partnerDynamicContent (name){
     $.getJSON("/ajax/partners", function(data) {
 
@@ -16,6 +19,7 @@ function partnerDynamicContent (name){
     });
 }
 
+*/
 
 
 

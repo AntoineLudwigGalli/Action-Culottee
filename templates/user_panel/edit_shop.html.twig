@@ -10,7 +10,7 @@
 
             <div class="col-10 mx-auto">
 
-                {# Formulaire de modification d'email #}
+                {# Formulaire de modification de boutique #}
                 {{ form_start(form) }}
 
                     {{ form(form) }}
@@ -24,4 +24,8 @@
     </div>
 
 {% endblock %}
-
+{% block jsIncludes %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/typeahead/typeahead.js') }}"></script>
+    <script src="{{ asset('js/typeahead/autocompletion-shop-inputs.js') }}"></script>
+{% endblock %}

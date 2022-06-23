@@ -63,6 +63,9 @@ class CreateShopFormType extends AbstractType
 
             ->add('address', TextType::class, [
                 'label' => 'Adresse de la boutique',
+                'attr' => [
+                    'class' => "typeahead-address typeahead",
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci de saisir l\'adresse de votre boutique'
@@ -78,6 +81,9 @@ class CreateShopFormType extends AbstractType
 // TODO : Verification et auto completion ville/code postal si on a le temps et qu'on s'ennuie.
             ->add('zip', TextType::class, [
                 'label' => 'Code Postal',
+                'attr' => [
+                    'class' => "typeahead-zip",
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Merci de saisir le code postal de votre boutique'
@@ -90,19 +96,23 @@ class CreateShopFormType extends AbstractType
             ])
 
             ->add('city', TextType::class, [
-        'label' => 'Ville',
-        'constraints' => [
-            new NotBlank([
-                'message' => 'Merci de saisir la ville dans laquelle se trouve votre boutique'
-            ]),
-            new Length([
-                'min' => 5,
-                'max' => 100,
-                'minMessage' => 'La ville dans laquelle se trouve votre boutique doit contenir au moins {{ limit }} caractères.',
-                'maxMessage' => 'La ville dans laquelle se trouve votre boutique ne peut contenir plus de {{ limit }} caractères'
-            ]),
-        ],
-    ])
+                'label' => 'Ville',
+                'attr' => [
+                    'class' => "typeahead-city",
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Merci de saisir la ville dans laquelle se trouve votre boutique'
+                    ]),
+                    new Length([
+                        'min' => 5,
+                        'max' => 100,
+                        'minMessage' => 'La ville dans laquelle se trouve votre boutique doit contenir au moins {{ limit }} caractères.',
+                        'maxMessage' => 'La ville dans laquelle se trouve votre boutique ne peut contenir plus de {{ limit }} caractères'
+                    ]),
+                ],
+            ])
+
             ->add('country', CountryType::class, [
                 'label' => 'Pays :',
                 'preferred_choices' => ['FR', 'BE', 'LU'], //Choix qui apparaissent en haut. Noté en format code ISO

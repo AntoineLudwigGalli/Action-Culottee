@@ -12,14 +12,21 @@ use App\Form\CreateShopFormType;
 use App\Form\DynamicContentFormType;
 use App\Form\RegistrationFormType;
 use App\Form\UpdateUserFormType;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
+use League\Csv\ByteSequence;
+use League\Csv\Reader;
+use League\Csv\Writer;
+use PDO;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use SplTempFileObject;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -160,7 +167,61 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_users_list.html.twig', ['users' => $users,]);
     }
+    ////////////////////////////////////////////////////////////////////
+    /// Export CSV des Users
 
+    #[Route('/liste-des-utilisateurs/export', name: 'users_list_export')]
+    public function usersListExport(ManagerRegistry $doctrine): Response {
+
+        // TODO: Ajouter la colonne vérification compte vérifié + activé
+        $header = ['#' , 'Email', 'Type de compte', 'Prénom', 'Nom', 'Numéro d\'adhérent', 'Téléphone', 'Inscription Newsletter', 'Cotisation payée', 'Compte vérifié'];
+
+        $userRepo = $doctrine->getRepository(User::class);
+
+        $users = $userRepo->findAll();
+
+        foreach($users as $user){
+            $arrayUsers[] = [
+                $user->getId(),
+                $user->getEmail(),
+                in_array('ROLE_ADMIN', $user->getRoles()) ? 'Administrateur' : ( in_array('ROLE_MEMBER', $user->getRoles()) ? 'Membre' : 'Utilisateur' ),
+                $user->getFirstname(),
+                $user->getLastname(),
+                $user->getMemberIdNumber(),
+                $user->getPhoneNumber(),
+                $user->isNewsletterOption() ? 'Oui' : 'Non',
+                $user->isMembershipPaid() ? 'Oui' : 'Non',
+                $user->isVerified() ? 'Oui' : 'Non',
+            ];
+        }
+
+        $writer = Writer::createFromFileObject(new SplTempFileObject()); //the CSV file will be created using a temporary File
+        $writer->setDelimiter("\t"); //the delimiter will be the tab character
+        $writer->setNewline("\r\n"); //use windows line endings for compatibility with some csv libraries
+        $writer->setOutputBOM(Writer::BOM_UTF8); //adding the BOM sequence on output
+        $writer->insertOne($header);
+        $writer->insertAll($arrayUsers ?? []);
+
+
+        // Provide a name for your file with extension
+        $filename = 'users.csv';
+
+        // Return a response with a specific content
+        $response = new Response($writer);
+
+        // Create the disposition of the file
+        $disposition = $response->headers->makeDisposition(
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $filename
+        );
+
+        // Set the content disposition
+        $response->headers->set('Content-Disposition', $disposition);
+
+        // Dispatch request
+        return $response;
+
+    }
     //////////////////////////////////////////////////////////
 
     #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]

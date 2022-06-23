@@ -39,9 +39,9 @@ class UserPanelController extends AbstractController
         $form = $this->createForm(CreateShopFormType::class, $shop);
 
         $form->handleRequest($request);
-dump($form->isSubmitted());
+
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($this->getUser());
+
             $shop->setOwner($this->getUser()); // On récupère l'id de l'utilisateur connecté pour y associer la
             // boutique qu'il a créé
 
@@ -120,7 +120,7 @@ dump($form->isSubmitted());
 
         if(!$this->isCsrfTokenValid('modifier_boutique_' . $shop->getId(), $csrfToken)){
 
-            $this->addFlash('error', 'Un problème est survenue veuillez réssayer.');
+            $this->addFlash('error', 'Un problème est survenue veuillez réessayer.');
 
         } else {
 
@@ -128,7 +128,7 @@ dump($form->isSubmitted());
 
                 $shopRepository->add($form->getData(), true);
 
-                $this->addFlash('success', 'La boutique à été supprimée avec succès !');
+                $this->addFlash('success', 'La boutique à été modifiée avec succès !');
 
                 return $this->redirectToRoute('user_panel_manage_shop');
             }
