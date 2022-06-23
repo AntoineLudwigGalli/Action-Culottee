@@ -32,7 +32,7 @@ class UserPanelController extends AbstractController
 {
     #[Route('/creer-une-boutique', name: 'shop_creation')]
     #[isGranted('ROLE_MEMBER')]
-    public function createShop(ManagerRegistry $doctrine, Request $request ): Response
+    public function createShop(ShopRepository $shopRepository, Request $request ): Response
     {
 
         $shop = new Shop();
@@ -72,16 +72,13 @@ class UserPanelController extends AbstractController
             $shop->setLatitude($latitude);
             $shop->setLongitude($longitude);
 
-
-            $em = $doctrine->getManager();
-            $em->persist($shop);
-            $em->flush();
+            $shopRepository->add($shop, true);
 
             $this->addFlash('success', 'Boutique ajoutée avec succès');
         }
 
         return $this->render('user_panel/shop_creation.html.twig', [
-            'createShopForm' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
@@ -93,11 +90,9 @@ class UserPanelController extends AbstractController
      */
     #[Route('/modifier-votre-boutique', name: 'manage_shop')]
     #[isGranted('ROLE_MEMBER')]
-    public function manageShop() : Response
+    public function manageShop(ShopRepository $shopRepository) : Response
     {
         $user = $this->getUser();
-
-
 
         return $this->render('user_panel/manage_shop.html.twig');
     }
@@ -150,13 +145,11 @@ class UserPanelController extends AbstractController
     public function deleteShop(Shop $shop, ShopRepository $shopRepository,Request $request) : Response
     {
 
+        $shopRepository->remove($shop, true);
 
-            $shopRepository->remove($shop, true);
+        $this->addFlash('success', 'La boutique à été supprimée avec succès !');
 
-            $this->addFlash('success', 'La boutique à été supprimée avec succès !');
-
-
-        return $this->redirectToRoute('user_panel_edit_shop');
+        return $this->redirectToRoute('user_panel_manage_shop');
     }
 
 

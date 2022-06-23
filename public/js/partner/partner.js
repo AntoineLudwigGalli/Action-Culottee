@@ -41,8 +41,6 @@ export class Partner {
         document.querySelector('.overlay-partner .img-p-partner').append(  document.createElement('div') );
         document.querySelector('.overlay-partner .img-p-partner div:last-child').append(  document.createElement('p') );
         document.querySelector('.overlay-partner .img-p-partner div:last-child').setAttribute('class', 'ms-3 text-break w-100');
-        
-
 
     }
 

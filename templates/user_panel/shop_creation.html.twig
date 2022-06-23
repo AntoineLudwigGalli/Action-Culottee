@@ -9,11 +9,41 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-12 col-md-6 mx-auto text-center mt-5">
-				{{ form_start(createShopForm) }}
+				{# Formulaire de modification de la boutique #}
+				{{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
 
-                {{ form(createShopForm) }}
+				{# Formulaire de modification de boutique #}
+				{{ form_start(form) }}
 
-                {{ form_end(createShopForm) }}
+				{{ form_label(form.name) }}
+				{{ form_widget(form.name) }}
+				{{ form_errors(form.name) }}
+
+				{{ form_label(form.address) }}
+				{{ form_widget(form.address) }}
+				{{ form_errors(form.address) }}
+
+				{{ form_label(form.zip) }}
+				{{ form_widget(form.zip) }}
+				{{ form_errors(form.zip) }}
+
+				{{ form_label(form.city) }}
+				{{ form_widget(form.city) }}
+				{{ form_errors(form.city) }}
+
+				{{ form_label(form.country) }}
+				{{ form_widget(form.country) }}
+				{{ form_errors(form.country) }}
+
+				{{ form_label(form.phoneNumber) }}
+				{{ form_widget(form.phoneNumber) }}
+				{{ form_errors(form.phoneNumber) }}
+
+				{{ form_widget(form.submit, {'attr': { 'value': 'Modifier' } }) }}
+
+				<a href="{{ path('user_panel_manage_shop') }}"><button type="button" class="btn btn-danger">Retour</button></a>
+
+				{{ form_end(form) }}
                 
 			</div>
 		</div>

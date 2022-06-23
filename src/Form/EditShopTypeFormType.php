@@ -26,7 +26,6 @@ class EditShopTypeFormType extends AbstractType
                 "empty_data" => '',
 
                 'constraints' => [
-                    "empty_data" => "",
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
                     ]),

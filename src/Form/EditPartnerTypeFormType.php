@@ -73,7 +73,7 @@ class EditPartnerTypeFormType extends AbstractType
 
                     new Length([
                         'min' => 3,
-                        'max' => 5000,
+                        'max' => 20_000,
                         'minMessage' => "La description doit contenir au moins {{ limit }} caractères",
                         'maxMessage' => 'La description est trop grande'
                     ])
