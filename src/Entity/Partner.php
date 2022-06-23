@@ -25,13 +25,10 @@ class Partner
     #[ORM\Column(type: 'text')]
     private $offer;
 
-<<<<<<< HEAD
+
 //    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'partners')]
 //    #[ORM\JoinColumn(nullable: false)]
-//    private $owner;
 
-=======
->>>>>>> origin/main
     public function getId(): ?int
     {
         return $this->id;
@@ -85,18 +82,5 @@ class Partner
         return $this;
     }
 
-<<<<<<< HEAD
-//    public function getOwner(): ?User
-//    {
-//        return $this->owner;
-//    }
-//
-//    public function setOwnerId(?User $owner): self
-//    {
-//        $this->owner = $owner;
-//
-//        return $this;
-//    }
-=======
->>>>>>> origin/main
+
 }
