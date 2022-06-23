@@ -20,6 +20,8 @@ class EditPhoneNumberTypeFormType extends AbstractType
 
                 'label' => 'Numéro de téléphone',
 
+                "empty_data" => '',
+
                 'constraints' => [
 
                     new NotBlank([

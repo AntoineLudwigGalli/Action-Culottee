@@ -19,7 +19,10 @@ class PartnerTypeFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
+
                 'label' => 'Titre',
+
+                "empty_data" => '',
 
                 'constraints' => [
 
@@ -39,6 +42,8 @@ class PartnerTypeFormType extends AbstractType
 
             ->add('logo', FileType::class, [
 
+                "empty_data" => '',
+
                 'constraints' => [
 
                     new NotBlank([
@@ -52,6 +57,8 @@ class PartnerTypeFormType extends AbstractType
             ->add('description', CKEditorType::class, [
 
                 'label' => 'Description',
+
+                "empty_data" => '',
 
                 'constraints' => [
 
@@ -72,6 +79,8 @@ class PartnerTypeFormType extends AbstractType
             ->add('offer', CKEditorType::class, [
 
                 'label' => 'Offre du partenaire',
+
+                "empty_data" => '',
 
                 'constraints' => [
 

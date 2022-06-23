@@ -20,6 +20,8 @@ class EditLastnameFirstnameFormType extends AbstractType
         $builder
             ->add('lastname', TextType::class, [
 
+                "empty_data" => '',
+
                 'constraints' => [
 
                     new NotBlank([
@@ -39,6 +41,7 @@ class EditLastnameFirstnameFormType extends AbstractType
             ])
             ->add('firstname', TextType::class, [
 
+                "empty_data" => '',
 
                 'constraints' => [
 
