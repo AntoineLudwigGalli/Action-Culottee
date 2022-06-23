@@ -77,6 +77,7 @@ class UserPanelController extends AbstractController
             $shopRepository->add($shop, true);
 
             $this->addFlash('success', 'Boutique ajoutée avec succès');
+            return $this->redirectToRoute("user_panel_manage_shop");
         }
 
         return $this->render('user_panel/shop_creation.html.twig', [

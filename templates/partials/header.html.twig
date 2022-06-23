@@ -86,7 +86,7 @@
 
                             {# Bouton de la page User Panel #}
                             {% if app.user.roles[0] == "ROLE_MEMBER" or app.user.roles[0] == "ROLE_ADMIN" %}
-                                <a class="dropdown-item" href="{{ path('user_panel_shop_creation') }}"><i
+                                <a class="dropdown-item" href="{{ path('user_panel_manage_shop') }}"><i
                                             class="fas fa-users-cog me-1"></i>Boutiques</a>
                             {% endif %}
 

@@ -82,7 +82,7 @@
                             </div>
 
                             <div>
-                                <a onclick="return confirm()" href="{{ path('user_panel_delete_shop', {'id': shops.id, 'token': csrf_token('supprimer_boutique_' ~ shops.id) })
+                                <a onclick="return confirm('Etes-vous sur de vouloir supprimer cette boutique ?')" href="{{ path('user_panel_delete_shop', {'id': shops.id, 'token': csrf_token('supprimer_boutique_' ~ shops.id) })
                                 }}" ><button class="btn btn-danger">Supprimer</button></a>
 
                             </div>
@@ -98,7 +98,7 @@
                         <div class="alert alert-warning">Aucune boutique a été crée pour le moment</div>
                     </div>
             {% endfor %}
-
+            <a href="{{ path('user_panel_shop_creation') }}"><button class="btn btn-primary mb-3">Créer une boutique</button></a>
         </div>
 
     </main>
