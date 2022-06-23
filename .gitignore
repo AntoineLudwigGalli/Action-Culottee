@@ -13,7 +13,7 @@
 /migrations/*.php
 /public/images/home_presentation/*.php
 /public/images/home_presentation/.gitignore
-/public/images/images-partners/*.php
+/public/images/images-partners/*
 !/public/images/images-partners/.gitignore
 
 ###< custom settings ###

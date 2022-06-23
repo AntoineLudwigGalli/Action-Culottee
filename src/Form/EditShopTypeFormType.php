@@ -26,7 +26,7 @@ class EditShopTypeFormType extends AbstractType
                 "empty_data" => '',
 
                 'constraints' => [
-
+                    "empty_data" => "",
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
                     ]),
@@ -43,10 +43,8 @@ class EditShopTypeFormType extends AbstractType
 
             ->add('address', TextType::class, [
 
+                "empty_data" => "",
                 'label' => 'Adresse',
-
-                "empty_data" => '',
-
                 'attr' => [
                     'class' => "typeahead"
                 ],
@@ -66,9 +64,7 @@ class EditShopTypeFormType extends AbstractType
             ->add('zip', TextType::class, [
 
                 'label' => 'Code postal',
-
                 "empty_data" => '',
-
                 'attr' => [
                     'class' => "typeahead"
                 ],
@@ -84,11 +80,8 @@ class EditShopTypeFormType extends AbstractType
             ])
 
             ->add('city', TextType::class, [
-
+                "empty_data" => "",
                 'label' => 'Ville',
-
-                "empty_data" => '',
-
                 'attr' => [
                     'class' => "typeahead"
                 ],
@@ -111,11 +104,8 @@ class EditShopTypeFormType extends AbstractType
             ])
 
             ->add('phoneNumber', TelType::class, [
-
+                "empty_data" => "",
                 'label' => 'Téléphone',
-
-                "empty_data" => '',
-
                 'constraints' => [
 
                     new NotBlank([

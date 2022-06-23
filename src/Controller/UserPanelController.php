@@ -24,10 +24,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Security\ChangePassword;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+
+
 
 #[Route("/user", name: "user_panel_")]
-#[isGranted('ROLE_MEMBER')]
 class UserPanelController extends AbstractController
 {
     #[Route('/creer-une-boutique', name: 'shop_creation')]
@@ -166,7 +166,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil', name: 'profil')]
-    #[isGranted('ROLE_MEMBER')]
+    #[isGranted('ROLE_USER')]
     public function userProfil(Request $request, UserRepository $userRepository) : Response
     {
         $user = $this->getUser();
@@ -195,7 +195,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-nom-et-prenom', name: 'edit_lastname_firstname')]
-    #[isGranted('ROLE_MEMBER')]
+    #[isGranted('ROLE_USER')]
     public function userEditFirstnameLastname(Request $request, UserRepository $userRepository) : Response
     {
 
@@ -231,7 +231,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-email', name: 'edit_email')]
-    #[isGranted('ROLE_MEMBER')]
+    #[isGranted('ROLE_USER')]
     public function userEditEmail(EmailVerifier $emailVerifier,Request $request, UserRepository $userRepository) : Response
     {
 
@@ -280,7 +280,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-mot-de-passe', name: 'edit_password')]
-    #[isGranted('ROLE_MEMBER')]
+    #[isGranted('ROLE_USER')]
     public function userEditPassword(UserPasswordHasherInterface $userPasswordHasher, Request $request, UserRepository $userRepository) : Response
     {
 
@@ -298,7 +298,7 @@ class UserPanelController extends AbstractController
             // Si l'ancien mot de passe est bon
             if ( $userPasswordHasher->isPasswordValid( $user, $form->get('oldPassword')->getData() ) ) {
 
-                // Si le nouveau mot de passe et pareil que le mot de passe actuel on return
+                // Si le nouveau mot de passe est identique au mot de passe actuel, on retourne
                 if (
                     $form->get('newPassword')->getData() == $user->getPassword()
                 ) {
@@ -335,7 +335,7 @@ class UserPanelController extends AbstractController
      *
      */
     #[Route('/profil/modifier-telephone', name: 'edit_phone')]
-    #[isGranted('ROLE_MEMBER')]
+    #[isGranted('ROLE_USER')]
     public function userEditPhone(Request $request, UserRepository $userRepository) : Response
     {
 
