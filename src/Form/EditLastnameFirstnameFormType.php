@@ -38,7 +38,7 @@ class EditLastnameFirstnameFormType extends AbstractType
 
             ])
             ->add('firstname', TextType::class, [
-                "empty_data" => "",
+                "empty_data" => '',
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'

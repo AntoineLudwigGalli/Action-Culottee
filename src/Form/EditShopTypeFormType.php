@@ -20,7 +20,11 @@ class EditShopTypeFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+
                 'label' => 'Nom de la boutique',
+
+                "empty_data" => '',
+
                 'constraints' => [
                     "empty_data" => "",
                     new NotBlank([
@@ -38,6 +42,7 @@ class EditShopTypeFormType extends AbstractType
             ])
 
             ->add('address', TextType::class, [
+
                 "empty_data" => "",
                 'label' => 'Adresse',
                 'attr' => [
@@ -57,8 +62,9 @@ class EditShopTypeFormType extends AbstractType
             ])
 
             ->add('zip', TextType::class, [
-                "empty_data" => "",
+
                 'label' => 'Code postal',
+                "empty_data" => '',
                 'attr' => [
                     'class' => "typeahead"
                 ],
@@ -100,7 +106,6 @@ class EditShopTypeFormType extends AbstractType
             ->add('phoneNumber', TelType::class, [
                 "empty_data" => "",
                 'label' => 'Téléphone',
-
                 'constraints' => [
 
                     new NotBlank([

@@ -20,7 +20,7 @@ document.querySelectorAll('.card a img').forEach(function (element) {
         const selectOverlay = document.querySelector('.overlay-partner');
 
         selectOverlay.querySelector('h1').textContent = elementTitle;
-        selectOverlay.querySelector('.img-p-partner p').textContent = elementDescription;
+        selectOverlay.querySelector('.img-p-partner p').innerHTML = elementDescription;
 
 
         if ( checkIfUser ) {
@@ -38,7 +38,7 @@ document.querySelectorAll('.card a img').forEach(function (element) {
 
                     this.setAttribute('class', 'btn btn-danger w-25');
 
-                    selectOverlay.querySelector('.img-p-partner p').textContent = elementOffer;
+                    selectOverlay.querySelector('.img-p-partner p').innerHTML = elementOffer;
 
                 } else {
 
@@ -47,7 +47,7 @@ document.querySelectorAll('.card a img').forEach(function (element) {
 
                     this.setAttribute('class', 'btn btn-warning w-25');
 
-                    selectOverlay.querySelector('.img-p-partner p').textContent = elementDescription;
+                    selectOverlay.querySelector('.img-p-partner p').innerHTML = elementDescription;
 
 
                 }
