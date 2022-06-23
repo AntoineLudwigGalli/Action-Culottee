@@ -40,7 +40,10 @@ class PartnerTypeFormType extends AbstractType
                 ]
             ])
 
-            ->add('logo', FileType::class, [ 'data_class' => null ])
+            ->add('logo', FileType::class, [
+                'data_class' => null,
+
+            ])
 
             ->add('description', CKEditorType::class, [
 

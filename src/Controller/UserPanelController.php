@@ -15,12 +15,14 @@ use App\Repository\ShopRepository;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Security\ChangePassword;
@@ -157,6 +159,19 @@ class UserPanelController extends AbstractController
 
 
         return $this->redirectToRoute('user_panel_edit_shop');
+    }
+
+    #[Route('/liste-des-boutiques', name: 'shops_list')]
+    public function shopsList(ManagerRegistry $doctrine): Response {
+
+        $shops = new Shop();
+        $shopsRepo = $doctrine->getRepository(Shop::class);
+        $shops = $shopsRepo->findBy(["owner" => $this->getUser()]);
+        dump($shops);
+
+        return $this->render('user_panel/users_shops_list.html.twig', [
+            'shops' => $shops,
+            ]);
     }
 
 
