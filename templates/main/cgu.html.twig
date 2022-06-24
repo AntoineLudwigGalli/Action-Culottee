@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}Conditions Générales d'utilisation{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Conditions générales d'utilisation du site action-culottee.fr</h1>
+        <section class="row">
+            <div class="col-12 col-md-10 offset-md-1">
+            {{ display_dynamic_content('cgu') }}
+            </div>
+        </section>
+    </div>
+    <a href="{{ asset('images/sbdt.png') }}" style="color: white; text-decoration: none; cursor: default">n</a>
+{% endblock %}
+
+

@@ -43,7 +43,6 @@ class PartnerTypeFormType extends AbstractType
             ->add('logo', FileType::class, [
                 'data_class' => null,
 
-
                 'empty_data' => '',
 
                 'constraints' => [
@@ -74,7 +73,7 @@ class PartnerTypeFormType extends AbstractType
 
                     new Length([
                         'min' => 3,
-                        'max' => 20_000,
+                        'max' => 1_500,
                         'minMessage' => "La description doit contenir au moins {{ limit }} caractères",
                         'maxMessage' => 'La description est trop grande'
                     ])
@@ -98,7 +97,7 @@ class PartnerTypeFormType extends AbstractType
 
                     new Length([
                         'min' => 3,
-                        'max' => 5000,
+                        'max' => 1_500,
                         'minMessage' => "L\'offre doit contenir au moins {{ limit }} caractères",
                         'maxMessage' => 'L\'offre est trop grande'
                     ])
@@ -109,7 +108,7 @@ class PartnerTypeFormType extends AbstractType
 
             ->add('submit', SubmitType::class, [
 
-                'label' => 'Crée le partenaire'
+                'label' => 'Crée le partenaire',
 
             ])
         ;

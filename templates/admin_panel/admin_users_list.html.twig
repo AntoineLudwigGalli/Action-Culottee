@@ -62,7 +62,7 @@
                                 <table class="align-middle table table-sm table-striped table-hover">
                                     <thead>
                                     <tr>
-                                        {#                                TODO:trié #}
+                                    
                                         <th scope="col"></th>
                                         <th scope="col">{{ knp_pagination_sortable(users, 'Rôle ', 'a.roles') }}</th>
                                         <th scope="col">{{ knp_pagination_sortable(users, 'Prénom ', 'a.firstname') }}</th>
@@ -113,7 +113,7 @@
                                             <td>{{ user.phoneNumber }}</td>
                                             <td>{{ user.newsletterOption == 0 ? "Non" : "Oui" }}</td>
                                             <td>{{ user.membershipPaid == 0 ? "Cotisation non réglée" : "Cotisation réglée" }}</td>
-                                            <td>{{ user.isVerified == 0 ? "Compte non vérifié" : "Compte vérifié" }}
+                                            <td>{{ user.associationMember == 0 ? "Compte non vérifié" : "Compte vérifié" }}
                                             <td>
 
 

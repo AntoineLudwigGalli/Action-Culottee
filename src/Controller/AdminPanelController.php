@@ -220,7 +220,7 @@ class AdminPanelController extends AbstractController {
     #[Route('/liste-des-utilisateurs/export', name: 'users_list_export')]
     public function usersListExport(ManagerRegistry $doctrine): Response {
 
-        // TODO: Ajouter la colonne vérification compte vérifié + activé
+
         $header = ['#', 'Email', 'Type de compte', 'Prénom', 'Nom', 'Numéro d\'adhérent', 'Téléphone', 'Inscription Newsletter', 'Cotisation payée', 'Compte vérifié'];
 
         $userRepo = $doctrine->getRepository(User::class);
@@ -231,7 +231,7 @@ class AdminPanelController extends AbstractController {
             $arrayUsers[] = [$user->getId(), $user->getEmail(),
                 in_array('ROLE_ADMIN', $user->getRoles()) ? 'Administrateur' : (in_array('ROLE_MEMBER', $user->getRoles()) ? 'Membre' : 'Utilisateur'), $user->getFirstname(),
                 $user->getLastname(), $user->getMemberIdNumber(), $user->getPhoneNumber(), $user->isNewsletterOption() ? 'Oui' : 'Non', $user->isMembershipPaid() ? 'Oui' : 'Non',
-                $user->isVerified() ? 'Oui' : 'Non',];
+                $user->isAssociationMember() ? 'Oui' : 'Non',];
         }
 
         $writer = Writer::createFromFileObject(new SplTempFileObject()); //the CSV file will be created using a temporary File
@@ -270,7 +270,7 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() == 1 && $user->isMembershipPaid() == 1) {
+            if ($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() && $user->isMembershipPaid() && $user->isAssociationMember()) {
                 $user->setRoles(["ROLE_MEMBER"]);
             } else {
                 $user->setRoles(["ROLE_USER"]);
@@ -495,7 +495,6 @@ class AdminPanelController extends AbstractController {
         $em = $doctrine->getManager();
 
         $query = $em
-            //            TODO:owner(jointure?)
             ->createQuery('SELECT a FROM App\Entity\Shop a WHERE a.zip LIKE :search OR a.city LIKE :search OR a.address LIKE :search OR a.phoneNumber LIKE :search OR a.country LIKE :search OR a.name LIKE :search ')
             ->setParameters(['search' => '%' . $search . '%']);
 

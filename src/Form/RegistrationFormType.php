@@ -160,10 +160,6 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // TODO: À enlever une fois les tests terminés
-            'attr' => [
-                'novalidate' => 'novalidate',
-            ],
             'data_class' => User::class,
         ]);
     }

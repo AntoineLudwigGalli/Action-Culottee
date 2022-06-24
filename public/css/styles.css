@@ -107,7 +107,7 @@ h2{
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Page register*/
 #registration_form_firstname,#registration_form_lastname,#registration_form_phoneNumber,
-#registration_form_memberIdNumber, #registration_form_email,#registration_form_plainPassword_first, #registration_form_plainPassword_second{
+#registration_form_memberIdNumber, #registration_form_email,#registration_form_plainPassword_first, #registration_form_plainPassword_second,#create_shop_by_user_form_name,#create_shop_by_user_form_address,#create_shop_by_user_form_zip,#create_shop_by_user_form_city,#create_shop_by_user_form_country,#create_shop_by_user_form_phoneNumber,#edit_lastname_firstname_form_lastname,#edit_lastname_firstname_form_firstname,#edit_email_form_email,#edit_password_type_form_oldPassword,#edit_password_type_form_newPassword_first,#edit_password_type_form_newPassword_second,#edit_phone_number_type_form_phoneNumber,#edit_shop_type_form_name,#edit_shop_type_form_address,#edit_shop_type_form_zip,#edit_shop_type_form_city,#edit_shop_type_form_country,#edit_shop_type_form_phoneNumber{
     background: #E1942D45;
 }
 .form-check a{
@@ -162,7 +162,6 @@ h2{
 /* Partials */
     /*Header*/
         /*Menu principal*/
-        /*TODO: Barre de nav - Menu principal*/
 .navbar {
     margin-bottom: 40px;
 ;
@@ -180,7 +179,7 @@ h2{
  }
 
     /*Footer*/
-    /*TODO: Améliorer le pied de page*/
+
 .footer {
     height: auto;
     width: 100%;
@@ -197,18 +196,16 @@ h2{
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Page actualités*/
 .container-fluid .row .agenda-entry{
-    background-color: #FF9933;
     min-height: 100px;
     border-radius: 10px;
-    border: black 5px solid;
+    border: black 1px solid;
     font-size: 1.5rem;
     font-weight: 500;
-    margin: auto;
-    text-align: center;
+
 }
-.container-fluid .row .agenda-entry .calendar-icon{
-    height: 5vh;
-}
+/*.container-fluid .row .agenda-entry .calendar-icon{*/
+/*    height: 5vh;*/
+/*}*/
 
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -242,9 +239,9 @@ h2{
 
 /* Overlay */
 
-.overlay-partner {
+.overlay {
 
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
@@ -252,16 +249,11 @@ h2{
     right: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
-    z-index: 99;
-    transition: all 0.3s ease;
+    z-index: 1;
     opacity: 0;
 }
 
 /* Affichage du partenaire */
-
-.partner-info {
-    padding: 20px;
-}
 
 .fa-xmark {
     display: block;
@@ -270,13 +262,22 @@ h2{
     cursor: pointer;
 }
 
-#partner-info {
-    min-height: 500px;
-}
-
-
 .img-p-partner p {
     font-size: .9rem;
+}
+
+/* Card */
+
+.card {
+
+    border: none;
+
+}
+
+.card img{
+    border-radius: 10px;
+
+    cursor: pointer;
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -290,22 +291,32 @@ h2{
     font-size: 7;
 }*/
 
-/* Newsletter */
+.font-user {
 
-#edit_newsletter_type_form {
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    background-color: #e1942d;
 
 }
 
-#edit_newsletter_type_form fieldset {
-    width: 50%;
+.interface-user {
+
+    border-radius: 30px;
+
 }
 
-#edit_newsletter_type_form_newsletterOption .form-check {
-    display: block;
+.text-user {
+
+    color: #e1942d;
+
+}
+
+.btn-edit {
+
+    background-color: #e1942d;
+
+    border-radius: 30px;
+
+    color: white;
+
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -374,3 +385,18 @@ h2{
         display: block;
     }
 }
+
+/* Partenaire image */
+/*
+
+@media screen and(min-width: 400px){
+
+    .card-partner {
+
+        width: 20% !important;
+
+    }
+
+}
+*/
+

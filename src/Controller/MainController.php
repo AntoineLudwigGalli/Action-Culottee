@@ -79,7 +79,7 @@ class MainController extends AbstractController {
             'partners' => $getPartners,
         ]);
     }
-
+// Todo : ce qui touche aux pages optionnelles (qui sommes nous, actions)
 //    Page qui somme nous
 
     #[Route('/qui-sommes-nous', name: 'about')]
@@ -89,27 +89,15 @@ class MainController extends AbstractController {
         return $this->render('main/about.html.twig');
     }
 
+    #[Route('/cgu', name: 'cgu')]
+    public function cgu(ManagerRegistry $doctrine, Request $request): Response
+    {
+
+        return $this->render('main/cgu.html.twig');
+    }
+
+
+
 }
 
-//    Profil utilisateur
 
-// #[Route('/profil', name: 'profil')]
-// #[IsGranted('ROLE_USER')]
-// public function profil()
-// {
-    // Si la personne qui essaye de venir sur cette page n'est pas connectée, elle sera redirigée à la page de connexion par le firewall
-
-//    return $this->render('main/profil.html.twig');
-// }
-
-
-//    Panneau d'administration
-
-// #[Route('/administration', name: 'admin')]
-// #[IsGranted('ROLE_ADMIN')]
-// public function admin()
-// {
-    // Si la personne qui essaye de venir sur cette page n'a pas le rôle ROLE_ADMIN, elle sera redirigée à la page de connexion si elle n'est pas connecté ou bien sur une page 403 si elle l'est mais n'est pas admin.
-
-//    return $this->render('main/admin.html.twig');
-// }
