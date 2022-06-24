@@ -1,57 +1,62 @@
 {% extends 'base.html.twig' %}
+{% block cssIncludes %}
 
+{% endblock %}
 {% block title %}Connexion{% endblock %}
-
+{#TODO:faire le style#}
 {% block body %}
-	<form method="post">
+
+	<form method="post" class="mx-auto col-9 col-lg-6">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
-		
+
 		{% if app.user %}
 			<div class="mb-3">
 				Vous êtes connecté avec le compte {{ app.user.userIdentifier }},
 				<a href="{{ path('app_logout') }}">Déconnexion</a>
 			</div>
 		{% endif %}
-		
-		<h1 class="h3 mb-3 font-weight-normal">Merci de vous connecter</h1>
-		
+
+		<div class="mb-3 d-sm-flex flex-column text-sm-start">
+			<h2 class="mb-3 fw-bold">Connexion</h2>
+			<p>Devenez membre. <a class="color-orange text-decoration-none" href="{{ path('app_register') }}">Inscrivez-vous</a></p>
+		</div>
+
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-12 col-md-6 mx-auto mt-5">
-					<label for="inputEmail">Adresse email</label> <input
+				<div class="col-12 mx-auto mt-5">
+					<label for="inputEmail" class="fw-bold">Mail</label> <input
 							type="email" value="{{ last_username }}"
-							name="email" id="inputEmail" class="form-control"
+							name="email" id="inputEmail" class="form-control form-warning input-orange"
 							autocomplete="email" required autofocus>
-					
-					<label for="inputPassword">Mot de passe</label> <input
+
+					<label class="fw-bold " for="inputPassword">Mot de passe</label> <input
 							type="password" name="password" id="inputPassword"
-							class="form-control" autocomplete="current-password"
+							class="form-control input-orange" autocomplete="current-password"
 							required>
-					
+
+					<div>
+						<a class="color-orange text-decoration-none" href="{{ path('app_forgot_password_request') }}">Mot
+							de passe oublié</a>
+					</div>
+
 					<input type="hidden" name="_csrf_token"
 					       value="{{ csrf_token('authenticate') }}">
-					
-					
+
 					<div class="checkbox mb-3">
 						<label> <input type="checkbox" name="_remember_me"> Se
 							souvenir de moi </label>
 					</div>
-					<div class="checkbox mb-3">
-						<p>Pas encore inscrit ? <a href="{{ path('app_register') }}">Cliquez ici</a></p>
-					</div>
-					
-					
-					<button class="btn btn-lg btn-primary" type="submit">
-						Connexion
+					<div class="col-md-6 mx-auto">
+					<button class="btn btn-lg button-orange w-100" type="submit">
+						Je me connecte
 					</button>
-					<div>
-						<a href="{{ path('app_forgot_password_request') }}">Mot
-							de passe oublié</a>
 					</div>
+
 				</div>
 			</div>
 		</div>
 	</form>
+
 {% endblock %}

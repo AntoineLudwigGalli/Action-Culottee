@@ -3,12 +3,9 @@
 namespace App\Form;
 
 use App\Entity\Shop;
-use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -18,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Regex;
 
-class CreateShopFormType extends AbstractType
+class CreateShopByUserFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -36,15 +33,6 @@ class CreateShopFormType extends AbstractType
                         'maxMessage' => 'Le nom de la boutique ne peut contenir plus de {{ limit }} caractères'
                     ]),
                 ],
-            ])
-            ->add('owner', EntityType::class, [
-                'label' => 'Gérant',
-                'placeholder' => 'Nom du gérant',
-                'class' => 'App\Entity\User',
-                'choice_value' => 'id',
-                'choice_label' => function ($owner) {
-                    return $owner->getFirstname() . ' ' . $owner->getLastname();
-                },
             ])
 
             ->add('phoneNumber', TelType::class, [

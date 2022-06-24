@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Shop;
 use App\Entity\User;
+use App\Form\CreateShopByUserFormType;
 use App\Form\CreateShopFormType;
 use App\Form\EditEmailFormType;
 use App\Form\EditLastnameFirstnameFormType;
@@ -39,7 +40,7 @@ class UserPanelController extends AbstractController
 
         $shop = new Shop();
 
-        $form = $this->createForm(CreateShopFormType::class, $shop);
+        $form = $this->createForm(CreateShopByUserFormType::class, $shop);
 
         $form->handleRequest($request);
 
@@ -77,6 +78,7 @@ class UserPanelController extends AbstractController
             $shopRepository->add($shop, true);
 
             $this->addFlash('success', 'Boutique ajoutée avec succès');
+            return $this->redirectToRoute("user_panel_manage_shop");
         }
 
         return $this->render('user_panel/shop_creation.html.twig', [

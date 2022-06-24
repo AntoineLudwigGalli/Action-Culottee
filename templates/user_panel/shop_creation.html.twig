@@ -10,15 +10,16 @@
 		<div class="row">
 			<div class="col-12 col-md-6 mx-auto text-center mt-5">
 				{# Formulaire de modification de la boutique #}
+{#    todo : virer le no validate            #}
 				{{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
 
 				{# Formulaire de modification de boutique #}
 				{{ form_start(form) }}
-
+    
 				{{ form_label(form.name) }}
 				{{ form_widget(form.name) }}
 				{{ form_errors(form.name) }}
-
+                
 				{{ form_label(form.address) }}
 				{{ form_widget(form.address) }}
 				{{ form_errors(form.address) }}
@@ -38,7 +39,7 @@
 				{{ form_label(form.phoneNumber) }}
 				{{ form_widget(form.phoneNumber) }}
 				{{ form_errors(form.phoneNumber) }}
-
+    
 				{{ form_widget(form.submit, {'attr': { 'value': 'Modifier' } }) }}
 
 				<a href="{{ path('user_panel_manage_shop') }}"><button type="button" class="btn btn-danger">Retour</button></a>

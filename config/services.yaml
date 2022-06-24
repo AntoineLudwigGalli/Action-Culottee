@@ -6,6 +6,7 @@
 parameters:
     app.events.event_number_on_agenda: 4
     app.home.photo.directory: '%kernel.project_dir%/public/images/home_presentation/'
+    google_recaptcha.private_key: '%env(GOOGLE_RECAPTCHA_PRIVATE_KEY)%'
 
 services:
     # default configuration for services in *this* file

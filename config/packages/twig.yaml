@@ -3,6 +3,8 @@ twig:
     form_themes: [ 'bootstrap_5_layout.html.twig' ]
 
 
+    globals:
+        google_recaptcha_site_key: '%env(GOOGLE_RECAPTCHA_SITE_KEY)%'
 
 
 when@test:
