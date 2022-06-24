@@ -131,7 +131,6 @@ h1{
 /* Partials */
     /*Header*/
         /*Menu principal*/
-        /*TODO: Barre de nav - Menu principal*/
 .navbar {
     margin-bottom: 40px;
 ;
@@ -149,7 +148,7 @@ h1{
  }
 
     /*Footer*/
-    /*TODO: Améliorer le pied de page*/
+
 .footer {
     height: auto;
     width: 100%;
