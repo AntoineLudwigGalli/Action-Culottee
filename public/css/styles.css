@@ -95,16 +95,8 @@ h2{
     background-color: #E1942D;
 }
 
-
-
-
-
-
-
-
-
-
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 /*Page register*/
 #registration_form_firstname,#registration_form_lastname,#registration_form_phoneNumber,
 #registration_form_memberIdNumber, #registration_form_email,#registration_form_plainPassword_first, #registration_form_plainPassword_second,#create_shop_by_user_form_name,#create_shop_by_user_form_address,#create_shop_by_user_form_zip,#create_shop_by_user_form_city,#create_shop_by_user_form_country,#create_shop_by_user_form_phoneNumber,#edit_lastname_firstname_form_lastname,#edit_lastname_firstname_form_firstname,#edit_email_form_email,#edit_password_type_form_oldPassword,#edit_password_type_form_newPassword_first,#edit_password_type_form_newPassword_second,#edit_phone_number_type_form_phoneNumber,#edit_shop_type_form_name,#edit_shop_type_form_address,#edit_shop_type_form_zip,#edit_shop_type_form_city,#edit_shop_type_form_country,#edit_shop_type_form_phoneNumber{
@@ -123,11 +115,14 @@ h2{
 
 
 /*Paginations*/
-.pagination .current{
-    background-color: #FF9933;
-    padding: 0.5rem 1rem;
 
-}
+/*Todo:refaire pagination si le coeur vous en dit*/
+
+/*.pagination .current{*/
+/*    background-color: #FF9933;*/
+/*    padding: 0.5rem 1rem;*/
+
+/*}*/
 
 .pagination span a, .pagination .current{
     padding: 0.5rem 1rem;
@@ -137,6 +132,7 @@ h2{
     color: black;
     text-decoration: none;
     box-shadow: 3px 3px 3px black;
+    background-color: white;
 }
 .pagination .current{
     margin-bottom: 5em;
@@ -202,6 +198,10 @@ h2{
     font-size: 1.5rem;
     font-weight: 500;
 
+}
+
+#agenda .pagination-button a{
+    background-color: white;
 }
 /*.container-fluid .row .agenda-entry .calendar-icon{*/
 /*    height: 5vh;*/
