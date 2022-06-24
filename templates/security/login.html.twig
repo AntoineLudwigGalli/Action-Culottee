@@ -5,6 +5,7 @@
 {% block title %}Connexion{% endblock %}
 {#TODO:faire le style#}
 {% block body %}
+
 	<form method="post" class="mx-auto col-9 col-lg-6">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -19,24 +20,24 @@
 
 		<div class="mb-3 d-sm-flex flex-column text-sm-start">
 			<h2 class="mb-3 fw-bold">Connexion</h2>
-			<p>Devenez membre. <a href="{{ path('app_register') }}">Inscrivez-vous</a></p>
+			<p>Devenez membre. <a class="color-orange text-decoration-none" href="{{ path('app_register') }}">Inscrivez-vous</a></p>
 		</div>
 
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12 mx-auto mt-5">
-					<label for="inputEmail" class="fw-bold ">Mail</label> <input
+					<label for="inputEmail" class="fw-bold">Mail</label> <input
 							type="email" value="{{ last_username }}"
-							name="email" id="inputEmail" class="form-control"
+							name="email" id="inputEmail" class="form-control form-warning input-orange"
 							autocomplete="email" required autofocus>
 
 					<label class="fw-bold " for="inputPassword">Mot de passe</label> <input
 							type="password" name="password" id="inputPassword"
-							class="form-control" autocomplete="current-password"
+							class="form-control input-orange" autocomplete="current-password"
 							required>
 
 					<div>
-						<a href="{{ path('app_forgot_password_request') }}">Mot
+						<a class="color-orange text-decoration-none" href="{{ path('app_forgot_password_request') }}">Mot
 							de passe oublié</a>
 					</div>
 
@@ -48,7 +49,7 @@
 							souvenir de moi </label>
 					</div>
 					<div class="col-md-6 mx-auto">
-					<button class="btn btn-lg btn-primary w-100" type="submit">
+					<button class="btn btn-lg button-orange w-100" type="submit">
 						Je me connecte
 					</button>
 					</div>
@@ -57,4 +58,5 @@
 			</div>
 		</div>
 	</form>
+
 {% endblock %}

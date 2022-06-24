@@ -16,6 +16,81 @@ h1{
     font-weight: bold;
 }
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/* Classes perso */
+
+.form-check-input:checked {
+    background-color: #E1942D;
+    border-color: #E1942D;
+    box-shadow: 0 0 5px #E1942D ;
+}
+.form-check-input:active {
+    background-color: #E1942D;
+    border-color: #E1942D;
+    box-shadow: 0 0 5px #E1942D ;
+}
+
+.form-control:focus {
+    border-color: #E1942D !important;
+    box-shadow: 0 0 5px #E1942D !important;
+}
+
+.button-orange{
+    background: #E1942D;
+    /*border: 1px solid #707070;*/
+    border-radius: 45px;
+    color: white;
+}
+
+.input-orange{
+    background: #E1942D45;
+    /*border: 1px solid #707070;*/
+}
+
+.input-orange:focus{
+    background: #E1942D45;
+    border: 1px solid #707070;
+}
+
+.color-orange {
+    color: #E1942D;
+}
+
+.color-orange:hover{
+    color: #E1942D;
+    font-weight: bolder ;
+}
+
+.bgc-orange{
+    background-color: #E1942D;
+}
+
+
+
+
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*Page register*/
+#registration_form_firstname,#registration_form_lastname,#registration_form_phoneNumber,
+#registration_form_memberIdNumber, #registration_form_email,#registration_form_plainPassword_first, #registration_form_plainPassword_second{
+    background: #E1942D45;
+}
+.form-check a{
+    color:#FF9933;
+    text-decoration: none;
+}
+.form-check a:hover{
+    color:#FF9933;
+    font-weight: bolder;
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
+
 /*Paginations*/
 .pagination .current{
     background-color: #FF9933;
