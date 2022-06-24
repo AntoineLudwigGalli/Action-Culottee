@@ -68,17 +68,20 @@ class UserPanelController extends AbstractController
 
             $output = json_decode($geocode);
 
+            if(empty($output)){
+                $this->addFlash('error', "L'adresse n'existe pas");
+            } else {
+                $latitude = $output[0]->lat;
+                $longitude = $output[0]->lon;
 
-            $latitude = $output[0]->lat;
-            $longitude = $output[0]->lon;
+                $shop->setLatitude($latitude);
+                $shop->setLongitude($longitude);
 
-            $shop->setLatitude($latitude);
-            $shop->setLongitude($longitude);
+                $shopRepository->add($shop, true);
 
-            $shopRepository->add($shop, true);
-
-            $this->addFlash('success', 'Boutique ajoutée avec succès');
-            return $this->redirectToRoute("user_panel_manage_shop");
+                $this->addFlash('success', 'Boutique ajoutée avec succès');
+                return $this->redirectToRoute("user_panel_manage_shop");
+            }
         }
 
         return $this->render('user_panel/shop_creation.html.twig', [
@@ -124,14 +127,40 @@ class UserPanelController extends AbstractController
         } else {
 
             if ( $form->isSubmitted() && $form->isValid() ) {
+                //  Avec l'aPI Nominatim, on récupère la latitude et la longitude de la boutique grâce à l'adresse saisie et
+                // présente en bdd.
+                $address = $shop->getAddress() . " " . $shop->getZip() . " " . $shop->getCity() . " " . $shop->getCountry();
 
-                $shopRepository->add($form->getData(), true);
+                $prepAddr = str_replace(' ', '+', $address);
 
-                $this->addFlash('success', 'La boutique à été modifiée avec succès !');
+                $referer = "https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json"; // La connexion à
+                // l'API nominatim requière de passer par le referer (un paramètre du header dans le navigateur.)
+                $opts = array('http' => array('header' => array("Referer: $referer\r\n")));
+                $context = stream_context_create($opts);
+                $geocode = file_get_contents($referer, false, $context);
 
-                return $this->redirectToRoute('user_panel_manage_shop');
+                $output = json_decode($geocode);
+
+                if (empty($output)) {
+
+                    $this->addFlash('error', "L'adresse n'existe pas");
+
+                }
+                else {
+                    $latitude = $output[0]->lat;
+                    $longitude = $output[0]->lon;
+
+                    $shop->setLatitude($latitude);
+                    $shop->setLongitude($longitude);
+
+                    $shopRepository->add($form->getData(), true);
+
+                    $this->addFlash('success', 'La boutique à été modifiée avec succès !');
+
+                    return $this->redirectToRoute('user_panel_manage_shop');
+                }
             }
-
+            return $this->render('user_panel/edit_shop.html.twig', ['form' => $form->createView()]);
         }
 
         return $this->render('user_panel/edit_shop.html.twig', [

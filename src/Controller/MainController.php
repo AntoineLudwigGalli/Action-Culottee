@@ -96,8 +96,6 @@ class MainController extends AbstractController {
         return $this->render('main/cgu.html.twig');
     }
 
-
-
 }
 
 
