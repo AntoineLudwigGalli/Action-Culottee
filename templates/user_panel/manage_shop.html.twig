@@ -78,11 +78,11 @@
                         <div class="col-12 d-flex flex-row justify-content-end">
 
                             <div>
-                                <a href="{{ path('user_panel_edit_shop', {'id': shops.id, 'token': csrf_token('modifier_boutique_' ~ shops.id)}) }}"><button class="btn btn-warning me-2">Modifier</button></a>
+                                <a href="{{ path('user_panel_edit_shop', {'id': shops.id }) }}"><button class="btn btn-warning me-2">Modifier</button></a>
                             </div>
 
                             <div>
-                                <a onclick="return confirm('Etes-vous sur de vouloir supprimer cette boutique ?')" href="{{ path('user_panel_delete_shop', {'id': shops.id, 'token': csrf_token('supprimer_boutique_' ~ shops.id) })
+                                <a onclick="return confirm('Etes-vous sur de vouloir supprimer cette boutique ?')" href="{{ path('user_panel_delete_shop', {'id': shops.id, 'csrf_token': csrf_token('delete_shop' ~ shops.id) })
                                 }}" ><button class="btn btn-danger">Supprimer</button></a>
 
                             </div>

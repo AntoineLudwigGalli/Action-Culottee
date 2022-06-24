@@ -89,15 +89,6 @@ class MainController extends AbstractController {
         return $this->render('main/about.html.twig');
     }
 
-    #[Route('/cgu', name: 'cgu')]
-    public function cgu(ManagerRegistry $doctrine, Request $request): Response
-    {
-
-        return $this->render('main/cgu.html.twig');
-    }
-
-
-
 }
 
 
