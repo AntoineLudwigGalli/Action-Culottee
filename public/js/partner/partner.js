@@ -4,15 +4,22 @@ export class Partner {
 
         // Div pour le positionnement du partenaire à affiché
         document.querySelector('.overlay-partner').prepend(document.createElement('div'));
-        document.querySelector('.overlay-partner>div').setAttribute('class', 'container d-block col-12 col-md-8 mx-auto my-5 bg-black h-25');
+        document.querySelector('.overlay-partner>div').setAttribute('class', 'row d-block col-12 col-md-8 mx-auto my-5 bg-white h-25');
         document.querySelector('.overlay-partner>div').setAttribute('id', 'partner-info');
 
-
-
+        // Div pour le positionnement du titre et lien
+        document.querySelector('.overlay-partner>div').prepend(document.createElement('div'));
+        document.querySelector('.overlay-partner>div').setAttribute('class', 'container d-block col-12 col-md-8 mx-auto my-5 bg-black h-25');
+        document.querySelector('.overlay-partner>div').setAttribute('id', 'partner-info');
 
         // Création du titre du partenaire
         document.querySelector('.overlay-partner>div').prepend(  document.createElement('h1') );
         document.querySelector('.overlay-partner>div h1').textContent = 'Blablabla';
+        document.querySelector('.overlay-partner>div h1').setAttribute('class', 'text-center')
+
+        // Création du lien du partenaire
+        document.querySelector('.overlay-partner>div').prepend(  document.createElement('a') );
+        document.querySelector('.overlay-partner>div a:first-child').textContent = 'Blablabla';
         document.querySelector('.overlay-partner>div h1').setAttribute('class', 'text-center')
 
 
