@@ -11,23 +11,24 @@
 		{# Affichage du nombre total d'évènements #}
 		<p>Nombre total d'évènements : {{ events.getTotalItemCount }}</p>
 	</div>
-</div>
-
-<div class="row">
-	<div class="mb-3">
-		<p class="text-end my-3 me-3">
-			{# Création d'un lien permettant de trier par description #}
-			<span class="mx-2 pagination-button">{{ knp_pagination_sortable
-					(events, 'Trier
+	<div class="row d-flex flex-column flex-md-row">
+		<div class="mb-3">
+			<p class="text-end my-3 me-3">
+				{# Création d'un lien permettant de trier par description #}
+				<span class="mx-2 pagination-button">{{ knp_pagination_sortable
+						(events, 'Trier
 			 par
 			 titre', 'a.eventDescription') }}</span>
-			{# Création d'un lien permettant de trier par date #}
-			<span class="mx-2 pagination-button">{{ knp_pagination_sortable
-					(events, 'Trier par
+				{# Création d'un lien permettant de trier par date #}
+				<span class="mx-2 pagination-button">{{ knp_pagination_sortable
+						(events, 'Trier par
 			 Date', 'a.eventDate') }}</span>
-		</p>
+			</p>
+		</div>
 	</div>
 </div>
+
+
 {# Blocs de mise en forme des actualités #}
 <div class="container-fluid">
 	<div class="row">
@@ -36,24 +37,31 @@
 			{% if event.eventDate >= date("now") %} {# On affiche que les
                 évènements à venir  (normalement, les évènements passés sont
                 supprimés mais c'est une double sécurité) #}
-				<div class="agenda-entry d-flex justify-content-start align-items-center mb-4 col-12 col-md-10">
-{#					Todo: Si on trouve un icone de calendrier mieux c'est cool#}
-					<img src="{{ asset('images/calendar.png') }}"
-					     alt="icône de calendrier"
-					     class="calendar-icon img-fluid ms-3">
+				<div class="agenda-entry d-flex flex-column mb-4 col-12 col-md-10 mx-auto">
+
+{#					<img src="{{ asset('images/calendar.png') }}"#}
+{#					     alt="icône de calendrier"#}
+{#					     class="calendar-icon img-fluid ms-3">#}
 					
 					{#Todo: créditer le logo en mettant ce lien dans les crédits <a href="https://www.flaticon.com/free-icons/calendar" title="calendar icons">Calendar icons created by Freepik - Flaticon</a> #}
 					
-					<span class="text-decoration-underline col-3 ms-3">{{
-						event.eventDate|format_datetime('full', 'none', locale='fr' ) }}</span>
-					<p class="m-0 col-8 offset-1">{{ event.eventDescription }}
-					</p>
+
+						<span class="text-decoration-underline mx-auto color-orange">
+						{{ event.eventDate|format_datetime('full', 'none', locale='fr' ) }}
+					</span>
+
+						<p class="mx-auto">
+							{{ event.eventDescription }}
+						</p>
+
+
 				</div>
+
 			{% endif %}
 		{% endfor %}
 		
 		<div class="row">
-			<div class="col-3 offset-5">
+			<div class=" offset-sm-3 offset-md-5">
 
 					{# Affichage du menu permettant de naviguer entre les différentes pages #}
 					{{ knp_pagination_render(events) }}
