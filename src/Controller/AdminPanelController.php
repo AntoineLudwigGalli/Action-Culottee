@@ -486,6 +486,7 @@ class AdminPanelController extends AbstractController {
      */
     #[Route('/suppression-d\'une-boutique/{id}/', name: 'shop_delete_', priority: 10)]
     public function shopDelete(Shop $shop, Request $request, ManagerRegistry $doctrine): Response {
+
         $csrfToken = $request->query->get('csrf_token', '');
 
         if (!$this->isCsrfTokenValid('shop_delete_' . $shop->getId(), $csrfToken)) {

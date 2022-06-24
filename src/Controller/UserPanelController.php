@@ -118,7 +118,6 @@ class UserPanelController extends AbstractController
         $form = $this->createForm(EditShopTypeFormType::class, $shop);
         $form->handleRequest( $request );
 
-
             if ( $form->isSubmitted() && $form->isValid() ) {
                 //  Avec l'aPI Nominatim, on récupère la latitude et la longitude de la boutique grâce à l'adresse saisie et
                 // présente en bdd.
@@ -156,30 +155,28 @@ class UserPanelController extends AbstractController
             return $this->render('user_panel/edit_shop.html.twig', ['form' => $form->createView()]);
         }
 
-        return $this->render('user_panel/edit_shop.html.twig', [
-            'form' => $form->createView()
-        ]);
-    }
+
 
     /**
      *
      * Page de suppression de boutique
      *
      */
-    #[Route('/modifier-votre-boutique/supprimer-boutique/{id}', name: 'delete_shop', priority: 10)]
+    #[Route('/modifier-votre-boutique/supprimer-boutique/{id}/', name: 'delete_shop', priority: 10)]
     #[isGranted('ROLE_MEMBER')]
     public function deleteShop(Shop $shop, ShopRepository $shopRepository,Request $request) : Response
     {
         $csrfToken = $request->query->get('csrf_token', '');
 
-        if (!$this->isCsrfTokenValid('shop_delete_' . $shop->getId(), $csrfToken)) {
+        if (!$this->isCsrfTokenValid('delete_shop' . $shop->getId(), $csrfToken)) {
 
             $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
 
         } else {
             $shopRepository->remove($shop, true);
+            $this->addFlash('success', 'La boutique à été supprimée avec succès !');
         }
-        $this->addFlash('success', 'La boutique à été supprimée avec succès !');
+
 
         return $this->redirectToRoute('user_panel_manage_shop');
     }
