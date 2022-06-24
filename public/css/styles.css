@@ -166,18 +166,16 @@ h1{
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Page actualités*/
 .container-fluid .row .agenda-entry{
-    background-color: #FF9933;
     min-height: 100px;
     border-radius: 10px;
-    border: black 5px solid;
+    border: black 1px solid;
     font-size: 1.5rem;
     font-weight: 500;
-    margin: auto;
-    text-align: center;
+
 }
-.container-fluid .row .agenda-entry .calendar-icon{
-    height: 5vh;
-}
+/*.container-fluid .row .agenda-entry .calendar-icon{*/
+/*    height: 5vh;*/
+/*}*/
 
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------
