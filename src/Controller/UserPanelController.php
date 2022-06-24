@@ -118,13 +118,6 @@ class UserPanelController extends AbstractController
         $form = $this->createForm(EditShopTypeFormType::class, $shop);
         $form->handleRequest( $request );
 
-        $csrfToken = $request->query->get('token', '');
-
-        if(!$this->isCsrfTokenValid('modifier_boutique_' . $shop->getId(), $csrfToken)){
-
-            $this->addFlash('error', 'Un problème est survenue veuillez réessayer.');
-
-        } else {
 
             if ( $form->isSubmitted() && $form->isValid() ) {
                 //  Avec l'aPI Nominatim, on récupère la latitude et la longitude de la boutique grâce à l'adresse saisie et
@@ -177,9 +170,15 @@ class UserPanelController extends AbstractController
     #[isGranted('ROLE_MEMBER')]
     public function deleteShop(Shop $shop, ShopRepository $shopRepository,Request $request) : Response
     {
+        $csrfToken = $request->query->get('csrf_token', '');
 
-        $shopRepository->remove($shop, true);
+        if (!$this->isCsrfTokenValid('shop_delete_' . $shop->getId(), $csrfToken)) {
 
+            $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
+
+        } else {
+            $shopRepository->remove($shop, true);
+        }
         $this->addFlash('success', 'La boutique à été supprimée avec succès !');
 
         return $this->redirectToRoute('user_panel_manage_shop');
