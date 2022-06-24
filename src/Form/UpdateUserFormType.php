@@ -118,7 +118,7 @@ class UpdateUserFormType extends AbstractType
             ])
 
 
-            ->add('isVerified', ChoiceType::class, [
+            ->add('associationMember', ChoiceType::class, [
                 'label' => "L'utilisateur a été vérifié et le compte est valide ?",
                 'expanded' => true,
                 'multiple' => false, //expanded et multiple permettent d'avoir des boutons radio plutôt qu'un menu
