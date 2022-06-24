@@ -13,7 +13,7 @@
                 {# Formulaire de modification du téléphone #}
                 {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
 
-
+                    {{ form_label(form.phoneNumber, 'Nouveau numéro de téléphone') }}
                     {{ form_widget(form.phoneNumber) }}
                     {{ form_errors(form.phoneNumber) }}
 

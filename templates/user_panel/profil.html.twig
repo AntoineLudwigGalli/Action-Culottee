@@ -4,7 +4,172 @@
 
 {% block body %}
 
-    <main class="container">
+    {# Font de page #}
+    <div class="row">
+
+        <div class="col-12 font-user">
+
+            {# Interface de profil #}
+            <div class="row">
+
+                <div class="col-8 bg-white mx-auto my-3 interface-user p-3">
+
+
+                    {# Titre #}
+                    <header class="row">
+
+                        <div class="col-12">
+
+                            <h2 class="fw-bold">Profil Utilisateur</h2>
+
+                        </div>
+
+                    </header>
+
+                    {# Information personelles #}
+                    <div class="row my-3">
+
+                        <div class="col-12">
+
+                            <h3 class="text-user">Information personelles</h3>
+
+                        </div>
+
+                    </div>
+
+
+                    {# Formulaire #}
+                    <div class="row">
+
+                        <div class="col-11 mx-auto">
+
+                            {# Prénom/Nom #}
+                            <div class="row my-3">
+
+                                <div class="col-12 d-flex flex-row justify-content-between align-items-baseline">
+
+                                    <div>
+                                        <p>{{ app.user.lastname }} {{ app.user.firstname }} </p>
+                                    </div>
+
+                                    <div>
+                                        <a class="text-decoration-none text-white" href="{{ path('user_panel_edit_lastname_firstname') }}"><button class="btn btn-warning btn-edit">Modifier</button></a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            {# Téléphone#}
+                            <div class="row mb-3">
+
+                                <div class="col-12 d-flex flex-row justify-content-between align-items-baseline">
+
+
+                                    <div>
+                                        <p>{{ app.user.phoneNumber }}</p>
+                                    </div>
+
+                                    <div>
+                                        <a class="text-decoration-none text-white" href="{{ path('user_panel_edit_phone') }}"><button class="btn btn-warning btn-edit">Modifier</button></a>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                            {# Mot de passe #}
+                            <div class="row mb-3">
+
+                                <div class="col-12 d-flex flex-row justify-content-between align-items-baseline">
+
+                                    <div>
+                                        <p>Mot de passe</p>
+                                    </div>
+
+                                    <div>
+                                        <a class="text-decoration-none text-white" href="{{ path('user_panel_edit_password') }}"><button class="btn btn-warning btn-edit">Modifier</button></a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            {# Mail #}
+                            <div class="row mb-3">
+
+                                <div class="col-12 d-flex flex-row justify-content-between align-items-baseline">
+
+                                    <div>
+                                        <p>{{ app.user.email }}</p>
+                                    </div>
+
+                                    <div>
+                                        <a class="text-decoration-none text-white" href="{{ path('user_panel_edit_email') }}"><button class="btn btn-warning btn-edit">Modifier</button></a>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {# Newsletters #}
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <div>
+                                <h3 class="text-user">Newsletter</h3>
+                            </div>
+
+                            <div>
+                                {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+
+                                <div class="row">
+
+                                    <div class="col-12">
+
+                                        {{ form_label(form.newsletterOption, 'Souhaitez-vous recevoir la newsletter ?') }}
+                                        {{ form_widget(form.newsletterOption, {'attr': { 'class': 'd-flex flex-row justify-content-around mb-3' } }) }}
+                                        {{ form_errors(form.newsletterOption) }}
+
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-12 text-center">
+
+                                        {{ form_widget(form.submit, {'attr': { 'class': 'btn-edit' } }) }}
+
+                                    </div>
+
+                                </div>
+
+                                {{ form_end(form) }}
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+   {# <main class="container">
 
         <div class="row mt-5">
 
@@ -46,7 +211,7 @@
 
                             <div>
                                 <a href="{{ path('user_panel_edit_phone') }}"><button class="btn btn-warning">Modifier le numéro</button></a>
-{#                                  TODO: Mettre du text si le numéro de téléphone est verifier ou pas #}
+#}{#                                  TODO: Mettre du text si le numéro de téléphone est verifier ou pas #}{#
                             </div>
 
                         </div>
@@ -69,7 +234,7 @@
         </div>
 
     </main>
-
+#}
 
 {% endblock %}
 

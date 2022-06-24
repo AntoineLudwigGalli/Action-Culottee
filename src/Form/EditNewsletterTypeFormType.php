@@ -32,7 +32,11 @@ class EditNewsletterTypeFormType extends AbstractType
             ->add('submit', SubmitType::class, [
                 'label' => 'Valider',
 
-                'attr' => ['class' => 'btn btn-warning']
+                'attr' => [
+
+                    'class' => 'btn-edit'
+
+                ]
             ])
         ;
     }
