@@ -395,6 +395,7 @@ class AdminPanelController extends AbstractController {
             $em->flush();
 
             $this->addFlash('success', 'Boutique ajoutée avec succès');
+            return $this->redirectToRoute('admin_panel_shops_list');
         }
 
         return $this->render('admin_panel/admin_shop_creation.html.twig', ['form' => $form->createView()]);

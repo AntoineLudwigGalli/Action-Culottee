@@ -37,6 +37,15 @@ class CreateShopFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('owner', EntityType::class, [
+                'label' => 'Gérant',
+                'placeholder' => 'Nom du gérant',
+                'class' => 'App\Entity\User',
+                'choice_value' => 'id',
+                'choice_label' => function ($owner) {
+                    return $owner->getFirstname() . ' ' . $owner->getLastname();
+                },
+            ])
 
             ->add('phoneNumber', TelType::class, [
                 'label' => 'Numéro de téléphone',
