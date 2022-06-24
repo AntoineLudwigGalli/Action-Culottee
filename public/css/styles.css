@@ -15,6 +15,28 @@ h1{
     text-align: center;
     font-weight: bold;
 }
+
+h2{
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+
+}
+
+.background_page_form{
+    background-color: #E1942D;
+}
+
+.form_page{
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin: 50px 0 50px 0;
+    padding: 40px;
+}
+
+.form-label{
+    font-weight: bold;
+}
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* Classes perso */
 
@@ -36,9 +58,18 @@ h1{
 
 .button-orange{
     background: #E1942D;
-    /*border: 1px solid #707070;*/
+    border: 2px solid white;
     border-radius: 45px;
     color: white;
+    margin-top: 20px;
+}
+
+.button-orange:hover{
+    background: white;
+    border: 2px solid #E1942D;
+    border-radius: 45px;
+    color: #E1942D;
+    margin-top: 20px;
 }
 
 .input-orange{
