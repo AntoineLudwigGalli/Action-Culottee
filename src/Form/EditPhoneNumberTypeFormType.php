@@ -18,6 +18,7 @@ class EditPhoneNumberTypeFormType extends AbstractType
         $builder
             ->add('phoneNumber', TelType::class, [
                 "empty_data" => "",
+
                 'label' => 'Numéro de téléphone',
 
                 "empty_data" => '',

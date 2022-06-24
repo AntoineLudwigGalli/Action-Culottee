@@ -109,7 +109,7 @@ class PartnerTypeFormType extends AbstractType
 
             ->add('submit', SubmitType::class, [
 
-                'label' => 'Crée le partenaire'
+                'label' => 'Crée le partenaire',
 
             ])
         ;

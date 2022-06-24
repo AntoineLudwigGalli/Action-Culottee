@@ -261,22 +261,32 @@ h1{
     font-size: 7;
 }*/
 
-/* Newsletter */
+.font-user {
 
-#edit_newsletter_type_form {
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    background-color: #e1942d;
 
 }
 
-#edit_newsletter_type_form fieldset {
-    width: 50%;
+.interface-user {
+
+    border-radius: 30px;
+
 }
 
-#edit_newsletter_type_form_newsletterOption .form-check {
-    display: block;
+.text-user {
+
+    color: #e1942d;
+
+}
+
+.btn-edit {
+
+    background-color: #e1942d;
+
+    border-radius: 30px;
+
+    color: white;
+
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
