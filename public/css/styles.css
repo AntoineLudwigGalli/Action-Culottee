@@ -19,7 +19,13 @@ h1{
 h2{
     font-family: 'Cinzel', serif;
     font-weight: bold;
+}
 
+h3{
+    font-family: 'Cinzel', serif;
+    font-size: 100%;
+    color: #E1942D;
+    font-weight: bold;
 }
 
 .background_page_form{
@@ -175,8 +181,7 @@ h2{
 
 .container-fluid>.navbar-collapse>.navbar-nav>.nav-item>.nav-link a.hover{
     color: black;
- ;
- }
+}
 
     /*Footer*/
 
@@ -184,13 +189,32 @@ h2{
     height: auto;
     width: 100%;
     background-color: #000000;
-    padding: 60px 0 60px 0;
-;
+    padding: 40px 0 0 0;
+}
+
+.copyright {
+    background-color: #000000 ;
+    padding: 40px 0 10px 0;
 }
 
 .footer-logo{
-    margin-left: 200px;
-;
+    width: 70%;
+}
+
+.fa-facebook-square{
+    color: #3b5998;
+}
+
+.fa-instagram-square{
+    color: transparent;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.fa-linkedin{
+    color: #0e76a8;
 }
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
