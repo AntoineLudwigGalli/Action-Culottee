@@ -76,7 +76,7 @@ h1{
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Page register*/
 #registration_form_firstname,#registration_form_lastname,#registration_form_phoneNumber,
-#registration_form_memberIdNumber, #registration_form_email,#registration_form_plainPassword_first, #registration_form_plainPassword_second{
+#registration_form_memberIdNumber, #registration_form_email,#registration_form_plainPassword_first, #registration_form_plainPassword_second,#create_shop_by_user_form_name,#create_shop_by_user_form_address,#create_shop_by_user_form_zip,#create_shop_by_user_form_city,#create_shop_by_user_form_country,#create_shop_by_user_form_phoneNumber,#edit_lastname_firstname_form_lastname,#edit_lastname_firstname_form_firstname,#edit_email_form_email,#edit_password_type_form_oldPassword,#edit_password_type_form_newPassword_first,#edit_password_type_form_newPassword_second,#edit_phone_number_type_form_phoneNumber,#edit_shop_type_form_name,#edit_shop_type_form_address,#edit_shop_type_form_zip,#edit_shop_type_form_city,#edit_shop_type_form_country,#edit_shop_type_form_phoneNumber{
     background: #E1942D45;
 }
 .form-check a{
