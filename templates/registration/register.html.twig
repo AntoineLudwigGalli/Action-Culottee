@@ -3,35 +3,58 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+{#    TODO: faire style#}
+
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-<div class="container-fluid">
-    
-    
-    <h1>Inscription</h1>
-    <div class="row">
-        <div class="col-12 col-md-6 mx-auto mt-5">
-        {{ form_start(registrationForm) }}
-            {{ form_row(registrationForm.firstname) }}
-            {{ form_row(registrationForm.lastname) }}
-            {{ form_row(registrationForm.email) }}
-            {{ form_row(registrationForm.plainPassword) }}
-            {{ form_row(registrationForm.phoneNumber) }}
-            {{ form_row(registrationForm.memberIdNumber) }}
-            {{ form_row(registrationForm.newsletterOption) }}
-            {{ form_row(registrationForm.agreeTerms) }}
+    <div class="container-fluid">
 
-            {# Affichage du Recaptcha #}
-            <div class="mb-3">
-                <div class="mb-2">Captcha de sécurité</div>
+        <div class="mx-auto col-9 col-lg-6">
 
-                <div class="g-recaptcha" data-sitekey="{{ google_recaptcha_site_key }}"></div>
+            <div class="mb-3 d-sm-flex flex-column text-sm-start">
+                <h2 class="mb-3 fw-bold">Rejoignez nous !</h2>
+                <p>Déjà inscrit ? <a href="{{ path('app_login') }}">Connectez-vous !</a></p>
             </div>
-            <button type="submit" class="btn btn-primary">S'inscrire</button>
-        {{ form_end(registrationForm) }}
+
+            <div>
+                {{ form_start(registrationForm) }}
+
+                <div class="d-md-flex flex-wrap justify-content-between">
+                {{ form_row(registrationForm.firstname) }}
+                {{ form_row(registrationForm.lastname) }}
+
+                {{ form_row(registrationForm.phoneNumber) }}
+                {{ form_row(registrationForm.memberIdNumber) }}
+                </div>
+
+
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.plainPassword) }}
+
+
+                <div class="d-md-flex flex-wrap justify-content-around">
+
+                {{ form_row(registrationForm.newsletterOption) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                {# Affichage du Recaptcha #}
+                <div class="mb-3">
+                    <div class="mb-2">Captcha de sécurité</div>
+
+                    <div class="g-recaptcha" data-sitekey="{{ google_recaptcha_site_key }}"></div>
+                </div>
+
+                </div>
+
+
+                <div class="col-md-6 mx-auto">
+                    <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+                </div>
+                {{ form_end(registrationForm) }}
+            </div>
         </div>
     </div>
-</div>
-    {% block jsIncludes %}    <script src="https://www.google.com/recaptcha/api.js" async defer></script>{% endblock %}
+    {% block jsIncludes %}
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>{% endblock %}
 {% endblock %}

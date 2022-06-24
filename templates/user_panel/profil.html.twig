@@ -27,7 +27,7 @@
 
                         <!-- Email -->
                         <div class="email-profil">
-                            <p>{{ app.user.email }}<sup class="ms-1 {{ app.user.verified ? 'text-success' : 'text-danger' }}">{{ app.user.verified ? 'Email vérifier' : 'Email non vérifier' }}</sup></p>
+                            <p>{{ app.user.email }}<sup class="ms-1 {{ app.user.verified ? 'text-success' : 'text-danger' }}">{{ app.user.verified ? 'Email vérifié' : 'Email non vérifié' }}</sup></p>
 
                             <div>
                                 <a href="{{ path('user_panel_edit_email') }}"><button class="btn btn-warning">Modifier l'email</button></a>
@@ -35,9 +35,9 @@
 
                         </div>
 
-                        <!-- Mot de pass -->
+                        <!-- Mot de passe -->
                         <div class="password-profil">
-                            <a href="{{ path('user_panel_edit_password') }}"> <button class="btn btn-warning">Modifier le mot de pass</button></a>
+                            <a href="{{ path('user_panel_edit_password') }}"> <button class="btn btn-warning">Modifier le mot de passe</button></a>
                         </div>
 
                         <!-- Téléphone -->
