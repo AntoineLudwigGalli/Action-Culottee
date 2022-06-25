@@ -9,9 +9,7 @@ body{
     font-family: 'Roboto', serif;
 
 }
-html{
-    background-color: red;
-}
+
     /*Titres H1*/
 
 h1{
@@ -257,7 +255,7 @@ p{
 
 /*Page d'accueil*/
 .home-title{
-    font-size: 4rem;
+    font-size: 3rem;
 }
 
 .introduction{
@@ -321,6 +319,9 @@ p{
     padding-bottom: 1rem;
 }
 
+.dynamic-image-right, .dynamic-image-left{
+    height: 130px;
+}
  /*Carousel*/
 #container img {
     display: block;
@@ -451,7 +452,9 @@ p{
 /*Media Queries*/
 
 @media screen and (min-width: 768px){
-
+    .home-title{
+        font-size: 4rem;
+    }
     .flex-profil div {
         display: flex;
         flex-direction: row;
@@ -479,14 +482,23 @@ p{
         padding: 1rem 8rem;
     }
     /*Animation JS des images sur la page d'accueil*/
-    .dynamic-image{
+    .dynamic-image-left{
         position: relative;
         left: -150px;
     }
-    .animation{
+    .dynamic-image-right{
+        position: relative;
+        right: -150px;
+    }
+    .animation-right{
         height: 130px;
         position: relative;
         left: 0px;
+    }
+    .animation-left{
+        height: 130px;
+        position: relative;
+        right: 0px;
     }
 }
 
