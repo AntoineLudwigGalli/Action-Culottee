@@ -24,7 +24,9 @@ use SplTempFileObject;
 use App\Form\PartnerTypeFormType;
 use App\Repository\PartnerRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
@@ -515,7 +517,6 @@ class AdminPanelController extends AbstractController {
      * Partner Section
      *
      */
-
     #[Route('/creer-un-partenaire', name: 'partner_creation')]
     public function partner(PartnerRepository $partnerRepository, Request $request): Response {
         $partner = new Partner();
@@ -563,6 +564,7 @@ class AdminPanelController extends AbstractController {
 
     /**
      *
+     * Liste des partenaire
      *
      */
     #[Route('/liste-des-partenaires', name: 'partners_list')]
@@ -625,11 +627,14 @@ class AdminPanelController extends AbstractController {
 
         }
 
-        return $this->render('admin_panel/admin_partner_edit.html.twig', ['form' => $form->createView()]);
+        return $this->render('admin_panel/admin_partner_edit.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
      *
+     * Supprimer un partenaire
      *
      */
     #[Route('/suppression-d\'un-partenaire/{id}/', name: 'partner_delete_', priority: 10)]

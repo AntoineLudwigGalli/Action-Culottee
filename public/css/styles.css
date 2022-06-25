@@ -39,6 +39,12 @@ h1{
     /*border: 1px solid #707070;*/
     border-radius: 45px;
     color: white;
+    outline: none;
+}
+
+/* Permet de supprimer l'effet focus sur le button */
+.btn:focus{
+    box-shadow: none;
 }
 
 .input-orange{
@@ -64,11 +70,15 @@ h1{
     background-color: #E1942D;
 }
 
+.btn-back {
 
+    background: #e74c3c;
 
+    border-radius: 45px;
 
+    color: white;
 
-
+}
 
 
 
@@ -263,33 +273,12 @@ h1{
     font-size: 7;
 }*/
 
-.font-user {
-
-    background-color: #e1942d;
-
-}
-
 .interface-user {
 
     border-radius: 30px;
 
 }
 
-.text-user {
-
-    color: #e1942d;
-
-}
-
-.btn-edit {
-
-    background-color: #e1942d;
-
-    border-radius: 30px;
-
-    color: white;
-
-}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
