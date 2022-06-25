@@ -240,26 +240,44 @@ h3{
 
 /*Page d'accueil*/
 
+.introduction, .actions{
+    background-color: #E1942D;
+}
+.posters{
+    background-color: black;
+}
+.missions{
+
+}
+.why-join{
+    background-color: #e1942d;
+
+}
+
+ /*Carousel*/
+#container img {
+    display: block;
+    width: auto !important;
+    height: 500px !important;
+}
+.carousel img{
+    height: 40rem;
+}
+.carousel-caption{
+    background-color: rgba(0,0,0,.7);
+    border-radius: 10px;
+    padding: 2rem;
+}
+.carousel p, .carousel h5{
+    color: #E1942D;
+}
+
  /*THE MAP*/
 #map {
     height: 60vh;
     margin-bottom: 40px;
 }
 
-/*Texte de la page d'accueil*/
-.home_text{
-    text-align: justify;
-}
-
-/*Texte au dessus de la map*/
-.container-fluid .row h2{
-    font-family: 'Caveat', serif;
-    text-align: center;
-    font-size: 45px;
-    color: #FF9933;
-    margin-bottom: 0;
-
-}
 
 /*---------------------------------------------------------*/
 
