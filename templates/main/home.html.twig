@@ -1,54 +1,265 @@
 {% extends 'base.html.twig' %}
+
    {% block cssIncludes %}
        {# Inclusion de la librairie Leaflet pour la map   #}
-       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-             integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-             crossorigin=""/>
+       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css" integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ==" crossorigin=""/>
        {# Ajout du Leaflet Control Geocoder pour le css de la barre de recherche #}
-       <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+       <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
        {# Ajout du leaflet Locate control pour la geolocalisation #}
-       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css" />
+       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css"/>
    {% endblock %}
 
 
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-
-    <div class="container-fluid">
+    
+    
+    <div class="row introduction">
+        <div class="col-6">
+            <h2>Culottés, inspirés et déterminés</h2>
+        </div>
+        <div class="col-6">
+            <p>L'union fait la force et les évènements de ces derniers temps nous ont plus que jamais rappelé cet adage. A l'initiative de Nathalie Paredes, une détaillante indépendante en lingerie, nous avons pu nous regrouper sur les réseaux sociaux et organiser des actions communes pour défendre, valoriser et promouvoir notre métier et notre savoir-faire.</p>
+            <a href="#">Retrouvez-nous près de chez vous</a>
+        </div>
+    </div>
+    
+    <div class="row missions">
+        
         <div class="row">
-
-            <div class="col-md-7">
-                <h1>Culottés, inspirés et déterminés !</h1>
-                <div class="home_text">
-                    {{ display_dynamic_content('home_main_presentation') }}
-                </div>
+            <div class="col-12">
+                <h3>ACTION CULOTTÉE EST UNE ASSOCIATION LOI 1901</h3>
             </div>
-            <div class="col-md-5">
-                <h2>Retrouvez-nous près de chez vous !</h2>
-                <div>
-                    {# Conteneur de la map#}
-                    <div id="map">
-                    </div>
-                </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <h2>Nos Missions</h2>
+                <div class="orange-line"></div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <p>Accompagner les professionnels indépendants de l’habillement en lingerie en équipement et bien-être de la personne dans leur quotidien. Faciliter le partage, la réactivité et la communication entre nous pour créer une dynamique de groupe.</p>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="row actions">
+        
+        <div class="row">
+            <div class="col-12">
+                <h2>Nos Actions depuis 2021</h2>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-2">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+            </div>
+            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+                <p>Envoi d'une culotte de mécontentement à notre 1er minister M. Jean Castex : Une action culottée suivie par plus de 280 boutiques indépendantes, qualifiées de « non essentielles », et relayée massivement sur les médias locaux et nationaux, même plusieurs mois après.</p>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-2">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+            </div>
+            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+                <p>Achats groupés et tarifs négociés pour du matériel professionnel (bustes et mannequins, décoration de vitrine).</p>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-2">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+            </div>
+            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+                <p>Publicité : campagne d’affichage à travers toute la France et Belgique pour revendiquer l’essentialité des sous-vêtements.</p>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-2">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+            </div>
+            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+                <p>Visites d'usine et rencontres fournisseurs ( LeChat et Louisa Bracq) </p>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-2">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+            </div>
+            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+                <p>Action de solidarité : envoi de lingerie à des personnes sinistrées suite aux innondations en Belgique.</p>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-2">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+            </div>
+            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+                <p>Mise en place et modération d'un fil de discussion sur les réseaux sociaux (facebook et Whatsapp) pour faciliter les dépannages et rétrocessions et partager les bonnes pratiques et idées.</p>
+            </div>
+        </div>
+        
+        <div class="row mb-3">
+            <div class="col-2">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+            </div>
+            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+                <p>Création et mise en ligne d'une carte de France recensant les boutiques indépendantes multimarques mise gracieusement à disposition des boutiques et à destination de leurs clients. </p>
             </div>
         </div>
     </div>
+    
+    
+    <div class="row">
+        <div class="col-6 d-flex flex-row posters py-4 offset-3 justify-content-center p-0">
+            <div class="col-3 ms-4">
+                <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
+            </div>
+            <div class="col-3 mx-4">
+                <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
+            </div>
+            <div class="col-3 me-4">
+                <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="row about">
+        <div class="col-12 text-center">
+            <h2>Qui Sommes-nous ?</h2>
+            <div class="orange-line"></div>
+        </div>
+        <div class="col-6 offset-3">
+            <p>Le bureau officiel est aidé dans ses tâches par d'autres détaillantes ou groupes de travail qui ont déjà œuvrés pour nos actions en 2021.</p>
+        </div>
+        
+        {#    Carousel #}
+        <div class="row carousel">
+            <div class="col-6 offset-3">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" data-bs-interval="10000">
+                            <img src="{{ asset('images/founders/Annabelle 2.jpg') }}" class="d-block w-100 img-fluid" alt="Annabelle Piquet recevant le prix de la boutique ambassadeur">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Annabelle Piquet recevant le prix de la boutique ambassadeur</h5>
+                                <p>Gérante de la boutique Un Temps Pour Elle à Dijon</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item" data-bs-interval="2000">
+                            <img src="{{ asset('images/founders/la-clef-des-charmes-sex-shop-à-Toulouse2.jpg') }}" class="d-block w-100 img-fluid" alt="Devanture de la très chic boutique La clé des charmes à Toulouse">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Devanture de la très chic boutique La clé des charmes à Toulouse</h5>
+                                <p>Avec Action Culottée, il y en a pour tous les goûts !</p>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <img src="{{ asset('images/founders/Audrey Maris.jpg') }}" class="d-block w-100 img-fluid" alt="Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes">
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes</h5>
+                                <p>Membre engagée pour la cause culottée et influenceuse lingerie sur Tiktok</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+    
+    <div class="row why-join">
+        <div class="row">
+            <div class="col-4 offset-2">
+                <h2>Pourquoi adhérer ?</h2>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-4 offset-2">
+                <p>Contribuer au fonctionnement de l'association, à son existence et à sa bonne gestion.</p>
+            </div>
+            <div class="col-4 offset-1">
+                <p>Participer aux visites d’usines et/ou de fournisseurs. </p>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-4 offset-2">
+                <p>Profiter de formations spécifiques à notre métier avec un accompagnement et une prise en charge du dossier par des organismes partenaires. </p>
+            </div>
+            <div class="col-4 offset-1">
+                <p>Bénéficier des avantages suite aux négociations d’achats groupés pour de l’équipement ou pour faire valoir nos intérêts auprès de nos fournisseurs. </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-4 offset-2">
+                <p>Profiter de la retombée médiatique des actions culottées menées. </p>
+            </div>
+            <div class="col-4 offset-1">
+                <p>Défendre les intérêts de vos consoeurs et valoriser votre métier. </p>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="row map">
+        <div class="row">
+            <div class="col-12">
+                <h2>Retrouvez-nous près de chez vous !</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" id="map"></div>
+        </div>
+    </div>
+    
+    {#            <div> #}
+    {#                <h2>Retrouvez-nous près de chez vous !</h2> #}
+    {#                <div> #}
+    {#                    #}{# Conteneur de la map #}
+    {#                    <div id="map"> #}
+    {#                    </div> #}
+    {#                </div> #}
+    {#            </div> #}
+
+
+
 {% endblock %}
 
 {% block jsIncludes %}
-{#    Inclusion jQuery pour faciliter les requêtes ajax #}
+    {#    Inclusion jQuery pour faciliter les requêtes ajax #}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     {# Inclusion de la librairie Leaflet pour la map   #}
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-            integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-            crossorigin="">
-    </script>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js" integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ==" crossorigin=""></script>
     {# Ajout du Leaflet Control Geocoder pour le css de la barre de recherche #}
     <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
     {# Ajout du leaflet Locate control pour la geolocalisation #}
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     {# Inclusion fichier JS de la map   #}
     <script src="{{ asset('js/leaflet-map.js') }}"></script>
+
 {% endblock %}
 

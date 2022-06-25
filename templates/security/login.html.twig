@@ -3,10 +3,10 @@
 
 {% endblock %}
 {% block title %}Connexion{% endblock %}
-{#TODO:faire le style#}
-{% block body %}
 
-	<form method="post" class="mx-auto col-9 col-lg-6">
+{% block body %}
+<div class="background_page_form vh-100">
+	<form method="post" class="mx-auto col-9 col-lg-6 form_page">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
@@ -18,14 +18,14 @@
 			</div>
 		{% endif %}
 
-		<div class="mb-3 d-sm-flex flex-column text-sm-start">
+		<div class=" d-sm-flex flex-column text-sm-start">
 			<h2 class="mb-3 fw-bold">Connexion</h2>
 			<p>Devenez membre. <a class="color-orange text-decoration-none" href="{{ path('app_register') }}">Inscrivez-vous</a></p>
 		</div>
 
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-12 mx-auto mt-5">
+				<div class="col-12 mx-auto">
 					<label for="inputEmail" class="fw-bold">Mail</label> <input
 							type="email" value="{{ last_username }}"
 							name="email" id="inputEmail" class="form-control form-warning input-orange"
@@ -58,5 +58,5 @@
 			</div>
 		</div>
 	</form>
-
+</div>
 {% endblock %}

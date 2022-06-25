@@ -18,7 +18,7 @@ class AjaxController extends AbstractController
 //On récupère dans la BDD les adresses des boutiques et on les convertit en page JSON
         $shopAddressRepository = $doctrine->getRepository(Shop::class);
         $shopAddresses = $shopAddressRepository->findAll();
-// Todo: faire la gestion des erreurs
+
         foreach ($shopAddresses as $shopAddress){
             $name = $shopAddress->getName();
             $phoneNumber = $shopAddress->getPhoneNumber();

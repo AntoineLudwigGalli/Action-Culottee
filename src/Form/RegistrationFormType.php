@@ -115,6 +115,7 @@ class RegistrationFormType extends AbstractType
             // Champ numéro d'adhérent au bon format
             ->add('memberIdNumber', TextType::class, [
                 'label' => "Numéro d'adhérent (facultatif)",
+                "required" => false,
                 'attr' => [
                     'placeholder' => 'Ex: 2022/123'
                 ],
@@ -160,10 +161,6 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // TODO: À enlever une fois les tests terminés
-            'attr' => [
-                'novalidate' => 'novalidate',
-            ],
             'data_class' => User::class,
         ]);
     }

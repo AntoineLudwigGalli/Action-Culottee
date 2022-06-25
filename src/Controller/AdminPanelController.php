@@ -19,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use League\Csv\Writer;
+use phpDocumentor\Reflection\Types\This;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use SplTempFileObject;
 use App\Form\PartnerTypeFormType;
@@ -222,7 +223,7 @@ class AdminPanelController extends AbstractController {
     #[Route('/liste-des-utilisateurs/export', name: 'users_list_export')]
     public function usersListExport(ManagerRegistry $doctrine): Response {
 
-        // TODO: Ajouter la colonne vérification compte vérifié + activé
+
         $header = ['#', 'Email', 'Type de compte', 'Prénom', 'Nom', 'Numéro d\'adhérent', 'Téléphone', 'Inscription Newsletter', 'Cotisation payée', 'Compte vérifié'];
 
         $userRepo = $doctrine->getRepository(User::class);
@@ -233,7 +234,7 @@ class AdminPanelController extends AbstractController {
             $arrayUsers[] = [$user->getId(), $user->getEmail(),
                 in_array('ROLE_ADMIN', $user->getRoles()) ? 'Administrateur' : (in_array('ROLE_MEMBER', $user->getRoles()) ? 'Membre' : 'Utilisateur'), $user->getFirstname(),
                 $user->getLastname(), $user->getMemberIdNumber(), $user->getPhoneNumber(), $user->isNewsletterOption() ? 'Oui' : 'Non', $user->isMembershipPaid() ? 'Oui' : 'Non',
-                $user->isVerified() ? 'Oui' : 'Non',];
+                $user->isAssociationMember() ? 'Oui' : 'Non',];
         }
 
         $writer = Writer::createFromFileObject(new SplTempFileObject()); //the CSV file will be created using a temporary File
@@ -272,10 +273,19 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() && $user->isMembershipPaid() && $user->isAssociationMember()) {
+
+            if ($user->getRoles() != ["ROLE_ADMIN"] &&
+//                Sans envoi réel de mail on ne peut pas vérifier cette condition
+//                $user->isVerified() &&
+                $user->isMembershipPaid() &&
+                $user->isAssociationMember())
+            {
                 $user->setRoles(["ROLE_MEMBER"]);
+
             } else {
+
                 $user->setRoles(["ROLE_USER"]);
+
             }
 
             // Sauvegarde des données modifiées en BDD
@@ -385,19 +395,24 @@ class AdminPanelController extends AbstractController {
 
             $output = json_decode($geocode);
 
-            $latitude = $output[0]->lat;
-            $longitude = $output[0]->lon;
+            if(empty($output)){
+                $this->addFlash('error', "L'adresse n'existe pas");
+            } else {
 
-            $shop->setLatitude($latitude);
-            $shop->setLongitude($longitude);
+                $latitude = $output[0]->lat;
+                $longitude = $output[0]->lon;
+
+                $shop->setLatitude($latitude);
+                $shop->setLongitude($longitude);
 
 
-            $em = $doctrine->getManager();
-            $em->persist($shop);
-            $em->flush();
+                $em = $doctrine->getManager();
+                $em->persist($shop);
+                $em->flush();
 
-            $this->addFlash('success', 'Boutique ajoutée avec succès');
-            return $this->redirectToRoute('admin_panel_shops_list');
+                $this->addFlash('success', 'Boutique ajoutée avec succès');
+                return $this->redirectToRoute('admin_panel_shops_list');
+            }
         }
 
         return $this->render('admin_panel/admin_shop_creation.html.twig', ['form' => $form->createView()]);
@@ -439,16 +454,40 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
+            //  Avec l'aPI Nominatim, on récupère la latitude et la longitude de la boutique grâce à l'adresse saisie et
+            // présente en bdd.
+            $address = $shop->getAddress() . " " . $shop->getZip() . " " . $shop->getCity() . " " . $shop->getCountry();
 
-            // Sauvegarde des données modifiées en BDD
-            $em = $doctrine->getManager();
-            $em->flush();
+            $prepAddr = str_replace(' ', '+', $address);
 
-            $this->addFlash('success', 'La boutique à été modifiée avec succès !');
+            $referer = "https://nominatim.openstreetmap.org/search?q='.$prepAddr.'&format=json"; // La connexion à
+            // l'API nominatim requière de passer par le referer (un paramètre du header dans le navigateur.)
+            $opts = array('http' => array('header' => array("Referer: $referer\r\n")));
+            $context = stream_context_create($opts);
+            $geocode = file_get_contents($referer, false, $context);
 
-            return $this->redirectToRoute('admin_panel_shops_list');
+            $output = json_decode($geocode);
+
+            if(empty($output)){
+
+                $this->addFlash('error', "L'adresse n'existe pas");
+
+            } else {
+
+                $latitude = $output[0]->lat;
+                $longitude = $output[0]->lon;
+
+                $shop->setLatitude($latitude);
+                $shop->setLongitude($longitude);
+
+
+                $em = $doctrine->getManager();
+                $em->flush();
+
+                $this->addFlash('success', 'Boutique modifiée avec succès');
+                return $this->redirectToRoute('admin_panel_shops_list');
+            }
         }
-
 
         return $this->render('admin_panel/admin_shop_edit.html.twig', ['form' => $form->createView()]);
     }
@@ -459,6 +498,7 @@ class AdminPanelController extends AbstractController {
      */
     #[Route('/suppression-d\'une-boutique/{id}/', name: 'shop_delete_', priority: 10)]
     public function shopDelete(Shop $shop, Request $request, ManagerRegistry $doctrine): Response {
+
         $csrfToken = $request->query->get('csrf_token', '');
 
         if (!$this->isCsrfTokenValid('shop_delete_' . $shop->getId(), $csrfToken)) {
@@ -497,7 +537,6 @@ class AdminPanelController extends AbstractController {
         $em = $doctrine->getManager();
 
         $query = $em
-            //            TODO:owner(jointure?)
             ->createQuery('SELECT a FROM App\Entity\Shop a WHERE a.zip LIKE :search OR a.city LIKE :search OR a.address LIKE :search OR a.phoneNumber LIKE :search OR a.country LIKE :search OR a.name LIKE :search ')
             ->setParameters(['search' => '%' . $search . '%']);
 
@@ -552,6 +591,7 @@ class AdminPanelController extends AbstractController {
                 $partnerRepository->add($partner, true);
 
                 $this->addFlash('success', 'Partenaire ajouté avec succés');
+                return $this->redirectToRoute("admin_panel_partners_list");
 
             }
 
@@ -622,7 +662,7 @@ class AdminPanelController extends AbstractController {
                 $partnerRepository->add($partner, true);
 
                 $this->addFlash('success', 'Partenaire modifier avec succés');
-
+                return $this->redirectToRoute("admin_panel_partners_list");
             }
 
         }

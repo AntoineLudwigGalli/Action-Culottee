@@ -65,7 +65,7 @@ class CreateShopByUserFormType extends AbstractType
                     ]),
                 ],
             ])
-// TODO : Verification et auto completion ville/code postal si on a le temps et qu'on s'ennuie.
+
             ->add('zip', TextType::class, [
                 'label' => 'Code Postal',
                 'attr' => [

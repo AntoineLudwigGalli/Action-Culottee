@@ -19,10 +19,26 @@ function openOverlayPartner() {
 
 /*
 *
-* Fonction pour fermer l'overlay
+* Fonction asynchrone pour fermer l'overlay
 *
 */
-function closeOverlayPartner() {
+
+async function closeOverlayPartner() {
+
+    // Création d'une promesse "sleep" pour attendre l'action quel sois fini afin de suprrimé l'overlay
+    const sleep = ms => new Promise(r => setTimeout(r,
+        ms));
+
+    // Animation fondu sur l'overlay avec l'utilisation de la librairie gsap
+    gsap.to('.overlay',
+        .2,
+        {
+            opacity: "0",
+            ease: Power3.easeInOut
+        });
+
+    // Attente de 500 miliseconds
+    await sleep(500);
 
     document.querySelector('.partner').classList.add('d-none');
 
@@ -59,19 +75,20 @@ document.querySelectorAll('.card img').forEach(function (element) {
                 const linkOffer = document.createElement('a');
                 const buttonOffer = document.createElement('button');
 
-                // Ajout du boutton offre
+                // Ajout du bouton offre
                 document.querySelector('.content').append( divButtonOffer );
                 divButtonOffer.prepend( linkOffer );
                 linkOffer.prepend( buttonOffer );
 
-                // Ajout des class sur l'offre
-                divButtonOffer.setAttribute('class', 'text-center mt-5 div-offer');
+
+                // Ajout des classes sur l'offre
+                divButtonOffer.setAttribute('class', 'text-center mt-5  div-offer');
                 linkOffer.setAttribute('class', 'text-black text-decoration-underline');
                 buttonOffer.setAttribute('class', 'btn button-orange offer w-25 mb-5');
 
                 buttonOffer.textContent = 'Offre';
 
-                // Ajout d'un evenement "click" uniquement quand l'overlay est afficher
+                // Ajout d'un évènement "click" uniquement quand l'overlay est affiché
                 document.querySelector('.offer').addEventListener('click', function () {
 
                     const text = 'Offre';
@@ -110,12 +127,13 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
 });
 
+
 // Evenement de click asynchrone pour attendre une execution afin dans executer une autre
 document.querySelector('.overlay').addEventListener('click', async function (ev) {
 
     const selectPartnerToDisplay = document.querySelector('.display-partner');
 
-    // Si le body contiens "display-partner" et quand il ne click pas dedans on ajout la "class d-none"
+    // Si le body contient "display-partner" et quand il ne click pas dedans on ajout la "class d-none"
     if ( document.body.contains(selectPartnerToDisplay) && !selectPartnerToDisplay.contains(ev.target) ) {
 
         // Création d'une promesse "sleep" pour attendre l'action quel sois fini afin de suprrimé l'overlay
@@ -135,9 +153,7 @@ document.querySelector('.overlay').addEventListener('click', async function (ev)
 
         document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );
 
-        closeOverlayPartner();
+        await closeOverlayPartner();
 
     }
-
-
 });

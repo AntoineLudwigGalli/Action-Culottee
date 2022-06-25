@@ -7,12 +7,44 @@
 
 body{
     font-family: 'Roboto', serif;
+
+}
+html{
+    background-color: red;
 }
     /*Titres H1*/
 
 h1{
     font-family: 'Cinzel', serif;
     text-align: center;
+    font-weight: bold;
+}
+
+h2{
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+}
+
+h3{
+    font-family: 'Cinzel', serif;
+    font-size: 100%;
+    color: #E1942D;
+    font-weight: bold;
+}
+
+.background_page_form{
+    background-color: #E1942D;
+}
+
+.form_page{
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin: 50px 0 50px 0;
+    padding: 40px;
+}
+
+.form-label{
     font-weight: bold;
 }
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -36,15 +68,22 @@ h1{
 
 .button-orange{
     background: #E1942D;
-    /*border: 1px solid #707070;*/
+    border: 2px solid white;
     border-radius: 45px;
     color: white;
-    outline: none;
 }
 
 /* Permet de supprimer l'effet focus sur le button */
 .btn:focus{
     box-shadow: none;
+
+}
+
+.button-orange:hover{
+    background: white;
+    border: 2px solid #E1942D;
+    border-radius: 45px;
+    color: #E1942D;
 }
 
 .input-orange{
@@ -70,6 +109,7 @@ h1{
     background-color: #E1942D;
 }
 
+
 .btn-back {
 
     background: #e74c3c;
@@ -81,9 +121,8 @@ h1{
 }
 
 
-
-
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
+
 /*Page register*/
 #registration_form_firstname,#registration_form_lastname,#registration_form_phoneNumber,
 #registration_form_memberIdNumber, #registration_form_email,#registration_form_plainPassword_first, #registration_form_plainPassword_second,#create_shop_by_user_form_name,#create_shop_by_user_form_address,#create_shop_by_user_form_zip,#create_shop_by_user_form_city,#create_shop_by_user_form_country,#create_shop_by_user_form_phoneNumber,#edit_lastname_firstname_form_lastname,#edit_lastname_firstname_form_firstname,#edit_email_form_email,#edit_password_type_form_oldPassword,#edit_password_type_form_newPassword_first,#edit_password_type_form_newPassword_second,#edit_phone_number_type_form_phoneNumber,#edit_shop_type_form_name,#edit_shop_type_form_address,#edit_shop_type_form_zip,#edit_shop_type_form_city,#edit_shop_type_form_country,#edit_shop_type_form_phoneNumber{
@@ -102,11 +141,14 @@ h1{
 
 
 /*Paginations*/
-.pagination .current{
-    background-color: #FF9933;
-    padding: 0.5rem 1rem;
 
-}
+/*Todo:refaire pagination si le coeur vous en dit*/
+
+/*.pagination .current{*/
+/*    background-color: #FF9933;*/
+/*    padding: 0.5rem 1rem;*/
+
+/*}*/
 
 .pagination span a, .pagination .current{
     padding: 0.5rem 1rem;
@@ -116,6 +158,7 @@ h1{
     color: black;
     text-decoration: none;
     box-shadow: 3px 3px 3px black;
+    background-color: white;
 }
 .pagination .current{
     margin-bottom: 5em;
@@ -141,7 +184,6 @@ h1{
 /* Partials */
     /*Header*/
         /*Menu principal*/
-        /*TODO: Barre de nav - Menu principal*/
 .navbar {
     margin-bottom: 40px;
 ;
@@ -155,65 +197,103 @@ h1{
 
 .container-fluid>.navbar-collapse>.navbar-nav>.nav-item>.nav-link a.hover{
     color: black;
- ;
- }
+}
 
     /*Footer*/
-    /*TODO: Améliorer le pied de page*/
+
 .footer {
     height: auto;
-    width: 100%;
+    /*width: 100%;*/
     background-color: #000000;
-    padding: 60px 0 60px 0;
-;
+    /*padding: 40px 0 0 0;*/
+}
+
+.copyright {
+    background-color: #000000 ;
+    /*padding: 40px 0 10px 0;*/
 }
 
 .footer-logo{
-    margin-left: 200px;
-;
+    width: 70%;
+}
+
+.fa-facebook-square{
+    color: #3b5998;
+}
+
+.fa-instagram-square{
+    color: transparent;
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+.fa-linkedin{
+    color: #0e76a8;
 }
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*Page actualités*/
 .container-fluid .row .agenda-entry{
-    background-color: #FF9933;
     min-height: 100px;
     border-radius: 10px;
-    border: black 5px solid;
+    border: black 1px solid;
     font-size: 1.5rem;
     font-weight: 500;
-    margin: auto;
-    text-align: center;
+
 }
-.container-fluid .row .agenda-entry .calendar-icon{
-    height: 5vh;
+
+#agenda .pagination-button a{
+    background-color: white;
 }
+/*.container-fluid .row .agenda-entry .calendar-icon{*/
+/*    height: 5vh;*/
+/*}*/
 
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /*Page d'accueil*/
 
-/* THE MAP */
+.introduction, .actions{
+    background-color: #E1942D;
+}
+.posters{
+    background-color: black;
+}
+.missions{
+
+}
+.why-join{
+    background-color: #e1942d;
+
+}
+
+ /*Carousel*/
+#container img {
+    display: block;
+    width: auto !important;
+    height: 500px !important;
+}
+.carousel img{
+    height: 40rem;
+}
+.carousel-caption{
+    background-color: rgba(0,0,0,.7);
+    border-radius: 10px;
+    padding: 2rem;
+}
+.carousel p, .carousel h5{
+    color: #E1942D;
+}
+
+ /*THE MAP*/
 #map {
     height: 60vh;
     margin-bottom: 40px;
 }
 
-/*Texte de la page d'accueil*/
-.home_text{
-    text-align: justify;
-}
-
-/*Texte au dessus de la map*/
-.container-fluid .row h2{
-    font-family: 'Caveat', serif;
-    text-align: center;
-    font-size: 45px;
-    color: #FF9933;
-    margin-bottom: 0;
-
-}
 
 /*---------------------------------------------------------*/
 
@@ -223,7 +303,7 @@ h1{
 
 .overlay {
 
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -317,7 +397,7 @@ h1{
     background-color: #FF9933;
 }
 /*//////////////////////////////////////////////////////////*/
-/*Media Queries*/
+Media Queries
 @media screen and (min-width: 992px) {
     #map {
         height: 60vh;
