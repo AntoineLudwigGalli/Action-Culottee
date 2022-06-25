@@ -463,6 +463,7 @@ p{
     .flex-profil div:last-child {
         display: block;
     }
+
 }
 
 @media screen and (min-width: 992px) {
