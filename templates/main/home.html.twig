@@ -19,10 +19,8 @@
         <div class="col-6">
             <h2 class="text-light home-title">Culottés, inspirés et déterminés</h2>
         </div>
-        <div class="col-6 text-light p-0">
-            <p>L'<b>union</b> fait la force et les évènements de ces derniers temps nous ont plus que jamais rappelé cet adage. A l'initiative de Nathalie Paredes, une détaillante indépendante en lingerie, nous avons pu nous regrouper sur les réseaux sociaux et <b>organiser des actions communes pour
-                    défendre, valoriser et promouvoir notre métier et notre savoir-faire.</b>organiser des actions communes pour
-                défendre, valoriser et promouvoir notre métier et notre savoir-faire.</p>
+        <div class="col-6 text-light p-0 mb-2">
+            {{ display_dynamic_content('home_main_presentation') }}
         </div>
         <div class="row mt-2">
             <div class="col-6 offset-6">
@@ -47,7 +45,7 @@
         
         <div class="row">
             <div class="col-12 text-center">
-                <p>Accompagner les professionnels indépendants de l’habillement en lingerie en équipement et bien-être de la personne dans leur quotidien. Faciliter le partage, la réactivité et la communication entre nous pour créer une dynamique de groupe.</p>
+                {{ display_dynamic_content('home_missions_presentation') }}
             </div>
         </div>
     
@@ -62,7 +60,7 @@
         </div>
         
         <div class="row">
-            <div class="col-2 p-0">
+            <div class="col-2 p-0 ">
                 <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
             <div class="col-9 offset-1 d-flex flex-row align-items-center">
@@ -143,7 +141,7 @@
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
             
-            <div class="col-3 me-2">
+            <div class="col-3 me-3">
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
             
@@ -162,7 +160,7 @@
             <h2 class="home-title orange-line">Qui Sommes-nous ?</h2>
         </div>
         <div class="col-8 offset-2 mb-3">
-            <p>Le bureau officiel est aidé dans ses tâches par d'autres détaillantes ou groupes de travail qui ont déjà œuvrés pour nos actions en 2021.</p>
+            {{ display_dynamic_content('home_about_presentation_text') }}
         </div>
         
         {#    Carousel #}
@@ -256,14 +254,6 @@
         </div>
     </div>
     
-    {#            <div> #}
-    {#                <h2>Retrouvez-nous près de chez vous !</h2> #}
-    {#                <div> #}
-    {#                    #}{# Conteneur de la map #}
-    {#                    <div id="map"> #}
-    {#                    </div> #}
-    {#                </div> #}
-    {#            </div> #}
 
 
 
