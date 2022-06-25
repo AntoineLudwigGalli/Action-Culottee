@@ -269,7 +269,7 @@ p{
     color: #E1942D;
     border: 2px solid #E1942D;
     text-decoration: none;
-    padding: 1rem 8rem;
+    padding: 1rem;
     text-transform: uppercase;
 }
 
@@ -301,6 +301,7 @@ p{
 
 }
 .posters-box .color-rows{
+
     height: 25vh;
 }
 
@@ -319,17 +320,7 @@ p{
     padding-top: 3rem;
     padding-bottom: 1rem;
 }
- /*Animation JS des images */
-.dynamic-image{
-    position: relative;
-    left: -150px;
 
-}
-.animation{
-    height: 130px;
-    position: relative;
-    left: 0px;
-}
  /*Carousel*/
 #container img {
     display: block;
@@ -457,22 +448,9 @@ p{
     background-color: #FF9933;
 }
 /*//////////////////////////////////////////////////////////*/
-Media Queries
-@media screen and (min-width: 992px) {
-    #map {
-        height: 60vh;
-    }
-}
-@media screen and (min-width: 1500px){
-    .shop-edit-table thead tr th,
-    .shop-edit-table tbody tr td
-    {
-        width: 50%;
-    }
+/*Media Queries*/
 
-}
-
-@media screen and (min-width: 574px){
+@media screen and (min-width: 768px){
 
     .flex-profil div {
         display: flex;
@@ -486,6 +464,33 @@ Media Queries
         display: block;
     }
 }
+
+@media screen and (min-width: 992px) {
+    #map {
+        height: 60vh;
+    }
+    .shop-edit-table thead tr th,
+    .shop-edit-table tbody tr td
+    {
+        width: 50%;
+    }
+    .home-button{
+        padding: 1rem 8rem;
+    }
+    /*Animation JS des images sur la page d'accueil*/
+    .dynamic-image{
+        position: relative;
+        left: -150px;
+    }
+    .animation{
+        height: 130px;
+        position: relative;
+        left: 0px;
+    }
+}
+
+
+
 
 /* Partenaire image */
 /*
