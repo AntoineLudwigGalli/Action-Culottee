@@ -1,6 +1,6 @@
 /*
 *
-* Function pour afficher l'overlay
+* Fonction pour afficher l'overlay
 *
 */
 function openOverlayPartner() {
@@ -25,11 +25,11 @@ function openOverlayPartner() {
 
 async function closeOverlayPartner() {
 
-    // Création d'une promesse "sleep" pour attendre l'action quel sois fini afin de suprrimé l'overlay
+    // Création d'une promesse "sleep" pour attendre que l'action soit terminée afin de supprimer l'overlay
     const sleep = ms => new Promise(r => setTimeout(r,
         ms));
 
-    // Animation fondu sur l'overlay avec l'utilisation de la librairie gsap
+    // Animation de fondu sur l'overlay avec l'utilisation de la librairie gsap
     gsap.to('.overlay',
         .2,
         {
@@ -37,7 +37,7 @@ async function closeOverlayPartner() {
             ease: Power3.easeInOut
         });
 
-    // Attente de 500 miliseconds
+    // Attente de 500 millisecondes
     await sleep(500);
 
     document.querySelector('.partner').classList.add('d-none');
@@ -54,7 +54,7 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
         console.log(this);
 
-        // Application du text dynamic sur l'overlay
+        // Application du texte dynamique sur l'overlay
         const partnerMark = partnersL[this.dataset.ov1]['title'];
         const partnerLogo = '/images/images-partners/' + partnersL[this.dataset.ov1]['logo'];
         const partnerDescription = partnersL[this.dataset.ov1]['description'];
@@ -128,19 +128,19 @@ document.querySelectorAll('.card img').forEach(function (element) {
 });
 
 
-// Evenement de click asynchrone pour attendre une execution afin dans executer une autre
+// Évènement de click asynchrone pour attendre une execution afin d'en exécuter une autre
 document.querySelector('.overlay').addEventListener('click', async function (ev) {
 
     const selectPartnerToDisplay = document.querySelector('.display-partner');
 
-    // Si le body contient "display-partner" et quand il ne click pas dedans on ajout la "class d-none"
+    // Si le body contient "display-partner" et quand il ne click pas dedans on ajoute la classe "d-none"
     if ( document.body.contains(selectPartnerToDisplay) && !selectPartnerToDisplay.contains(ev.target) ) {
 
-        // Création d'une promesse "sleep" pour attendre l'action quel sois fini afin de suprrimé l'overlay
+        // Création d'une promesse "sleep" pour attendre que l'action soit terminée afin de supprimer l'overlay
         const sleep = ms => new Promise(r => setTimeout(r,
             ms));
 
-        // Animation fondu sur l'overlay avec l'utilisation de la librairie gsap
+        // Animation de fondu sur l'overlay avec l'utilisation de la librairie gsap
         gsap.to('.overlay',
             .2,
             {
@@ -148,7 +148,7 @@ document.querySelector('.overlay').addEventListener('click', async function (ev)
                 ease: Power3.easeInOut
             });
 
-        // Attente de 500 miliseconds
+        // Attente de 500 millisecondes
         await sleep(500);
 
         document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );

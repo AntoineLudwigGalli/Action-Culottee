@@ -1,8 +1,6 @@
 // On définit les coordonnées affichées et le zoom initial au chargement de la page
 let map = L.map('map').setView([46.657, 2.329], 6);
 
-// todo : Bien penser à créditer la carte https://www.openstreetmap.org/copyright
-
 // On choisit l'url de la tile (design de la map) voulue ainsi que le niveau de zoom max et le copyright
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -10,7 +8,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Personnalisation des icônes
-var pantyIcon = L.icon({
+let pantyIcon = L.icon({
     iconUrl: '../images/map_icon.png',
     iconSize:     [20, 20], // size of the icon
     iconAnchor:   [8, 20], // point of the icon which will correspond to marker's location
