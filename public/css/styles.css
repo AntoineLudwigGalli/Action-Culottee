@@ -31,7 +31,9 @@ h3{
     color: #E1942D;
     font-weight: bold;
 }
-
+p{
+    font-size: 1.3rem;
+}
 .background_page_form{
     background-color: #E1942D;
 }
@@ -184,15 +186,14 @@ h3{
 /* Partials */
     /*Header*/
         /*Menu principal*/
+
 .navbar {
     margin-bottom: 40px;
-;
 }
 
 .navbar-nav {
     font-family: 'Cinzel', serif;
     font-weight: bold;
-;
 }
 
 .container-fluid>.navbar-collapse>.navbar-nav>.nav-item>.nav-link a.hover{
@@ -203,14 +204,13 @@ h3{
 
 .footer {
     height: auto;
-    /*width: 100%;*/
     background-color: #000000;
-    /*padding: 40px 0 0 0;*/
+
 }
 
 .copyright {
     background-color: #000000 ;
-    /*padding: 40px 0 10px 0;*/
+
 }
 
 .footer-logo{
@@ -255,19 +255,68 @@ h3{
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /*Page d'accueil*/
+.home-title{
+    font-size: 4rem;
+}
 
-.introduction, .actions{
-    background-color: #E1942D;
+.introduction{
+    padding: 3rem;
+
+}
+.home-button{
+    background: white;
+    color: #E1942D;
+    border: 2px solid #E1942D;
+    text-decoration: none;
+    padding: 1rem 8rem;
+    text-transform: uppercase;
+}
+
+.home-button:hover{
+    background: #E1942D;
+    border: 2px solid white;
+    color: white;
+    margin-top: 20px;
+}
+.missions{
+    padding: 3rem;
+}
+.missions h3{
+    text-transform: uppercase;
+    font-size: 1.2em;
+    margin-bottom: 1rem;
+
+}
+.orange-line{
+    text-decoration: #e1942d underline 10px;
+}
+.actions{
+ padding: 3rem 0;
 }
 .posters{
     background-color: black;
 }
-.missions{
+.posters-box{
 
 }
-.why-join{
-    background-color: #e1942d;
+.posters-box .color-rows{
+    height: 25vh;
+}
 
+.about{
+    padding-bottom: 3rem;
+}
+
+.why-join{
+    padding: 3rem;
+}
+.why-join p{
+    font-weight: bold;
+}
+
+.map{
+    padding-top: 3rem;
+    padding-bottom: 1rem;
 }
 
  /*Carousel*/
