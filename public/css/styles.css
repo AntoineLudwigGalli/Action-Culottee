@@ -74,7 +74,12 @@ p{
     border: 2px solid white;
     border-radius: 45px;
     color: white;
-    margin-top: 20px;
+}
+
+/* Permet de supprimer l'effet focus sur le button */
+.btn:focus{
+    box-shadow: none;
+
 }
 
 .button-orange:hover{
@@ -82,7 +87,6 @@ p{
     border: 2px solid #E1942D;
     border-radius: 45px;
     color: #E1942D;
-    margin-top: 20px;
 }
 
 .input-orange{
@@ -107,6 +111,18 @@ p{
 .bgc-orange{
     background-color: #E1942D;
 }
+
+
+.btn-back {
+
+    background: #e74c3c;
+
+    border-radius: 45px;
+
+    color: white;
+
+}
+
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -347,7 +363,7 @@ p{
 
 .overlay {
 
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -397,33 +413,12 @@ p{
     font-size: 7;
 }*/
 
-.font-user {
-
-    background-color: #e1942d;
-
-}
-
 .interface-user {
 
     border-radius: 30px;
 
 }
 
-.text-user {
-
-    color: #e1942d;
-
-}
-
-.btn-edit {
-
-    background-color: #e1942d;
-
-    border-radius: 30px;
-
-    color: white;
-
-}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
