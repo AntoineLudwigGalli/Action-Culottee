@@ -33,6 +33,7 @@ h3{
 }
 p{
     font-size: 1.3rem;
+    margin-bottom: 0;
 }
 .background_page_form{
     background-color: #E1942D;
@@ -302,7 +303,17 @@ p{
     padding-top: 3rem;
     padding-bottom: 1rem;
 }
+ /*Animation JS des images */
+.dynamic-image{
+    position: relative;
+    left: -150px;
 
+}
+.animation{
+    height: 130px;
+    position: relative;
+    left: 0px;
+}
  /*Carousel*/
 #container img {
     display: block;
