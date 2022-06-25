@@ -489,6 +489,10 @@ p{
     .dynamic-image-right{
         position: relative;
         right: -150px;
+
+    }
+    .hide-overflow{
+        overflow: hidden;
     }
     .animation-right{
         height: 130px;
