@@ -19,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
 use League\Csv\Writer;
+use phpDocumentor\Reflection\Types\This;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use SplTempFileObject;
 use App\Form\PartnerTypeFormType;
@@ -580,6 +581,7 @@ class AdminPanelController extends AbstractController {
                 $partnerRepository->add($partner, true);
 
                 $this->addFlash('success', 'Partenaire ajouté avec succés');
+                return $this->redirectToRoute("admin_panel_partners_list");
 
             }
 
@@ -649,7 +651,7 @@ class AdminPanelController extends AbstractController {
                 $partnerRepository->add($partner, true);
 
                 $this->addFlash('success', 'Partenaire modifier avec succés');
-
+                return $this->redirectToRoute("admin_panel_partners_list");
             }
 
         }

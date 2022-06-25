@@ -4,8 +4,8 @@
 
 {% block body %}
 
-    <div id="agenda" class="background_page_form">
-        <div class="row my-3">
+    <div id="agenda" class="background_page_form row">
+        <div class=" my-3">
             <div class="col-12 text-center text-white mt-5">
                 <h1>Les Actualités Culottées</h1>
                 {# Affichage du nombre total d'évènements #}
@@ -29,7 +29,7 @@
         </div>
 
         {# Blocs de mise en forme des actualités #}
-        <div class="container-fluid">
+{#        <div class="container-fluid">#}
             <div class="row">
                 {# Pour chaque évènement, on affiche dans l'ordre chronologique uniquement ceux dont la date est à venir. Ceux dont la date est passée ne sont pas affichés #}
                 {% for event in events %}
@@ -58,7 +58,7 @@
                 {% endfor %}
 
                 <div class="row">
-                    <div class=" offset-sm-3 offset-md-5">
+                    <div class="col-12 ">
 
                         {# Affichage du menu permettant de naviguer entre les différentes pages #}
                         {{ knp_pagination_render(events) }}
@@ -67,6 +67,6 @@
                 </div>
             </div>
         </div>
-    </div>
+   
 {% endblock %}
 

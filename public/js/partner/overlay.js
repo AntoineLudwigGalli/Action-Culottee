@@ -24,7 +24,7 @@ function openOverlayPartner() {
 */
 async function closeOverlayPartner() {
 
-    // Création d'une promesse "sleep" pour attendre l'action quel sois fini afin de suprrimé l'overlay
+    // Création d'une promesse "sleep" pour attendre que l'action soit finie afin de supprimer l'overlay
     const sleep = ms => new Promise(r => setTimeout(r,
         ms));
 
@@ -36,7 +36,7 @@ async function closeOverlayPartner() {
             ease: Power3.easeInOut
         });
 
-    // Attente de 500 miliseconds
+    // Attente de 500 milliseconds
     await sleep(500);
 
     document.querySelector('.partner').classList.add('d-none');
@@ -72,19 +72,19 @@ document.querySelectorAll('.card img').forEach(function (element) {
                 const linkOffer = document.createElement('a');
                 const buttonOffer = document.createElement('button');
 
-                // Ajout du boutton offre
+                // Ajout du bouton offre
                 document.querySelector('.content').append( divButtonOffer );
                 divButtonOffer.prepend( linkOffer );
                 linkOffer.prepend( buttonOffer );
 
-                // Ajout des class sur l'offre
+                // Ajout des classes sur l'offre
                 divButtonOffer.setAttribute('class', 'text-center mt-5');
                 linkOffer.setAttribute('class', 'text-black text-decoration-underline');
                 buttonOffer.setAttribute('class', 'btn btn-warning offer w-25 mb-5');
 
                 buttonOffer.textContent = 'Offre';
 
-                // Ajout d'un evenement "click" uniquement quand l'overlay est afficher
+                // Ajout d'un évènement "click" uniquement quand l'overlay est affiché
                 document.querySelector('.offer').addEventListener('click', function () {
 
                     const text = 'Offre';
@@ -119,17 +119,15 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
 });
 
-// Evenement de click
+// Évènement de click
 document.querySelector('.overlay').addEventListener('click', function (ev) {
 
     const selectPartnerToDisplay = document.querySelector('.display-partner');
 
-    // Si le body contiens "display-partner" et quand il ne click pas dedans on ajout la "class d-none"
+    // Si le body contient "display-partner" et quand il ne click pas dedans on ajout la "class d-none"
     if ( document.body.contains(selectPartnerToDisplay) && !selectPartnerToDisplay.contains(ev.target) ) {
 
         closeOverlayPartner();
 
     }
-
-
 });

@@ -1,8 +1,9 @@
 {# TODO: Barre de navigation avec bannière + de culotte ! #}
 {# Menu principal du site #}
+<div class="row">
+    <div class="col-12">
 <nav class="navbar navbar-expand-lg navbar- navbar-light">
-    <div class="container-fluid">
-
+    
         {# Logo et titre du site #}
         <a class="navbar-brand" href="{{ path('main_home') }}">
             <img src="{{ asset('/images/logo_header.png') }}" alt="" class="img-fluid main-navbar-logo">
@@ -112,13 +113,15 @@
 
                     {# Bouton de la page de connexion #}
                     <li class="nav-item">
-                        <a class="nav-link{{ route == 'app_login' ? ' active' }}" href="{{ path('app_login') }}"><i
-                                    class="fas fa-sign-in-alt mx-1"></i>Connexion</a>
+                        <a class="nav-link{{ route == 'app_login' ? ' active' }}" href="{{ path('app_login') }}">
+                            <i class="fas fa-sign-in-alt mx-1"></i>Connexion</a>
                     </li>
 
                 {% endif %}
 
             </ul>
         </div>
-    </div>
+  
 </nav>
+    </div>
+</div>
