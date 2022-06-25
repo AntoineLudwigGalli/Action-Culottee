@@ -271,10 +271,19 @@ class AdminPanelController extends AbstractController {
 
         // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($user->getRoles() != ["ROLE_ADMIN"] && $user->isVerified() && $user->isMembershipPaid() && $user->isAssociationMember()) {
+
+            if ($user->getRoles() != ["ROLE_ADMIN"] &&
+//                Sans envoi réel de mail on ne peut pas vérifier cette condition
+//                $user->isVerified() &&
+                $user->isMembershipPaid() &&
+                $user->isAssociationMember())
+            {
                 $user->setRoles(["ROLE_MEMBER"]);
+
             } else {
+
                 $user->setRoles(["ROLE_USER"]);
+
             }
 
             // Sauvegarde des données modifiées en BDD
