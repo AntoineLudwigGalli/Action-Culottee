@@ -7,6 +7,10 @@
 
 body{
     font-family: 'Roboto', serif;
+
+}
+html{
+    background-color: red;
 }
     /*Titres H1*/
 
@@ -183,14 +187,14 @@ h3{
 
 .footer {
     height: auto;
-    width: 100%;
+    /*width: 100%;*/
     background-color: #000000;
-    padding: 40px 0 0 0;
+    /*padding: 40px 0 0 0;*/
 }
 
 .copyright {
     background-color: #000000 ;
-    padding: 40px 0 10px 0;
+    /*padding: 40px 0 10px 0;*/
 }
 
 .footer-logo{
@@ -235,7 +239,7 @@ h3{
 
 /*Page d'accueil*/
 
-/* THE MAP */
+ /*THE MAP*/
 #map {
     height: 60vh;
     margin-bottom: 40px;
@@ -379,7 +383,7 @@ h3{
     background-color: #FF9933;
 }
 /*//////////////////////////////////////////////////////////*/
-/*Media Queries*/
+Media Queries
 @media screen and (min-width: 992px) {
     #map {
         height: 60vh;

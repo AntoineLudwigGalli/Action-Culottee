@@ -1,4 +1,5 @@
 {% extends 'base.html.twig' %}
+
    {% block cssIncludes %}
        {# Inclusion de la librairie Leaflet pour la map   #}
        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
@@ -15,7 +16,7 @@
 
 {% block body %}
 
-    <div class="container-fluid">
+   
         <div class="row">
 
             <div class="col-md-7">
@@ -33,7 +34,7 @@
                 </div>
             </div>
         </div>
-    </div>
+  
 {% endblock %}
 
 {% block jsIncludes %}
@@ -50,5 +51,6 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     {# Inclusion fichier JS de la map   #}
     <script src="{{ asset('js/leaflet-map.js') }}"></script>
+    
 {% endblock %}
 
