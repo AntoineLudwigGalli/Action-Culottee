@@ -7,13 +7,13 @@
 
 body{
     font-family: 'Roboto', serif;
-
 }
+
 html{
     background-color: red;
 }
-    /*Titres H1*/
 
+/*Titres*/
 h1{
     font-family: 'Cinzel', serif;
     text-align: center;
@@ -169,14 +169,12 @@ h3{
     /*Header*/
         /*Menu principal*/
 .navbar {
-    margin-bottom: 40px;
-;
+    margin: 10px 10px 10px 10px;
 }
 
 .navbar-nav {
     font-family: 'Cinzel', serif;
     font-weight: bold;
-;
 }
 
 .container-fluid>.navbar-collapse>.navbar-nav>.nav-item>.nav-link a.hover{
