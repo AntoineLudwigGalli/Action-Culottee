@@ -388,7 +388,7 @@ p{
 
 .overlay {
 
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
@@ -398,6 +398,12 @@ p{
     background-color: rgba(0,0,0,0.5);
     z-index: 1;
     opacity: 0;
+}
+
+.content {
+
+    padding-bottom: 10%;
+
 }
 
 /* Affichage du partenaire */
@@ -430,6 +436,12 @@ p{
     box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
     -webkit-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
     -moz-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);;
+
+    cursor: pointer;
+
+}
+
+@media screen and(min-width: ){
 
 }
 
