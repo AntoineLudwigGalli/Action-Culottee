@@ -64,15 +64,15 @@
                                     <tr>
                                     
                                         <th scope="col"></th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'Rôle ', 'a.roles') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'Prénom ', 'a.firstname') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'Nom ', 'a.lastname') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'Email ', 'a.email') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'N° adhérent ', 'a.memberIdNumber') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'N° téléphone ', 'a.phoneNumber') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'Newsletter ', 'a.newsletterOption') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'Paiement ', 'a.membershipPaid') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(users, 'Compte vérifié ', 'a.isVerified') }}</th>
+                                        <th scope="col"><a href="">Rôle</a></th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'Prénom ', 'u.firstname') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'Nom ', 'u.lastname') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'Email ', 'u.email') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'N° adhérent ', 'u.memberIdNumber') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'N° téléphone ', 'u.phoneNumber') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'Newsletter ', 'u.newsletterOption') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'Paiement ', 'u.membershipPaid') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(users, 'Compte vérifié ', 'u.isVerified') }}</th>
 
                                     </tr>
                                     </thead>

@@ -55,13 +55,14 @@
                                     <thead>
                                     <tr>
                                         <th scope="col"></th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Gérant ', 'a.owner') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Nom ', 'a.name') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Adresse ', 'a.address') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Code postal ', 'a.zip') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Ville ', 'a.city') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'N° téléphone ', 'a.phoneNumber') }}</th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Pays ', 'a.country') }}</th>
+                                        <th scope="col"><a href="">Gérant</a></th>
+{#                                        TODO:#}
+                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Nom ', 's.name') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Adresse ', 's.address') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Code postal ', 's.zip') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Ville ', 's.city') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(shops, 'N° téléphone ', 's.phoneNumber') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Pays ', 's.country') }}</th>
 
 
                                     </tr>
