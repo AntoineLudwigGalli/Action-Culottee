@@ -6,7 +6,22 @@
 
     <div class="container">
 
-        <h1 class="text-center"> Nos partenaires </h1>
+        {# Titre #}
+        <div class="row">
+
+            <div class="col-12">
+
+                <header class="my-3 col-1">
+                    <h1> Nos partenaires </h1>
+                </header>
+
+                <div class="my-5">
+                    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate dolorum eius nesciunt, recusandae repellat similique.</h2>
+                </div>
+
+            </div>
+
+        </div>
 
         {# Affichage des partenaires #}
         <div class="row">
@@ -17,11 +32,14 @@
 
                 {% for partner in partners %}
 
-                    <div class="card col-12 col-sm-6 col-md-4 col-lg-3 mx-auto mb-4 p-sm-4 card-partner">
-                        <img data-ov1="{{ i }}" data-ov2="{{ partner.id }}" src="{{ asset('images/images-partners/' ~ partner.logo ) }}" alt="" class="card-img-top rounded-5">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">{{ partner.title }}</h2>
+                    <div class="card me-1 me-sm-0 me-md-0 col-5 col-sm-6 col-md-4 col-lg-3 mx-auto mb-4 p-sm-4 card-partner">
+                        <div>
+                            <img data-ov1="{{ i }}" data-ov2="{{ partner.id }}" src="{{ asset('images/images-partners/' ~ partner.logo ) }}" alt="" class="card-img-top">
                         </div>
+{#
+                       <div class="card-body my-5">
+                            <h2 class="card-title text-center">{{ partner.title }}</h2>
+                        </div>#}
                     </div>
 
                     {% set i = i + 1 %}
@@ -41,7 +59,7 @@
 
             <div class="col-12">
 
-                <div class="display-partner bg-white col-md-10 col-lg-6 d-flex flex-row mx-auto mt-5">
+                <div class="display-partner bg-white col-md-8 col-lg-10 col-xl-6 col-xxl-6 d-flex flex-row mx-auto mt-5">
 
                     {# Bord jaune #}
                     <div class="bgc-orange col-1"></div>
@@ -88,7 +106,7 @@
                                         {# Descrition #}
                                         <div class="d-flex flex-column flex-lg-row mt-lg-5">
 
-                                            <div class="partner-sentence p-3">
+                                            <div class="partner-sentence p-3 text-break">
 
                                                 <p class="w-100">...</p>
 

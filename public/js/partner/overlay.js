@@ -40,6 +40,12 @@ async function closeOverlayPartner() {
     // Attente de 500 miliseconds
     await sleep(500);
 
+
+    // Si il existe on le supprime
+    if ( document.querySelector('.div-offer') ) {
+        document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );
+    }
+
     document.querySelector('.partner').classList.add('d-none');
 
 
