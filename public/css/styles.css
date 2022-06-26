@@ -329,7 +329,7 @@ p{
     padding-bottom: 1rem;
 }
 
-.dynamic-image-right, .dynamic-image-left{
+.dynamic-image{
     height: 130px;
 }
  /*Carousel*/
@@ -518,28 +518,20 @@ p{
         padding: 1rem 8rem;
     }
     /*Animation JS des images sur la page d'accueil*/
-    .dynamic-image-left{
+    .dynamic-image{
         position: relative;
         left: -150px;
     }
-    .dynamic-image-right{
-        position: relative;
-        right: -150px;
 
-    }
     .hide-overflow{
         overflow: hidden;
     }
-    .animation-right{
+    .animation{
         height: 130px;
         position: relative;
         left: 0;
     }
-    .animation-left{
-        height: 130px;
-        position: relative;
-        right: 0;
-    }
+
 }
 
 

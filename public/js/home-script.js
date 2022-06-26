@@ -1,23 +1,14 @@
-$(".dynamic-image-left").mouseenter(function (e){
+$(".dynamic-image").mouseenter(function (e){
     e.preventDefault();
-    $(this).addClass("animation-right");
+    $(this).addClass("animation");
 
 })
 
-$(".dynamic-image-left").mouseleave(function (e) {
+$(".dynamic-image").mouseleave(function (e) {
     e.preventDefault();
-    $(this).removeClass("animation-right");
+    $(this).removeClass("animation");
 });
 
-$(".dynamic-image-right").mouseenter(function (e){
-    e.preventDefault();
-    $(this).addClass("animation-left");
 
-})
-
-$(".dynamic-image-right").mouseleave(function (e) {
-    e.preventDefault();
-    $(this).removeClass("animation-left");
-});
 
 
