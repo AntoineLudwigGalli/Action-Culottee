@@ -4,47 +4,40 @@
 
 {% block content %}
     <div class="container-fluid">
-
+        
         <div class="col-md-10 offset-md-2">
-
+            
             <div class="row">
-                <h1 class="col-12 text-center my-5">Menu d'administration</h1>
+                <h1 class="col-12 text-center orange-line my-5">Menu d'administration</h1>
             </div>
-    
+            
             <div class="row">
-                <h2 class="col-12 text-center mt-3">Le site d'Action Culottée, c'est actuellement :</h2>
+                <h2 class="col-12 text-center  mt-3">Le site d'Action Culottée, c'est actuellement :</h2>
             </div>
             <div class="row">
-
+                
                 <div class="col-12 col-md-8 mx-auto">
                     <div class="row separation-row"></div>
                     <div class="row">
-                        <div class="col-md-4 offset-md-1 col-6">
+                        <div class="col-md-3 col-6">
                             <a href="{{ path('admin_panel_users_list') }}" class="admin-button mt-3 btn">{{ users.getTotalItemCount() }} utilisateurs</a>
                         </div>
-                        <div class="col-md-6 offset-md-1 col-6">
-                            <a href="{{ path('admin_panel_events_list') }}" class="admin-button mt-3 btn">{{ events.getTotalItemCount() }} évènements prévus</a>
+                        <div class="col-md-3  col-6">
+                            <a href="{{ path('admin_panel_events_list') }}" class="admin-button mt-3 btn">{{ events.getTotalItemCount() }} évènements</a>
                         </div>
                         
-                    </div>
-                    
-                    <div class="row separation-row"></div>
-                    
-                    <div class="row mt-4">
-                        <div class="col-md-4 offset-md-1 col-6">
+                        
+                        <div class="col-md-3 col-6">
                             <a href="{{ path('admin_panel_partners_list') }}" class="admin-button mt-3 btn">{{ partners.getTotalItemCount() }} partenaires</a>
                         </div>
-                        <div class="col-md-6 offset-md-1 col-6">
-                            <a href="{{ path('admin_panel_shops_list') }}" class="admin-button mt-3 btn">{{ shops.getTotalItemCount() }} boutiques enregistrées</a>
+                        <div class="col-md-3  col-6">
+                            <a href="{{ path('admin_panel_shops_list') }}" class="admin-button mt-3 btn">{{ shops.getTotalItemCount() }} boutiques </a>
                         </div>
-                        
-                    </div>
-      
                     
-      
-
+                    </div>
+                
                 </div>
-
+            
             </div>
         </div>
     </div>
