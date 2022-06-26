@@ -16,13 +16,11 @@ function openOverlayPartner() {
     document.querySelector('.overlay').classList.toggle('d-none');
 
 }
-
 /*
 *
 * Fonction asynchrone pour fermer l'overlay
 *
 */
-
 async function closeOverlayPartner() {
 
     // Création d'une promesse "sleep" pour attendre que l'action soit terminée afin de supprimer l'overlay
@@ -40,14 +38,12 @@ async function closeOverlayPartner() {
     // Attente de 500 millisecondes
     await sleep(500);
 
-
     // Si il existe on le supprime
     if ( document.querySelector('.div-offer') ) {
         document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );
     }
 
     document.querySelector('.partner').classList.add('d-none');
-
 
 }
 

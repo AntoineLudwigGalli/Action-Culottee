@@ -44,7 +44,9 @@ class AdminPanelController extends AbstractController {
 // Requêtes de toutes les entrées dans les tables des entités Shop, FutureEvents, User et Partner pour en afficher le nombre dans les boutons de l'index admin
         $em = $doctrine->getManager();
 
-        $query = $em->createQuery('SELECT e FROM App\Entity\FutureEvent e');
+
+        $query = $em->createQuery('SELECT e FROM App\Entity\FutureEvent e ');
+
 
         $events = $paginator->paginate($query,  55);
 
@@ -127,12 +129,13 @@ class AdminPanelController extends AbstractController {
 
         $em = $doctrine->getManager();
 
-        $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a ORDER BY a.eventDate ASC');
+        $query = $em->createQuery('SELECT e FROM App\Entity\FutureEvent e ORDER BY e.eventDate ASC');
 
         $events = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_events_list.html.twig', ['events' => $events,]);
     }
+
 
 
     #[Route('/suppression-d\'un-evenement/{id}/', name: 'event_delete_', priority: 10)]
@@ -144,7 +147,7 @@ class AdminPanelController extends AbstractController {
             $this->addFlash('error', 'Token de sécurité invalide, veuillez ré-essayer.');
 
         } else {
-            // Suppression de l'article en BDD
+            // Suppression de l'event en BDD
             $em = $doctrine->getManager();
             $em->remove($futureEvent);
             $em->flush();
@@ -152,20 +155,20 @@ class AdminPanelController extends AbstractController {
             // Message flash de succès
             $this->addFlash('success', "L'évènement a été supprimé avec succès !");
         }
-        // Redirection vers la page qui liste les articles
+        // Redirection vers la page qui liste les events
         return $this->redirectToRoute('admin_panel_events_list');
     }
-
-
+    /**
+     *
+     *
+     */
     #[Route('/modification-d\'un-evenement/{id}/', name: 'event_edit_', priority: 10)]
     public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
 
-        // Instanciation d'un nouveau formulaire basé sur $futureEvent qui contient déjà les données actuelles de l'article à modifier
         $form = $this->createForm(CreateEventFormType::class, $futureEvent);
 
         $form->handleRequest($request);
 
-        // Si le formulaire est envoyé et sans erreurs
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Sauvegarde des données modifiées en BDD
@@ -215,7 +218,10 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_register.html.twig', ['registrationForm' => $form->createView(),]);
     }
-
+    /**
+     *
+     *
+     */
 
     #[Route('/liste-des-utilisateurs', name: 'users_list')]
     public function usersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
@@ -228,12 +234,113 @@ class AdminPanelController extends AbstractController {
 
         $em = $doctrine->getManager();
 
-        $query = $em->createQuery('SELECT a FROM App\Entity\User a ORDER BY a.roles DESC');
+
+        $query = $em->createQuery('SELECT u FROM App\Entity\User u ORDER BY u.id DESC');
+
 
         $users = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_users_list.html.twig', ['users' => $users,]);
     }
+    /**
+     *
+     *
+     */
+
+    #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
+    public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response {
+        $form = $this->createForm(UpdateUserFormType::class, $user);
+
+        $form->handleRequest($request);
+
+        // Si le formulaire est envoyé et sans erreurs
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($user->getRoles() != ["ROLE_ADMIN"] &&
+//                Sans envoi réel de mail, on ne peut pas vérifier cette condition
+//                $user->isVerified() &&
+                $user->isMembershipPaid() &&
+                $user->isAssociationMember())
+            {
+                $user->setRoles(["ROLE_MEMBER"]);
+
+            } else {
+
+                $user->setRoles(["ROLE_USER"]);
+
+            }
+
+            // Sauvegarde des données modifiées en BDD
+            $em = $doctrine->getManager();
+            $em->flush();
+
+            // Message flash de succès
+            $this->addFlash('success', 'Utilisateur modifié avec succès !');
+
+            // Redirection vers la liste
+            return $this->redirectToRoute('admin_panel_users_list', ['id' => $user->getId(),]);
+
+        }
+
+        return $this->render('admin_panel/admin_user_edit.html.twig', ['form' => $form->createView(),]);
+
+    }
+
+    /**
+     *
+     *
+     */
+    #[Route('/suppression-d\'un-utilisateur/{id}/', name: 'user_delete_', priority: 10)]
+    public function userDelete(User $user, Request $request, ManagerRegistry $doctrine): Response {
+        $csrfToken = $request->query->get('csrf_token', '');
+
+        if (!$this->isCsrfTokenValid('user_delete_' . $user->getId(), $csrfToken)) {
+
+            $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
+
+        } else {
+            // Suppression de l'utilisateur en BDD
+            $em = $doctrine->getManager();
+            $em->remove($user);
+            $em->flush();
+
+            // Message flash de succès
+            $this->addFlash('success', "L'utilisateur a été supprimé avec succès !");
+        }
+        // Redirection vers la page qui liste les utilisateurs
+        return $this->redirectToRoute('admin_panel_users_list');
+    }
+
+    /**
+     *
+     *
+     */
+
+    #[Route('/rechercher-un-utilisateur/', name: 'users_search')]
+    public function searchUser(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+
+        $requestedPage = $request->query->getInt('page', 1);
+
+        if ($requestedPage < 1) {
+            throw new NotFoundHttpException();
+        }
+
+        $search = $request->query->get('search', '');
+
+        $em = $doctrine->getManager();
+
+        $query =
+            $em->createQuery('SELECT u FROM App\Entity\User u WHERE u.firstname LIKE :search OR u.lastname LIKE :search OR u.email LIKE :search OR u.phoneNumber LIKE :search OR u.memberIdNumber LIKE :search')
+                ->setParameters(['search' => '%' . $search . '%']);
+
+        $users = $paginator->paginate($query,
+            $requestedPage,
+            55
+        );
+
+        return $this->render('admin_panel/admin_users_search.html.twig', ['users' => $users,]);
+    }
+
 
     /*    /////////////////////////////////////////////////////////////////////*/
 
@@ -282,97 +389,9 @@ class AdminPanelController extends AbstractController {
 
     }
 
-    //////////////////////////////////////////////////////////
 
-    #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
-    public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response {
-        $form = $this->createForm(UpdateUserFormType::class, $user);
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        $form->handleRequest($request);
-
-        // Si le formulaire est envoyé et sans erreurs
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            if ($user->getRoles() != ["ROLE_ADMIN"] &&
-//                Sans envoi réel de mail, on ne peut pas vérifier cette condition
-//                $user->isVerified() &&
-                $user->isMembershipPaid() &&
-                $user->isAssociationMember())
-            {
-                $user->setRoles(["ROLE_MEMBER"]);
-
-            } else {
-
-                $user->setRoles(["ROLE_USER"]);
-
-            }
-
-            // Sauvegarde des données modifiées en BDD
-            $em = $doctrine->getManager();
-            $em->flush();
-
-            // Message flash de succès
-            $this->addFlash('success', 'Utilisateur modifié avec succès !');
-
-            // Redirection vers la liste
-            return $this->redirectToRoute('admin_panel_users_list', ['id' => $user->getId(),]);
-
-        }
-
-        return $this->render('admin_panel/admin_user_edit.html.twig', ['form' => $form->createView(),]);
-
-    }
-
-
-    #[Route('/suppression-d\'un-utilisateur/{id}/', name: 'user_delete_', priority: 10)]
-    public function userDelete(User $user, Request $request, ManagerRegistry $doctrine): Response {
-        $csrfToken = $request->query->get('csrf_token', '');
-
-        if (!$this->isCsrfTokenValid('user_delete_' . $user->getId(), $csrfToken)) {
-
-            $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
-
-        } else {
-            // Suppression de l'article en BDD
-            $em = $doctrine->getManager();
-            $em->remove($user);
-            $em->flush();
-
-            // Message flash de succès
-            $this->addFlash('success', "L'utilisateur a été supprimé avec succès !");
-        }
-        // Redirection vers la page qui liste les articles
-        return $this->redirectToRoute('admin_panel_users_list');
-    }
-
-
-
-    #[Route('/rechercher-un-utilisateur/', name: 'users_search')]
-    public function searchUser(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
-
-        $requestedPage = $request->query->getInt('page', 1);
-
-        if ($requestedPage < 1) {
-            throw new NotFoundHttpException();
-        }
-
-        $search = $request->query->get('search', '');
-
-        $em = $doctrine->getManager();
-// Requête DQL pour comparer la saisie de la recherche avec les entrées en bdd par champs
-        $query =
-            $em->createQuery('SELECT a FROM App\Entity\User a WHERE a.firstname LIKE :search OR a.lastname LIKE :search OR a.email LIKE :search OR a.phoneNumber LIKE :search OR a.memberIdNumber LIKE :search')
-                ->setParameters(['search' => '%' . $search . '%']);
-
-        $users = $paginator->paginate($query,
-            $requestedPage,
-            55
-        );
-
-        return $this->render('admin_panel/admin_users_search.html.twig', ['users' => $users,]);
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
      *
@@ -444,7 +463,7 @@ class AdminPanelController extends AbstractController {
 
         $em = $doctrine->getManager();
 
-        $query = $em->createQuery('SELECT a FROM App\Entity\Shop a ORDER BY a.id DESC');
+        $query = $em->createQuery('SELECT s FROM App\Entity\Shop s ORDER BY s.id DESC');
 
         $shops = $paginator->paginate($query, $requestedPage, 55);
 
@@ -502,8 +521,10 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_shop_edit.html.twig', ['form' => $form->createView()]);
     }
-
-
+    /**
+     *
+     *
+     */
     #[Route('/suppression-d\'une-boutique/{id}/', name: 'shop_delete_', priority: 10)]
     public function shopDelete(Shop $shop, Request $request, ManagerRegistry $doctrine): Response {
 
@@ -514,7 +535,7 @@ class AdminPanelController extends AbstractController {
             $this->addFlash('error', 'Token sécurité invalide, veuillez ré-essayer.');
 
         } else {
-            // Suppression de l'article en BDD
+            // Suppression de la boutique en BDD
             $em = $doctrine->getManager();
             $em->remove($shop);
             $em->flush();
@@ -522,11 +543,13 @@ class AdminPanelController extends AbstractController {
             // Message flash de succès
             $this->addFlash('success', "La boutique a été supprimée avec succès !");
         }
-        // Redirection vers la page qui liste les articles
+        // Redirection vers la page qui liste les boutiques
         return $this->redirectToRoute('admin_panel_shops_list');
     }
-
-
+    /**
+     *
+     *
+     */
     #[Route('/rechercher-une-boutique/', name: 'shops_search')]
     public function searchShop(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
 
@@ -541,14 +564,13 @@ class AdminPanelController extends AbstractController {
         $em = $doctrine->getManager();
 
         $query = $em
-            ->createQuery('SELECT a FROM App\Entity\Shop a WHERE a.zip LIKE :search OR a.city LIKE :search OR a.address LIKE :search OR a.phoneNumber LIKE :search OR a.country LIKE :search OR a.name LIKE :search ')
+            ->createQuery('SELECT s FROM App\Entity\Shop s WHERE s.zip LIKE :search OR s.city LIKE :search OR s.address LIKE :search OR s.phoneNumber LIKE :search OR s.country LIKE :search OR s.name LIKE :search ')
             ->setParameters(['search' => '%' . $search . '%']);
 
         $shops = $paginator->paginate($query, $requestedPage, 55);
 
         return $this->render('admin_panel/admin_shops_search.html.twig', ['shops' => $shops,]);
     }
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
@@ -617,7 +639,7 @@ class AdminPanelController extends AbstractController {
 
         $em = $doctrine->getManager();
 
-        $query = $em->createQuery('SELECT a FROM App\Entity\Partner a ORDER BY a.id DESC');
+        $query = $em->createQuery('SELECT p FROM App\Entity\Partner p ORDER BY p.id DESC');
 
         $partners = $paginator->paginate($query, $requestedPage, 55);
 
@@ -685,7 +707,7 @@ class AdminPanelController extends AbstractController {
             $this->addFlash('error', 'Token de sécurité invalide, veuillez ré-essayer.');
 
         } else {
-            // Suppression de l'article en BDD
+            // Suppression du partenaire en BDD
             $em = $doctrine->getManager();
             $em->remove($partner);
             $em->flush();
@@ -693,7 +715,7 @@ class AdminPanelController extends AbstractController {
             // Message flash de succès
             $this->addFlash('success', "Le partenaire a été supprimé avec succès !");
         }
-        // Redirection vers la page qui liste les articles
+        // Redirection vers la page qui liste les partenaires
         return $this->redirectToRoute('admin_panel_partners_list');
     }
 
