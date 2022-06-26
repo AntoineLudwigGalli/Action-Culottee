@@ -18,11 +18,9 @@ html {
 
 body{
     font-family: 'Roboto', serif;
-
 }
 
-    /*Titres H1*/
-
+/*Titres*/
 h1{
     font-family: 'Cinzel', serif;
     text-align: center;
@@ -198,7 +196,7 @@ p{
         /*Menu principal*/
 
 .navbar {
-    margin-bottom: 40px;
+    margin: 10px 10px 10px 10px;
 }
 
 .navbar-nav {
@@ -235,7 +233,6 @@ p{
     color: transparent;
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
     background: -webkit-radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-    background-clip: text;
     -webkit-background-clip: text;
 }
 

@@ -1,127 +1,107 @@
-{# TODO: Barre de navigation avec bannière + de culotte ! #}
+{# Barre de navigation avec logo #}
 {# Menu principal du site #}
-<div class="row">
+<div class="row py-3">
     <div class="col-12">
-<nav class="navbar navbar-expand-lg navbar- navbar-light">
-    
-        {# Logo et titre du site #}
-        <a class="navbar-brand" id="top" href="{{ path('main_home') }}">
-            <img src="{{ asset('/images/logo_header.png') }}" alt="" class="img-fluid main-navbar-logo">
-        </a>
+        <nav class="navbar navbar-expand-lg navbar- navbar-light justify-content-between align-items-center">
+            {# Logo #}
+            <a class="navbar-brand" href="{{ path('main_home') }}">
+                <img src="{{ asset('/images/logo_header.png') }}" alt="" class="img-fluid main-navbar-logo">
+            </a>
 
-        {# Bouton burger #}
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarContent"
-                aria-controls="mainNavbarContent" aria-expanded="false" aria-label="Afficher la navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+            {# Bouton burger #}
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbarContent" aria-controls="mainNavbarContent" aria-expanded="false" aria-label="Afficher la navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        {# Conteneur principal des boutons #}
-        <div class="collapse navbar-collapse" id="mainNavbarContent">
+            <div class="button_nav">
+                {# Boutons du haut à droite #}
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 justify-content-end">
 
-            {# Paquet des boutons de gauche #}
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                {# Bouton de la page Accueil #}
-                <li class="nav-item">
-                    <a class="nav-link{{ route == 'main_home' ? ' active' }}" href="{{ path('main_home') }}">Accueil</a>
-                </li>
-
-{#                #}{# Bouton de la page qui-sommes-nous #}
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link{{ route == 'main_about' ? ' active' }}" href="{{ path('main_about') }}">Qui#}
-{#                        sommes-nous ?</a>#}
-{#                </li>#}
-
-{#                #}{# TODO: #}
-{#                #}{# Bouton de la page Les actions clulottées #}
-{#                <li class="nav-item">#}
-{#                    <a class="nav-link{{ route == 'main_home' ? '' }}" href="{{ path('main_home') }}">Les actions#}
-{#                        culottées</a>#}
-{#                </li>#}
-
-                {# TODO: #}
-                {# Bouton de la page Nos partenaires #}
-                <li class="nav-item">
-                    <a class="nav-link{{ route == 'main_partners' ? '' }}" href="{{ path('main_partners') }}">Nos
-                        partenaires</a>
-                </li>
-
-                {# TODO: #}
-                {# Bouton de la page Actualité #}
-                <li class="nav-item">
-                    <a class="nav-link{{ route == 'main_agenda' ? '' }}" href="{{ path('main_agenda') }}">Actualités</a>
-                </li>
-
-            </ul>
-
-            {# Paquet des boutons de droite #}
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-
-                {# Affichage des boutons réservés aux utilisateurs connectés #}
-                {% if app.user %}
-
+                    {# Affichage des boutons réservés aux utilisateurs connectés #}
+                    {% if app.user %}
                     {# Menu déroulant #}
                     <li class="nav-item dropdown">
-
                         {# Texte du bouton du menu déroulant #}
-                        <a class="nav-link dropdown-toggle" href="#" id="profil-dropdown" role="button"
-                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {# TODO: #}
+                        <a class="nav-link dropdown-toggle" href="#" id="profil-dropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {# Affichage du prénom de l'utilisateur connecté #}
-                            <i class="fas fa-user mx-1"></i>{{ app.user.firstname }} {{ app.user.lastname }}
+                            <i class="fa-solid fa-briefcase mx-1"></i>{{ app.user.firstname }} {{ app.user.lastname }}
                         </a>
-
                         {# Liste des boutons du menu déroulant #}
                         <div class="dropdown-menu" aria-labelledby="profil-dropdown">
-
-                            {# TODO: #}
                             {# Bouton de la page mon profil #}
-                            <a class="dropdown-item" href="{{ path('user_panel_profil') }}"><i
-                                        class="fas fa-users-cog me-1"></i>Mon Profil</a>
+                            <a class="dropdown-item" href="{{ path('user_panel_profil') }}">
+                                <i class="fa-solid fa-user me-1"></i>Mon Profil
+                            </a>
 
                             {# Bouton de la page Administration #}
                             {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                                <a class="dropdown-item" href="{{ path('admin_panel_index') }}"><i
-                                            class="fas fa-users-cog me-1"></i>Administration</a>
+                            <a class="dropdown-item" href="{{ path('admin_panel_index') }}">
+                                <i class="fa-solid fa-gears me-1"></i>Administration
+                            </a>
                             {% endif %}
 
                             {# Bouton de la page User Panel #}
                             {% if app.user.roles[0] == "ROLE_MEMBER" or app.user.roles[0] == "ROLE_ADMIN" %}
-                                <a class="dropdown-item" href="{{ path('user_panel_manage_shop') }}"><i
-                                            class="fas fa-users-cog me-1"></i>Boutiques</a>
+                            <a class="dropdown-item" href="{{ path('user_panel_manage_shop') }}">
+                                <i class="fa-solid fa-store me-1"></i>Boutiques
+                            </a>
                             {% endif %}
 
                             {# Séparateur #}
                             <div class="dropdown-divider"></div>
 
                             {# Bouton de la page de déconnexion #}
-                            <a class="dropdown-item" href="{{ path('app_logout') }}"><i
-                                        class="fas fa-sign-out-alt me-1"></i>Déconnexion</a>
-
+                            <a class="dropdown-item" href="{{ path('app_logout') }}">
+                                <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
+                            </a>
                         </div>
-
                     </li>
 
                     {# Affichage des boutons réservés aux utilisateurs non connectés #}
-                {% else %}
-
+                    {% else %}
                     {# Bouton de la page d'inscription #}
                     <li class="nav-item">
-                        <a class="nav-link{{ route == 'app_register' ? ' active' }}"
-                           href="{{ path('app_register') }}"><i class="fas fa-user-plus mx-1"></i>Inscription</a>
+                        <a class="nav-link{{ route == 'app_register' ? ' active' }}" href="{{ path('app_register') }}">
+                            <i class="fas fa-user-plus mx-1"></i>Inscription
+                        </a>
                     </li>
-
                     {# Bouton de la page de connexion #}
                     <li class="nav-item">
                         <a class="nav-link{{ route == 'app_login' ? ' active' }}" href="{{ path('app_login') }}">
-                            <i class="fas fa-sign-in-alt mx-1"></i>Connexion</a>
+                            <i class="fas fa-sign-in-alt mx-1"></i>Connexion
+                        </a>
                     </li>
+                    {% endif %}
+                </ul>
 
-                {% endif %}
-
-            </ul>
-        </div>
-  
-</nav>
+                {# Conteneur principal des boutons #}
+                <div class="collapse navbar-collapse" id="mainNavbarContent">
+                    {# Paquet des boutons ligne dessous #}
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-content-end">
+                        {# Bouton de la page Accueil #}
+                        <li class="nav-item">
+                            <a class="nav-link{{ route == 'main_home' ? ' active' }}" href="{{ path('main_home') }}">Accueil</a>
+                        </li>
+                        {# Bouton de la page qui-sommes-nous #}
+                        <li class="nav-item">
+                            <a class="nav-link{{ route == 'main_about' ? ' active' }}" href="{{ path('main_about') }}">Qui sommes-nous ?</a>
+                        </li>
+                        {# TODO: Page Les actions clulottées #}
+                        {# Bouton de la page Les actions clulottées #}
+                        {# <li class="nav-item">
+                            <a class="nav-link{{ route == 'main_home' ? '' }}" href="{{ path('main_home') }}">Les actions culottées</a>
+                        </li> #}
+                        {# Bouton de la page Nos partenaires #}
+                        <li class="nav-item">
+                            <a class="nav-link{{ route == 'main_partners' ? '' }}" href="{{ path('main_partners') }}">Nos partenaires</a>
+                        </li>
+                        {# Bouton de la page Actualité #}
+                        <li class="nav-item">
+                            <a class="nav-link{{ route == 'main_agenda' ? '' }}" href="{{ path('main_agenda') }}">Actualités</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
 </div>
