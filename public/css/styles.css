@@ -349,7 +349,16 @@ p{
 .carousel p, .carousel h5{
     color: #E1942D;
 }
+ /*ScrollTrigger*/
 
+
+.visible, .invisible {
+    opacity: 0.0;
+    transition: opacity 0.5s ease;
+}
+.visible {
+    opacity: 1.0;
+}
  /*THE MAP*/
 #map {
     height: 60vh;
