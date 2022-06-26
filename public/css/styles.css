@@ -397,6 +397,7 @@ p{
 
 .overlay {
 
+    overflow-y: scroll;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -408,7 +409,15 @@ p{
     z-index: 1;
     opacity: 0;
 }
+.content{
 
+}
+.partner-title h2{
+
+}
+.partner-image{
+    height: 15vh;
+}
 /* Affichage du partenaire */
 
 .fa-xmark {
