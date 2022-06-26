@@ -9,10 +9,6 @@ body{
     font-family: 'Roboto', serif;
 }
 
-html{
-    background-color: red;
-}
-
 /*Titres*/
 h1{
     font-family: 'Cinzel', serif;
@@ -31,7 +27,10 @@ h3{
     color: #E1942D;
     font-weight: bold;
 }
-
+p{
+    font-size: 1.3rem;
+    margin-bottom: 0;
+}
 .background_page_form{
     background-color: #E1942D;
 }
@@ -71,7 +70,12 @@ h3{
     border: 2px solid white;
     border-radius: 45px;
     color: white;
-    margin-top: 20px;
+}
+
+/* Permet de supprimer l'effet focus sur le button */
+.btn:focus{
+    box-shadow: none;
+
 }
 
 .button-orange:hover{
@@ -79,7 +83,6 @@ h3{
     border: 2px solid #E1942D;
     border-radius: 45px;
     color: #E1942D;
-    margin-top: 20px;
 }
 
 .input-orange{
@@ -104,6 +107,18 @@ h3{
 .bgc-orange{
     background-color: #E1942D;
 }
+
+
+.btn-back {
+
+    background: #e74c3c;
+
+    border-radius: 45px;
+
+    color: white;
+
+}
+
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -168,6 +183,7 @@ h3{
 /* Partials */
     /*Header*/
         /*Menu principal*/
+
 .navbar {
     margin: 10px 10px 10px 10px;
 }
@@ -185,14 +201,13 @@ h3{
 
 .footer {
     height: auto;
-    /*width: 100%;*/
     background-color: #000000;
-    /*padding: 40px 0 0 0;*/
+
 }
 
 .copyright {
     background-color: #000000 ;
-    /*padding: 40px 0 10px 0;*/
+
 }
 
 .footer-logo{
@@ -236,6 +251,89 @@ h3{
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 /*Page d'accueil*/
+.home-title{
+    font-size: 3rem;
+}
+
+.introduction{
+    padding: 3rem;
+
+}
+.home-button{
+    background: white;
+    color: #E1942D;
+    border: 2px solid #E1942D;
+    text-decoration: none;
+    padding: 1rem;
+    text-transform: uppercase;
+}
+
+.home-button:hover{
+    background: #E1942D;
+    border: 2px solid white;
+    color: white;
+    margin-top: 20px;
+}
+.missions{
+    padding: 3rem;
+}
+.missions h3{
+    text-transform: uppercase;
+    font-size: 1.2em;
+    margin-bottom: 1rem;
+
+}
+.orange-line{
+    text-decoration: #e1942d underline 10px;
+}
+.actions{
+ padding: 3rem 0;
+}
+.posters{
+    background-color: black;
+}
+
+.posters-box .color-rows{
+
+    height: 25vh;
+}
+
+.about{
+    padding-bottom: 3rem;
+}
+
+.why-join{
+    padding: 3rem;
+}
+.why-join p{
+    font-weight: bold;
+}
+
+.map{
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+}
+
+.dynamic-image-right, .dynamic-image-left{
+    height: 130px;
+}
+ /*Carousel*/
+#container img {
+    display: block;
+    width: auto !important;
+    height: 500px !important;
+}
+.carousel img{
+    height: 40rem;
+}
+.carousel-caption{
+    background-color: rgba(0,0,0,.7);
+    border-radius: 10px;
+    padding: 2rem;
+}
+.carousel p, .carousel h5{
+    color: #E1942D;
+}
 
  /*THE MAP*/
 #map {
@@ -243,20 +341,6 @@ h3{
     margin-bottom: 40px;
 }
 
-/*Texte de la page d'accueil*/
-.home_text{
-    text-align: justify;
-}
-
-/*Texte au dessus de la map*/
-.container-fluid .row h2{
-    font-family: 'Caveat', serif;
-    text-align: center;
-    font-size: 45px;
-    color: #FF9933;
-    margin-bottom: 0;
-
-}
 
 /*---------------------------------------------------------*/
 
@@ -266,7 +350,7 @@ h3{
 
 .overlay {
 
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -316,33 +400,12 @@ h3{
     font-size: 7;
 }*/
 
-.font-user {
-
-    background-color: #e1942d;
-
-}
-
 .interface-user {
 
     border-radius: 30px;
 
 }
 
-.text-user {
-
-    color: #e1942d;
-
-}
-
-.btn-edit {
-
-    background-color: #e1942d;
-
-    border-radius: 30px;
-
-    color: white;
-
-}
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -381,23 +444,12 @@ h3{
     background-color: #FF9933;
 }
 /*//////////////////////////////////////////////////////////*/
-Media Queries
-@media screen and (min-width: 992px) {
-    #map {
-        height: 60vh;
+/*Media Queries*/
+
+@media screen and (min-width: 768px){
+    .home-title{
+        font-size: 4rem;
     }
-}
-@media screen and (min-width: 1500px){
-    .shop-edit-table thead tr th,
-    .shop-edit-table tbody tr td
-    {
-        width: 50%;
-    }
-
-}
-
-@media screen and (min-width: 574px){
-
     .flex-profil div {
         display: flex;
         flex-direction: row;
@@ -409,7 +461,48 @@ Media Queries
     .flex-profil div:last-child {
         display: block;
     }
+
 }
+
+@media screen and (min-width: 992px) {
+    #map {
+        height: 60vh;
+    }
+    .shop-edit-table thead tr th,
+    .shop-edit-table tbody tr td
+    {
+        width: 50%;
+    }
+    .home-button{
+        padding: 1rem 8rem;
+    }
+    /*Animation JS des images sur la page d'accueil*/
+    .dynamic-image-left{
+        position: relative;
+        left: -150px;
+    }
+    .dynamic-image-right{
+        position: relative;
+        right: -150px;
+
+    }
+    .hide-overflow{
+        overflow: hidden;
+    }
+    .animation-right{
+        height: 130px;
+        position: relative;
+        left: 0px;
+    }
+    .animation-left{
+        height: 130px;
+        position: relative;
+        right: 0px;
+    }
+}
+
+
+
 
 /* Partenaire image */
 /*

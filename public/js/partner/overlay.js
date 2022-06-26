@@ -19,12 +19,13 @@ function openOverlayPartner() {
 
 /*
 *
-* Function asynchrone pour execution de l'animation et de fermeture de overlay
+* Fonction asynchrone pour fermer l'overlay
 *
 */
+
 async function closeOverlayPartner() {
 
-    // Création d'une promesse "sleep" pour attendre que l'action soit finie afin de supprimer l'overlay
+    // Création d'une promesse "sleep" pour attendre l'action quel sois fini afin de suprrimé l'overlay
     const sleep = ms => new Promise(r => setTimeout(r,
         ms));
 
@@ -36,7 +37,7 @@ async function closeOverlayPartner() {
             ease: Power3.easeInOut
         });
 
-    // Attente de 500 milliseconds
+    // Attente de 500 miliseconds
     await sleep(500);
 
     document.querySelector('.partner').classList.add('d-none');
@@ -50,6 +51,8 @@ document.querySelectorAll('.card img').forEach(function (element) {
     element.addEventListener('click',  function (e) {
 
         openOverlayPartner();
+
+        console.log(this);
 
         // Application du text dynamic sur l'overlay
         const partnerMark = partnersL[this.dataset.ov1]['title'];
@@ -77,10 +80,11 @@ document.querySelectorAll('.card img').forEach(function (element) {
                 divButtonOffer.prepend( linkOffer );
                 linkOffer.prepend( buttonOffer );
 
+
                 // Ajout des classes sur l'offre
-                divButtonOffer.setAttribute('class', 'text-center mt-5');
+                divButtonOffer.setAttribute('class', 'text-center mt-5  div-offer');
                 linkOffer.setAttribute('class', 'text-black text-decoration-underline');
-                buttonOffer.setAttribute('class', 'btn btn-warning offer w-25 mb-5');
+                buttonOffer.setAttribute('class', 'btn button-orange offer w-25 mb-5');
 
                 buttonOffer.textContent = 'Offre';
 
@@ -93,7 +97,9 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
                         this.textContent = 'Retour';
 
-                        this.setAttribute('class', 'btn btn-danger w-25 offer mb-5');
+                        this.setAttribute('class', 'btn btn-back w-25 offer mb-5');
+
+                        console.log(this);
 
                         document.querySelector('.partner-sentence p').innerHTML = partnerOffer;
 
@@ -101,7 +107,9 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
                         this.textContent = 'Offre';
 
-                        this.setAttribute('class', 'btn btn-warning w-25 offer mb-5');
+                        this.setAttribute('class', 'btn button-orange w-25 offer mb-5');
+
+                        console.log(this);
 
                         document.querySelector('.partner-sentence p').innerHTML = partnerDescription;
 
@@ -119,15 +127,33 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
 });
 
-// Évènement de click
-document.querySelector('.overlay').addEventListener('click', function (ev) {
+
+// Evenement de click asynchrone pour attendre une execution afin dans executer une autre
+document.querySelector('.overlay').addEventListener('click', async function (ev) {
 
     const selectPartnerToDisplay = document.querySelector('.display-partner');
 
     // Si le body contient "display-partner" et quand il ne click pas dedans on ajout la "class d-none"
     if ( document.body.contains(selectPartnerToDisplay) && !selectPartnerToDisplay.contains(ev.target) ) {
 
-        closeOverlayPartner();
+        // Création d'une promesse "sleep" pour attendre l'action quel sois fini afin de suprrimé l'overlay
+        const sleep = ms => new Promise(r => setTimeout(r,
+            ms));
+
+        // Animation fondu sur l'overlay avec l'utilisation de la librairie gsap
+        gsap.to('.overlay',
+            .2,
+            {
+                opacity: "0",
+                ease: Power3.easeInOut
+            });
+
+        // Attente de 500 miliseconds
+        await sleep(500);
+
+        document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );
+
+        await closeOverlayPartner();
 
     }
 });
