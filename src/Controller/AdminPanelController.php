@@ -38,13 +38,15 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route("/admin", name: "admin_panel_")]
 #[IsGranted('ROLE_ADMIN')]
 class AdminPanelController extends AbstractController {
-
+// Page d'index
     #[Route('', name: 'index')]
     public function indexAdmin(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
-
+// Requêtes de toutes les entrées dans les tables des entités Shop, FutureEvents, User et Partner pour en afficher le nombre dans les boutons de l'index admin
         $em = $doctrine->getManager();
 
+
         $query = $em->createQuery('SELECT e FROM App\Entity\FutureEvent e ');
+
 
         $events = $paginator->paginate($query,  55);
 
@@ -134,10 +136,7 @@ class AdminPanelController extends AbstractController {
         return $this->render('admin_panel/admin_events_list.html.twig', ['events' => $events,]);
     }
 
-    /**
-     *
-     *
-     */
+
 
     #[Route('/suppression-d\'un-evenement/{id}/', name: 'event_delete_', priority: 10)]
     public function eventDelete(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
@@ -179,7 +178,7 @@ class AdminPanelController extends AbstractController {
             // Message flash de succès
             $this->addFlash('success', 'Publication modifiée avec succès !');
 
-            // Redirection vers l'évènement modifié
+            // Redirection vers la liste des évènements contenant maintenant l'évènement modifié
             return $this->redirectToRoute('admin_panel_events_list', ['id' => $futureEvent->getId(),]);
 
         }
@@ -235,7 +234,9 @@ class AdminPanelController extends AbstractController {
 
         $em = $doctrine->getManager();
 
+
         $query = $em->createQuery('SELECT u FROM App\Entity\User u ORDER BY u.id DESC');
+
 
         $users = $paginator->paginate($query, $requestedPage, 55);
 
@@ -347,13 +348,15 @@ class AdminPanelController extends AbstractController {
     #[Route('/liste-des-utilisateurs/export', name: 'users_list_export')]
     public function usersListExport(ManagerRegistry $doctrine): Response {
 
-
+// Création des en-têtes des colonnes du fichier de tableur
         $header = ['#', 'Email', 'Type de compte', 'Prénom', 'Nom', 'Numéro d\'adhérent', 'Téléphone', 'Inscription Newsletter', 'Cotisation payée', 'Compte vérifié'];
 
+        // On va chercher tous les utilisateurs présents en bdd
         $userRepo = $doctrine->getRepository(User::class);
 
         $users = $userRepo->findAll();
 
+        // Pour chaque utilisateur, on affiche ses données dans une ligne. On en profite pour rendre plus facilement lisible les données
         foreach ($users as $user) {
             $arrayUsers[] = [$user->getId(), $user->getEmail(),
                 in_array('ROLE_ADMIN', $user->getRoles()) ? 'Administrateur' : (in_array('ROLE_MEMBER', $user->getRoles()) ? 'Membre' : 'Utilisateur'), $user->getFirstname(),
@@ -386,7 +389,9 @@ class AdminPanelController extends AbstractController {
 
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     /**
      *
@@ -591,7 +596,7 @@ class AdminPanelController extends AbstractController {
 
             if (!in_array($ext, $extArray)) {
 
-                $form->get('logo')->addError(new FormError('L\'extension du fichier n\'est pas bon'));
+                $form->get('logo')->addError(new FormError('L\'extension du fichier n\'est pas bonne'));
 
             } else {
 
@@ -603,11 +608,10 @@ class AdminPanelController extends AbstractController {
 
                 $partner->setLogo($filename);
 
-                dump($partner);
 
                 $partnerRepository->add($partner, true);
 
-                $this->addFlash('success', 'Partenaire ajouté avec succés');
+                $this->addFlash('success', 'Partenaire ajouté avec succès');
                 return $this->redirectToRoute("admin_panel_partners_list");
 
             }
@@ -666,7 +670,7 @@ class AdminPanelController extends AbstractController {
 
             if (!in_array($ext, $extArray)) {
 
-                $form->get('logo')->addError(new FormError('L\'extension du fichier n\'est pas bon'));
+                $form->get('logo')->addError(new FormError('L\'extension du fichier n\'est pas bonne'));
 
             } else {
 
@@ -678,7 +682,7 @@ class AdminPanelController extends AbstractController {
 
                 $partnerRepository->add($partner, true);
 
-                $this->addFlash('success', 'Partenaire modifier avec succès');
+                $this->addFlash('success', 'Partenaire modifié avec succès');
                 return $this->redirectToRoute("admin_panel_partners_list");
             }
 
@@ -727,19 +731,21 @@ class AdminPanelController extends AbstractController {
     #[Route('/contenu-dynamique/modifier/{name}/', name: 'dynamic_content_edit', requirements: ["name" => "[a-z0-9_-]{2,50}"])]
     public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response {
 
+        //On va chercher par nom (qui sert de clé) le dynamic content correspondant
         $dynamicContentRepo = $doctrine->getRepository(DynamicContent::class);
 
         $currentDynamicContent = $dynamicContentRepo->findOneByName($name);
 
         $em = $doctrine->getManager();
 
+        // Si le contenu est vide, on en crée un avec le nom passé dans la fonction twig
         if (empty($currentDynamicContent)) {
             $currentDynamicContent = new DynamicContent();
             $currentDynamicContent->setName($name);
             $em->persist($currentDynamicContent);
         }
 
-
+        // Sinon, on modifie le contenu existant par le nouveau contenu
         $form = $this->createForm(DynamicContentFormType::class, $currentDynamicContent);
 
         $form->handleRequest($request);
@@ -756,7 +762,5 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
     }
-
-
 
 }

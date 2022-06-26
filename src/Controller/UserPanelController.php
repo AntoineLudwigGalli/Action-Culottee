@@ -195,7 +195,7 @@ class UserPanelController extends AbstractController
 
             $userRepository->add($user, true);
 
-            $this->addFlash('success', 'Newsletter modifier avec succes');
+            $this->addFlash('success', 'Newsletter modifier avec succès');
 
             return $this->redirectToRoute('user_panel_profil');
 
@@ -223,13 +223,13 @@ class UserPanelController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // Ajout des nouveau nom et prénom sur l'utilisateur de la session actuel
+            // Ajout des nouveaux nom et prénom sur l'utilisateur de la session actuelle
             $user->setLastname( $form->get('lastname')->getData() );
             $user->setFirstname( $form->get('firstname')->getData() );
 
             $userRepository->add($user, true);
 
-            $this->addFlash('success', 'Modification du Nom/Prénom avec success.');
+            $this->addFlash('success', 'Modification du Nom/Prénom avec succès.');
 
             return $this->redirectToRoute('user_panel_profil');
 
@@ -275,7 +275,7 @@ class UserPanelController extends AbstractController
                     ->from(new \Symfony\Component\Mime\Address('a@gmail.com', 'Action Culottée'))->to($this->getUser()->getEmail())->subject('Merci de confirmer votre adresse email')
                     ->htmlTemplate('registration/confirmation_email.html.twig'));
 
-                $this->addFlash('success', 'Modification de l\'adress email avec success. Une vérification a été envoyer dans votre boite mail');
+                $this->addFlash('success', 'Modification de l\'adresse email avec succès. Une vérification a été envoyée dans votre boite mail');
 
                 return $this->redirectToRoute('user_panel_profil');
 
@@ -290,7 +290,6 @@ class UserPanelController extends AbstractController
         ]);
     }
 
-
     /**
      *
      * Page de modification du mot de pass
@@ -301,11 +300,11 @@ class UserPanelController extends AbstractController
     public function userEditPassword(UserPasswordHasherInterface $userPasswordHasher, Request $request, UserRepository $userRepository) : Response
     {
 
-        // Utilisateur actuellement connecter
+        // Utilisateur actuellement connecté
         $user = $this->getUser();
+        
+        // Classe qui permet de créer le formulaire pour après faire la comparaison avec l'utilisateur
 
-
-        // Class qui permet de crée le formulaire pour après faire la comparaison avec l'utilisateur
         $changePassword = new ChangePassword();
 
         $form = $this->createForm(EditPasswordTypeFormType::class, $changePassword);
@@ -329,14 +328,14 @@ class UserPanelController extends AbstractController
 
                 $userRepository->add($user, true);
 
-                $this->addFlash('success', 'Modification du mot de pass avec success');
+                $this->addFlash('success', 'Modification du mot de passe avec succès');
 
                 return $this->redirectToRoute('user_panel_profil');
 
             } else {
 
                 // Sinon on crée une erreur
-                $form->get('oldPassword')->addError(new FormError('Mot de pass actuel incorect'));
+                $form->get('oldPassword')->addError(new FormError('Mot de passe actuel incorrect'));
 
             }
 
@@ -367,7 +366,7 @@ class UserPanelController extends AbstractController
 
             $userRepository->add( $user, true );
 
-            $this->addFlash('success', 'Modification du numéro de téléphone avec succes');
+            $this->addFlash('success', 'Modification du numéro de téléphone avec succès');
 
             return $this->redirectToRoute('user_panel_profil');
         }

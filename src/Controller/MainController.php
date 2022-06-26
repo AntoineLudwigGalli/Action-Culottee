@@ -58,9 +58,9 @@ class MainController extends AbstractController {
 
         $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a ORDER BY a.eventDate ASC');
 
-        // On stocke dans $articles les 10 articles de la page demandée dans l'URL
+        // On stocke dans $events les 4 évènements de la page demandée dans l'URL
         $events = $paginator->paginate($query,     // Requête de selection des articles en BDD
-            $requestedPage,     // Numéro de la page dont on veux les articles
+            $requestedPage,     // Numéro de la page dont on veut les articles
             4      // Nombre d'articles par page
         );
 
@@ -82,12 +82,12 @@ class MainController extends AbstractController {
 // Todo : ce qui touche aux pages optionnelles (qui sommes nous, actions)
 //    Page qui somme nous
 
-    #[Route('/qui-sommes-nous', name: 'about')]
-    public function about(ManagerRegistry $doctrine, Request $request): Response
-    {
-
-        return $this->render('main/about.html.twig');
-    }
+//    #[Route('/qui-sommes-nous', name: 'about')]
+//    public function about(ManagerRegistry $doctrine, Request $request): Response
+//    {
+//
+//        return $this->render('main/about.html.twig');
+//    }
 
 }
 

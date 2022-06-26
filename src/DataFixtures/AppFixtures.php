@@ -24,8 +24,6 @@ class AppFixtures extends Fixture
 
         $faker = Faker\Factory::create("fr_FR");
 
-
-
         $admin = new User();
 
         $admin
@@ -57,7 +55,6 @@ class AppFixtures extends Fixture
             ->setNewsletterOption(1)
             ->setMembershipPaid(1)
             ->setIsVerified(1)
-
             ->setPassword( $this->encoder->hashPassword($member, '/Member1/'))
         ;
 

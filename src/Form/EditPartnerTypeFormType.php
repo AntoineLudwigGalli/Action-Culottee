@@ -27,14 +27,14 @@ class EditPartnerTypeFormType extends AbstractType
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Ce champs ne peux pas être vide',
+                        'message' => 'Ce champ ne peux pas être vide',
                     ]),
 
                     new Length([
                         'min' => 3,
                         'max' => 100,
                         'minMessage' => "Le titre doit contenir au moins {{ limit }} caractères",
-                        'maxMessage' => 'Le titre est trop grand'
+                        'maxMessage' => 'Le titre ne peut pas contenir plus de {{ limit }} caractères'
                     ])
 
                 ]
@@ -48,7 +48,7 @@ class EditPartnerTypeFormType extends AbstractType
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Ce champs ne peux pas être vide',
+                        'message' => 'Ce champ ne peux pas être vide',
                     ]),
 
                 ]
@@ -65,14 +65,14 @@ class EditPartnerTypeFormType extends AbstractType
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Ce champs ne peux pas être vide',
+                        'message' => 'Ce champ ne peux pas être vide',
                     ]),
 
                     new Length([
                         'min' => 3,
                         'max' => 1_500,
                         'minMessage' => "La description doit contenir au moins {{ limit }} caractères",
-                        'maxMessage' => 'La description est trop grande'
+                        'maxMessage' => 'La description ne peut pas contenir plus de {{ limit }} caractères'
                     ])
 
                 ]
@@ -89,14 +89,14 @@ class EditPartnerTypeFormType extends AbstractType
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Ce champs ne peux pas être vide',
+                        'message' => 'Ce champ ne peux pas être vide',
                     ]),
 
                     new Length([
                         'min' => 3,
                         'max' => 1_500,
                         'minMessage' => "L\'offre doit contenir au moins {{ limit }} caractères",
-                        'maxMessage' => 'L\'offre est trop grande'
+                        'maxMessage' => 'L\'offre ne peut pas contenir plus de {{ limit }} caractères'
                     ])
 
                 ]

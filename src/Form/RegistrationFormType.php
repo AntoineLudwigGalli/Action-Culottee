@@ -77,7 +77,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 8,
                         'max' => 4096,
                         'minMessage' => "Votre mot de passe doit contenir au moins {{ limit }} caractères",
-                        'maxMessage' => 'Votre mot de passe est trop grand'
+                        'maxMessage' => 'Votre mot de passe ne peut pas contenir plus de {{ limit }} caractères'
                     ])
                 ],
             ])
@@ -93,7 +93,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 2,
                         'max' => 100,
                         'minMessage' => 'Votre prénom doit contenir au moins {{ limit }} caractères.',
-                        'maxMessage' => 'Votre prénom ne peut contenir plus de {{ limit }} caractères'
+                        'maxMessage' => 'Votre prénom ne peut pas contenir plus de {{ limit }} caractères'
                     ]),
                 ],
             ])
@@ -108,7 +108,7 @@ class RegistrationFormType extends AbstractType
                         'min' => 2,
                         'max' => 100,
                         'minMessage' => 'Votre nom doit contenir au moins {{ limit }} caractères.',
-                        'maxMessage' => 'Votre nom ne peut contenir plus de {{ limit }} caractères'
+                        'maxMessage' => 'Votre nom ne peut pas contenir plus de {{ limit }} caractères'
                     ]),
                 ],
             ])

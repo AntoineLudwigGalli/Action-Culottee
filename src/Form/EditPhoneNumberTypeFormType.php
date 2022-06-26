@@ -21,12 +21,11 @@ class EditPhoneNumberTypeFormType extends AbstractType
 
                 'label' => 'Numéro de téléphone',
 
-                "empty_data" => '',
 
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Le champs ne peux pas être vide'
+                        'message' => 'Le champ ne peux pas être vide'
                     ]),
 
                     new Regex([
