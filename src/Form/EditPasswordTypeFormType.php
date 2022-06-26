@@ -33,7 +33,7 @@ class EditPasswordTypeFormType extends AbstractType
                         'min' => 8,
                         'max' => 4096,
                         'minMessage' => "Votre mot de passe doit contenir au moins {{ limit }} caractères",
-                        'maxMessage' => 'Votre mot de passe est trop grand'
+                        'maxMessage' => 'Votre mot de passe ne peut pas contenir plus de {{ limit }} caractères'
                     ])
                 ]
             ])
@@ -43,12 +43,12 @@ class EditPasswordTypeFormType extends AbstractType
 
                 'type' => PasswordType::class,
 
-                'invalid_message' => 'Le mot de passe ne match pas',
+                'invalid_message' => 'Le mot de passe saisi ne correspond pas à celui saisi initialement.',
 
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Le champs ne peux pas être vide'
+                        'message' => 'Le champ ne peux pas être vide'
                     ]),
 
                     new Regex([
@@ -59,7 +59,7 @@ class EditPasswordTypeFormType extends AbstractType
                         'min' => 8,
                         'max' => 4096,
                         'minMessage' => "Votre mot de passe doit contenir au moins {{ limit }} caractères",
-                        'maxMessage' => 'Votre mot de passe est trop grand'
+                        'maxMessage' => 'Votre mot de passe ne peut pas contenir plus de {{ limit }} caractères'
                     ])
 
                 ],

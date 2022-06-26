@@ -25,7 +25,7 @@ class EditEmailFormType extends AbstractType
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Le champs ne doit pas être vide'
+                        'message' => 'Le champ ne doit pas être vide'
                     ]),
 
                     new Email([
@@ -36,8 +36,8 @@ class EditEmailFormType extends AbstractType
                         'min' => 3,
                         'max' => 180,
 
-                        'minMessage' => 'Ton email doit être de {{ limit }} characters de long',
-                        'maxMessage' => 'Ton email ne peux pas être plus grand que {{ limit }} characters ',
+                        'minMessage' => 'L\'email doit contenir au minimum {{ limit }} caractères',
+                        'maxMessage' => 'L\' email ne peux pas contenir plus de {{ limit }} caractères ',
                     ])
 
                 ]

@@ -27,13 +27,13 @@ class EditShopTypeFormType extends AbstractType
 
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Le champs ne peux pas être vide'
+                        'message' => 'Le champ ne peux pas être vide'
                     ]),
                     new Length([
                         'min' => 3,
                         'max' => 100,
-                        'minMessage' => 'Le nom de la boutique doit être de {{ limit }} characters de long',
-                        'maxMessage' => 'Le nom de la boutique ne peux pas être plus grand que {{ limit }} characters ',
+                        'minMessage' => 'Le nom de la boutique doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Le nom de la boutique ne peut pas contenir plus de {{ limit }} caractères',
                     ])
 
                 ]

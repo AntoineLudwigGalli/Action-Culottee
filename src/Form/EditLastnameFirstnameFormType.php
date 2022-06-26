@@ -23,15 +23,15 @@ class EditLastnameFirstnameFormType extends AbstractType
                 'constraints' => [
 
                     new NotBlank([
-                        'message' => 'Le champs ne peux pas être vide'
+                        'message' => 'Le champ ne peux pas être vide'
                     ]),
 
                     new Length([
                         'min' => 3,
                         'max' => 100,
 
-                        'minMessage' => 'Ton nom doit être de {{ limit }} characters de long',
-                        'maxMessage' => 'Ton nom ne peux pas être plus grand que {{ limit }} characters ',
+                        'minMessage' => 'Le nom doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Le nom doit contenir au maximum {{ limit }} caractères',
                     ])
 
                 ]
@@ -41,13 +41,13 @@ class EditLastnameFirstnameFormType extends AbstractType
                 "empty_data" => '',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Le champs ne peux pas être vide'
+                        'message' => 'Le champ ne peux pas être vide'
                     ]),
                     new Length([
                         'min' => 3,
                         'max' => 100,
-                        'minMessage' => 'Ton prénom doit être de {{ limit }} characters de long',
-                        'maxMessage' => 'Ton prénom ne peux pas être plus grand que {{ limit }} characters ',
+                        'minMessage' => 'Le prénom doit contenir au moins {{ limit }} caractères',
+                        'maxMessage' => 'Le prénom doit contenir au maximum {{ limit }} caractères',
                     ])
                 ]
             ])

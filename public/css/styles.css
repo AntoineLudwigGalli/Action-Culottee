@@ -368,6 +368,15 @@ p.text_footer{
     height: 130px;
 }
  /*Carousel*/
+
+#container p {
+    text-align: center;
+}
+
+#container {
+    height: 100%;
+}
+
 #container img {
     display: block;
     width: auto !important;

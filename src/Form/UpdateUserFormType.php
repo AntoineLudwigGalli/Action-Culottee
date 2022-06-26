@@ -53,7 +53,7 @@ class UpdateUserFormType extends AbstractType
                         'min' => 2,
                         'max' => 100,
                         'minMessage' => 'Le prénom doit contenir au moins {{ limit }} caractères.',
-                        'maxMessage' => 'Le prénom ne peut contenir plus de {{ limit }} caractères'
+                        'maxMessage' => 'Le prénom ne peut pas contenir plus de {{ limit }} caractères'
                     ]),
                 ],
             ])
@@ -69,7 +69,7 @@ class UpdateUserFormType extends AbstractType
                         'min' => 2,
                         'max' => 100,
                         'minMessage' => 'Le nom doit contenir au moins {{ limit }} caractères.',
-                        'maxMessage' => 'Le nom ne peut contenir plus de {{ limit }} caractères'
+                        'maxMessage' => 'Le nom ne peut pas contenir plus de {{ limit }} caractères'
                     ]),
                 ],
             ])
