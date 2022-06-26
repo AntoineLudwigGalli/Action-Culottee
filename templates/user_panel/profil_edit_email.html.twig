@@ -11,15 +11,29 @@
             <div class="col-10 mx-auto">
 
                 {# Formulaire de modification d'email #}
-                {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+                {{ form_start( form ) }}
 
-                {{ form_label(form.email, 'Votre nouvelle adress mail') }}
-                {{ form_widget(form.email) }}
-                {{ form_errors(form.email) }}
+                    {{ form_label(form.email, 'Votre nouvelle adress mail') }}
+                    {{ form_widget(form.email) }}
+                    {{ form_errors(form.email) }}
 
-                {{ form_widget(form.submit, {'attr': { 'value': 'Confirmer' } }) }}
+                    <div class="row mb-3">
 
-                <a href="{{ path('user_panel_profil') }}"><button type="button" class="btn btn-danger">Retour</button></a>
+                        <div class="col-12 d-flex flex-row mt-3">
+
+                            <div class="me-4">
+                                {{ form_widget(form.submit, {'attr': { 'value': 'Modifier', 'class': 'button-orange' } }) }}
+                            </div>
+
+                            <div>
+                                <a href="{{ path('user_panel_profil') }}"><button type="button" class="btn btn-danger btn-back">Retour</button></a>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
                 {{ form_end(form) }}
 
             </div>
