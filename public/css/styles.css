@@ -86,7 +86,6 @@ p{
 /* Permet de supprimer l'effet focus sur le button */
 .btn:focus{
     box-shadow: none;
-
 }
 
 .button-orange:hover{
@@ -121,13 +120,9 @@ p{
 
 
 .btn-back {
-
     background: #e74c3c;
-
     border-radius: 45px;
-
     color: white;
-
 }
 
 
@@ -162,32 +157,32 @@ p{
 
 .pagination span a, .pagination .current{
     padding: 0.5rem 1rem;
-    border: black solid 1px;
     margin: 0 .3em;
-    border-radius: 5px;
     color: black;
-    text-decoration: none;
-    box-shadow: 3px 3px 3px black;
     background-color: white;
+    margin-bottom: 40px ;
+    text-decoration: none;
 }
 .pagination .current{
-    margin-bottom: 5em;
+    font-weight: bold;
+    color: white;
+    background-color: black;
 }
 
-.pagination-button a{
-    padding: 0.5rem 1rem;
-    border: black solid 1px;
-    margin: 0 .3em;
-    border-radius: 5px;
-    color: black;
-    text-decoration: none;
-    box-shadow: 3px 3px 3px black;
-}
-.pagination-button a:hover{
-    box-shadow: none;
-}
 .pagination span a:hover{
     box-shadow: none;
+    color: #E1942D;
+}
+
+/*Style pour les boutons de tri*/
+.pagination-button a{
+    padding: 0.5rem 1rem;
+    margin: 0 .3em;
+    color: black;
+    text-decoration: none;
+}
+.pagination-button a:hover{
+    color: #E1942D;
 }
 
 /*-------------------------------------------------------------------------------------*/
@@ -213,8 +208,21 @@ p{
 .footer {
     height: auto;
     background-color: #000000;
-
 }
+
+.footer_zone a.nav-link{
+    color: white;
+    padding: 0;
+}
+
+a.nav-link:hover{
+    color: #E1942D;
+}
+
+p.text_footer{
+    font-size:medium;
+}
+
 
 .copyright {
     background-color: #000000 ;
@@ -244,20 +252,31 @@ p{
 /*Page actualités*/
 .container-fluid .row .agenda-entry{
     min-height: 100px;
-    border-radius: 10px;
-    border: black 1px solid;
     font-size: 1.5rem;
     font-weight: 500;
-
+    border-left: solid 80px black;
 }
 
 #agenda .pagination-button a{
     background-color: white;
 }
-/*.container-fluid .row .agenda-entry .calendar-icon{*/
-/*    height: 5vh;*/
-/*}*/
 
+.date_actu{
+    color: #E1942D;
+    text-transform: uppercase;
+    font-size: 20px;
+}
+
+.actu_page{
+    background-color: white;
+    box-shadow: 2px 2px 1px 1px rgba(0, 0, 0, 0.1);
+    margin: 15px 0 10px 0;
+    padding: 40px;
+}
+
+/*.container-fluid .row .agenda-entry .calendar-icon{
+    height: 5vh;
+}*/
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------
 

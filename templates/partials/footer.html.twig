@@ -1,5 +1,5 @@
 {# Pied de page #}
-<div class="row d-flex">
+<div class="row d-flex footer_zone">
     <div class="col-12 column footer mt-auto py-4">
         <div class="row">
             <div class="col-3 offset-1">
@@ -8,24 +8,24 @@
             <div class="col-2 text-white">
                 <div class="footer_navbar">
                     <h3 class="fw-bold text-uppercase">Coordonnées</h3>
-                    <p>Association Action Culottée<br> 6, rue Houdon 75018 Paris</p>
-                    <p>actionculottee@gmail.com</p>
+                    <p class="text_footer">Association Action Culottée<br> 6, rue Houdon 75018 Paris
+                    actionculottee@gmail.com</p>
                 </div>
             </div>
             <div class="col-2 text-white">
                 <div class="footer_navbar">
                     <h3 class="fw-bold text-uppercase">Navigations</h3>
-                    <p>Accueil</p>
-                    <p>Qui sommes-nous ?</p>
-                    <p>Partenaires</p>
-                    <p>Actualités</p>
+                    <p class="text_footer"><a class="nav-link{{ route == 'main_home' ? ' active' }}" href="{{ path('main_home') }}">Accueil</a>
+                    <a class="nav-link{{ route == 'main_about' ? ' active' }}" href="{{ path('main_home') }}#whoAreWe" }}">Qui sommes-nous ?</a>
+                    <a class="nav-link{{ route == 'main_partners' ? '' }}" href="{{ path('main_partners') }}">Nos partenaires</a>
+                    <a class="nav-link{{ route == 'main_agenda' ? '' }}" href="{{ path('main_agenda') }}">Actualités</a></p>
                 </div>
             </div>
             <div class="col-2 text-white">
                 <div class="footer_navbar">
                     <h3 class="fw-bold text-uppercase">Liens utiles</h3>
-                    <p>Mentions légales</p>
-                    <p>Conditions générales d'utilisation</p>
+                    <p class="text_footer"><a class="nav-link{{ route == 'legals_legal_mentions' ? '' }}" href="{{ path('legals_legal_mentions') }}">Mentions légales</a>
+                    <a class="nav-link{{ route == 'legals_cgu' ? '' }}" href="{{ path('legals_cgu') }}">Conditions Générales d'Utilisation</a></p>
                 </div>
             </div>
         </div>
