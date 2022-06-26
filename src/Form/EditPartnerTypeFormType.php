@@ -42,10 +42,15 @@ class EditPartnerTypeFormType extends AbstractType
 
             ->add('logo', FileType::class, [
                 'data_class' => null,
+
+                "empty_data" => '',
+
                 'constraints' => [
+
                     new NotBlank([
-                        'message' => 'Ce champ ne peux pas être vide'
-                    ])
+                        'message' => 'Ce champs ne peux pas être vide',
+                    ]),
+
                 ]
             ])
 

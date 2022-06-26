@@ -6,7 +6,16 @@
 
     <div class="container">
 
-        <h1 class="text-center"> Nos partenaires </h1>
+        {# Titre #}
+        <div class="row">
+            
+                <header class="col-12">
+                    <h1> Nos partenaires </h1>
+                </header>
+        </div>
+       
+
+ 
 
         {# Affichage des partenaires #}
         <div class="row">
@@ -16,11 +25,14 @@
 
                 {% for partner in partners %}
 
-                    <div class="card col-12 col-sm-6 col-md-4 col-lg-3 mx-auto mb-4 p-sm-4 card-partner">
-                        <img data-ov1="{{ i }}" data-ov2="{{ partner.id }}" src="{{ asset('images/images-partners/' ~ partner.logo ) }}" alt="" class="card-img-top rounded-5">
-                        <div class="card-body">
-                            <h2 class="card-title text-center">{{ partner.title }}</h2>
+                    <div class="card me-1 me-sm-0 me-md-0 col-5 col-sm-6 col-md-4 col-lg-3 mx-auto mb-4 p-sm-4 card-partner">
+                        <div>
+                            <img data-ov1="{{ i }}" data-ov2="{{ partner.id }}" src="{{ asset('images/images-partners/' ~ partner.logo ) }}" alt="" class="card-img-top">
                         </div>
+{#
+                       <div class="card-body my-5">
+                            <h2 class="card-title text-center">{{ partner.title }}</h2>
+                        </div>#}
                     </div>
 
                     {% set i = i + 1 %}
@@ -40,7 +52,7 @@
 
             <div class="col-12">
 
-                <div class="display-partner bg-white col-md-10 col-lg-6 d-flex flex-row mx-auto mt-5">
+                <div class="display-partner bg-white col-md-8 col-lg-10 col-xl-6 col-xxl-6 d-flex flex-row mx-auto mt-5">
 
                     {# Bord jaune #}
                     <div class="bgc-orange col-1"></div>
@@ -69,11 +81,10 @@
                                     <div class="d-lg-flex flex-lg-column col-9 col-lg-7 mx-auto">
 
                                         {# Titre/Lien #}
-                                        <div class="col-3">
-
-                                            <div class="partner-title">
+                                        <div class="col-3 partner-title">
+                                            
                                                 <h2>...</h2>
-                                            </div>
+                                            
 
                                             {#
                                             <div>
@@ -87,7 +98,7 @@
                                         {# Descrition #}
                                         <div class="d-flex flex-column flex-lg-row mt-lg-5">
 
-                                            <div class="partner-sentence p-3">
+                                            <div class="partner-sentence p-3 text-break">
 
                                                 <p class="w-100">...</p>
 
@@ -112,8 +123,12 @@
             </div>
 
         </div>
-
-
+    
+        <div class="row">
+            <div class="my-5 col-12 text-center">
+                <h2>Les marques présentes ci-dessus partagent les valeurs mises en avant par Action Culottée et ont décidé de soutenir nos efforts en créant un partenariat fort avec nous à destination de nos adhérents. </h2>
+            </div>
+        </div>
 
     </div>
 
@@ -161,8 +176,9 @@
         const checkIfUser = userRoles.includes('ROLE_USER');
 
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="{{ asset('js/partner/partner-script.js') }}"></script>
     <script src="{{ asset('js/partner/overlay.js') }}"></script>
 {% endblock %}
 

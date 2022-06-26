@@ -41,8 +41,8 @@ class RegistrationFormType extends AbstractType
             ->add('agreeTerms', CheckboxType::class, [
                 'label_html' => true, //Permet de contourner l'échappement des balises HTML dans le label
                 //    Mettre le vrai lien CGU
-                'label' => 'Accepter les <a href="https://google.fr" target="_blank">conditions d\'utilisation</a>',
-                'mapped' => false, //Permet d'ignorer le contrôle du champs avec les champs dans la BDD pour éviter
+                'label' => 'Accepter les <a href="/legals/cgu" target="_blank">conditions d\'utilisation</a>',
+                'mapped' => false, //Permet d'ignorer le contrôle du champ avec les champs dans la BDD pour éviter
                 // une erreur symfony
                 'constraints' => [
                     new IsTrue([
@@ -127,7 +127,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            // Champs numéro de téléphone français
+            // Champs numéro de téléphone
             ->add('phoneNumber', TelType::class, [
                 'label' => 'Numéro de téléphone',
                 'constraints' => [

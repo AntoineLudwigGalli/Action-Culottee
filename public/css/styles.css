@@ -1,4 +1,15 @@
 /*Paramètres généraux du site*/
+/* Smooth scrolling sur l'entièreté du site pour plus d'accessibilité*/
+html {
+    scroll-behavior: smooth;
+}
+#scrollUp
+{
+    position: fixed;
+    bottom : 60px;
+    right: -100px;
+    opacity: 0.5;
+}
     /* Police */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
@@ -266,6 +277,7 @@ p{
     text-decoration: none;
     padding: 1rem;
     text-transform: uppercase;
+    font-size: 0.8rem;
 }
 
 .home-button:hover{
@@ -314,7 +326,7 @@ p{
     padding-bottom: 1rem;
 }
 
-.dynamic-image-right, .dynamic-image-left{
+.dynamic-image{
     height: 130px;
 }
  /*Carousel*/
@@ -334,13 +346,45 @@ p{
 .carousel p, .carousel h5{
     color: #E1942D;
 }
+ /*ScrollTrigger*/
 
+
+.visible, .invisible {
+    opacity: 0.0;
+    transition: opacity 0.5s ease;
+}
+.visible {
+    opacity: 1.0;
+}
  /*THE MAP*/
 #map {
     height: 60vh;
     margin-bottom: 40px;
 }
+/*Effet typewriter*/
+.typewriter h2 {
+    font-size: 3.8rem;
+    overflow: hidden; /* Ensures the content is not revealed until the animation */
+    /*border-right: .15em solid orange; !* The typwriter cursor *!*/
+    white-space: nowrap; /* Keeps the content on a single line */
+    margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+    letter-spacing: .15em; /* Adjust as needed */
+    animation:
+            typing 3.5s steps(40, end),
+            blink-caret .75s step-end infinite;
+}
 
+/* The typing effect */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+}
 
 /*---------------------------------------------------------*/
 
@@ -350,6 +394,7 @@ p{
 
 .overlay {
 
+    overflow-y: scroll;
     position: fixed;
     width: 100%;
     height: 100%;
@@ -362,6 +407,13 @@ p{
     opacity: 0;
 }
 
+.partner-image{
+    height: 15vh;
+}
+.orange-filter{
+    background-color: #e1942d;
+    opacity: .7;
+}
 /* Affichage du partenaire */
 
 .fa-xmark {
@@ -384,10 +436,17 @@ p{
 }
 
 .card img{
-    border-radius: 10px;
 
-    cursor: pointer;
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+
+    box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
+    -webkit-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
+    -moz-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);;
+
 }
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -443,13 +502,29 @@ p{
     box-shadow: none;
     background-color: #FF9933;
 }
+
 /*//////////////////////////////////////////////////////////*/
+
+/* Média query  */
+@media screen and (min-width: 992px) {
+    #map {
+        height: 60vh;
+    }
+}
+
 /*Media Queries*/
 
 @media screen and (min-width: 768px){
+
     .home-title{
         font-size: 4rem;
     }
+
+    .home-button{
+
+        font-size: 1rem;
+    }
+
     .flex-profil div {
         display: flex;
         flex-direction: row;
@@ -477,44 +552,20 @@ p{
         padding: 1rem 8rem;
     }
     /*Animation JS des images sur la page d'accueil*/
-    .dynamic-image-left{
+    .dynamic-image{
         position: relative;
         left: -150px;
     }
-    .dynamic-image-right{
-        position: relative;
-        right: -150px;
 
-    }
     .hide-overflow{
         overflow: hidden;
     }
-    .animation-right{
+    .animation{
         height: 130px;
         position: relative;
-        left: 0px;
-    }
-    .animation-left{
-        height: 130px;
-        position: relative;
-        right: 0px;
-    }
-}
-
-
-
-
-/* Partenaire image */
-/*
-
-@media screen and(min-width: 400px){
-
-    .card-partner {
-
-        width: 20% !important;
-
+        left: 0;
     }
 
 }
-*/
+
 

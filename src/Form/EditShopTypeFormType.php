@@ -89,7 +89,7 @@ class EditShopTypeFormType extends AbstractType
                         'message' => 'Le champs ne peux pas être vide'
                     ]),
                     new Length([
-                        'min' => 3,
+                        'min' => 2,
                         'max' => 100,
                         'minMessage' => 'La ville doit être de {{ limit }} characters de long',
                         'maxMessage' => 'La ville ne peux pas être plus grand que {{ limit }} characters ',
