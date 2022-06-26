@@ -14,7 +14,6 @@
 
 {% block body %}
     
-    
     <div class="row introduction bgc-orange">
         
         <div class="col-12 text-center typewriter">
@@ -259,9 +258,11 @@
         </div>
     </div>
     
-
-
-
+    <div id="scrollUp">
+        <a href="#top"><img src="{{ asset('images/to_top.png') }}"/></a>
+    </div>
+    
+   
 {% endblock %}
 
 {% block jsIncludes %}
@@ -275,6 +276,8 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     {# Inclusion fichier JS de la map   #}
     <script src="{{ asset('js/leaflet-map.js') }}"></script>
+    <script src="{{ asset('js/scroll-up.js') }}"></script>
+    
     <script src="{{ asset('js/home-script.js') }}"></script>
 
 {% endblock %}

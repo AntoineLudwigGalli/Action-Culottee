@@ -127,7 +127,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            // Champs numéro de téléphone français
+            // Champs numéro de téléphone
             ->add('phoneNumber', TelType::class, [
                 'label' => 'Numéro de téléphone',
                 'constraints' => [

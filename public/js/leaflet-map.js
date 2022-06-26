@@ -23,7 +23,12 @@ $.getJSON("/ajax/shops", function(data){
 // On intègre une étiquette avec la description du marqueur (si on veut que ça apparaisse dès le chargement, il faut
 // rajouter .openPopup() àla suite de cette ligne
         marker.bindPopup(
-            "<b>" + data[i].name +"</b><br>" + data[i].phoneNumber +"<br>" + data[i].address + "<br>" + data[i].zipcode +"<br>" + data[i].city+"<br>" + data[i].country+"<br>"
+            "<span><b>" + data[i].name +"</b></span><br>" +
+            "<span>" + data[i].phoneNumber +"</span><br>" +
+            "<span style='text-transform: capitalize'>" + data[i].address + "</span><br>" +
+            "<span>" + data[i].zipcode +"</span><br>" +
+            "<span style='text-transform: uppercase'>" + data[i].city+"</span><br>" +
+            "<span>" + data[i].country+"</span>"
         );
     }
 
