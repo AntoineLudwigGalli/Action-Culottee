@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}Actualités culottées{% endblock %}
-
 {% block body %}
 
     <div id="agenda" class="background_page_form row">
@@ -15,58 +13,41 @@
                 <div class="mb-3">
                     <p class="text-end my-3 me-3">
                         {# Création d'un lien permettant de trier par description #}
-                        <span class="mx-2 pagination-button">{{ knp_pagination_sortable
-                                (events, 'Trier
-			 par
-			 titre', 'a.eventDescription') }}</span>
+                        <span class="mx-2 pagination-button">{{ knp_pagination_sortable (events, 'Trier par titre', 'a.eventDescription') }}</span>
                         {# Création d'un lien permettant de trier par date #}
-                        <span class="mx-2 pagination-button">{{ knp_pagination_sortable
-                                (events, 'Trier par
-			 date', 'a.eventDate') }}</span>
+                        <span class="mx-2 pagination-button">{{ knp_pagination_sortable (events, 'Trier par date', 'a.eventDate') }}</span>
                     </p>
                 </div>
             </div>
         </div>
 
         {# Blocs de mise en forme des actualités #}
-{#        <div class="container-fluid">#}
+        {#<div class="container-fluid">#}
             <div class="row">
                 {# Pour chaque évènement, on affiche dans l'ordre chronologique uniquement ceux dont la date est à venir. Ceux dont la date est passée ne sont pas affichés #}
                 {% for event in events %}
-                    {% if event.eventDate >= date("now") %} {# On affiche que les
-                évènements à venir  (normalement, les évènements passés sont
-                supprimés mais c'est une double sécurité) #}
-                        <div class="agenda-entry d-flex flex-column mb-4 col-12 col-md-10 mx-auto form_page">
-
-                            {#                    <img src="{{ asset('images/calendar.png') }}" #}
-                            {#                         alt="icône de calendrier" #}
-                            {#                         class="calendar-icon img-fluid ms-3"> #}
-
-
-                            <span class="text-decoration-underline mx-auto color-orange">
-						{{ event.eventDate|format_datetime('full', 'none', locale='fr' ) }}
-					</span>
-
+                    {% if event.eventDate >= date("now") %} {# On affiche que les évènements à venir  (normalement, les évènements passés sont supprimés mais c'est une double sécurité) #}
+                        <div class="agenda-entry d-flex flex-column mb-4 col-12 col-md-10 mx-auto actu_page">
+                            {# <img src="{{ asset('images/calendar.png') }}" alt="icône de calendrier" class="calendar-icon img-fluid ms-3"> #}
+                                <span class="date_actu mx-auto">
+						            {{ event.eventDate|format_datetime('full', 'none', locale='fr' ) }}
+					            </span>
+                                 <hr>
                             <p class="mx-auto">
                                 {{ event.eventDescription }}
                             </p>
-
-
                         </div>
-
                     {% endif %}
                 {% endfor %}
 
                 <div class="row">
-                    <div class="col-12 ">
-
+                    <div class="col-12 d-flex justify-content-center">
                         {# Affichage du menu permettant de naviguer entre les différentes pages #}
                         {{ knp_pagination_render(events) }}
-
                     </div>
                 </div>
             </div>
         </div>
-   
+
 {% endblock %}
 
