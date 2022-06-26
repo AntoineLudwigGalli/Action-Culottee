@@ -40,8 +40,34 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminPanelController extends AbstractController {
 
     #[Route('', name: 'index')]
-    public function indexAdmin(): Response {
-        return $this->render('admin_panel/admin_index.html.twig');
+    public function indexAdmin(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+
+        $em = $doctrine->getManager();
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\FutureEvent a ORDER BY a.eventDate ASC');
+
+        $events = $paginator->paginate($query,  55);
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\User a ORDER BY a.id DESC');
+
+        $users = $paginator->paginate($query, 55);
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\Shop a ORDER BY a.id DESC');
+
+        $shops = $paginator->paginate($query, 55);
+
+        $query = $em->createQuery('SELECT a FROM App\Entity\Partner a ORDER BY a.id DESC');
+
+        $partners = $paginator->paginate($query, 55);
+
+
+        return $this->render('admin_panel/admin_index.html.twig', [
+            "events" => $events,
+            "users" => $users,
+            "shops" => $shops,
+            "partners" => $partners
+            ]
+        );
     }
 
 
@@ -714,4 +740,7 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_dynamic_content.html.twig', ['form' => $form->createView(),]);
     }
+
+
+
 }
