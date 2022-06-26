@@ -431,10 +431,16 @@ p.text_footer{
     padding-bottom: 10%;
 
 }
+.card-img-top{
+    filter: contrast(200%);
+    border-radius: 100%;
+}
 
 .orange-filter{
     background-color: #e1942d;
     opacity: .7;
+
+    border-radius: 10px;
 }
 
 /* Affichage du partenaire */
@@ -450,6 +456,9 @@ p.text_footer{
     font-size: .9rem;
 }
 
+.display-partner{
+    width: 50vw;
+}
 /* Card */
 
 .card {
