@@ -8,31 +8,55 @@
        {# Ajout du leaflet Locate control pour la geolocalisation #}
        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css"/>
        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+       {#  Inclusion du css pour le slider  #}
+       <link
+               rel="stylesheet"
+               href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css"
+       />
+       <style>
+           /*#container img {*/
+           /*    display: block;*/
+           /*    width: 100%!important;*/
+           /*    height: 100% !important;*/
+           /*}*/
+
+           #container img {
+               display: block;
+               width: auto !important;
+               height: 500px !important;
+           }
+
+           #container p {
+               text-align: center;
+           }
+
+           #container {
+               height: 100%;
+           }
+       </style>
    {% endblock %}
 
 
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    
+
     <div class="row introduction bgc-orange">
-        
-        <div class="col-12 text-center typewriter">
-            <h2 class="text-light home-title">Culottés, inspirés et déterminés</h2>
+        <div class="col-12 col-xl-5 text-center typewriter">
+            <h2 class="text-light home-title">Culottés, <br>inspirés <br>et déterminés</h2>
         </div>
-        
-        <div class="col-12  text-light p-0 mb-2">
-            {{ display_dynamic_content('home_main_presentation') }}
-        </div>
-        
-        <div class="row mt-2">
-            <div class="col-lg-6 offset-lg-6 col-md-8 offset-3 col-12">
-                <a href="#map-title" class="home-button mt-3 btn">Retrouvez-nous près de chez vous</a>
+
+        <div class="col-12 col-xl-7 row column">
+            <div class="col-12 col-xl-12 text-light p-0 mb-2">
+                {{ display_dynamic_content('home_main_presentation') }}
+            </div>
+            <div class="col-12 btn">
+                <a href="#map-title" class="home-button">Retrouvez-nous près de chez vous</a>
             </div>
         </div>
     </div>
- 
-    
+
     <div class="row missions" data-aos="fade-in"
             data-aos-offset="200"
             data-aos-delay="50"
@@ -42,21 +66,21 @@
                 <h3 class="color-orange">Action culottée est une association loi de 1901</h3>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-12 text-center">
                 <h2 class="home-title" > Nos <span class="orange-line">Missions</span></h2>
             </div>
         </div>
-        
+
         <div class="row">
             <div class="col-12 text-center">
                 {{ display_dynamic_content('home_missions_presentation') }}
             </div>
         </div>
-    
+
     </div>
-    
+
     <div class="row actions bgc-orange">
         
         <div class="row mb-3"  >
@@ -70,7 +94,7 @@
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
+                <img src="{{ asset('images/actions/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
             <div class="col-lg-9  d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
                     data-aos-offset="200"
@@ -86,7 +110,7 @@
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
+                <img src="{{ asset('images/actions/deco-vitrine.jpg') }}" alt="Achats groupés et tarifs négociés" class="img-fluid dynamic-image">
             </div>
             <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
                     data-aos-offset="200"
@@ -103,7 +127,7 @@
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
+                <img src="{{ asset('images/actions/campagne-affichage.jpg') }}" alt="Campagne d'affichage" class="img-fluid dynamic-image">
             </div>
             <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
                     data-aos-offset="200"
@@ -118,7 +142,7 @@
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <img src="{{ asset('images/founders/couturiere_bracq.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image ">
+                <img src="{{ asset('images/actions/usine.jpg') }}" alt="Usine et fournisseurs" class="img-fluid dynamic-image ">
             </div>
             <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
                     data-aos-offset="200"
@@ -133,7 +157,7 @@
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
+                <img src="{{ asset('images/actions/solidaire.jpg') }}" alt="Action de solidarité" class="img-fluid dynamic-image">
             </div>
             <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
                     data-aos-offset="200"
@@ -142,13 +166,13 @@
                 <p class="text-light">Action de solidarité : envoi de lingerie à des personnes sinistrées suite aux innondations en Belgique.</p>
             </div>
         </div>
-    
+
         <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" >
             <div class="col-12 col-lg-2 p-0" data-aos="fade-left"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
+                <img src="{{ asset('images/actions/partage.jpg') }}" alt="Réseaux sociaux" class="img-fluid dynamic-image">
             </div>
             <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
                     data-aos-offset="200"
@@ -156,15 +180,14 @@
                     data-aos-duration="1000">
                 <p class="text-light">Mise en place et modération d'un fil de discussion sur les réseaux sociaux (Facebook et Whatsapp) pour faciliter les dépannages et rétrocessions et partager les bonnes pratiques et idées.</p>
             </div>
-           
         </div>
-    
+
         <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" >
             <div class="col-12 col-lg-2 p-0" data-aos="fade-left"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
+                <img src="{{ asset('images/actions/numerique.jpg') }}" alt="Vitrine numérique" class="img-fluid dynamic-image">
             </div>
             <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
                     data-aos-offset="200"
@@ -174,47 +197,45 @@
             </div>
         </div>
     </div>
-    
-    
+
     <div class="row posters-box mb-3" >
         <div class="col-lg-3 d-none d-lg-block" >
             <div class="row bgc-orange color-rows"></div>
             <div class="row color-rows"></div>
         </div>
-        
+
         <div class="col-lg-6 col-12 d-flex flex-column flex-lg-row posters align-items-lg-center justify-content-lg-around py-3 px-0">
-            
+
             <div class="col-lg-3 ms-lg-2 col-10 offset-1 mb-2 d-none d-md-block" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
-    
+
             <div class="col-lg-3 ms-lg-2 col-10 offset-1 mb-2 d-none d-md-block" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
-    
+
             <div class="col-lg-3 ms-lg-2 col-10 offset-1 mb-2" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
-            
+
         </div>
-    
+
         <div class="col-lg-3 d-none d-lg-block ">
             <div class="row bgc-orange color-rows"></div>
             <div class="row color-rows"></div>
         </div>
-        
+
     </div>
-    
-    
+
     <div class="row about">
         <div class="col-12 text-center mt-5 mb-3" data-aos="fade-left"
                 data-aos-offset="200"
@@ -230,49 +251,45 @@
         </div>
         
         {#    Carousel #}
-        <div class="row carousel mx-auto mx-md-0">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12" data-aos="fade-left"
-                    data-aos-offset="200"
-                    data-aos-delay="50"
-                    data-aos-duration="1000">
-                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="{{ asset('images/founders/Annabelle 2.jpg') }}" class="d-block w-100 img-fluid" alt="Annabelle Piquet recevant le prix de la boutique ambassadeur">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Annabelle Piquet recevant le prix de la boutique ambassadeur</h5>
-                                <p>Gérante de la boutique Un Temps Pour Elle à Dijon</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img src="{{ asset('images/founders/la-clef-des-charmes-sex-shop-à-Toulouse2.jpg') }}" class="d-block w-100 img-fluid" alt="Devanture de la très chic boutique La clé des charmes à Toulouse">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Devanture de la très chic boutique La clé des charmes à Toulouse</h5>
-                                <p>Avec Action Culottée, il y en a pour tous les goûts !</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('images/founders/audrey-marie.jpg') }}" class="d-block w-100 img-fluid" alt="Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes</h5>
-                                <p>Membre engagée pour la cause culottée et influenceuse lingerie sur Tiktok</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
-                    </button>
+        <section id="container" class="d-flex align-items-center col-12 col-md-3  p-md-3">
+
+            <div id="vertical-slider" class="splide">
+
+                <div class="splide__track ">
+
+                    <ul class="splide__list">
+{#ajouter "display_dynamic_content('about_nb_img') + foreach#}
+                        <span class="d-none"> </span>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Annabelle 2.jpg') }}" alt="Annabelle Cumin">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Photo de Jenny.jpg') }}"
+                            alt="Jenny Mercier">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Audrey Maris.jpg') }}"
+                            alt="Audrey Maris">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Mélinda Elodie 3.jpg') }}"
+                            alt="Mélinda Elodie">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img alt=" Aurélie Vidal" src="{{ asset('images/founders/Aurélie Vidal Pomponette.jpg'
+                            )  }}  ">
+                        </li>
+
+                    </ul>
                 </div>
             </div>
-        </div>
+
+        </section>
     
     </div>
     
@@ -287,47 +304,47 @@
         </div>
         
         <div class="row mx-auto mx-lg-0 mt-4">
-            <div class="col-lg-5 offset-lg-1 col-6" data-aos="fade-right"
+            <div class="col-lg-5 offset-lg-1 col-12" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
                 <p class="text-light">Contribuer au fonctionnement de l'association, à son existence et à sa bonne gestion.</p>
             </div>
-            <div class="col-lg-5 offset-lg-1 col-6" data-aos="fade-right"
+            <div class="col-lg-5 offset-lg-1 col-12" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <p class="text-light">Participer aux visites d’usines et/ou de fournisseurs. </p>
+                <p class="text-light"><br>Participer aux visites d’usines et/ou de fournisseurs. </p>
             </div>
         </div>
     
         <div class="row mx-auto mx-lg-0 mt-4">
-            <div class="col-lg-5 offset-lg-1 col-6" data-aos="fade-right"
+            <div class="col-lg-5 offset-lg-1 col-12" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
                 <p class="text-light">Profiter de formations spécifiques à notre métier avec un accompagnement et une prise en charge du dossier par des organismes partenaires. </p>
             </div>
-            <div class="col-lg-5 offset-lg-1 col-6" data-aos="fade-right"
+            <div class="col-lg-5 offset-lg-1 col-12" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <p class="text-light">Bénéficier des avantages suite aux négociations d’achats groupés pour de l’équipement ou pour faire valoir nos intérêts auprès de nos fournisseurs. </p>
+                <p class="text-light"><br>Bénéficier des avantages suite aux négociations d’achats groupés pour de l’équipement ou pour faire valoir nos intérêts auprès de nos fournisseurs. </p>
             </div>
         </div>
     
         <div class="row mx-auto mx-lg-0 mt-4">
-            <div class="col-lg-5 offset-lg-1 col-6" data-aos="fade-right"
+            <div class="col-lg-5 offset-lg-1 col-12" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
                 <p class="text-light">Profiter de la retombée médiatique des actions culottées menées. </p>
             </div>
-            <div class="col-lg-5 offset-lg-1 col-6" data-aos="fade-right"
+            <div class="col-lg-5 offset-lg-1 col-12" data-aos="fade-right"
                     data-aos-offset="200"
                     data-aos-delay="50"
                     data-aos-duration="1000">
-                <p class="text-light">Défendre les intérêts de vos consœurs et valoriser votre métier. </p>
+                <p class="text-light"><br>Défendre les intérêts de vos consœurs et valoriser votre métier. </p>
             </div>
         </div>
         
@@ -373,6 +390,44 @@
     
     <script src="{{ asset('js/scroll-up.js') }}"></script>
     <script src="{{ asset('js/home-script.js') }}"></script>
+
+{#    Inclusion library SpliderJs#}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
+{#    Script pour le slider#}
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            new Splide('.splide', {
+
+                type: 'loop',
+                direction: "ltr",
+                updateOnMove: true,
+                arrows: true,
+                isNavigation: true,
+                wheel: false,
+                pagination: false,
+                focus: 'center',
+
+                perPage: 2,
+
+                gap: '1rem',
+                lazyLoad: true,
+                rewind: true,
+
+                autoWidth: true,
+                height: 'auto',
+                width: '100vw',
+
+                autoHeight: true,
+
+
+            }).mount();
+
+        });
+
+    </script>
 
 {% endblock %}
 
