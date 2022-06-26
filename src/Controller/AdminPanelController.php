@@ -78,6 +78,7 @@ class AdminPanelController extends AbstractController {
 
                 // Ajout message flash
                 $this->addFlash("success", "Évènement créé avec succès !");
+                return $this->redirectToRoute('admin_panel_events_list');
             }
         }
 
