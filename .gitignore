@@ -13,7 +13,6 @@
 /migrations/*.php
 /public/images/home_presentation/*.php
 /public/images/home_presentation/.gitignore
-/public/images/images-partners/*
 !/public/images/images-partners/.gitignore
 /public/images/founders/*
 /public/images/founders/.gitignore

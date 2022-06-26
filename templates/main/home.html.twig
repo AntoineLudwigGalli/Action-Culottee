@@ -7,6 +7,7 @@
        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
        {# Ajout du leaflet Locate control pour la geolocalisation #}
        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css"/>
+       <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
    {% endblock %}
 
 
@@ -32,7 +33,10 @@
     </div>
  
     
-    <div class="row missions">
+    <div class="row missions" data-aos="fade-in"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000">
         <div class="row ">
             <div class="col-12 text-center">
                 <h3 class="color-orange">Action culottée est une association loi de 1901</h3>
@@ -41,7 +45,7 @@
         
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="home-title"> Nos <span class="orange-line">Missions</span></h2>
+                <h2 class="home-title" > Nos <span class="orange-line">Missions</span></h2>
             </div>
         </div>
         
@@ -55,82 +59,112 @@
     
     <div class="row actions bgc-orange">
         
-        <div class="row mb-3">
-            <div class="col-lg-9 offset-lg-1 col-10 offset-1 ">
+        <div class="row mb-3" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000" >
+            <div class="col-lg-9 offset-lg-1 col-10 offset-1 " >
                 <h2 class="text-light home-title">Nos Actions depuis 2021</h2>
             </div>
         </div>
         
-        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000">
             <div class="col-12 col-lg-2 p-0">
                 <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
+            <div class="col-lg-9  d-lg-flex flex-lg-row align-items-lg-center" data-aos="fade-left"
+                    data-aos-offset="200"
+                    data-aos-delay="50"
+                    data-aos-duration="1000">
                 <p class="text-light">Envoi d'une culotte de mécontentement à notre Premier Ministre M. Jean Castex : une action culottée suivie par plus de 280 boutiques indépendantes, qualifiées de « non essentielles », et relayée massivement sur les médias locaux et nationaux, même plusieurs
                     mois après.</p>
             </div>
         </div>
     
-        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000">
             <div class="col-12 col-lg-2 p-0">
                 <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-lg-9 d-lg-flex offset-lg-1 flex-lg-row align-items-lg-center">
+            <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Achats groupés et tarifs négociés pour du matériel professionnel (bustes et mannequins, décoration de vitrine).</p>
             </div>
            
            
         </div>
     
-        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000">
             <div class="col-12 col-lg-2 p-0">
                 <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
+            <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Publicité : campagne d’affichage à travers toute la France et Belgique pour revendiquer l’essentialité des sous-vêtements.</p>
             </div>
         </div>
     
-        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000">
             <div class="col-12 col-lg-2 p-0">
                 <img src="{{ asset('images/founders/couturiere_bracq.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image ">
             </div>
-            <div class="col-lg-9 d-lg-flex offset-lg-1 flex-lg-row align-items-lg-center">
+            <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Visites d'usine et rencontres fournisseurs (LeChat et Louisa Bracq). </p>
             </div>
         </div>
     
-        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000">
             <div class="col-12 col-lg-2 p-0">
                 <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
+            <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Action de solidarité : envoi de lingerie à des personnes sinistrées suite aux innondations en Belgique.</p>
             </div>
         </div>
     
-        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000">
             <div class="col-12 col-lg-2 p-0">
                 <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-lg-9 d-lg-flex offset-lg-1 flex-lg-row align-items-lg-center">
+            <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Mise en place et modération d'un fil de discussion sur les réseaux sociaux (Facebook et Whatsapp) pour faciliter les dépannages et rétrocessions et partager les bonnes pratiques et idées.</p>
             </div>
            
         </div>
     
-        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0" data-aos="fade-left"
+                data-aos-offset="200"
+                data-aos-delay="50"
+                data-aos-duration="1000">
             <div class="col-12 col-lg-2 p-0">
                 <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
+            <div class="col-lg-9 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Création et mise en ligne d'une carte de France recensant les boutiques indépendantes multimarques mise gracieusement à disposition des boutiques et à destination de leurs clients.</p>
             </div>
         </div>
     </div>
     
     
-    <div class="row posters-box mb-3">
+    <div class="row posters-box mb-3" data-aos="fade-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000">
         
         <div class="col-lg-3 d-none d-lg-block ">
             <div class="row bgc-orange color-rows"></div>
@@ -161,7 +195,11 @@
     </div>
     
     
-    <div class="row about">
+    <div class="row about"
+            data-aos="fade-left"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000">
         <div class="col-12 text-center mt-5 mb-3">
             <h2 class="home-title orange-line">Qui Sommes-nous ?</h2>
         </div>
@@ -213,7 +251,10 @@
     
     </div>
     
-    <div class="row why-join bgc-orange">
+    <div class="row why-join bgc-orange" data-aos="fade-right"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 ps-5 col-12">
                 <h2 class="text-light home-title mb-5">Pourquoi adhérer ?</h2>
@@ -249,7 +290,10 @@
         
     </div>
     
-    <div class="row map">
+    <div class="row map" data-aos="fade-left"
+            data-aos-offset="200"
+            data-aos-delay="50"
+            data-aos-duration="1000">
         <div class="row">
             <div class="col-12">
                 <h2 class="home-title" id="map-title">Retrouvez-nous près de chez vous !</h2>
@@ -278,8 +322,12 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     {# Inclusion fichier JS de la map   #}
     <script src="{{ asset('js/leaflet-map.js') }}"></script>
-    <script src="{{ asset('js/scroll-up.js') }}"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     
+    <script src="{{ asset('js/scroll-up.js') }}"></script>
     <script src="{{ asset('js/home-script.js') }}"></script>
 
 {% endblock %}
