@@ -228,6 +228,12 @@ p{
 
     /*Footer*/
 
+.footer-cheat {
+
+    margin-bottom: 20%;
+
+}
+
 .footer {
     height: auto;
     background-color: #000000;
@@ -475,7 +481,7 @@ p.text_footer{
 
 .overlay {
 
-    position: absolute;
+    position: fixed;
     overflow-y: scroll;
     width: 100%;
     height: 100%;
@@ -560,7 +566,6 @@ p.text_footer{
     border-radius: 30px;
 
 }
-
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
