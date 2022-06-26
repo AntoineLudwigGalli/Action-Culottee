@@ -92,7 +92,7 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
 
                 // Ajout des classes sur l'offre
-                divButtonOffer.setAttribute('class', 'text-center mt-5  div-offer');
+                divButtonOffer.setAttribute('class', 'text-center mt-5 div-offer');
                 linkOffer.setAttribute('class', 'text-black text-decoration-underline');
                 buttonOffer.setAttribute('class', 'btn button-orange offer w-25 mb-5');
 
@@ -155,7 +155,9 @@ document.querySelector('.overlay').addEventListener('click', async function (ev)
         // Attente de 500 millisecondes
         await sleep(500);
 
-        document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );
+        if ( document.querySelector('.div-offer') ) {
+            document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );
+        }
 
         await closeOverlayPartner();
 

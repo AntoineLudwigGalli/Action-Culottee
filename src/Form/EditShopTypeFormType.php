@@ -44,9 +44,7 @@ class EditShopTypeFormType extends AbstractType
 
                 "empty_data" => "",
                 'label' => 'Adresse',
-                'attr' => [
-                    'class' => "typeahead"
-                ],
+
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
@@ -64,9 +62,7 @@ class EditShopTypeFormType extends AbstractType
 
                 'label' => 'Code postal',
                 "empty_data" => '',
-                'attr' => [
-                    'class' => "typeahead"
-                ],
+
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'
@@ -81,9 +77,7 @@ class EditShopTypeFormType extends AbstractType
             ->add('city', TextType::class, [
                 "empty_data" => "",
                 'label' => 'Ville',
-                'attr' => [
-                    'class' => "typeahead"
-                ],
+
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le champs ne peux pas être vide'

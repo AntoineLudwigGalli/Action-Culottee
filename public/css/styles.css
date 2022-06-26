@@ -413,8 +413,8 @@ p.text_footer{
 
 .overlay {
 
+    position: absolute;
     overflow-y: scroll;
-    position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
@@ -426,13 +426,17 @@ p.text_footer{
     opacity: 0;
 }
 
-.partner-image{
-    height: 15vh;
+.content {
+
+    padding-bottom: 10%;
+
 }
+
 .orange-filter{
     background-color: #e1942d;
     opacity: .7;
 }
+
 /* Affichage du partenaire */
 
 .fa-xmark {
@@ -463,6 +467,8 @@ p.text_footer{
     box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
     -webkit-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
     -moz-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);;
+
+    cursor: pointer;
 
 }
 
@@ -497,9 +503,7 @@ p.text_footer{
     margin-bottom: 15px;
 }
 
-.twitter-typeahead{
-    display: block !important;
-}
+
 
 
 

@@ -16,7 +16,7 @@ class Partner
     #[ORM\Column(type: 'string', length: 100)]
     private $title;
 
-    #[ORM\Column(type: 'string', length: 60, nullable: true)]
+    #[ORM\Column(type: 'string', length: 60)]
     private $logo;
 
     #[ORM\Column(type: 'text')]
@@ -51,7 +51,7 @@ class Partner
         return $this->logo;
     }
 
-    public function setLogo(?string $logo): self
+    public function setLogo(string $logo): self
     {
         $this->logo = $logo;
 
