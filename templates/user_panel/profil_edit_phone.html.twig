@@ -10,17 +10,32 @@
 
             <div class="col-10 mx-auto">
 
-                {# Formulaire de modification du téléphone #}
-                {{ form_start( form, { 'attr': { novalidate:'novalidate' } } ) }}
+                {# Formulaire de modification numero de téléphone #}
+                {{ form_start( form ) }}
 
-                    {{ form_label(form.phoneNumber, 'Nouveau numéro de téléphone') }}
-                    {{ form_widget(form.phoneNumber) }}
-                    {{ form_errors(form.phoneNumber) }}
+                {{ form_label(form.phoneNumber, 'Nouveau numéro de téléphone') }}
+                {{ form_widget(form.phoneNumber) }}
+                {{ form_errors(form.phoneNumber) }}
 
-                    {{ form_widget(form.submit, {'attr': { 'value': 'Modifier' } }) }}
-                    <a href="{{ path('user_panel_profil') }}"><button type="button" class="btn btn-danger">Retour</button></a>
+                <div class="row mb-3">
+
+                    <div class="col-12 d-flex flex-row mt-3">
+
+                        <div class="me-4">
+                            {{ form_widget(form.submit, {'attr': { 'value': 'Modifier', 'class': 'button-orange' } }) }}
+                        </div>
+
+                        <div>
+                            <a href="{{ path('user_panel_profil') }}"><button type="button" class="btn btn-danger btn-back">Retour</button></a>
+                        </div>
+
+
+                    </div>
+
+                </div>
 
                 {{ form_end(form) }}
+
             </div>
 
         </div>

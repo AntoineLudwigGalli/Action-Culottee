@@ -21,7 +21,7 @@ class EditPasswordTypeFormType extends AbstractType
             ->add('oldPassword', PasswordType::class, [
                 'label' => 'Mot de passe actuel',
 
-                "empty_data" => '',
+                'empty_data' => '',
 
                 'constraints' => [
 
@@ -35,7 +35,8 @@ class EditPasswordTypeFormType extends AbstractType
                         'minMessage' => "Votre mot de passe doit contenir au moins {{ limit }} caractères",
                         'maxMessage' => 'Votre mot de passe est trop grand'
                     ])
-                ]
+                ],
+
             ])
             ->add('newPassword', RepeatedType::class, [
 

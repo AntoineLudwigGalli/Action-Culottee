@@ -3,9 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Shop;
-use App\Entity\User;
 use App\Form\CreateShopByUserFormType;
-use App\Form\CreateShopFormType;
 use App\Form\EditEmailFormType;
 use App\Form\EditLastnameFirstnameFormType;
 use App\Form\EditNewsletterTypeFormType;
@@ -15,15 +13,12 @@ use App\Form\EditShopTypeFormType;
 use App\Repository\ShopRepository;
 use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
-use Doctrine\Persistence\ManagerRegistry;
-use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Security\ChangePassword;
@@ -309,10 +304,12 @@ class UserPanelController extends AbstractController
         // Utilisateur actuellement connecter
         $user = $this->getUser();
 
+
         // Class qui permet de crée le formulaire pour après faire la comparaison avec l'utilisateur
         $changePassword = new ChangePassword();
 
         $form = $this->createForm(EditPasswordTypeFormType::class, $changePassword);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
