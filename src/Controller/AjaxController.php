@@ -15,7 +15,7 @@ class AjaxController extends AbstractController
     #[Route('/ajax/shops', name: 'app_ajax_shops')]
     public function jsonAction(ManagerRegistry $doctrine): JsonResponse
     {
-//On récupère dans la BDD les adresses des boutiques et on les convertit en page JSON
+// On récupère dans la BDD les adresses des boutiques et on les convertit en page JSON
         $shopAddressRepository = $doctrine->getRepository(Shop::class);
         $shopAddresses = $shopAddressRepository->findAll();
 

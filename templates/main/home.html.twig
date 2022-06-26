@@ -14,23 +14,23 @@
 
 {% block body %}
     
-    
     <div class="row introduction bgc-orange">
-        <div class="col-6">
+        
+        <div class="col-12 text-center typewriter">
             <h2 class="text-light home-title">Culottés, inspirés et déterminés</h2>
         </div>
-        <div class="col-6 text-light p-0">
-            <p>L'<b>union</b> fait la force et les évènements de ces derniers temps nous ont plus que jamais rappelé cet adage. A l'initiative de Nathalie Paredes, une détaillante indépendante en lingerie, nous avons pu nous regrouper sur les réseaux sociaux et <b>organiser des actions communes pour
-                    défendre, valoriser et promouvoir notre métier et notre savoir-faire.</b>organiser des actions communes pour
-                défendre, valoriser et promouvoir notre métier et notre savoir-faire.</p>
+        
+        <div class="col-12  text-light p-0 mb-2">
+            {{ display_dynamic_content('home_main_presentation') }}
         </div>
+        
         <div class="row mt-2">
-            <div class="col-6 offset-6">
+            <div class="col-lg-6 offset-lg-6 col-md-8 offset-3 col-12">
                 <a href="#map-title" class="home-button mt-3">Retrouvez-nous près de chez vous</a>
             </div>
         </div>
-        
     </div>
+ 
     
     <div class="row missions">
         <div class="row ">
@@ -47,7 +47,7 @@
         
         <div class="row">
             <div class="col-12 text-center">
-                <p>Accompagner les professionnels indépendants de l’habillement en lingerie en équipement et bien-être de la personne dans leur quotidien. Faciliter le partage, la réactivité et la communication entre nous pour créer une dynamique de groupe.</p>
+                {{ display_dynamic_content('home_missions_presentation') }}
             </div>
         </div>
     
@@ -56,71 +56,75 @@
     <div class="row actions bgc-orange">
         
         <div class="row mb-3">
-            <div class="col-9 offset-1">
+            <div class="col-lg-9 offset-lg-1 col-10 offset-1 ">
                 <h2 class="text-light home-title">Nos Actions depuis 2021</h2>
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-2 p-0">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+            <div class="col-12 col-lg-2 p-0">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-9 offset-1 d-flex flex-row align-items-center">
-                <p class="text-light">Envoi d'une culotte de mécontentement à notre 1er minister M. Jean Castex : Une action culottée suivie par plus de 280 boutiques indépendantes, qualifiées de « non essentielles », et relayée massivement sur les médias locaux et nationaux, même plusieurs mois après.</p>
+            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
+                <p class="text-light">Envoi d'une culotte de mécontentement à notre Premier Ministre M. Jean Castex : une action culottée suivie par plus de 280 boutiques indépendantes, qualifiées de « non essentielles », et relayée massivement sur les médias locaux et nationaux, même plusieurs
+                    mois après.</p>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-2 p-0">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+    
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+            <div class="col-12 col-lg-2 p-0">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+            <div class="col-lg-9 d-lg-flex offset-lg-1 flex-lg-row align-items-lg-center">
                 <p class="text-light">Achats groupés et tarifs négociés pour du matériel professionnel (bustes et mannequins, décoration de vitrine).</p>
             </div>
+           
+           
         </div>
-        
-        <div class="row">
-            <div class="col-2 p-0">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+    
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+            <div class="col-12 col-lg-2 p-0">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Publicité : campagne d’affichage à travers toute la France et Belgique pour revendiquer l’essentialité des sous-vêtements.</p>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-2 p-0">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+    
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+            <div class="col-12 col-lg-2 p-0">
+                <img src="{{ asset('images/founders/couturiere_bracq.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image ">
             </div>
-            <div class="col-9 offset-1 d-flex flex-row align-items-center">
-                <p class="text-light">Visites d'usine et rencontres fournisseurs ( LeChat et Louisa Bracq) </p>
+            <div class="col-lg-9 d-lg-flex offset-lg-1 flex-lg-row align-items-lg-center">
+                <p class="text-light">Visites d'usine et rencontres fournisseurs (LeChat et Louisa Bracq). </p>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-2 p-0">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+    
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+            <div class="col-12 col-lg-2 p-0">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-9 offset-1 d-flex flex-row align-items-center">
+            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
                 <p class="text-light">Action de solidarité : envoi de lingerie à des personnes sinistrées suite aux innondations en Belgique.</p>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-2 p-0">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+    
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+            <div class="col-12 col-lg-2 p-0">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-9 offset-1 d-flex flex-row align-items-center">
-                <p class="text-light">Mise en place et modération d'un fil de discussion sur les réseaux sociaux (facebook et Whatsapp) pour faciliter les dépannages et rétrocessions et partager les bonnes pratiques et idées.</p>
+            <div class="col-lg-9 d-lg-flex offset-lg-1 flex-lg-row align-items-lg-center">
+                <p class="text-light">Mise en place et modération d'un fil de discussion sur les réseaux sociaux (Facebook et Whatsapp) pour faciliter les dépannages et rétrocessions et partager les bonnes pratiques et idées.</p>
             </div>
+           
         </div>
-        
-        <div class="row">
-            <div class="col-2 p-0">
-                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid">
+    
+        <div class="row mx-auto mx-lg-0 mb-3 mb-lg-0 p-lg-0">
+            <div class="col-12 col-lg-2 p-0">
+                <img src="{{ asset('images/castex-panty.jpg') }}" alt="Culottes envoyée à Jean Castex" class="img-fluid dynamic-image">
             </div>
-            <div class="col-9 offset-1 d-flex flex-row align-items-center">
-                <p class="text-light">Création et mise en ligne d'une carte de France recensant les boutiques indépendantes multimarques mise gracieusement à disposition des boutiques et à destination de leurs clients. </p>
+            <div class="col-lg-9 offset-lg-1 d-lg-flex flex-lg-row align-items-lg-center">
+                <p class="text-light">Création et mise en ligne d'une carte de France recensant les boutiques indépendantes multimarques mise gracieusement à disposition des boutiques et à destination de leurs clients.</p>
             </div>
         </div>
     </div>
@@ -128,28 +132,28 @@
     
     <div class="row posters-box mb-3">
         
-        <div class="col-3 ">
+        <div class="col-lg-3 d-none d-lg-block ">
             <div class="row bgc-orange color-rows"></div>
             <div class="row color-rows"></div>
         </div>
         
-        <div class="col-6 d-flex flex-row posters align-items-center justify-content-around py-3 px-0">
+        <div class="col-lg-6 col-12 d-flex flex-column flex-lg-row posters align-items-lg-center justify-content-lg-around py-3 px-0">
             
-            <div class="col-3 ms-2">
+            <div class="col-lg-3 ms-lg-2 col-10 offset-1 mb-2 d-none d-md-block">
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
-            
-            <div class="col-3 mx-2">
+    
+            <div class="col-lg-3 ms-lg-2 col-10 offset-1 mb-2 d-none d-md-block">
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
-            
-            <div class="col-3 me-2">
+    
+            <div class="col-lg-3 ms-lg-2 col-10 offset-1 mb-2">
                 <img src="{{ asset('images/home_presentation/poster.jpg') }}" alt="Affiche de la campagne essentiel" class="img-fluid">
             </div>
             
         </div>
-        
-        <div class="col-3">
+    
+        <div class="col-lg-3 d-none d-lg-block ">
             <div class="row bgc-orange color-rows"></div>
             <div class="row color-rows"></div>
         </div>
@@ -161,13 +165,13 @@
         <div class="col-12 text-center mt-5 mb-3">
             <h2 class="home-title orange-line">Qui Sommes-nous ?</h2>
         </div>
-        <div class="col-8 offset-2 mb-3">
-            <p>Le bureau officiel est aidé dans ses tâches par d'autres détaillantes ou groupes de travail qui ont déjà œuvrés pour nos actions en 2021.</p>
+        <div class="col-lg-8 offset-lg-2 col-12 mb-3">
+            {{ display_dynamic_content('home_about_presentation_text') }}
         </div>
         
         {#    Carousel #}
-        <div class="row carousel">
-            <div class="col-8 offset-2">
+        <div class="row carousel mx-auto mx-md-0">
+            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12">
                 <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -190,7 +194,7 @@
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('images/founders/Audrey Maris.jpg') }}" class="d-block w-100 img-fluid" alt="Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes">
+                            <img src="{{ asset('images/founders/audrey-marie.jpg') }}" class="d-block w-100 img-fluid" alt="Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes</h5>
                                 <p>Membre engagée pour la cause culottée et influenceuse lingerie sur Tiktok</p>
@@ -211,35 +215,35 @@
     
     <div class="row why-join bgc-orange">
         <div class="row">
-            <div class="col-10 offset-1 ps-5">
+            <div class="col-lg-10 offset-lg-1 ps-5 col-12">
                 <h2 class="text-light home-title mb-5">Pourquoi adhérer ?</h2>
             </div>
         </div>
         
-        <div class="row mt-4">
-            <div class="col-5 offset-1">
+        <div class="row mx-auto mx-lg-0 mt-4">
+            <div class="col-lg-5 offset-lg-1 col-6">
                 <p class="text-light">Contribuer au fonctionnement de l'association, à son existence et à sa bonne gestion.</p>
             </div>
-            <div class="col-5 offset-1">
+            <div class="col-lg-5 offset-lg-1 col-6">
                 <p class="text-light">Participer aux visites d’usines et/ou de fournisseurs. </p>
             </div>
         </div>
     
-        <div class="row mt-4">
-            <div class="col-5 offset-1">
+        <div class="row mx-auto mx-lg-0 mt-4">
+            <div class="col-lg-5 offset-lg-1 col-6">
                 <p class="text-light">Profiter de formations spécifiques à notre métier avec un accompagnement et une prise en charge du dossier par des organismes partenaires. </p>
             </div>
-            <div class="col-5 offset-1">
+            <div class="col-lg-5 offset-lg-1 col-6">
                 <p class="text-light">Bénéficier des avantages suite aux négociations d’achats groupés pour de l’équipement ou pour faire valoir nos intérêts auprès de nos fournisseurs. </p>
             </div>
         </div>
-        
-        <div class="row">
-            <div class="col-5 offset-1">
+    
+        <div class="row mx-auto mx-lg-0 mt-4">
+            <div class="col-lg-5 offset-lg-1 col-6">
                 <p class="text-light">Profiter de la retombée médiatique des actions culottées menées. </p>
             </div>
-            <div class="col-5 offset-1">
-                <p class="text-light">Défendre les intérêts de vos consoeurs et valoriser votre métier. </p>
+            <div class="col-lg-5 offset-lg-1 col-6">
+                <p class="text-light">Défendre les intérêts de vos consœurs et valoriser votre métier. </p>
             </div>
         </div>
         
@@ -256,17 +260,11 @@
         </div>
     </div>
     
-    {#            <div> #}
-    {#                <h2>Retrouvez-nous près de chez vous !</h2> #}
-    {#                <div> #}
-    {#                    #}{# Conteneur de la map #}
-    {#                    <div id="map"> #}
-    {#                    </div> #}
-    {#                </div> #}
-    {#            </div> #}
-
-
-
+    <div id="scrollUp">
+        <a href="#top"><img src="{{ asset('images/to_top.png') }}"/></a>
+    </div>
+    
+   
 {% endblock %}
 
 {% block jsIncludes %}
@@ -280,6 +278,9 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.js" charset="utf-8"></script>
     {# Inclusion fichier JS de la map   #}
     <script src="{{ asset('js/leaflet-map.js') }}"></script>
+    <script src="{{ asset('js/scroll-up.js') }}"></script>
+    
+    <script src="{{ asset('js/home-script.js') }}"></script>
 
 {% endblock %}
 

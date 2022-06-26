@@ -52,8 +52,6 @@ class EditPartnerTypeFormType extends AbstractType
                     ]),
 
                 ]
-
-
             ])
 
             ->add('description', CKEditorType::class, [

@@ -88,9 +88,10 @@ class CreateShopFormType extends AbstractType
                         'message' => 'Merci de saisir le code postal de votre boutique'
                     ]),
                     new Regex([
-                        'pattern' => '/^\d{5}$/u', // Accepte uniquement 5 chiffres
+                        'pattern' => '/^\d{4,5}$/u', // Accepte uniquement 4 ou 5 chiffres (codes postaux belges et luembourgeois 4 chiffres)
                         'message' => "Merci de saisir un code postal valide."
                     ]),
+
                 ]
             ])
 
@@ -104,7 +105,7 @@ class CreateShopFormType extends AbstractType
                         'message' => 'Merci de saisir la ville dans laquelle se trouve votre boutique'
                     ]),
                     new Length([
-                        'min' => 5,
+                        'min' => 2,
                         'max' => 100,
                         'minMessage' => 'La ville dans laquelle se trouve votre boutique doit contenir au moins {{ limit }} caractères.',
                         'maxMessage' => 'La ville dans laquelle se trouve votre boutique ne peut contenir plus de {{ limit }} caractères'

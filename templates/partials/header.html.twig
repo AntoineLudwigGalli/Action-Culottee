@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-lg navbar- navbar-light">
     
         {# Logo et titre du site #}
-        <a class="navbar-brand" href="{{ path('main_home') }}">
+        <a class="navbar-brand" id="top" href="{{ path('main_home') }}">
             <img src="{{ asset('/images/logo_header.png') }}" alt="" class="img-fluid main-navbar-logo">
         </a>
 
@@ -26,18 +26,18 @@
                     <a class="nav-link{{ route == 'main_home' ? ' active' }}" href="{{ path('main_home') }}">Accueil</a>
                 </li>
 
-                {# Bouton de la page qui-sommes-nous #}
-                <li class="nav-item">
-                    <a class="nav-link{{ route == 'main_about' ? ' active' }}" href="{{ path('main_about') }}">Qui
-                        sommes-nous ?</a>
-                </li>
+{#                #}{# Bouton de la page qui-sommes-nous #}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link{{ route == 'main_about' ? ' active' }}" href="{{ path('main_about') }}">Qui#}
+{#                        sommes-nous ?</a>#}
+{#                </li>#}
 
-                {# TODO: #}
-                {# Bouton de la page Les actions clulottées #}
-                <li class="nav-item">
-                    <a class="nav-link{{ route == 'main_home' ? '' }}" href="{{ path('main_home') }}">Les actions
-                        culottées</a>
-                </li>
+{#                #}{# TODO: #}
+{#                #}{# Bouton de la page Les actions clulottées #}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link{{ route == 'main_home' ? '' }}" href="{{ path('main_home') }}">Les actions#}
+{#                        culottées</a>#}
+{#                </li>#}
 
                 {# TODO: #}
                 {# Bouton de la page Nos partenaires #}

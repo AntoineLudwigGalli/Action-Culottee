@@ -55,7 +55,7 @@
                                     <thead>
                                     <tr>
                                         <th scope="col"></th>
-                                        <th scope="col">{{ knp_pagination_sortable(shops, 'propriétaire ', 'a.owner') }}</th>
+                                        <th scope="col">{{ knp_pagination_sortable(shops, 'Gérant ', 'a.owner') }}</th>
                                         <th scope="col">{{ knp_pagination_sortable(shops, 'Nom ', 'a.name') }}</th>
                                         <th scope="col">{{ knp_pagination_sortable(shops, 'Adresse ', 'a.address') }}</th>
                                         <th scope="col">{{ knp_pagination_sortable(shops, 'Code postal ', 'a.zip') }}</th>
@@ -86,11 +86,11 @@
                                                 </div>
 
                                             </td>
-                                            <td>{{ shop.owner.getLastname() }}</td>
+                                            <td>{{ shop.owner.getLastname() ~ " " ~ shop.owner.getFirstname()}}</td>
                                             <td>{{ shop.name }}</td>
                                             <td>{{ shop.address }}</td>
                                             <td>{{ shop.zip }}</td>
-                                            <td>{{ shop.city }}</td>
+                                            <td>{{ shop.city|upper }}</td>
                                             <td>{{ shop.phoneNumber }}</td>
                                             <td>{{ shop.country }}</td>
 
