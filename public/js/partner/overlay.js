@@ -40,19 +40,29 @@ async function closeOverlayPartner() {
     // Attente de 500 millisecondes
     await sleep(500);
 
+
+    // Si il existe on le supprime
+    if ( document.querySelector('.div-offer') ) {
+        document.querySelector('.div-offer').parentElement.removeChild( document.querySelector('.div-offer') );
+    }
+
     document.querySelector('.partner').classList.add('d-none');
 
 
 }
 
+
+/**
+ *
+ * Evenement click sur les images
+ *
+ */
 document.querySelectorAll('.card img').forEach(function (element) {
 
     // Ajout d'un évènement "click" sur chaque card
     element.addEventListener('click',  function (e) {
 
         openOverlayPartner();
-
-        console.log(this);
 
         // Application du texte dynamique sur l'overlay
         const partnerMark = partnersL[this.dataset.ov1]['title'];
@@ -99,8 +109,6 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
                         this.setAttribute('class', 'btn btn-back w-25 offer mb-5');
 
-                        console.log(this);
-
                         document.querySelector('.partner-sentence p').innerHTML = partnerOffer;
 
                     } else {
@@ -109,13 +117,9 @@ document.querySelectorAll('.card img').forEach(function (element) {
 
                         this.setAttribute('class', 'btn button-orange w-25 offer mb-5');
 
-                        console.log(this);
-
                         document.querySelector('.partner-sentence p').innerHTML = partnerDescription;
 
-
                     }
-
 
                 });
 

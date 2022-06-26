@@ -431,10 +431,17 @@ p{
 }
 
 .card img{
-    border-radius: 10px;
 
-    cursor: pointer;
+    max-width: 100%;
+    height: 200px;
+    object-fit: cover;
+
+    box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
+    -webkit-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);
+    -moz-box-shadow: 10px 5px 11px -1px rgba(0,0,0,0.32);;
+
 }
+
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -490,16 +497,29 @@ p{
     box-shadow: none;
     background-color: #FF9933;
 }
+
 /*//////////////////////////////////////////////////////////*/
+
+/* Média query  */
+@media screen and (min-width: 992px) {
+    #map {
+        height: 60vh;
+    }
+}
+
 /*Media Queries*/
 
 @media screen and (min-width: 768px){
+
     .home-title{
         font-size: 4rem;
     }
+
     .home-button{
+
         font-size: 1rem;
     }
+
     .flex-profil div {
         display: flex;
         flex-direction: row;
@@ -543,20 +563,4 @@ p{
 
 }
 
-
-
-
-/* Partenaire image */
-/*
-
-@media screen and(min-width: 400px){
-
-    .card-partner {
-
-        width: 20% !important;
-
-    }
-
-}
-*/
 
