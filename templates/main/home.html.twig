@@ -8,6 +8,33 @@
        {# Ajout du leaflet Locate control pour la geolocalisation #}
        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol/dist/L.Control.Locate.min.css"/>
        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+       {#  Inclusion du css pour le slider  #}
+       <link
+               rel="stylesheet"
+               href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css"
+       />
+       <style>
+           /*#container img {*/
+           /*    display: block;*/
+           /*    width: 100%!important;*/
+           /*    height: 100% !important;*/
+           /*}*/
+
+           #container img {
+               display: block;
+               width: auto !important;
+               height: 500px !important;
+           }
+
+           #container p {
+               text-align: center;
+           }
+
+           #container {
+               height: 100%;
+           }
+       </style>
    {% endblock %}
 
 
@@ -230,49 +257,45 @@
         </div>
         
         {#    Carousel #}
-        <div class="row carousel mx-auto mx-md-0">
-            <div class="col-lg-8 offset-lg-2 col-md-8 offset-md-2 col-12" data-aos="fade-left"
-                    data-aos-offset="200"
-                    data-aos-delay="50"
-                    data-aos-duration="1000">
-                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
-                    <div class="carousel-indicators">
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-                    <div class="carousel-inner">
-                        <div class="carousel-item active" data-bs-interval="10000">
-                            <img src="{{ asset('images/founders/Annabelle 2.jpg') }}" class="d-block w-100 img-fluid" alt="Annabelle Piquet recevant le prix de la boutique ambassadeur">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Annabelle Piquet recevant le prix de la boutique ambassadeur</h5>
-                                <p>Gérante de la boutique Un Temps Pour Elle à Dijon</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item" data-bs-interval="2000">
-                            <img src="{{ asset('images/founders/la-clef-des-charmes-sex-shop-à-Toulouse2.jpg') }}" class="d-block w-100 img-fluid" alt="Devanture de la très chic boutique La clé des charmes à Toulouse">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Devanture de la très chic boutique La clé des charmes à Toulouse</h5>
-                                <p>Avec Action Culottée, il y en a pour tous les goûts !</p>
-                            </div>
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('images/founders/audrey-marie.jpg') }}" class="d-block w-100 img-fluid" alt="Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes">
-                            <div class="carousel-caption d-none d-md-block">
-                                <h5>Audrey Marie, gérante de la boutique Jolie Chose à Venarey Les Laumes</h5>
-                                <p>Membre engagée pour la cause culottée et influenceuse lingerie sur Tiktok</p>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="visually-hidden">Next</span>
-                    </button>
+        <section id="container" class="d-flex align-items-center col-12 col-md-3  p-md-3">
+
+            <div id="vertical-slider" class="splide">
+
+                <div class="splide__track ">
+
+                    <ul class="splide__list">
+{#ajouter "display_dynamic_content('about_nb_img') + foreach#}
+                        <span class="d-none"> </span>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Annabelle 2.jpg') }}" alt="Annabelle Cumin">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Photo de Jenny.jpg') }}"
+                            alt="Jenny Mercier">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Audrey Maris.jpg') }}"
+                            alt="Audrey Maris">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img src="{{ asset('images/founders/Mélinda Elodie 3.jpg') }}"
+                            alt="Mélinda Elodie">
+                        </li>
+
+                        <li class="splide__slide py-5">
+                            <img alt=" Aurélie Vidal" src="{{ asset('images/founders/Aurélie Vidal Pomponette.jpg'
+                            )  }}  ">
+                        </li>
+
+                    </ul>
                 </div>
             </div>
-        </div>
+
+        </section>
     
     </div>
     
@@ -373,6 +396,44 @@
     
     <script src="{{ asset('js/scroll-up.js') }}"></script>
     <script src="{{ asset('js/home-script.js') }}"></script>
+
+{#    Inclusion library SpliderJs#}
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+
+{#    Script pour le slider#}
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            new Splide('.splide', {
+
+                type: 'loop',
+                direction: "ltr",
+                updateOnMove: true,
+                arrows: true,
+                isNavigation: true,
+                wheel: false,
+                pagination: false,
+                focus: 'center',
+
+                perPage: 2,
+
+                gap: '1rem',
+                lazyLoad: true,
+                rewind: true,
+
+                autoWidth: true,
+                height: 'auto',
+                width: '100vw',
+
+                autoHeight: true,
+
+
+            }).mount();
+
+        });
+
+    </script>
 
 {% endblock %}
 
