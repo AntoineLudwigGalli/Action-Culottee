@@ -8,20 +8,14 @@
 
         {# Titre #}
         <div class="row">
-
-            <div class="col-12">
-
-                <header class="my-3 col-1">
+            
+                <header class="col-12">
                     <h1> Nos partenaires </h1>
                 </header>
-
-                <div class="my-5">
-                    <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate dolorum eius nesciunt, recusandae repellat similique.</h2>
-                </div>
-
-            </div>
-
         </div>
+       
+
+ 
 
         {# Affichage des partenaires #}
         <div class="row">
@@ -130,8 +124,12 @@
             </div>
 
         </div>
-
-
+    
+        <div class="row">
+            <div class="my-5 col-12 text-center">
+                <h2>Les marques présentes ci-dessus partagent les valeurs mises en avant par Action Culottée et ont décidé de soutenir nos efforts en créant un partenariat fort avec nous à destination de nos adhérents. </h2>
+            </div>
+        </div>
 
     </div>
 
@@ -179,8 +177,9 @@
         const checkIfUser = userRoles.includes('ROLE_USER');
 
     </script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+    <script src="{{ asset('js/partner/partner-script.js') }}"></script>
     <script src="{{ asset('js/partner/overlay.js') }}"></script>
 {% endblock %}
 
