@@ -5,7 +5,7 @@
 {% block title %}Connexion{% endblock %}
 
 {% block body %}
-<div class="background_page_form vh-100">
+<div class="background_page_form vh-100 d-flex flex-column justify-content-center">
 	<form method="post" class="mx-auto col-9 col-lg-6 form_page">
 		{% if error %}
 			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
