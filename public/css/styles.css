@@ -212,19 +212,7 @@ p{
     background-color: #E1942D;
 }
 
-@media screen and (min-width: 768px)
-{
-    .navbar-nav a {
-        margin-left: 20px;
-    }
-}
 
-@media screen and (min-width: 992px)
-{
-    .navbar-nav a {
-        margin-left: 40px;
-    }
-}
 
     /*Footer*/
 
@@ -634,7 +622,9 @@ p.text_footer{
 /*Media Queries*/
 
 @media screen and (min-width: 768px){
-
+    .navbar-nav a {
+        margin-left: 20px;
+    }
     .home-title{
         font-size: 4rem;
     }
@@ -659,6 +649,9 @@ p.text_footer{
 }
 
 @media screen and (min-width: 992px) {
+    .navbar-nav a {
+        margin-left: 40px;
+    }
     #map {
         height: 60vh;
     }
@@ -686,5 +679,4 @@ p.text_footer{
     }
 
 }
-
 
