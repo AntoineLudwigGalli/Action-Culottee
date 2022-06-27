@@ -37,10 +37,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 #[Route("/admin", name: "admin_panel_")]
 #[IsGranted('ROLE_ADMIN')]
-class AdminPanelController extends AbstractController {
+class AdminPanelController extends AbstractController
+{
 // Page d'index
     #[Route('', name: 'index')]
-    public function indexAdmin(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function indexAdmin(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 // Requêtes de toutes les entrées dans les tables des entités Shop, FutureEvents, User et Partner pour en afficher le nombre dans les boutons de l'index admin
         $em = $doctrine->getManager();
 
@@ -48,7 +50,7 @@ class AdminPanelController extends AbstractController {
         $query = $em->createQuery('SELECT e FROM App\Entity\FutureEvent e ');
 
 
-        $events = $paginator->paginate($query,  55);
+        $events = $paginator->paginate($query, 55);
 
         $query = $em->createQuery('SELECT u FROM App\Entity\User u');
 
@@ -64,10 +66,10 @@ class AdminPanelController extends AbstractController {
 
 
         return $this->render('admin_panel/admin_index.html.twig', [
-            "events" => $events,
-            "users" => $users,
-            "shops" => $shops,
-            "partners" => $partners
+                "events" => $events,
+                "users" => $users,
+                "shops" => $shops,
+                "partners" => $partners
             ]
         );
     }
@@ -80,7 +82,8 @@ class AdminPanelController extends AbstractController {
      */
 
     #[Route('/creer-un-evenement', name: 'event')]
-    public function createEvent(ManagerRegistry $doctrine, Request $request): Response {
+    public function createEvent(ManagerRegistry $doctrine, Request $request): Response
+    {
 
         // Création d'une nouvelle instance de la classe FutureEvent
         $newEvent = new FutureEvent();
@@ -119,27 +122,37 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/liste-des-evenements', name: 'events_list')]
-    public function eventList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
-
+    public function eventList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
+        // On récupère dans l'URL la donnée GET page (si elle n'existe pas, la valeur retournée par défaut sera la page 1)
         $requestedPage = $request->query->getInt('page', 1);
 
+        // Si le numéro de page demandé dans l'URL est inférieur à 1, erreur 404
         if ($requestedPage < 1) {
             throw new NotFoundHttpException();
         }
-
+        // Récupération du manager des entités
         $em = $doctrine->getManager();
 
+        // Création d'une requête qui servira au paginator pour récupérer les events de la page courante
         $query = $em->createQuery('SELECT e FROM App\Entity\FutureEvent e ORDER BY e.eventDate ASC');
 
-        $events = $paginator->paginate($query, $requestedPage, 55);
+        //On stocke dans $events les 10 events de la page demandée dans l'URL
+        $events = $paginator->paginate(
+            $query, // Requête de selection des events en BDD
+            $requestedPage, // Numéro de la page dont on veut les events
+            55); // Nombre d'events par page
 
-        return $this->render('admin_panel/admin_events_list.html.twig', ['events' => $events,]);
+        return $this->render('admin_panel/admin_events_list.html.twig', [
+            'events' => $events,]); // On envoie les events récupérés à la vue
     }
 
 
-
     #[Route('/suppression-d\'un-evenement/{id}/', name: 'event_delete_', priority: 10)]
-    public function eventDelete(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
+    public function eventDelete(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response
+    {
+
+//        Token
         $csrfToken = $request->query->get('csrf_token', '');
 
         if (!$this->isCsrfTokenValid('event_delete_' . $futureEvent->getId(), $csrfToken)) {
@@ -158,17 +171,22 @@ class AdminPanelController extends AbstractController {
         // Redirection vers la page qui liste les events
         return $this->redirectToRoute('admin_panel_events_list');
     }
+
     /**
      *
      *
      */
     #[Route('/modification-d\'un-evenement/{id}/', name: 'event_edit_', priority: 10)]
-    public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response {
+    public function publicationEdit(FutureEvent $futureEvent, Request $request, ManagerRegistry $doctrine): Response
+    {
+
 
         $form = $this->createForm(CreateEventFormType::class, $futureEvent);
 
+        //instanciation d\'un formulaire
         $form->handleRequest($request);
 
+        //Verif du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
 
             // Sauvegarde des données modifiées en BDD
@@ -196,7 +214,8 @@ class AdminPanelController extends AbstractController {
      */
 
     #[Route('/inscription', name: 'register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response {
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -218,13 +237,15 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_register.html.twig', ['registrationForm' => $form->createView(),]);
     }
+
     /**
      *
      *
      */
 
     #[Route('/liste-des-utilisateurs', name: 'users_list')]
-    public function usersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function usersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -242,13 +263,15 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_users_list.html.twig', ['users' => $users,]);
     }
+
     /**
      *
      *
      */
 
     #[Route('/modification-d\'un-utilisateur/{id}/', name: 'user_edit_', priority: 10)]
-    public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response {
+    public function userEdit(User $user, Request $request, ManagerRegistry $doctrine): Response
+    {
         $form = $this->createForm(UpdateUserFormType::class, $user);
 
         $form->handleRequest($request);
@@ -260,8 +283,7 @@ class AdminPanelController extends AbstractController {
 //                Sans envoi réel de mail, on ne peut pas vérifier cette condition
 //                $user->isVerified() &&
                 $user->isMembershipPaid() &&
-                $user->isAssociationMember())
-            {
+                $user->isAssociationMember()) {
                 $user->setRoles(["ROLE_MEMBER"]);
 
             } else {
@@ -291,7 +313,8 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/suppression-d\'un-utilisateur/{id}/', name: 'user_delete_', priority: 10)]
-    public function userDelete(User $user, Request $request, ManagerRegistry $doctrine): Response {
+    public function userDelete(User $user, Request $request, ManagerRegistry $doctrine): Response
+    {
         $csrfToken = $request->query->get('csrf_token', '');
 
         if (!$this->isCsrfTokenValid('user_delete_' . $user->getId(), $csrfToken)) {
@@ -317,7 +340,8 @@ class AdminPanelController extends AbstractController {
      */
 
     #[Route('/rechercher-un-utilisateur/', name: 'users_search')]
-    public function searchUser(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function searchUser(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -346,7 +370,8 @@ class AdminPanelController extends AbstractController {
 
     /// Export CSV des Users
     #[Route('/liste-des-utilisateurs/export', name: 'users_list_export')]
-    public function usersListExport(ManagerRegistry $doctrine): Response {
+    public function usersListExport(ManagerRegistry $doctrine): Response
+    {
 
 // Création des en-têtes des colonnes du fichier de tableur
         $header = ['#', 'Email', 'Type de compte', 'Prénom', 'Nom', 'Numéro d\'adhérent', 'Téléphone', 'Inscription Newsletter', 'Cotisation payée', 'Compte vérifié'];
@@ -400,7 +425,8 @@ class AdminPanelController extends AbstractController {
      */
 
     #[Route('/creer-une-boutique', name: 'shop_creation')]
-    public function createShop(ManagerRegistry $doctrine, Request $request): Response {
+    public function createShop(ManagerRegistry $doctrine, Request $request): Response
+    {
 
         $shop = new Shop();
 
@@ -425,7 +451,7 @@ class AdminPanelController extends AbstractController {
 
             $output = json_decode($geocode);
 
-            if(empty($output)){
+            if (empty($output)) {
                 $this->addFlash('error', "L'adresse n'existe pas");
             } else {
 
@@ -453,7 +479,8 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/liste-des-boutiques', name: 'shops_list')]
-    public function shopsList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function shopsList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -475,7 +502,8 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/modifier-une-boutique/{id}/', name: 'shop_edit_', priority: 10)]
-    public function editShop(Request $request, Shop $shop, ManagerRegistry $doctrine): Response {
+    public function editShop(Request $request, Shop $shop, ManagerRegistry $doctrine): Response
+    {
 
         $form = $this->createForm(EditShopTypeFormType::class, $shop);
 
@@ -498,7 +526,7 @@ class AdminPanelController extends AbstractController {
 
             $output = json_decode($geocode);
 
-            if(empty($output)){
+            if (empty($output)) {
 
                 $this->addFlash('error', "L'adresse n'existe pas");
 
@@ -521,12 +549,14 @@ class AdminPanelController extends AbstractController {
 
         return $this->render('admin_panel/admin_shop_edit.html.twig', ['form' => $form->createView()]);
     }
+
     /**
      *
      *
      */
     #[Route('/suppression-d\'une-boutique/{id}/', name: 'shop_delete_', priority: 10)]
-    public function shopDelete(Shop $shop, Request $request, ManagerRegistry $doctrine): Response {
+    public function shopDelete(Shop $shop, Request $request, ManagerRegistry $doctrine): Response
+    {
 
         $csrfToken = $request->query->get('csrf_token', '');
 
@@ -546,12 +576,14 @@ class AdminPanelController extends AbstractController {
         // Redirection vers la page qui liste les boutiques
         return $this->redirectToRoute('admin_panel_shops_list');
     }
+
     /**
      *
      *
      */
     #[Route('/rechercher-une-boutique/', name: 'shops_search')]
-    public function searchShop(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function searchShop(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -579,7 +611,8 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/creer-un-partenaire', name: 'partner_creation')]
-    public function partner(PartnerRepository $partnerRepository, Request $request): Response {
+    public function partner(PartnerRepository $partnerRepository, Request $request): Response
+    {
         $partner = new Partner();
 
         $form = $this->createForm(PartnerTypeFormType::class, $partner);
@@ -629,7 +662,8 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/liste-des-partenaires', name: 'partners_list')]
-    public function partnersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response {
+    public function partnersList(ManagerRegistry $doctrine, Request $request, PaginatorInterface $paginator): Response
+    {
 
         $requestedPage = $request->query->getInt('page', 1);
 
@@ -652,7 +686,8 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/modifier-un-partenaire/{id}/', name: 'partner_edit_', priority: 10)]
-    public function editPartner(Request $request, Partner $partner ,PartnerRepository $partnerRepository): Response {
+    public function editPartner(Request $request, Partner $partner, PartnerRepository $partnerRepository): Response
+    {
 
         $filename = $partner->getLogo();
 
@@ -699,7 +734,8 @@ class AdminPanelController extends AbstractController {
      *
      */
     #[Route('/suppression-d\'un-partenaire/{id}/', name: 'partner_delete_', priority: 10)]
-    public function partnerDelete(Partner $partner, Request $request, ManagerRegistry $doctrine): Response {
+    public function partnerDelete(Partner $partner, Request $request, ManagerRegistry $doctrine): Response
+    {
         $csrfToken = $request->query->get('csrf_token', '');
 
         if (!$this->isCsrfTokenValid('partner_delete_' . $partner->getId(), $csrfToken)) {
@@ -729,7 +765,8 @@ class AdminPanelController extends AbstractController {
      */
 
     #[Route('/contenu-dynamique/modifier/{name}/', name: 'dynamic_content_edit', requirements: ["name" => "[a-z0-9_-]{2,50}"])]
-    public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response {
+    public function dynamicContentEdit($name, ManagerRegistry $doctrine, Request $request): Response
+    {
 
         //On va chercher par nom (qui sert de clé) le dynamic content correspondant
         $dynamicContentRepo = $doctrine->getRepository(DynamicContent::class);
