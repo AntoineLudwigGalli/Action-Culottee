@@ -29,20 +29,20 @@
                         {# Liste des boutons du menu déroulant #}
                         <div class="dropdown-menu" aria-labelledby="profil-dropdown">
                             {# Bouton de la page mon profil #}
-                            <a class="dropdown-item" href="{{ path('user_panel_profil') }}">
+                            <a class="dropdown-item ms-0" href="{{ path('user_panel_profil') }}">
                                 <i class="fa-solid fa-user me-1"></i>Mon Profil
                             </a>
 
                             {# Bouton de la page Administration #}
                             {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                            <a class="dropdown-item" href="{{ path('admin_panel_index') }}">
+                            <a class="dropdown-item ms-0" href="{{ path('admin_panel_index') }}">
                                 <i class="fa-solid fa-gears me-1"></i>Administration
                             </a>
                             {% endif %}
 
                             {# Bouton de la page User Panel #}
                             {% if app.user.roles[0] == "ROLE_MEMBER" or app.user.roles[0] == "ROLE_ADMIN" %}
-                            <a class="dropdown-item" href="{{ path('user_panel_manage_shop') }}">
+                            <a class="dropdown-item ms-0" href="{{ path('user_panel_manage_shop') }}">
                                 <i class="fa-solid fa-store me-1"></i>Boutiques
                             </a>
                             {% endif %}
@@ -51,7 +51,7 @@
                             <div class="dropdown-divider"></div>
 
                             {# Bouton de la page de déconnexion #}
-                            <a class="dropdown-item" href="{{ path('app_logout') }}">
+                            <a class="dropdown-item ms-0" href="{{ path('app_logout') }}">
                                 <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                             </a>
                         </div>
