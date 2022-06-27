@@ -504,7 +504,6 @@ p.text_footer{
 }
 .card-img-top{
     filter: contrast(200%);
-    border-radius: 100%;
 }
 
 .orange-filter{
@@ -661,6 +660,10 @@ p.text_footer{
         display: block;
     }
 
+    .card-img-top{
+        filter: contrast(200%);
+        border-radius: 100%;
+    }
 }
 
 @media screen and (min-width: 992px) {

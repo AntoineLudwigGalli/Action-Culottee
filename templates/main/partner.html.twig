@@ -19,13 +19,13 @@
 
         {# Affichage des partenaires #}
         <div class="row">
-            <div class="col-12 d-flex flex-row flex-wrap align-items-baseline">
+            <div class="col-12 d-flex flex-column flex-md-row flex-wrap align-items-baseline">
 
                 {% set i = 0 %}
 
                 {% for partner in partners %}
 
-                    <div class="card me-1 me-sm-0 me-md-0 col-5 col-sm-6 col-md-4 col-lg-3 mx-auto mb-4 p-sm-4 card-partner">
+                    <div class="card me-1 me-sm-0 me-md-0 col-12 col-md-4 col-lg-3 mx-auto mb-4 p-sm-4 card-partner">
                         <div>
                             <img data-ov1="{{ i }}" data-ov2="{{ partner.id }}" src="{{ asset('images/images-partners/' ~ partner.logo ) }}" alt="" class="card-img-top">
                         </div>
