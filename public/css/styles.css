@@ -83,17 +83,32 @@ p{
     color: white;
 }
 
-/* Permet de supprimer l'effet focus sur le button */
-.btn:focus{
-    box-shadow: none;
-}
-
 .button-orange:hover{
     background: white;
     border: 2px solid #E1942D;
     border-radius: 45px;
     color: #E1942D;
 }
+
+.button-red{
+
+    border: 2px solid white;
+    border-radius: 45px;
+    color: white;
+}
+.button-red:hover{
+    background: white;
+    border: 2px solid #E1942D;
+    border-radius: 45px;
+
+}
+
+/* Permet de supprimer l'effet focus sur le button */
+.btn:focus{
+    box-shadow: none;
+}
+
+
 
 .input-orange{
     background: #E1942D45;
