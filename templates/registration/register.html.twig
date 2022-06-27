@@ -9,9 +9,9 @@
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
-    <div class="container-fluid">
+  
         <div class="mx-auto col-9 col-lg-6">
-            <div class="form_page">
+            <div class="form_page mb-0">
                 <div class="mb-3 d-sm-flex flex-column text-sm-start">
                     <h2 class="mb-3 fw-bold">Rejoignez-nous !</h2>
                     <p>Déjà inscrit ? <a class="color-orange text-decoration-none" href="{{ path('app_login') }}">Connectez-vous.</a></p>
@@ -55,8 +55,8 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    
+
     {% block jsIncludes %}
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>{% endblock %}
 {% endblock %}
